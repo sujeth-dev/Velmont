@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velmont — Website Content Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vblack:    #1A1A1A;
+  --terracotta:#FF4015;
+  --slate:     #68778D;
+  --concrete:  #D9DCE0;
+  --mineral:   #BBBCC3;
+  --sand:      #D9CAB0;
+  --paper:     #F4F0EB;
+  --head:      'Manrope', system-ui, sans-serif;
+  --body:      'Inter', system-ui, sans-serif;
+  --serif:     'Cormorant Garamond', Georgia, serif;
+
+  /* Status colors */
+  --approved-bg:  #EAF4EE;
+  --approved-fg:  #2D7A4F;
+  --review-bg:    #FFF8EC;
+  --review-fg:    #A0600A;
+  --provide-bg:   #FDEEED;
+  --provide-fg:   #B53020;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--vblack);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 64px 80px;
+  background: var(--vblack);
+  position: relative;
+  overflow: hidden;
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  right: -120px; bottom: -120px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,64,21,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cover-wordmark {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.18em;
+  color: #fff;
+  text-transform: uppercase;
+}
+.cover-doc-type {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  text-align: right;
+  line-height: 1.8;
+}
+.cover-main {
+  max-width: 780px;
+}
+.cover-main h1 {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 32px;
+}
+.cover-main p {
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.72;
+  color: rgba(255,255,255,0.52);
+  max-width: 540px;
+  margin-bottom: 48px;
+}
+.cover-meta {
+  display: flex;
+  gap: 48px;
+}
+.cover-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cover-meta-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+}
+.cover-meta-value {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.72);
+}
+.cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(187,188,195,0.14);
+  padding-top: 28px;
+}
+.cover-version {
+  font-family: var(--body);
+  font-size: 11px;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.06em;
+}
+.cover-pages {
+  display: flex;
+  gap: 28px;
+}
+.cover-pages a {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  text-decoration: none;
+}
+.cover-pages a:hover { color: rgba(255,255,255,0.75); }
+
+/* ── LEGEND ── */
+.legend {
+  padding: 40px 80px;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  border-bottom: 1px solid var(--mineral);
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.legend-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-right: 8px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 2px;
+}
+.badge-approved { background: var(--approved-bg); color: var(--approved-fg); }
+.badge-review   { background: var(--review-bg);   color: var(--review-fg); }
+.badge-provide  { background: var(--provide-bg);   color: var(--provide-fg); }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.badge-approved .badge-dot { background: var(--approved-fg); }
+.badge-review   .badge-dot { background: var(--review-fg); }
+.badge-provide  .badge-dot { background: var(--provide-fg); }
+
+/* ── PAGE DIVIDER ── */
+.page-divider {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  border-bottom: 1px solid var(--mineral);
+  border-top: 2px solid var(--terracotta);
+  margin-top: 80px;
+}
+.page-divider-num {
+  padding: 32px 0 32px 80px;
+  border-right: 1px solid var(--mineral);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+.page-divider-num .pg-num {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 400;
+  color: rgba(26,26,26,0.12);
+  line-height: 1;
+  letter-spacing: 0.06em;
+}
+.page-divider-num .pg-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.page-divider-info {
+  padding: 32px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.page-divider-info h2 {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  color: var(--vblack);
+}
+.page-divider-info p {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.72;
+  color: #5a5550;
+  max-width: 600px;
+}
+
+/* ── SECTION BLOCK ── */
+.section-block {
+  padding: 0 80px;
+  border-bottom: 1px solid var(--mineral);
+}
+.section-block-inner {
+  padding: 40px 0;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 60px;
+}
+.section-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+}
+.section-num {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+.section-name {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--vblack);
+}
+.section-type {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── CONTENT ROWS ── */
+.content-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.content-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.content-text {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--vblack);
+}
+.content-text.hero-text {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.content-text.serif-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--vblack);
+}
+.content-text.eyebrow-text {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.content-text.muted {
+  color: #5a5550;
+}
+.content-note {
+  font-family: var(--body);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--slate);
+  font-style: italic;
+  padding: 10px 14px;
+  border-left: 2px solid var(--mineral);
+  background: rgba(217,220,224,0.25);
+  border-radius: 0 2px 2px 0;
+}
+
+/* ── ITEM GRID (for services, stats, etc.) ── */
+.item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--mineral);
+  border: 1px solid var(--mineral);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.item-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+.item-grid.four-col  { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.grid-cell {
+  background: var(--paper);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.grid-cell-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.grid-cell-value {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  color: var(--vblack);
+}
+.grid-cell-desc {
+  font-family: var(--body);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: #5a5550;
+}
+
+/* ── TAG LIST ── */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  padding: 6px 14px;
+  border: 1px solid var(--mineral);
+  border-radius: 999px;
+  color: #5a5550;
+}
+
+/* ── STATUS BADGE inline ── */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.status-approved { background: var(--approved-bg); color: var(--approved-fg); }
+.status-review   { background: var(--review-bg);   color: var(--review-fg); }
+.status-provide  { background: var(--provide-bg);   color: var(--provide-fg); }
+
+/* ── DIVIDER LINE ── */
+hr.thin { border: none; border-top: 1px solid var(--concrete); margin: 16px 0; }
+
+/* ── PROJECT TILE PREVIEW ── */
+.proj-tile-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--mineral);
+  border: 1px solid var(--mineral);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.ptile {
+  background: var(--paper);
+  padding: 20px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ptile-ind {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.ptile-name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--vblack);
+  line-height: 1.2;
+}
+.ptile-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--mineral);
+  margin-top: 4px;
+}
+.ptile-loc {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mineral);
+  letter-spacing: 0.10em;
+}
+.ptile-arr { color: var(--terracotta); font-size: 16px; }
+
+/* ── FORM PREVIEW ── */
+.form-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-field.full { grid-column: 1 / -1; }
+.field-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.field-input {
+  background: rgba(217,220,224,0.30);
+  border: 1px solid var(--mineral);
+  border-radius: 2px;
+  padding: 12px 16px;
+  font-family: var(--body);
+  font-size: 13.5px;
+  color: var(--mineral);
+  font-style: italic;
+}
+
+/* ── CONTACT DETAILS PREVIEW ── */
+.contact-details-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--mineral);
+  border: 1px solid var(--mineral);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.cd-cell {
+  background: var(--paper);
+  padding: 18px 24px;
+}
+.cd-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+.cd-value {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vblack);
+  line-height: 1.6;
+}
+
+/* ── APPROVAL FOOTER ── */
+.approval-section {
+  margin-top: 80px;
+  background: var(--vblack);
+  padding: 80px;
+}
+.approval-section h2 {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.approval-section > p {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.72;
+  color: rgba(255,255,255,0.50);
+  max-width: 580px;
+  margin-bottom: 48px;
+}
+.approval-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(187,188,195,0.14);
+  border: 1px solid rgba(187,188,195,0.14);
+  border-radius: 2px;
+  overflow: hidden;
+  max-width: 720px;
+}
+.approval-cell {
+  background: rgba(255,255,255,0.04);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.approval-cell-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.approval-line {
+  border: none;
+  border-top: 1px solid rgba(187,188,195,0.22);
+  margin-top: 8px;
+}
+.approval-hint {
+  font-family: var(--body);
+  font-size: 12px;
+  color: rgba(255,255,255,0.22);
+  font-style: italic;
+}
+.approval-summary {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(187,188,195,0.14);
+  display: flex;
+  gap: 40px;
+}
+.approval-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.as-label {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+}
+.as-value {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── FOOTER ── */
+.doc-footer {
+  padding: 28px 80px;
+  background: var(--vblack);
+  border-top: 1px solid rgba(187,188,195,0.10);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.doc-footer-brand {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.doc-footer-copy {
+  font-family: var(--body);
+  font-size: 11px;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.04em;
+}
+
+/* ── PRINT ── */
+@media print {
+  .legend { position: static; }
+  .cover { min-height: auto; page-break-after: always; }
+  .page-divider { page-break-before: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER
+══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-wordmark">Velmont</div>
+    <div class="cover-doc-type">
+      Website Content Plan<br>
+      v1.0 · June 2026
+    </div>
+  </div>
+
+  <div class="cover-main">
+    <h1>Website<br>Content Plan</h1>
+    <p>This document outlines all written content, structure, and copy for every page of the Velmont website — for your review and approval before development begins. Please confirm, amend, or flag any section below.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <span class="cover-version">velmont-content-plan-v1.0.html</span>
+    <div class="cover-pages">
+      <a href="#home">Home</a>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     LEGEND (sticky)
+══════════════════════════════════════════ -->
+<div class="legend">
+  <span class="legend-label">Status Key</span>
+  <span class="badge badge-approved"><span class="badge-dot"></span>Approved — ready to build</span>
+  <span class="badge badge-review"><span class="badge-dot"></span>Needs Review — confirm or amend</span>
+  <span class="badge badge-provide"><span class="badge-dot"></span>Client to Provide — content missing</span>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 01 — HOME
+══════════════════════════════════════════ -->
+<div id="home" class="page-divider">
+  <div class="page-divider-num">
+    <div class="pg-num">01</div>
+    <div class="pg-label">Page</div>
+  </div>
+  <div class="page-divider-info">
+    <h2>Home</h2>
+    <p>The first impression — establishes positioning, introduces the studio's work, and drives visitors toward the portfolio and enquiry.</p>
+  </div>
+</div>
+
+<!-- 01.1 NAVIGATION -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">01.1</div>
+      <div class="section-name">Navigation</div>
+      <div class="section-type">Global — all pages</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Logo tagline</div>
+        <div class="content-text eyebrow-text">Defining Environments.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Navigation links</div>
+        <div class="tag-list">
+          <span class="tag">Work</span>
+          <span class="tag">Services</span>
+          <span class="tag">About</span>
+          <span class="tag">Contact</span>
+        </div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Primary CTA button</div>
+        <div class="content-text"><strong>Enquire</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 01.2 HERO -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">01.2</div>
+      <div class="section-name">Hero</div>
+      <div class="section-type">Full-screen · Image + Copy</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Eyebrow</div>
+        <div class="content-text eyebrow-text">Defining Environments.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Headline (H1)</div>
+        <div class="content-text hero-text">Spaces composed<br>with architectural<br>intent.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Sub-headline</div>
+        <div class="content-text muted">A turnkey interiors studio delivering considered, end-to-end environments across healthcare, workplace, and hospitality — from initial brief to the final switch plate.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Primary CTA</div>
+        <div class="content-text">View the Portfolio <span style="color:var(--terracotta)">→</span></div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Bottom-right meta</div>
+        <div class="tag-list">
+          <span class="tag">Bengaluru, India</span>
+          <span class="tag">Est. 2018</span>
+        </div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Background image</div>
+        <div class="content-note">A hero-quality interior photograph — landmark hospitality or workplace project. Should be dark-toned or support a dark overlay. <strong>Client to confirm which project image to use here.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 01.3 SELECTED WORK STRIP -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">01.3</div>
+      <div class="section-name">Selected Work Strip</div>
+      <div class="section-type">Horizontal tile row</div>
+      <span class="status status-provide">Client to Provide</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Label column</div>
+        <div class="content-text">Selected Work — <strong>100+</strong> Projects</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">3 featured projects (preview)</div>
+        <div class="proj-tile-preview">
+          <div class="ptile">
+            <div class="ptile-ind">Hospitality</div>
+            <div class="ptile-name">JW Marriott</div>
+            <div class="ptile-foot">
+              <span class="ptile-loc">Bangalore · ____</span>
+              <span class="ptile-arr">→</span>
+            </div>
+          </div>
+          <div class="ptile">
+            <div class="ptile-ind">Hospitality</div>
+            <div class="ptile-name">Taj</div>
+            <div class="ptile-foot">
+              <span class="ptile-loc">Kochi · ____</span>
+              <span class="ptile-arr">→</span>
+            </div>
+          </div>
+          <div class="ptile">
+            <div class="ptile-ind">Select discipline</div>
+            <div class="ptile-name" style="color:var(--mineral)">Third project</div>
+            <div class="ptile-foot">
+              <span class="ptile-loc">Location · Year</span>
+              <span class="ptile-arr">→</span>
+            </div>
+          </div>
+        </div>
+        <div class="content-note">Please confirm: (1) year for JW Marriott and Taj, (2) which third project to feature. Also confirm if discipline labels should say "Hospitality / Workplace / Healthcare / Commercial" or something else.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 01.4 STUDIO INTRO -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">01.4</div>
+      <div class="section-name">Studio Introduction</div>
+      <div class="section-type">2-column · Text + Image</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Kicker</div>
+        <div class="content-text eyebrow-text">The Studio</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text hero-text" style="font-size:28px;">One team.<br>Every layer.<br>Delivered.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Body copy</div>
+        <div class="content-text muted">We design environments end to end — architecture, interiors, furniture, and build, held together by a single accountable studio. No handoffs. No gaps. One vision carried from the first sketch to the final slab.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Link CTA</div>
+        <div class="content-text">Our Process <span style="color:var(--terracotta)">→</span></div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Right-side image</div>
+        <div class="content-note">A strong interior photograph — full bleed, no text overlay needed. Caption reads: Project name · Discipline · Location, Year. <strong>Client to confirm which image.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 01.5 DISCIPLINES STRIP -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">01.5</div>
+      <div class="section-name">Disciplines</div>
+      <div class="section-type">Horizontal label strip</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Column header</div>
+        <div class="content-text eyebrow-text">Disciplines</div>
+      </div>
+      <div class="item-grid four-col">
+        <div class="grid-cell">
+          <div class="grid-cell-label">01</div>
+          <div class="grid-cell-value">Workplace</div>
+          <div class="grid-cell-desc">48,000 ft² avg.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">02</div>
+          <div class="grid-cell-value">Healthcare</div>
+          <div class="grid-cell-desc">Clinical &amp; Wellness</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">03</div>
+          <div class="grid-cell-value">Hospitality</div>
+          <div class="grid-cell-desc">Hotels &amp; Resorts</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">04</div>
+          <div class="grid-cell-value">Commercial</div>
+          <div class="grid-cell-desc">MNC Fit-out</div>
+        </div>
+      </div>
+      <div class="content-note">Please confirm the 4 discipline names and their sub-labels. If Healthcare is not a major current sector, it can be replaced. The "48,000 ft² avg." figure for Workplace is a placeholder — please confirm or replace with a real number.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 01.6 PROCESS -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">01.6</div>
+      <div class="section-name">How We Work</div>
+      <div class="section-type">Dark section · Process steps</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Kicker</div>
+        <div class="content-text eyebrow-text">How We Work</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text" style="font-family:'Manrope';font-weight:600;font-size:22px;letter-spacing:-0.02em;">Turnkey, from brief to handover.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Intro copy</div>
+        <div class="content-text muted">One accountable studio managing every discipline — so the environment you receive matches the environment you imagined.</div>
+      </div>
+      <hr class="thin">
+      <div class="item-grid four-col">
+        <div class="grid-cell">
+          <div class="grid-cell-label">Step 01</div>
+          <div class="grid-cell-value">Brief</div>
+          <div class="grid-cell-desc">Understanding the programme, budget, and the feeling the space must create.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Step 02</div>
+          <div class="grid-cell-value">Design</div>
+          <div class="grid-cell-desc">Architectural drawings, material boards, and spatial narratives — resolved together.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Step 03</div>
+          <div class="grid-cell-value">Build</div>
+          <div class="grid-cell-desc">Studio-managed construction. Every supplier, every finish, every timeline held to one standard.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Step 04</div>
+          <div class="grid-cell-value">Handover</div>
+          <div class="grid-cell-desc">A complete environment, delivered on programme, ready to live in from day one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 01.7 FOOTER -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">01.7</div>
+      <div class="section-name">Footer</div>
+      <div class="section-type">Global — all pages</div>
+      <span class="status status-provide">Client to Provide</span>
+    </div>
+    <div class="section-content">
+      <div class="item-grid">
+        <div class="grid-cell">
+          <div class="grid-cell-label">Footer navigation</div>
+          <div class="tag-list" style="margin-top:4px;">
+            <span class="tag">Work</span><span class="tag">Services</span><span class="tag">About</span><span class="tag">Contact</span>
+          </div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Social media links</div>
+          <div class="grid-cell-desc" style="color:var(--provide-fg);">Not yet provided — please share LinkedIn, Instagram, or other handles.</div>
+        </div>
+        <div class="grid-cell" style="grid-column:1/-1;">
+          <div class="grid-cell-label">Copyright line</div>
+          <div class="grid-cell-value" style="font-size:13px;font-weight:400;">© 2026 Velmont Design Studio. All rights reserved.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 02 — WORK
+══════════════════════════════════════════ -->
+<div id="work" class="page-divider">
+  <div class="page-divider-num">
+    <div class="pg-num">02</div>
+    <div class="pg-label">Page</div>
+  </div>
+  <div class="page-divider-info">
+    <h2>Work</h2>
+    <p>The portfolio page — browsable by discipline. This is the primary page prospective clients will spend the most time on.</p>
+  </div>
+</div>
+
+<!-- 02.1 PAGE HERO -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">02.1</div>
+      <div class="section-name">Page Hero</div>
+      <div class="section-type">Full-width header</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Eyebrow</div>
+        <div class="content-text eyebrow-text">Select Projects</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text hero-text" style="font-size:22px;">100+ projects delivered across India.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02.2 FILTER BAR -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">02.2</div>
+      <div class="section-name">Filter Bar</div>
+      <div class="section-type">Interactive — discipline filter</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Filter options</div>
+        <div class="tag-list">
+          <span class="tag" style="border-color:var(--terracotta);color:var(--vblack);font-weight:600;">All</span>
+          <span class="tag">Workplace</span>
+          <span class="tag">Healthcare</span>
+          <span class="tag">Hospitality</span>
+          <span class="tag">Commercial</span>
+        </div>
+      </div>
+      <div class="content-note">Active filter shown with terracotta underline or bold. Please confirm if "Healthcare" is a filter category you want visible. If most projects are Hospitality and Workplace, we can adjust the order or labels.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 02.3 PROJECT TILES -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">02.3</div>
+      <div class="section-name">Project Grid</div>
+      <div class="section-type">Filterable tile grid</div>
+      <span class="status status-provide">Client to Provide</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Confirmed projects (from company profile)</div>
+        <div class="proj-tile-preview">
+          <div class="ptile">
+            <div class="ptile-ind">Hospitality</div>
+            <div class="ptile-name">JW Marriott</div>
+            <div class="ptile-foot">
+              <span class="ptile-loc">Bangalore · ____</span>
+              <span class="ptile-arr">→</span>
+            </div>
+          </div>
+          <div class="ptile">
+            <div class="ptile-ind">Hospitality</div>
+            <div class="ptile-name">Taj</div>
+            <div class="ptile-foot">
+              <span class="ptile-loc">Kochi · ____</span>
+              <span class="ptile-arr">→</span>
+            </div>
+          </div>
+          <div class="ptile" style="opacity:0.4;">
+            <div class="ptile-ind">+ More projects</div>
+            <div class="ptile-name" style="color:var(--mineral);">To be added</div>
+            <div class="ptile-foot">
+              <span class="ptile-loc">via admin panel</span>
+              <span class="ptile-arr">→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-note">
+        <strong>Required per project:</strong> Project name · Discipline · Location · Year · Area (sq ft) · Scope (e.g. Turnkey) · Lead paragraph (1–2 sentences in editorial voice) · Body copy (2–3 paragraphs) · Materials list · 3 project photographs (high resolution). <br><br>
+        All projects are managed through the admin panel — no developer needed once built. Please prepare a list of projects you'd like to feature at launch and their photos.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02.4 PROJECT DETAIL PAGE -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">02.4</div>
+      <div class="section-name">Single Project Detail</div>
+      <div class="section-type">Per-project page · Template</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Page structure (template — same for every project)</div>
+        <div class="item-grid">
+          <div class="grid-cell">
+            <div class="grid-cell-label">Section 1 — Breadcrumb</div>
+            <div class="grid-cell-desc">Work / [Discipline] / [Project Name]</div>
+          </div>
+          <div class="grid-cell">
+            <div class="grid-cell-label">Section 2 — Project Hero</div>
+            <div class="grid-cell-desc">Full-width hero image. Eyebrow: "Discipline · Location". H1: Project name.</div>
+          </div>
+          <div class="grid-cell">
+            <div class="grid-cell-label">Section 3 — Spec Bar</div>
+            <div class="grid-cell-desc">4 facts: Industry · Area · Year · Scope (e.g. Turnkey). Terracotta top rule.</div>
+          </div>
+          <div class="grid-cell">
+            <div class="grid-cell-label">Section 4 — Project Body</div>
+            <div class="grid-cell-desc">Left: editorial lead (Cormorant Garamond italic). Right: 2–3 body paragraphs + materials tags.</div>
+          </div>
+          <div class="grid-cell">
+            <div class="grid-cell-label">Section 5 — Image Gallery</div>
+            <div class="grid-cell-desc">3-image grid: 1 large (left, full height) + 2 stacked (right). Photo captions optional.</div>
+          </div>
+          <div class="grid-cell">
+            <div class="grid-cell-label">Section 6 — Prev / Next</div>
+            <div class="grid-cell-desc">Links to adjacent projects. Auto-populated from the project list.</div>
+          </div>
+        </div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Example — Meridian Medical Pavilion (reference file)</div>
+        <div class="content-text serif-text">"Calm by design: daylight, honed stone, and warm timber soften a clinical brief into something restorative."</div>
+        <div class="content-text muted" style="margin-top:8px;font-size:13px;">↑ This is the editorial lead style — one or two strong, descriptive sentences written from a design perspective.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 03 — SERVICES
+══════════════════════════════════════════ -->
+<div id="services" class="page-divider">
+  <div class="page-divider-num">
+    <div class="pg-num">03</div>
+    <div class="pg-label">Page</div>
+  </div>
+  <div class="page-divider-info">
+    <h2>Services</h2>
+    <p>Details what Velmont offers — six service areas with descriptions, plus the in-house manufacturing differentiator.</p>
+  </div>
+</div>
+
+<!-- 03.1 PAGE HERO -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">03.1</div>
+      <div class="section-name">Page Hero</div>
+      <div class="section-type">Section header</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Eyebrow</div>
+        <div class="content-text eyebrow-text">What We Do</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text hero-text" style="font-size:22px;">End-to-end.<br>From concept to handover.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Sub-headline</div>
+        <div class="content-text muted">Velmont delivers the full spectrum of commercial interior services under one roof — design, manufacturing, and build, without the fragmentation of multiple contractors.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03.2 SERVICES GRID -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">03.2</div>
+      <div class="section-name">Services Grid</div>
+      <div class="section-type">3 × 2 card grid</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="item-grid three-col">
+        <div class="grid-cell">
+          <div class="grid-cell-label">Service 01</div>
+          <div class="grid-cell-value">Commercial Interiors</div>
+          <div class="grid-cell-desc">End-to-end interior solutions for hospitality, corporate, and commercial environments.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Service 02</div>
+          <div class="grid-cell-value">Turnkey Fit-Outs</div>
+          <div class="grid-cell-desc">Comprehensive project delivery from planning to handover.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Service 03</div>
+          <div class="grid-cell-value">Furniture Manufacturing</div>
+          <div class="grid-cell-desc">Custom furniture solutions crafted through our in-house facility.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Service 04</div>
+          <div class="grid-cell-value">Project Execution</div>
+          <div class="grid-cell-desc">Coordinated site management focused on quality and efficiency.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Service 05</div>
+          <div class="grid-cell-value">Technical Support</div>
+          <div class="grid-cell-desc">Detailed planning and technical expertise at every stage, supporting smooth execution.</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Service 06</div>
+          <div class="grid-cell-value">Carpentry &amp; Joinery</div>
+          <div class="grid-cell-desc">Bespoke woodwork and joinery tailored to project requirements.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03.3 MANUFACTURING -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">03.3</div>
+      <div class="section-name">Manufacturing Capability</div>
+      <div class="section-type">Dark feature section</div>
+      <span class="status status-provide">Client to Provide</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text" style="font-family:'Manrope';font-weight:600;font-size:20px;letter-spacing:-0.02em;">Design. Manufacture. Deliver.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Body copy</div>
+        <div class="content-text muted">Our in-house manufacturing facility enables complete control over quality, customisation, and delivery timelines. From custom furniture and joinery to specialised interior components, every product is crafted with precision and attention to detail.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Photo grid (4–5 images)</div>
+        <div class="content-note">Photos of the manufacturing facility — workshop, machinery, craftsmen, finished joinery pieces. <strong>Please provide high-resolution facility photographs.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03.4 SERVICES CTA -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">03.4</div>
+      <div class="section-name">Page CTA</div>
+      <div class="section-type">Bottom call-to-action</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text" style="font-family:'Manrope';font-weight:600;font-size:20px;">Start your project with us.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">CTA button</div>
+        <div class="content-text">Enquire <span style="color:var(--terracotta)">→</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 04 — ABOUT
+══════════════════════════════════════════ -->
+<div id="about" class="page-divider">
+  <div class="page-divider-num">
+    <div class="pg-num">04</div>
+    <div class="pg-label">Page</div>
+  </div>
+  <div class="page-divider-info">
+    <h2>About</h2>
+    <p>Builds trust — story, credentials, stats, and manufacturing differentiator.</p>
+  </div>
+</div>
+
+<!-- 04.1 PAGE HERO -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">04.1</div>
+      <div class="section-name">Page Hero</div>
+      <div class="section-type">Section header</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Eyebrow</div>
+        <div class="content-text eyebrow-text">The Studio</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text hero-text" style="font-size:22px;">Built to deliver,<br>from first sketch<br>to final handover.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04.2 WHO WE ARE -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">04.2</div>
+      <div class="section-name">Who We Are</div>
+      <div class="section-type">2-column · Copy + Image</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Kicker</div>
+        <div class="content-text eyebrow-text">About Velmont</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Main copy</div>
+        <div class="content-text muted">Velmont Design LLP specialises in commercial interiors, turnkey fit-outs, and custom furniture manufacturing. With an integrated approach to design, production, and execution, we deliver high-quality spaces for hospitality, corporate, and commercial clients across India.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Key highlight pills</div>
+        <div class="tag-list">
+          <span class="tag">End-to-End Interior Solutions</span>
+          <span class="tag">In-House Manufacturing Facility</span>
+          <span class="tag">Hospitality, Corporate &amp; Commercial Expertise</span>
+          <span class="tag">Quality-Driven Project Execution</span>
+        </div>
+      </div>
+      <div class="content-note">Please confirm if the about copy should be expanded. The current copy is taken directly from the company profile PDF. If you have a longer brand story or founding narrative, this is a good place for it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04.3 TRUST INDEX / STATS -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">04.3</div>
+      <div class="section-name">Track Record</div>
+      <div class="section-type">4-column stats strip</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="item-grid four-col">
+        <div class="grid-cell">
+          <div class="grid-cell-label">Stat 01</div>
+          <div class="grid-cell-value" style="font-size:28px;">15+</div>
+          <div class="grid-cell-desc">Years of Industry Experience</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Stat 02</div>
+          <div class="grid-cell-value" style="font-size:28px;">100+</div>
+          <div class="grid-cell-desc">Projects Delivered Across India</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Stat 03</div>
+          <div class="grid-cell-value" style="font-size:28px;">5M+</div>
+          <div class="grid-cell-desc">Square Feet Delivered</div>
+        </div>
+        <div class="grid-cell">
+          <div class="grid-cell-label">Stat 04</div>
+          <div class="grid-cell-value" style="font-size:28px;">200+</div>
+          <div class="grid-cell-desc">Total Workforce</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04.4 APPROACH -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">04.4</div>
+      <div class="section-name">Our Approach</div>
+      <div class="section-type">Editorial copy block</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Kicker</div>
+        <div class="content-text eyebrow-text">How We Think</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Lead paragraph (editorial, serif)</div>
+        <div class="content-text serif-text">"An environment reads as calm only when nothing in it is accidental — that demands one team, one standard, from the first plan to the final finish."</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Body</div>
+        <div class="content-text muted">We hold the full scope: design, manufacture, and build, within a single studio. That continuity of accountability — from concept to handover — is what allows us to deliver spaces that feel resolved rather than assembled.</div>
+      </div>
+      <div class="content-note">This is proposed copy written to match Velmont's editorial tone. Please review and adjust to reflect your studio's actual philosophy. If you'd like to add a founding story or the directors' background, this section can accommodate it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04.5 MANUFACTURING -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">04.5</div>
+      <div class="section-name">Manufacturing Capability</div>
+      <div class="section-type">Feature section + photo grid</div>
+      <span class="status status-provide">Client to Provide</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text" style="font-family:'Manrope';font-weight:600;font-size:20px;">In-house. In control.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Copy</div>
+        <div class="content-text muted">Our manufacturing facility gives us complete control over quality, customisation, and delivery timelines. From custom furniture and joinery to specialist interior components — everything built under one roof, to one standard.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Photos required</div>
+        <div class="content-note">4–5 high-resolution photos of the manufacturing facility. Ideal subjects: workshop interior, craftsmen at work, joinery detail, finished furniture before dispatch. <strong>Please provide or confirm availability of these images.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04.6 ABOUT CTA -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">04.6</div>
+      <div class="section-name">Page CTA</div>
+      <div class="section-type">Bottom call-to-action</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text" style="font-family:'Manrope';font-weight:600;font-size:20px;">Work with us.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">CTA button</div>
+        <div class="content-text">Get in Touch <span style="color:var(--terracotta)">→</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 05 — CONTACT
+══════════════════════════════════════════ -->
+<div id="contact" class="page-divider">
+  <div class="page-divider-num">
+    <div class="pg-num">05</div>
+    <div class="pg-label">Page</div>
+  </div>
+  <div class="page-divider-info">
+    <h2>Contact</h2>
+    <p>The conversion page — enquiry form, contact details, office location, and map.</p>
+  </div>
+</div>
+
+<!-- 05.1 PAGE HERO -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">05.1</div>
+      <div class="section-name">Page Hero</div>
+      <div class="section-type">Section header</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Eyebrow</div>
+        <div class="content-text eyebrow-text">Get in Touch</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Headline</div>
+        <div class="content-text hero-text" style="font-size:22px;">Let's build something<br>exceptional together.</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Sub-headline</div>
+        <div class="content-text muted">Whether you have a brief ready or are just beginning to explore — we'd like to hear about your project.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05.2 ENQUIRY FORM -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">05.2</div>
+      <div class="section-name">Enquiry Form</div>
+      <div class="section-type">Lead capture form</div>
+      <span class="status status-review">Needs Review</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Form fields (proposed)</div>
+        <div class="form-preview">
+          <div class="form-field">
+            <div class="field-label">Full Name *</div>
+            <div class="field-input">e.g. Rahul Mehta</div>
+          </div>
+          <div class="form-field">
+            <div class="field-label">Company / Organisation</div>
+            <div class="field-input">e.g. Hyatt Hotels</div>
+          </div>
+          <div class="form-field">
+            <div class="field-label">Email Address *</div>
+            <div class="field-input">e.g. rahul@company.com</div>
+          </div>
+          <div class="form-field">
+            <div class="field-label">Phone Number</div>
+            <div class="field-input">e.g. +91 98765 43210</div>
+          </div>
+          <div class="form-field">
+            <div class="field-label">Project Type</div>
+            <div class="field-input" style="color:var(--slate);">Hospitality / Workplace / Healthcare / Commercial / Other</div>
+          </div>
+          <div class="form-field">
+            <div class="field-label">Project Location</div>
+            <div class="field-input">e.g. Bengaluru</div>
+          </div>
+          <div class="form-field full">
+            <div class="field-label">Tell us about your project *</div>
+            <div class="field-input" style="min-height:80px;display:flex;align-items:flex-start;">Brief description, approximate area, timeline...</div>
+          </div>
+        </div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Submit button</div>
+        <div class="content-text">Send Enquiry <span style="color:var(--terracotta)">→</span></div>
+      </div>
+      <div class="content-note">Please confirm: (1) Are all these fields needed? (2) Should "Project Type" be a dropdown or pill selectors? (3) Should enquiries go to Info@velmontdesign.com — or a different address? (4) Do you want a WhatsApp shortcut button alongside the form?</div>
+    </div>
+  </div>
+</div>
+
+<!-- 05.3 CONTACT DETAILS -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">05.3</div>
+      <div class="section-name">Contact Details</div>
+      <div class="section-type">Info block</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="contact-details-preview">
+        <div class="cd-cell">
+          <div class="cd-label">Office Address</div>
+          <div class="cd-value">Site No. 60/1, Anagalapura Village,<br>Bidarahalli Hobli,<br>Bangalore – 560077</div>
+        </div>
+        <div class="cd-cell">
+          <div class="cd-label">Phone &amp; WhatsApp</div>
+          <div class="cd-value">+91 93622 36718</div>
+        </div>
+        <div class="cd-cell">
+          <div class="cd-label">Email</div>
+          <div class="cd-value">Info@velmontdesign.com</div>
+        </div>
+        <div class="cd-cell">
+          <div class="cd-label">Business Hours</div>
+          <div class="cd-value">Monday – Saturday<br>9:00 am – 9:00 pm</div>
+        </div>
+      </div>
+      <div class="content-note">Please confirm business days (Monday–Saturday assumed). Social media links to be added once handles are shared.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 05.4 MAP -->
+<div class="section-block">
+  <div class="section-block-inner">
+    <div class="section-meta">
+      <div class="section-num">05.4</div>
+      <div class="section-name">Map Embed</div>
+      <div class="section-type">Google Maps</div>
+      <span class="status status-approved">Approved</span>
+    </div>
+    <div class="section-content">
+      <div class="content-row">
+        <div class="content-label">Map pin</div>
+        <div class="content-text">Velmont Design LLP — Anagalapura Village, Bengaluru</div>
+      </div>
+      <div class="content-row">
+        <div class="content-label">Google Maps link (confirmed)</div>
+        <div class="content-text" style="font-size:12px;color:var(--slate);word-break:break-all;">https://www.google.com/maps/place/Velmont+design+LLP/data=!4m2!3m1!1s0x0:0x9345710035a52ef1</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CONTENT CHECKLIST
+══════════════════════════════════════════ -->
+<div style="margin-top:80px; padding:0 80px 0; border-top:2px solid var(--terracotta);">
+  <div style="padding:48px 0; border-bottom:1px solid var(--mineral);">
+    <div style="font-family:'Inter';font-size:10px;font-weight:600;letter-spacing:0.30em;text-transform:uppercase;color:var(--slate);margin-bottom:16px;">Content Readiness Summary</div>
+    <div style="font-family:'Manrope';font-weight:600;font-size:32px;letter-spacing:-0.02em;color:var(--vblack);margin-bottom:24px;">What we have · What we need</div>
+    <div class="item-grid three-col">
+      <div class="grid-cell" style="background:var(--approved-bg);">
+        <div class="grid-cell-label" style="color:var(--approved-fg);">Ready to Build</div>
+        <div class="grid-cell-value">Navigation &amp; Footer structure</div>
+        <div class="grid-cell-desc">Hero copy (all pages) · Services grid copy · Process steps copy · Stats / track record · Contact details · About copy · Google Maps link</div>
+      </div>
+      <div class="grid-cell" style="background:var(--review-bg);">
+        <div class="grid-cell-label" style="color:var(--review-fg);">Needs Confirmation</div>
+        <div class="grid-cell-value">Review &amp; approve</div>
+        <div class="grid-cell-desc">Discipline names &amp; sub-labels · Hero image selection · 3 featured projects on homepage · Project years &amp; area data · Form fields &amp; email routing · About copy tone · Business hours / days</div>
+      </div>
+      <div class="grid-cell" style="background:var(--provide-bg);">
+        <div class="grid-cell-label" style="color:var(--provide-fg);">Still Needed</div>
+        <div class="grid-cell-value">Client to supply</div>
+        <div class="grid-cell-desc">Manufacturing facility photographs · Full project list with details (name, year, area, discipline, location, photos) · Social media handles · Any additional services content · Hero image(s)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     APPROVAL SECTION
+══════════════════════════════════════════ -->
+<div class="approval-section">
+  <h2>Approval &amp; Sign-off</h2>
+  <p>Once you've reviewed this document, please confirm your approval — or send back notes on any section marked Needs Review or Client to Provide. Development will begin only after approval is received.</p>
+
+  <div class="approval-grid">
+    <div class="approval-cell">
+      <div class="approval-cell-label">Client Name</div>
+      <hr class="approval-line">
+      <div class="approval-hint">Please sign or type your full name</div>
+    </div>
+    <div class="approval-cell">
+      <div class="approval-cell-label">Designation</div>
+      <hr class="approval-line">
+      <div class="approval-hint">Role / Title</div>
+    </div>
+    <div class="approval-cell">
+      <div class="approval-cell-label">Date of Approval</div>
+      <hr class="approval-line">
+      <div class="approval-hint">DD / MM / YYYY</div>
+    </div>
+    <div class="approval-cell">
+      <div class="approval-cell-label">Signature / Email Confirmation</div>
+      <hr class="approval-line">
+      <div class="approval-hint">Or reply to the email with "Approved" noted</div>
+    </div>
+  </div>
+
+  <div class="approval-summary">
+    <div class="approval-summary-item">
+      <span class="as-label">To approve</span>
+      <span class="as-value">Email: thedenn0007@gmail.com</span>
+    </div>
+    <div class="approval-summary-item">
+      <span class="as-label">Document version</span>
+      <span class="as-value">v1.0 — June 2026</span>
+    </div>
+    <div class="approval-summary-item">
+      <span class="as-label">Next step after approval</span>
+      <span class="as-value">Development begins on all 5 pages</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span class="doc-footer-brand">Velmont</span>
+  <span class="doc-footer-copy">Website Content Plan · Confidential · © 2026 Velmont Design Studio</span>
+</div>
+
+</body>
+</html>
