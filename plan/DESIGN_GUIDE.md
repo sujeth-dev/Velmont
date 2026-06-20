@@ -460,7 +460,28 @@ display: flex; justify-content: space-between; align-items: center
 
 ---
 
-## 7. Interaction & Motion Tokens
+## 7. Verified Corrections (from design verification pass)
+
+### Discrepancies fixed vs. earlier assumptions
+
+| Item | Incorrect assumption | Correct value (from reference) |
+|---|---|---|
+| Hero eyebrow color (on dark bg) | "rgba warm" (vague) | `rgba(209,200,188,0.82)` — exact |
+| Nav link color (inactive) | slate `#68778D` | `#5a5550` — warm near-black |
+| Mineral token usage | borders only | Also used as **muted text** in `wt-year`, `ws-note`, `wt-ind` fallback |
+| Body min-width | not documented | `min-width: 1200px` — **desktop-only layout, no mobile breakpoints in reference** |
+| Project body text size | 14–16px generic | `14.5px` specifically in `.proj-text-col p` |
+| Studio body text size | 14–16px generic | `15px` specifically in `.studio-text p` |
+| Studio body max-width | not noted | `max-width: 460px` |
+| Studio H2 max-width | not noted | `max-width: 500px` |
+| Process head p max-width | not noted | `max-width: 300px` |
+
+### Mobile / Responsiveness
+The approved reference files (`index.html`, `work.html`) contain **zero `@media` queries**. The body has `min-width: 1200px`. The design is **desktop-only** as approved. A responsive build would require additional design decisions beyond what the reference provides.
+
+---
+
+## 8. Interaction & Motion Tokens
 
 From the reference — no complex animations defined. Keep motion minimal and purposeful:
 - `scroll-behavior: smooth` on `html`
@@ -469,7 +490,7 @@ From the reference — no complex animations defined. Keep motion minimal and pu
 
 ---
 
-## 8. Voice & Copy Tone
+## 9. Voice & Copy Tone
 
 Extracted directly from approved copy in the reference files:
 
@@ -486,7 +507,7 @@ Extracted directly from approved copy in the reference files:
 
 ---
 
-## 9. Navigation Structure (Approved)
+## 10. Navigation Structure (Approved)
 
 ```
 Work        ← primary portfolio page (was "Projects" — use "Work")
@@ -498,7 +519,7 @@ CTA in nav: **"Enquire"** (not "Contact Us" or "Get in Touch")
 
 ---
 
-## 10. Disciplines / Sectors (Approved)
+## 11. Disciplines / Sectors (Approved)
 
 | Discipline | Note |
 |---|---|
@@ -511,7 +532,7 @@ CTA in nav: **"Enquire"** (not "Contact Us" or "Get in Touch")
 
 ---
 
-## 11. Process Steps (Approved Copy)
+## 12. Process Steps (Approved Copy)
 
 | Step | Title | Description |
 |---|---|---|
@@ -522,7 +543,7 @@ CTA in nav: **"Enquire"** (not "Contact Us" or "Get in Touch")
 
 ---
 
-## 12. Approved Hero Copy (Homepage)
+## 13. Approved Hero Copy (Homepage)
 
 ```
 Eyebrow:  Defining Environments.
@@ -538,7 +559,7 @@ Meta R:   Bengaluru, India
 
 ---
 
-## 13. What Changed from Original Plan
+## 14. What Changed from Original Plan
 
 | Original Plan | Correct (from approved files) |
 |---|---|

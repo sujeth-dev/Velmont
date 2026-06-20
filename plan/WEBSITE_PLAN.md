@@ -2,6 +2,20 @@
 
 ---
 
+## 0. Build Source of Truth
+
+> **This is the single most important rule for the build.**
+
+| What | Source file | Use for |
+|---|---|---|
+| **Design** — CSS, fonts, colors, grid, component structure, spacing, all visual code | `draft/VELMONT-handoff/velmont/project/index.html` + `work.html` | Copy CSS directly. Do not re-derive or re-implement. |
+| **Content** — copy, section names, page structure, what text goes where | `velmont-website/CONTENT_PLAN.html` | Approved copy per section, per page. |
+| **Design notes** | `DESIGN_GUIDE.md` | Reference only — explains decisions. Not used as code source. |
+
+The design reference files (`index.html`, `work.html`) ARE the design. Port their CSS as-is into each page. Populate with content from `CONTENT_PLAN.html`. Do not re-interpret or re-derive design values from scratch.
+
+---
+
 ## 1. Overview
 
 **Client:** Velmont Design LLP  
@@ -9,7 +23,9 @@
 **Location:** Bangalore, India  
 **Domain:** velmontdesign.com  
 
-**Goal:** A premium, minimal website that positions Velmont as a high-end commercial interiors firm, generates enquiries, and allows the team to manage their project portfolio through a simple admin panel.
+**Goal:** A premium, minimal website that positions Velmont as a specialist commercial interior contracting company — B2B focused, specification-led, and quality-driven. Generates project enquiries and allows the team to manage their portfolio through a simple admin panel.
+
+> **Tone direction (updated from final content plan):** Contractor voice — factual, professional, specification-focused. NOT design-studio editorial. Copy emphasises precision, delivery, and in-house capability over architectural poetics.
 
 ---
 
@@ -40,7 +56,22 @@
 ### Brand Direction
 > Architectural · Turnkey · Minimal · Premium — **"Defining Environments."**
 >
-> Tone: spare and confident. Short declarative statements. Precise language around materials, light, and process. No marketing hyperbole.
+> **Tone (final, from approved content plan):** B2B contractor voice. Professional, factual, delivery-focused. Language centres on specification, precision, and in-house capability. Not a design studio — a specialist contracting company.
+
+### Copy Changes Logged from Client-Edited Content Plan
+
+| Section | Original (reference file) | Final (client approved) |
+|---|---|---|
+| Hero H1 | "Spaces composed with architectural intent." | **"Commercial interiors built to the highest standard."** |
+| Hero sub | "A turnkey interiors studio delivering considered, end-to-end environments…" | **"A commercial interior contracting company delivering precision fit-outs…"** |
+| 01.4 section title | Studio Introduction | **About Velmont** |
+| 01.4 body | "We design environments end to end…No handoffs. No gaps." | **"Velmont is a commercial interior contracting company with an in-house manufacturing facility…"** |
+| Process intro | "One accountable studio managing every discipline…" | **"One accountable team managing every phase of your project…"** |
+| Process Step 02 | "Design" — spatial narratives, material boards | **"Planning"** — site assessment, procurement, programme |
+| Services H1 | "End-to-end. From concept to handover." | **"Specialist services for commercial interiors."** |
+| Services sub | "Velmont delivers the full spectrum…without the fragmentation of multiple contractors." | **"Turnkey fit-outs, furniture manufacturing, carpentry, joinery…delivered by one specialist contracting team."** |
+| Manufacturing H | "Design. Manufacture. Deliver." | **"A state-of-the-art manufacturing facility."** |
+| Manufacturing copy | "enables complete control over quality, customisation, and delivery timelines…" | **"…built to precise specifications…quality-checked under one roof before it reaches your site."** |
 
 ---
 
