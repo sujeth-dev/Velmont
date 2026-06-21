@@ -145,22 +145,20 @@
 }
 
 /* ----------------------------------------------------------------
-   01.3  Selected Work Strip
-   Grid: 240px label column + 3 tiles
+   01.3  Our Projects — auto-scroll horizontal carousel
    ---------------------------------------------------------------- */
 .vm-work {
-  display: grid;
-  grid-template-columns: 240px repeat(3, 1fr);
   border-top: 1px solid var(--mineral);
   border-bottom: 1px solid var(--mineral);
+  overflow: hidden;
 }
 
-.vm-work__intro {
-  padding: 34px 0 34px var(--pad-side);
-  border-right: 1px solid var(--mineral);
+.vm-work__header {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
+  padding: 28px var(--pad-side);
+  border-bottom: 1px solid var(--mineral);
 }
 
 .vm-work__kicker {
@@ -173,16 +171,28 @@
   margin: 0;
 }
 
-.vm-work__count {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: var(--fs-display-num); /* 52px */
-  letter-spacing: 0.06em;
-  line-height: 1;
-  color: var(--vblack);
+.vm-work__track-wrap {
+  overflow: hidden;
+}
+
+.vm-work__track {
+  display: flex;
+  width: max-content;
+  animation: vm-marquee 42s linear infinite;
+}
+
+.vm-work__track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes vm-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .vm-work__tile {
+  width: 380px;
+  flex-shrink: 0;
   padding: var(--pad-tile-y) var(--pad-tile-x); /* 28px 40px */
   display: flex;
   flex-direction: column;
@@ -191,10 +201,6 @@
   color: inherit;
   border-right: 1px solid var(--mineral);
   transition: background var(--t-fast) var(--ease-default);
-}
-
-.vm-work__tile:last-child {
-  border-right: 0;
 }
 
 .vm-work__tile:hover {

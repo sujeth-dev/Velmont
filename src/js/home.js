@@ -1,9 +1,6 @@
-// Velmont — Home page (Phase 2).
-// Fetches /data/projects.json and renders the 3 featured tiles into the
-// Selected Work strip. Falls back to a styled placeholder if the fetch fails
-// so the strip never collapses.
-
-const MAX_FEATURED = 3;
+// Velmont — Home page.
+// Fetches /data/projects.json and renders the Our Projects auto-scroll carousel.
+// Tiles are duplicated so the CSS marquee animation loops seamlessly.
 
 /**
  * Pure renderer — produces the HTML for a single work tile. Exported so
@@ -34,22 +31,35 @@ export function renderWorkTile(p) {
 }
 
 /**
- * @param {object[]} projects - array of project records
- * @returns {object[]} the featured + published subset (max 3)
+ * Returns all published projects for the carousel.
+ * @param {object[]} projects
+ * @returns {object[]}
  */
-export function selectFeatured(projects) {
-  return projects.filter((p) => p.featured && p.published).slice(0, MAX_FEATURED);
+export function selectPublished(projects) {
+  return projects.filter((p) => p.published);
 }
 
 /**
- * Mount featured tiles into the given container.
+ * Kept for backward-compat with existing Vitest suite.
+ * @param {object[]} projects
+ * @returns {object[]}
+ */
+export function selectFeatured(projects) {
+  return projects.filter((p) => p.featured && p.published).slice(0, 3);
+}
+
+/**
+ * Mount carousel — renders all published tiles twice so the CSS marquee
+ * animation loops without a visible seam.
  * @param {HTMLElement} mount
  * @param {object[]} projects
  */
 export function mountFeatured(mount, projects) {
   if (!mount) return 0;
-  const tiles = selectFeatured(projects);
-  mount.innerHTML = tiles.map(renderWorkTile).join('');
+  const tiles = selectPublished(projects);
+  if (!tiles.length) return 0;
+  const html = tiles.map(renderWorkTile).join('');
+  mount.innerHTML = html + html; // duplicate for seamless loop
   return tiles.length;
 }
 
@@ -69,7 +79,7 @@ export async function initHome() {
   if (!mount) return;
   const projects = await loadProjects();
   if (!projects) {
-    mount.innerHTML = '<p style="padding: 40px; color: var(--slate);">Featured work loading…</p>';
+    mount.innerHTML = '<p style="padding: 40px; color: var(--slate);">Projects loading…</p>';
     return;
   }
   mountFeatured(mount, projects);

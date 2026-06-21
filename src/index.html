@@ -41,14 +41,18 @@
         <p class="vm-hero__meta">Bengaluru, India<br />Est. 2018</p>
       </section>
 
-      <!-- 01.3 SELECTED WORK STRIP -->
+      <!-- 01.3 OUR PROJECTS CAROUSEL -->
       <section class="vm-work" aria-labelledby="work-h">
-        <header class="vm-work__intro">
-          <p class="vm-work__kicker" id="work-h">Selected Work</p>
-          <p class="vm-work__count">100+</p>
+        <header class="vm-work__header">
+          <p class="vm-work__kicker" id="work-h">Our Projects</p>
+          <a class="vm-link" href="/work">
+            View All <span class="vm-link__arrow" aria-hidden="true">→</span>
+          </a>
         </header>
-        <div id="work-tiles" data-tiles>
-          <!-- Hydrated by src/js/home.js from data/projects.json -->
+        <div class="vm-work__track-wrap">
+          <div id="work-tiles" class="vm-work__track" data-tiles>
+            <!-- Hydrated by src/js/home.js — tiles duplicated for infinite scroll -->
+          </div>
         </div>
       </section>
 
