@@ -98,6 +98,18 @@
   border-bottom-color: var(--terracotta);
 }
 
+/* ---- Contact labels ---- */
+.vm-footer__contact-label {
+  display: block;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin-bottom: 4px;
+}
+
 /* ---- Copyright ---- */
 .vm-footer__copyright {
   margin: 26px 0 0;
