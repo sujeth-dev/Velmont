@@ -4,6 +4,51 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Phase 3 — Work Portfolio Grid + Project Detail Pages
+
+| Field | Value |
+|---|---|
+| Date | 2026-06-21 |
+| Status | Complete |
+| Branch | main |
+| Commit | 606084e |
+
+### What shipped
+
+- `src/work.html` — Work list page: hero ("100+ projects delivered across India."), discipline filter bar (All / Workplace / Healthcare / Hospitality / Commercial), 3-column project grid hydrated from projects.json (6 published tiles, each with index number, discipline label, project name, location/year, terracotta arrow).
+- `src/work/[slug].html` — Single project detail template (slug-driven). All 6 project pages served from this one file via URL rewrite.
+- `src/js/work.js` — Renders grid tiles with `data-discipline` attributes; filter toggle sets `hidden` attribute on non-matching tiles — no page reload.
+- `src/js/project.js` — Reads slug from `window.location.pathname`, fetches `/data/projects.json`, hydrates breadcrumb, hero H1, spec bar (Industry / Area / Year / Scope), editorial lead, body paragraphs, material pills, gallery (main + topRight + bottomRight), and circular prev/next navigation.
+- `src/css/work.css` — Work hero, filter bar, project grid, tile styles per DESIGN_GUIDE.
+- `src/css/project.css` — Breadcrumb, project hero (520px), spec bar (terracotta 2px top border, concrete bg), body (1.1fr 1fr grid), gallery (1.62fr 1fr, 560px, 3px gap), prev/next nav.
+- `vite.config.js` — `workSlugRewritePlugin` (Vite plugin) rewrites `/work/<slug>` to serve `[slug].html` in both dev and preview servers; `work` + `project` added to Rollup multi-page inputs.
+- `serve-local.mjs` — Same `/work/*` rewrite for manual local preview.
+- `e2e/work.spec.js` — 12 new Playwright tests covering work grid, discipline filter (Hospitality → 5, Workplace → 1, All → 6), tile href correctness, all 6 project detail pages (H1 + spec bar + body + gallery + breadcrumb + prev/next), and circular prev/next navigation.
+- `e2e/home.spec.js` — Fixed 2 pre-existing broken assertions: tile count selector updated to `:not([data-clone])` expecting 6; stats selector corrected from `.vm-stats__cell` → `.vm-finale__stat`.
+- `src/js/home.js` — Clone tiles now marked `data-clone="true" aria-hidden="true" tabindex="-1"` for accessibility and testability.
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | Pass — 54 / 54 |
+| Vite build | Pass — 11 chunks, 1.23s. `dist/work/[slug].html` 4.34 kB |
+| Playwright (all specs) | Pass — 26 / 26 (14 regression + 12 new Phase 3) |
+
+### Carry-overs
+
+- MEA Bangalore — only 1 photo available; same image used for hero and all 3 gallery slots. Year and area are null (display as "—"). Additional photos + metadata pending client.
+- The Seasons OTF files — still pending client; display numbers fall back to Cormorant Garamond.
+- Social handles still pending — footer placeholders unchanged.
+
+### Commit
+
+- Message: `Phase 3: Work portfolio grid with filter and all 6 project detail pages`
+- Hash: 606084e
+- Branch: main
+
+---
+
 ## Phase 2 — Home Page
 
 | Field | Value |
