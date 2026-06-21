@@ -49,9 +49,9 @@
             View All <span class="vm-link__arrow" aria-hidden="true">→</span>
           </a>
         </header>
-        <div class="vm-work__track-wrap">
-          <div id="work-tiles" class="vm-work__track" data-tiles>
-            <!-- Hydrated by src/js/home.js — tiles duplicated for infinite scroll -->
+        <div class="vm-work__slider">
+          <div id="work-tiles" class="vm-work__slides" data-tiles>
+            <!-- Hydrated by src/js/home.js — first 3 tiles cloned at end for seamless loop -->
           </div>
         </div>
       </section>
@@ -150,38 +150,36 @@
         </div>
       </section>
 
-      <!-- STATS BAR -->
-      <section class="vm-stats" aria-label="Velmont at a glance">
-        <div class="vm-stats__cell">
-          <span class="vm-stats__num">15+</span>
-          <span class="vm-stats__label">Years</span>
+      <!-- STATS + CTA — combined section on paper background -->
+      <section class="vm-finale" aria-labelledby="cta-h">
+        <div class="vm-finale__stats">
+          <div class="vm-finale__stat">
+            <span class="vm-stats__num">15+</span>
+            <span class="vm-stats__label">Years</span>
+          </div>
+          <div class="vm-finale__stat">
+            <span class="vm-stats__num">100+</span>
+            <span class="vm-stats__label">Projects</span>
+          </div>
+          <div class="vm-finale__stat">
+            <span class="vm-stats__num">5M+</span>
+            <span class="vm-stats__label">Sq Ft</span>
+          </div>
+          <div class="vm-finale__stat">
+            <span class="vm-stats__num">200+</span>
+            <span class="vm-stats__label">Workforce</span>
+          </div>
         </div>
-        <div class="vm-stats__cell">
-          <span class="vm-stats__num">100+</span>
-          <span class="vm-stats__label">Projects</span>
-        </div>
-        <div class="vm-stats__cell">
-          <span class="vm-stats__num">5M+</span>
-          <span class="vm-stats__label">Sq Ft</span>
-        </div>
-        <div class="vm-stats__cell">
-          <span class="vm-stats__num">200+</span>
-          <span class="vm-stats__label">Workforce</span>
-        </div>
-      </section>
-
-      <!-- CTA BANNER -->
-      <section class="vm-cta" aria-labelledby="cta-h">
-        <div>
-          <h2 id="cta-h" class="vm-cta__h">Let's build something exceptional together.</h2>
-          <p class="vm-cta__sub">
+        <div class="vm-finale__cta">
+          <h2 id="cta-h" class="vm-finale__h">Let's build something exceptional together.</h2>
+          <p class="vm-finale__sub">
             Whether you have a brief ready or are just beginning to explore — we'd like to hear
             about your project.
           </p>
+          <a class="vm-finale__link" href="/contact" data-cta="enquire">
+            Enquire <span aria-hidden="true">→</span>
+          </a>
         </div>
-        <a class="vm-cta__link" href="/contact" data-cta="enquire">
-          Enquire <span class="vm-cta__link__arrow" aria-hidden="true">→</span>
-        </a>
       </section>
     </main>
 

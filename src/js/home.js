@@ -49,8 +49,9 @@ export function selectFeatured(projects) {
 }
 
 /**
- * Mount carousel — renders all published tiles twice so the CSS marquee
- * animation loops without a visible seam.
+ * Mount sliding-window carousel.
+ * Renders all published tiles, then appends clones of the first 3 so the
+ * loop can snap back to index 0 without a visible jump.
  * @param {HTMLElement} mount
  * @param {object[]} projects
  */
@@ -58,8 +59,10 @@ export function mountFeatured(mount, projects) {
   if (!mount) return 0;
   const tiles = selectPublished(projects);
   if (!tiles.length) return 0;
-  const html = tiles.map(renderWorkTile).join('');
-  mount.innerHTML = html + html; // duplicate for seamless loop
+  const tileHtml = tiles.map(renderWorkTile).join('');
+  // Clone first 3 tiles at the end for seamless wraparound
+  const cloneHtml = tiles.slice(0, 3).map(renderWorkTile).join('');
+  mount.innerHTML = tileHtml + cloneHtml;
   return tiles.length;
 }
 
@@ -77,10 +80,60 @@ async function loadProjects() {
 export async function initHome() {
   const mount = document.querySelector('[data-tiles]');
   if (!mount) return;
+
   const projects = await loadProjects();
   if (!projects) {
     mount.innerHTML = '<p style="padding: 40px; color: var(--slate);">Projects loading…</p>';
     return;
   }
-  mountFeatured(mount, projects);
+
+  const n = mountFeatured(mount, projects);
+  if (!n) return;
+
+  // One tile width = 100% / 3 of the slider container
+  const TILE_PCT = 100 / 3;
+  let index = 0;
+  let timer;
+
+  function goTo(i, animate) {
+    if (animate) mount.classList.add('is-animated');
+    mount.style.transform = `translateX(-${i * TILE_PCT}%)`;
+  }
+
+  function advance() {
+    index++;
+    goTo(index, true);
+
+    // When we reach the cloned section, snap back silently
+    if (index === n) {
+      mount.addEventListener(
+        'transitionend',
+        () => {
+          mount.classList.remove('is-animated');
+          index = 0;
+          goTo(0, false);
+          // Re-enable animation after one paint so the snap isn't visible
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => mount.classList.add('is-animated'));
+          });
+        },
+        { once: true },
+      );
+    }
+  }
+
+  // Start after a short delay so transition class is applied post-render
+  requestAnimationFrame(() => {
+    mount.classList.add('is-animated');
+    timer = setInterval(advance, 4500);
+  });
+
+  // Pause on hover
+  const slider = mount.closest('.vm-work__slider');
+  if (slider) {
+    slider.addEventListener('mouseenter', () => clearInterval(timer));
+    slider.addEventListener('mouseleave', () => {
+      timer = setInterval(advance, 4500);
+    });
+  }
 }
