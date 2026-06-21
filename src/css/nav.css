@@ -33,7 +33,7 @@
 
 .vm-nav__tagline {
   display: block;
-  margin-top: -20px; /* tucks under the logo */
+  margin-top: -28px; /* -20px base + 8px to compensate logo translateY(-8px) */
   font-family: var(--body);
   font-weight: 500;
   font-size: var(--fs-nav-tagline); /* 9.5px */
