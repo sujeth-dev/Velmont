@@ -1,0 +1,68 @@
+/* ============================================================
+   Velmont Design Studio — Design Tokens
+   Source of truth: plan/DESIGN_GUIDE.md §2–§3
+   Do not substitute values. Add new tokens via DECISIONS.md log.
+   ============================================================ */
+
+:root {
+  /* -- Color tokens (DESIGN_GUIDE §2) -- */
+  --vblack: #1a1a1a;
+  --terracotta: #ff4015;
+  --slate: #68778d;
+  --concrete: #d9dce0;
+  --mineral: #bbbcc3;
+  --steel: #8c92ba;
+  --sand: #d9cab0;
+  --paper: #f4f0eb;
+
+  /* Body paragraph text — warm near-black, NOT vblack, NOT slate */
+  --body-text: #5a5550;
+
+  /* -- Typography stacks (DESIGN_GUIDE §3) -- */
+  --display: 'The Seasons', 'Cormorant Garamond', Georgia, serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --head: 'Manrope', system-ui, -apple-system, Segoe UI, sans-serif;
+  --body: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+
+  /* -- Type scale -- */
+  --fs-hero-h1: 88px;
+  --fs-project-h1: 68px;
+  --fs-section-h2: 48px;
+  --fs-section-h3-dark: 44px;
+  --fs-eyebrow: 11px;
+  --fs-body: 15px;
+  --fs-body-sm: 14.5px;
+  --fs-hero-sub: 16px;
+  --fs-editorial-lead: 28px;
+  --fs-work-tile-name: 28px;
+  --fs-display-num: 52px;
+  --fs-process-step-num: 42px;
+  --fs-process-step-title: 16px;
+  --fs-spec-value: 18px;
+  --fs-spec-label: 10px;
+  --fs-nav-link: 13.5px;
+  --fs-nav-cta: 12px;
+  --fs-nav-tagline: 9.5px;
+  --fs-footer-link: 12px;
+  --fs-copyright: 11px;
+  --fs-material-tag: 11.5px;
+
+  /* -- Spacing tokens -- */
+  --pad-side: 80px;
+  --pad-tile-y: 28px;
+  --pad-tile-x: 40px;
+  --col-gap: 80px;
+  --gap-nav-links: 44px;
+
+  /* -- Heights -- */
+  --nav-h: 94px;
+  --hero-h: 700px;
+  --project-hero-h: 520px;
+  --logo-h: 82px;
+  --gallery-h: 560px;
+
+  /* -- Motion -- */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 140ms;
+  --t-base: 220ms;
+}

@@ -2,21 +2,32 @@
 
 B2B commercial interior contracting company website for Velmont Design LLP, Bengaluru.
 
-**Status:** Planning complete. Build not started. Phase 0 is next.
+**Status:** Phase 0 complete. Foundation, tooling, and CI in place.
 **Live domain:** velmontdesign.com (not yet deployed)
 **Stack:** Vanilla HTML/CSS/JS + Vite · Firebase · Vercel · Playwright · Vitest
 
 ---
 
-## How to start the build
+## Quick start
 
-Each phase is run as an automated loop. Start Phase 0:
+```bash
+npm install
+npm run optimize-images   # produce WebP assets from /assets/projects
+npm run dev               # http://localhost:5173
+npm test                  # vitest
+npm run e2e               # playwright (requires browsers installed)
+npm run lint              # eslint
+npm run format:check      # prettier
+npm run build             # production build → dist/
+```
+
+## How to run the next phase
+
+Each phase is run as an automated loop. Increment the phase number after sign-off:
 
 ```
-/loop "develop, test, commit and push Phase 0 of Velmont website per the master plan at plan/MASTER_PLAN.md. Stop and notify me if an approval gate is reached or if any test fails."
+/loop "develop, test, commit and push Phase 1 of Velmont website per the master plan at plan/MASTER_PLAN.md. Stop and notify me if an approval gate is reached or if any test fails."
 ```
-
-Increment the phase number after each phase is approved.
 
 ---
 
@@ -92,10 +103,4 @@ Source JPG photography for all 6 projects. Processed to WebP/AVIF in Phase 6. On
 Four logo JPG files are duplicates of their PNG equivalents and serve no purpose. Remove them during Phase 0 folder setup:
 
 ```
-assets/logos/velmont-main.jpg
-assets/logos/velmont-white.jpg
-assets/logos/velmont-black.jpg
-assets/logos/velmont-orange.jpg
-```
-
-No other files are redundant. `velmont-black.png`, `velmont-orange.png`, `velmont-taglined.jpg`, `velmont-taglined-2.jpg`, and `color-palette.png` are brand archive files — not used by the website but not safe to delete without client sign-off.
+assets/lo
