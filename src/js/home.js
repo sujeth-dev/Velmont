@@ -98,8 +98,11 @@ export async function initHome() {
   let index = 0;
   let timer;
 
+  // Manage transition directly via style — more reliable than class toggling
   function goTo(i, animate) {
-    if (animate) mount.classList.add('is-animated');
+    mount.style.transition = animate
+      ? 'transform 0.85s cubic-bezier(0.4, 0, 0.2, 1)'
+      : 'none';
     mount.style.transform = `translateX(-${i * TILE_PCT}%)`;
   }
 
@@ -107,29 +110,25 @@ export async function initHome() {
     index++;
     goTo(index, true);
 
-    // When we reach the cloned section, snap back silently
+    // When we reach the cloned section, snap back to origin invisibly
     if (index === n) {
       mount.addEventListener(
         'transitionend',
         () => {
-          mount.classList.remove('is-animated');
           index = 0;
           goTo(0, false);
-          // Re-enable animation after one paint so the snap isn't visible
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => mount.classList.add('is-animated'));
-          });
+          // Force a synchronous reflow so the browser commits the instant-snap
+          // before the next animation frame, making the wrap truly seamless
+          void mount.offsetWidth;
         },
         { once: true },
       );
     }
   }
 
-  // Start after a short delay so transition class is applied post-render
-  requestAnimationFrame(() => {
-    mount.classList.add('is-animated');
-    timer = setInterval(advance, 4500);
-  });
+  // Set initial position without transition, then start the interval
+  goTo(0, false);
+  timer = setInterval(advance, 4500);
 
   // Pause on hover
   const slider = mount.closest('.vm-work__slider');

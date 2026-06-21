@@ -206,11 +206,7 @@
 
 .vm-work__slides {
   display: flex;
-  /* transition applied by JS after initial render to avoid load jump */
-}
-
-.vm-work__slides.is-animated {
-  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  /* transition managed inline by home.js for reliable seamless looping */
 }
 
 .vm-work__tile {

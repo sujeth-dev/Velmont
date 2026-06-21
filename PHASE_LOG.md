@@ -4,6 +4,39 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Post-Phase 3 Polish — Hero Images + UI Fixes
+
+| Field | Value |
+|---|---|
+| Date | 2026-06-21 |
+| Status | Complete |
+| Branch | main |
+| Commits | 7cb8865 (hero images), see below (polish) |
+
+### What shipped
+
+**Hero images (7cb8865):**
+- Home hero: ITC Ratnadipa Colombo `exterior.webp` as full-bleed `<img>` behind `::after` gradient overlay. Text at z-index 2.
+- All 6 project detail pages: `images.hero` from JSON now hydrated by `project.js` into `<img data-proj-hero-img>`. Same overlay CSS pattern.
+- Fallback background colour (#2b2927 / #2e2b28) for image load failures.
+
+**UI polish:**
+- Carousel: replaced double-RAF class-toggle with direct `style.transition` + `void mount.offsetWidth` forced reflow — truly seamless infinite loop, no visible snap-back.
+- Work page: redesigned from 3-column grid to 1-project-per-full-row editorial layout. Each row has the project `cover` image on the left, project info on the right (alternating even/odd). Subtle zoom on hover.
+- Project detail gallery: `overflow: hidden` added to clip images to 560px grid bounds. `border-bottom` line sits directly below gallery images.
+- Prev/Next navigation removed from project detail pages entirely.
+- Home carousel kicker reverted to "Selected Work" per MASTER_PLAN spec.
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | Pass — 54 / 54 |
+| Vite build | Pass |
+| Playwright | Pass — 25 / 25 (prev/next test removed with the nav) |
+
+---
+
 ## Phase 3 — Work Portfolio Grid + Project Detail Pages
 
 | Field | Value |

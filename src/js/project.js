@@ -32,7 +32,7 @@ export function renderMaterials(materials) {
  * @param {object} prev - previous project (circular)
  * @param {object} next - next project (circular)
  */
-export function hydratePage(project, prev, next) {
+export function hydratePage(project) {
   // Breadcrumb
   const bc = document.querySelector('[data-breadcrumb-project]');
   if (bc) bc.textContent = project.title || '';
@@ -108,20 +108,6 @@ export function hydratePage(project, prev, next) {
   // Page title
   document.title = `${project.title} — Velmont Design Studio`;
 
-  // Prev / Next
-  if (prev) {
-    const prevLink = document.querySelector('[data-prev-link]');
-    if (prevLink) prevLink.href = `/work/${prev.slug}`;
-    const prevName = document.querySelector('[data-prev-name]');
-    if (prevName) prevName.textContent = prev.title || '';
-  }
-
-  if (next) {
-    const nextLink = document.querySelector('[data-next-link]');
-    if (nextLink) nextLink.href = `/work/${next.slug}`;
-    const nextName = document.querySelector('[data-next-name]');
-    if (nextName) nextName.textContent = next.title || '';
-  }
 }
 
 async function loadProjects() {
@@ -146,18 +132,14 @@ export async function initProject() {
   if (!projects) return;
 
   const published = projects.filter((p) => p.published);
-  const idx = published.findIndex((p) => p.slug === slug);
+  const project = published.find((p) => p.slug === slug);
 
-  if (idx === -1) {
+  if (!project) {
     document.title = 'Project not found — Velmont Design Studio';
     const main = document.querySelector('#main');
     if (main) main.innerHTML = '<p style="padding:80px var(--pad-side);font-family:var(--body);color:var(--slate)">Project not found.</p>';
     return;
   }
 
-  const project = published[idx];
-  const prev = published[(idx - 1 + published.length) % published.length];
-  const next = published[(idx + 1) % published.length];
-
-  hydratePage(project, prev, next);
+  hydratePage(project);
 }

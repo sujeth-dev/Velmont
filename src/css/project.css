@@ -217,6 +217,8 @@
   grid-template-rows: 1fr 1fr;
   gap: 3px;
   height: var(--gallery-h); /* 560px */
+  overflow: hidden; /* clip images to grid bounds */
+  border-bottom: 1px solid var(--mineral);
 }
 
 .vm-proj-gallery__img {
@@ -230,53 +232,3 @@
   grid-row: 1 / 3;
 }
 
-/* ----------------------------------------------------------------
-   Prev / Next project navigation
-   ---------------------------------------------------------------- */
-.vm-proj-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--mineral);
-}
-
-.vm-proj-nav__link {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 40px var(--pad-side);
-  text-decoration: none;
-  color: inherit;
-  transition: background var(--t-fast) var(--ease-default);
-}
-
-.vm-proj-nav__link:hover {
-  background: rgba(0, 0, 0, 0.03);
-}
-
-.vm-proj-nav__link--next {
-  border-left: 1px solid var(--mineral);
-  text-align: right;
-}
-
-.vm-proj-nav__dir {
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 0.30em;
-  text-transform: uppercase;
-  color: var(--slate);
-}
-
-.vm-proj-nav__name {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.2;
-  color: var(--vblack);
-}
-
-.vm-proj-nav__arrow {
-  color: var(--terracotta);
-  font-size: 20px;
-}

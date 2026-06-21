@@ -21,15 +21,24 @@ export function renderGridTile(p, index) {
   const year = p.year != null ? String(p.year) : '—';
   const loc = String(p.location || '');
   const meta = loc && year !== '—' ? `${loc} · ${year}` : loc || year;
+  const cover = String(p.images?.cover || '');
+  const title = String(p.title || '');
   return [
     `<a class="vm-grid-tile" href="/work/${slug}" data-discipline="${p.discipline || ''}" data-tile="${slug}">`,
+    `<div class="vm-grid-tile__img-wrap">`,
+    `<img class="vm-grid-tile__img" src="${cover}" alt="${title}" loading="lazy" width="760" height="500" />`,
+    `</div>`,
+    `<div class="vm-grid-tile__content">`,
+    `<div>`,
     `<span class="vm-grid-tile__index">${padIndex(index)}</span>`,
     `<p class="vm-grid-tile__discipline">${p.discipline || ''}</p>`,
-    `<p class="vm-grid-tile__name">${p.title || ''}</p>`,
+    `<p class="vm-grid-tile__name">${title}</p>`,
     `<p class="vm-grid-tile__meta">${meta}</p>`,
+    `</div>`,
     `<div class="vm-grid-tile__foot">`,
     `<span class="vm-grid-tile__year">${year !== '—' ? year : ''}</span>`,
     `<span class="vm-grid-tile__arrow" aria-hidden="true">→</span>`,
+    `</div>`,
     `</div>`,
     `</a>`,
   ].join('');

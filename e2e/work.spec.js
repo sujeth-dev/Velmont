@@ -54,7 +54,7 @@ test.describe('Phase 3 — Work list page', () => {
 
 test.describe('Phase 3 — Project detail pages', () => {
   for (const proj of PROJECTS) {
-    test(`${proj.title} — renders H1, spec bar, body, gallery, breadcrumb, prev/next`, async ({ page }) => {
+    test(`${proj.title} — renders H1, spec bar, body, gallery, breadcrumb`, async ({ page }) => {
       await page.goto(`/work/${proj.slug}`);
 
       // H1 matches project title
@@ -63,7 +63,7 @@ test.describe('Phase 3 — Project detail pages', () => {
       // Spec bar has 4 cells
       await expect(page.locator('.vm-spec-bar__cell')).toHaveCount(4);
 
-      // Spec bar values are populated (not empty "—" for industry/scope, those always have values)
+      // Spec bar values populated
       await expect(page.locator('[data-spec-industry]')).toHaveText(proj.discipline);
       await expect(page.locator('[data-spec-scope]')).not.toBeEmpty();
 
@@ -81,32 +81,6 @@ test.describe('Phase 3 — Project detail pages', () => {
       await expect(page.locator('[data-gallery-main]')).toHaveAttribute('src', /.+/);
       await expect(page.locator('[data-gallery-top-right]')).toHaveAttribute('src', /.+/);
       await expect(page.locator('[data-gallery-bottom-right]')).toHaveAttribute('src', /.+/);
-
-      // Prev/Next nav present
-      await expect(page.locator('[data-prev-link]')).toHaveAttribute('href', /\/work\/.+/);
-      await expect(page.locator('[data-next-link]')).toHaveAttribute('href', /\/work\/.+/);
     });
   }
-
-  test('prev/next navigation links work (circular)', async ({ page }) => {
-    // Start at first project
-    await page.goto('/work/jw-marriott-bengaluru');
-
-    // Follow "Next" link
-    const nextHref = await page.locator('[data-next-link]').getAttribute('href');
-    expect(nextHref).toBeTruthy();
-    await page.goto(nextHref);
-    // Should be on taj-malabar-kochi
-    await expect(page.locator('[data-proj-h1]')).toHaveText('Taj Malabar Resort & Spa, Kochi');
-
-    // Follow "Prev" back
-    const prevHref = await page.locator('[data-prev-link]').getAttribute('href');
-    await page.goto(prevHref);
-    await expect(page.locator('[data-proj-h1]')).toHaveText('JW Marriott Bengaluru Prestige Golfshire');
-
-    // Circular: prev from first should wrap to last
-    const prevFromFirst = await page.locator('[data-prev-link]').getAttribute('href');
-    await page.goto(prevFromFirst);
-    await expect(page.locator('[data-proj-h1]')).toHaveText('Taj Exotica Resort & Spa, Andamans');
-  });
 });
