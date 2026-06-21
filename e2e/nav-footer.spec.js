@@ -22,7 +22,6 @@ test.describe('Phase 1 — nav', () => {
     const cta = page.locator('.vm-nav__cta');
     await expect(cta).toHaveText('Enquire');
     const borderColor = await cta.evaluate((el) => getComputedStyle(el).borderTopColor);
-    // var(--terracotta) #FF4015 → rgb(255, 64, 21)
     expect(borderColor.replace(/\s/g, '')).toBe('rgb(255,64,21)');
   });
 });
@@ -42,6 +41,6 @@ test.describe('Phase 1 — footer', () => {
   test('copyright line is present', async ({ page }) => {
     await page.goto('/');
     const copy = page.locator('.vm-footer__copyright');
-    await expect(copy).toContainText('© 2026 Velmont Design Studio. All rights reserved.');
+    await expect(copy).toContainText('© 2026 Velmont Design LLP. All rights reserved.');
   });
 });

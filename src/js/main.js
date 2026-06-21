@@ -1,7 +1,9 @@
 // Velmont — main entry point.
-// Phase 1: inject shared nav + footer on every page.
+// Phase 1: inject shared nav + footer.
+// Phase 2: hydrate the home page Selected Work strip.
 
 import { injectComponent, markActiveNavLink } from './components.js';
+import { initHome } from './home.js';
 
 async function init() {
   await Promise.all([
@@ -9,6 +11,7 @@ async function init() {
     injectComponent('#footer-mount', '/components/footer.html'),
   ]);
   markActiveNavLink();
+  initHome();
 }
 
 if (document.readyState === 'loading') {

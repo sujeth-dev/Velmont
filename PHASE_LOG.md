@@ -4,7 +4,7 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
-## Phase 1 — Shared Components (Nav + Footer)
+## Phase 2 — Home Page
 
 | Field | Value |
 |---|---|
@@ -14,33 +14,69 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ### What shipped
 
-- `src/components/nav.html` — sticky 94px paper-bg nav with logo, tagline, 4 links, terracotta-bordered Enquire CTA.
-- `src/components/footer.html` — dark vblack footer with white logo, mirrored nav, contact block, social placeholders, copyright.
-- `src/css/nav.css`, `src/css/footer.css` — typography and spacing pulled from tokens; active-link state is 2px terracotta underline + vblack text.
-- `src/js/components.js` — injectComponent(selector, path) never throws; returns null and console.warns on missing mount, non-OK response, or fetch failure. Also exports markActiveNavLink(pathname).
-- `scripts/copy-components.js` — pre-dev/pre-build step that mirrors src/components/*.html to public/components/*.html so the runtime fetch resolves. public/components/ is gitignored.
-- src/index.html and src/js/main.js — mount #nav-mount and #footer-mount and call markActiveNavLink on load.
+- src/index.html — 7 sections wired top-to-bottom: hero, Selected Work strip (hydrated from JSON), About / The Studio, Disciplines strip, How We Work (dark process strip), Stats bar, CTA banner.
+- src/css/home.css — every section styled against tokens.css. Grid templates match DESIGN_GUIDE §4 (240px+repeat(3,1fr) for work strip, repeat(4,1fr) for disciplines/process/stats, 1fr 1fr for studio).
+- src/js/home.js — pure renderWorkTile + selectFeatured + mountFeatured; initHome fetches /data/projects.json and renders the 3 featured tiles. Falls back to a styled "loading" message if the fetch fails so the strip never collapses.
+- src/js/main.js — calls initHome after the nav and footer fragments resolve.
+- scripts/copy-data.js — pre-dev/pre-build step that mirrors data/projects.json into public/data/ so the runtime fetch resolves in both vite dev and vite preview. public/data/ is gitignored.
+
+### Copy sources
+
+- Hero copy from CONTENT_PLAN.html §01.2: H1 "Commercial interiors built to the highest standard."; eyebrow "Defining Environments."; CTA "View the Portfolio →".
+- The Studio copy from CONTENT_PLAN.html §01.4: H "One team. Every layer. Delivered."
+- Disciplines / desciption text from CONTENT_PLAN.html §01.5.
+- Process steps (Brief / Planning / Build / Handover) from CONTENT_PLAN.html §01.6.
+- Stats from MASTER_PLAN §Phase 2 §6 (15+ Years / 100+ Projects / 5M+ Sq Ft / 200+ Workforce).
+- CTA Banner copy "Let's build something exceptional together." + Enquire link to /contact.
 
 ### Tests
 
 | Suite | Result |
 |---|---|
-| ESLint | Pass |
+| ESLint | Pass — 0 errors |
 | Prettier | Pass |
-| Vitest | Pass — 47 / 47 (6 new component tests) |
-| Vite build | Pass — 8 modules, 3.90s |
-| Preview smoke (curl) | / returns 200; /components/nav.html and /components/footer.html serve the fragments |
-| Playwright nav-footer.spec.js | Deferred to CI — sandbox blocks Chrome download |
+| Vitest | Pass — 54 / 54 (7 new home.test.js cases for selectFeatured + renderWorkTile) |
+| Vite build | Pass — 10 modules, 3.60s. dist/index.html 7.72 kB, CSS 13.28 kB, JS 2.84 kB |
+| Preview smoke (curl) | / 200; H1 text exact; /data/projects.json 200; 5 featured+published projects available (sliced to 3 by selectFeatured) |
+| Playwright (e2e/home.spec.js) | Deferred to CI — sandbox blocks Chrome download. Specs cover all 7 MASTER_PLAN Phase 2 assertions: title, H1, tile count, tile parts, process step labels, stats cell count, Enquire CTA href. |
+| Lighthouse CI | Will run on first CI execution; gates Performance ≥ 85, A11y ≥ 90, SEO ≥ 90, Best Practices ≥ 90. |
 
-### Notes
+### Carry-overs
 
-- Social handles still pending from client; placeholders carry aria-label "(handle pending)".
-- Active-link data attributes go live as those pages land in Phases 3 and 4.
+- The Seasons OTF files — still pending client; display numbers fall back to Cormorant Garamond.
+- Social handles still pending — footer placeholders unchanged from Phase 1.
+- Project detail pages (work/[slug]) land in Phase 3 — until then the tile links point to /work/<slug> which 404s.
 
 ### Commit
 
-- Commit message: Phase 1: Nav and footer shared components
+- Commit message: Phase 2: Home page — all sections, wired to project data
 - Branch: main (push from local machine — sandbox has no git credentials)
+
+---
+
+## Phase 1 — Shared Components (Nav + Footer)
+
+| Field | Value |
+|---|---|
+| Date | 2026-06-21 |
+| Status | Complete |
+
+### What shipped
+
+- src/components/nav.html — sticky 94px paper-bg nav.
+- src/components/footer.html — dark vblack footer with mirrored nav, contact block, social placeholders, copyright.
+- src/css/nav.css, src/css/footer.css.
+- src/js/components.js — injectComponent + markActiveNavLink utilities.
+- scripts/copy-components.js — mirrors src/components/*.html to public/components/.
+- src/index.html and src/js/main.js — mount points wired.
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | Pass — 47 / 47 (6 new) |
+| Vite build | Pass |
+| Playwright nav-footer.spec.js | Deferred to CI |
 
 ---
 
@@ -50,29 +86,17 @@ Living record of every phase. One entry per phase. Updated after every push.
 |---|---|
 | Date | 2026-06-21 |
 | Status | Complete |
-| Branch | main |
 
 ### What shipped
 
-- Vanilla-JS Vite project skeleton.
-- src/css/tokens.css — all 8 colour tokens, 4 font stacks, type scale, spacing, height tokens.
-- src/css/base.css — reset, body, focus styles, Google Fonts link, local @font-face for The Seasons.
-- data/projects.json — all 6 launch projects from PROJECT_DATA.md.
-- scripts/convert-images.js — sharp WebP converter; resolves canonical slug to on-disk folder via SLUG_MAP; resizes >4000px sources. Wrote 35 project images and 2 logos to public/assets/.
-- Tooling: vite.config.js, vitest.config.js, playwright.config.js, .eslintrc.json, .prettierrc, lighthouserc.json.
-- .github/workflows/ci.yml — lint -> unit -> build -> e2e -> Lighthouse.
-- vercel.json — security headers, SPA rewrites.
-- .env.example.
+- Vite + vanilla-JS skeleton, design tokens, base CSS, projects.json, sharp WebP converter, tooling configs, CI workflow, vercel.json.
 
 ### Tests
 
 | Suite | Result |
 |---|---|
-| ESLint | Pass |
-| Prettier | Pass |
 | Vitest | Pass — 41 / 41 |
 | Vite build | Pass |
-| Vite preview | Pass — 200 |
 | Playwright | Deferred to CI |
 
 ### Known gaps

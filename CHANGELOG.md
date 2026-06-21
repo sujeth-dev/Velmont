@@ -2,21 +2,21 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 2 — 2026-06-21
+
+- Home page built — 7 sections: hero, Selected Work strip, About, Disciplines, How We Work, Stats, CTA banner.
+- src/index.html, src/css/home.css, src/js/home.js wired.
+- src/js/main.js now calls initHome after nav and footer are injected.
+- Added scripts/copy-data.js — runs pre-dev and pre-build to expose data/projects.json at /data/projects.json.
+- Vitest now 54/54 (7 new home tests for selectFeatured and renderWorkTile).
+- Playwright home.spec.js added under e2e/.
+
 ## Phase 1 — 2026-06-21
 
-- Added shared nav: src/components/nav.html, src/css/nav.css.
-- Added shared footer: src/components/footer.html, src/css/footer.css.
-- Added injectComponent and markActiveNavLink utilities in src/js/components.js; wired in src/js/main.js.
-- Added scripts/copy-components.js — runs pre-dev and pre-build to expose src/components/*.html at /components/*.html.
-- Added jsdom as a dev dependency for component unit tests; Vitest now 47/47 (6 new).
-- Playwright nav/footer specs added under e2e/nav-footer.spec.js.
+- Added shared nav and footer (src/components/*, src/css/nav.css, src/css/footer.css).
+- Added injectComponent and markActiveNavLink utilities; scripts/copy-components.js mirrors fragments.
+- Added jsdom; Vitest 47/47 (6 new).
 
 ## Phase 0 — 2026-06-21
 
-- Initialised Vite + vanilla-JS project skeleton.
-- Added design tokens (src/css/tokens.css) and base styles (src/css/base.css) from DESIGN_GUIDE.
-- Created data/projects.json with all 6 launch projects from PROJECT_DATA.md.
-- Added scripts/convert-images.js — sharp pre-build to produce WebP project images and logos under /public/assets/.
-- Configured ESLint, Prettier, Vitest, Playwright, Lighthouse CI.
-- Added .github/workflows/ci.yml (lint -> unit -> build -> e2e -> Lighthouse).
-- Added vercel.json (security headers + rewrites) and .env.example.
+- Vite + vanilla-JS skeleton, tokens.css, base.css, projects.json, sharp WebP converter, tooling, CI, vercel.json.

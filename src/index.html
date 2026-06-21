@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=1200" />
     <meta
       name="description"
-      content="Velmont Design Studio — a turnkey commercial interiors studio based in Bengaluru. Hospitality, workplace, healthcare, and commercial fit-out."
+      content="Velmont Design Studio — a turnkey commercial interior contracting company in Bengaluru. Hospitality, workplace, healthcare, and commercial fit-out."
     />
     <title>Velmont Design Studio</title>
 
@@ -20,12 +20,165 @@
     <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/nav.css" />
     <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/home.css" />
   </head>
   <body>
     <div id="nav-mount" data-component="nav"></div>
 
-    <main id="main" class="vm-phase-holder">
-      <p class="vm-phase-holder__msg">Velmont Design Studio — home page is wired in Phase 2.</p>
+    <main id="main">
+      <!-- 01.1 HERO -->
+      <section class="vm-hero" aria-labelledby="hero-h">
+        <p class="vm-hero__eyebrow">Defining Environments.</p>
+        <h1 id="hero-h" class="vm-hero__h1">Commercial interiors built to the highest standard.</h1>
+        <p class="vm-hero__sub">
+          A commercial interior contracting company delivering precision fit-outs across healthcare,
+          workplace, and hospitality — backed by an in-house manufacturing facility.
+        </p>
+        <a class="vm-hero__cta" href="/work">
+          View the Portfolio
+          <span class="vm-hero__cta__arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="vm-hero__meta">Bengaluru, India<br />Est. 2018</p>
+      </section>
+
+      <!-- 01.3 SELECTED WORK STRIP -->
+      <section class="vm-work" aria-labelledby="work-h">
+        <header class="vm-work__intro">
+          <p class="vm-work__kicker" id="work-h">Selected Work</p>
+          <p class="vm-work__count">100+</p>
+        </header>
+        <div id="work-tiles" data-tiles>
+          <!-- Hydrated by src/js/home.js from data/projects.json -->
+        </div>
+      </section>
+
+      <!-- 01.4 ABOUT VELMONT -->
+      <section class="vm-section vm-studio" aria-labelledby="studio-h">
+        <div>
+          <p class="vm-kicker">The Studio</p>
+          <h2 id="studio-h" class="vm-studio__h">One team.<br />Every layer.<br />Delivered.</h2>
+          <a class="vm-link" href="/about">
+            Our Process <span class="vm-link__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="vm-studio__body">
+          <p>
+            Velmont is a commercial interior contracting company with an in-house manufacturing
+            facility — delivering fit-outs, custom furniture, carpentry, and joinery for
+            hospitality, healthcare, and workplace projects across India.
+          </p>
+          <p>
+            One accountable team, delivering to specification — from the first plan to the final
+            finish.
+          </p>
+        </div>
+      </section>
+
+      <!-- 01.5 DISCIPLINES -->
+      <section class="vm-disciplines" aria-labelledby="disc-h">
+        <header class="vm-disciplines__intro">
+          <p class="vm-kicker" id="disc-h" style="margin: 0">Disciplines</p>
+        </header>
+        <div class="vm-disciplines__cell">
+          <span class="vm-disciplines__num">01</span>
+          <span class="vm-disciplines__name">Workplace</span>
+          <span class="vm-disciplines__desc">48,000 ft² avg.</span>
+        </div>
+        <div class="vm-disciplines__cell">
+          <span class="vm-disciplines__num">02</span>
+          <span class="vm-disciplines__name">Healthcare</span>
+          <span class="vm-disciplines__desc">Clinical &amp; Wellness</span>
+        </div>
+        <div class="vm-disciplines__cell">
+          <span class="vm-disciplines__num">03</span>
+          <span class="vm-disciplines__name">Hospitality</span>
+          <span class="vm-disciplines__desc">Hotels &amp; Resorts</span>
+        </div>
+        <div class="vm-disciplines__cell">
+          <span class="vm-disciplines__num">04</span>
+          <span class="vm-disciplines__name">Commercial</span>
+          <span class="vm-disciplines__desc">MNC Fit-out</span>
+        </div>
+      </section>
+
+      <!-- 01.6 HOW WE WORK -->
+      <section class="vm-section vm-section--dark vm-process" aria-labelledby="proc-h">
+        <header class="vm-process__head">
+          <p class="vm-kicker">How We Work</p>
+          <h2 id="proc-h">Turnkey, from brief to handover.</h2>
+          <p>
+            One accountable team managing every phase of your project — so your fit-out is delivered
+            on specification, on time, and to the standard you expect.
+          </p>
+        </header>
+        <div class="vm-process__steps">
+          <div class="vm-process__step">
+            <span class="vm-process__step__num">01</span>
+            <span class="vm-process__step__title">Brief</span>
+            <span class="vm-process__step__desc"
+              >Understanding the project scope, specifications, budget, and timeline
+              requirements.</span
+            >
+          </div>
+          <div class="vm-process__step">
+            <span class="vm-process__step__num">02</span>
+            <span class="vm-process__step__title">Planning</span>
+            <span class="vm-process__step__desc"
+              >Site assessment, procurement scheduling, and programme planning — aligned to your
+              drawings and specifications.</span
+            >
+          </div>
+          <div class="vm-process__step">
+            <span class="vm-process__step__num">03</span>
+            <span class="vm-process__step__title">Build</span>
+            <span class="vm-process__step__desc"
+              >Site delivery managed to specification. Every supplier, every finish, every timeline
+              held to one standard.</span
+            >
+          </div>
+          <div class="vm-process__step">
+            <span class="vm-process__step__num">04</span>
+            <span class="vm-process__step__title">Handover</span>
+            <span class="vm-process__step__desc"
+              >A complete environment, delivered on programme, ready to live in from day one.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- STATS BAR -->
+      <section class="vm-stats" aria-label="Velmont at a glance">
+        <div class="vm-stats__cell">
+          <span class="vm-stats__num">15+</span>
+          <span class="vm-stats__label">Years</span>
+        </div>
+        <div class="vm-stats__cell">
+          <span class="vm-stats__num">100+</span>
+          <span class="vm-stats__label">Projects</span>
+        </div>
+        <div class="vm-stats__cell">
+          <span class="vm-stats__num">5M+</span>
+          <span class="vm-stats__label">Sq Ft</span>
+        </div>
+        <div class="vm-stats__cell">
+          <span class="vm-stats__num">200+</span>
+          <span class="vm-stats__label">Workforce</span>
+        </div>
+      </section>
+
+      <!-- CTA BANNER -->
+      <section class="vm-cta" aria-labelledby="cta-h">
+        <div>
+          <h2 id="cta-h" class="vm-cta__h">Let's build something exceptional together.</h2>
+          <p class="vm-cta__sub">
+            Whether you have a brief ready or are just beginning to explore — we'd like to hear
+            about your project.
+          </p>
+        </div>
+        <a class="vm-cta__link" href="/contact" data-cta="enquire">
+          Enquire <span class="vm-cta__link__arrow" aria-hidden="true">→</span>
+        </a>
+      </section>
     </main>
 
     <div id="footer-mount" data-component="footer"></div>

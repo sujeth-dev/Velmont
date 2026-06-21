@@ -2,7 +2,7 @@
 
 B2B commercial interior contracting company website for Velmont Design LLP, Bengaluru.
 
-**Status:** Phase 1 complete. Foundation, tooling, CI, and shared nav + footer components in place.
+**Status:** Phase 2 complete. Foundation, shared nav + footer, and full home page (7 sections, wired to project data) in place.
 **Live domain:** velmontdesign.com (not yet deployed)
 **Stack:** Vanilla HTML/CSS/JS + Vite · Firebase · Vercel · Playwright · Vitest
 
@@ -98,6 +98,4 @@ Source JPG photography for all 6 projects. Processed to WebP/AVIF in Phase 6. On
 
 ---
 
-## Redundancy Removal Plan
-
-Fou
+## Re
