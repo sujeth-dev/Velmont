@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200" />
+    <meta
+      name="description"
+      content="Velmont Design Studio project portfolio — 100+ commercial interior projects across hospitality, workplace, healthcare and commercial fit-out."
+    />
+    <title>Our Work — Velmont Design Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    />
+
+    <link rel="stylesheet" href="./css/tokens.css" />
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/work.css" />
+  </head>
+  <body>
+    <div id="nav-mount" data-component="nav"></div>
+
+    <main id="main">
+      <!-- Work hero -->
+      <section class="vm-work-hero" aria-labelledby="work-h">
+        <p class="vm-work-hero__eyebrow">Select Projects</p>
+        <h1 id="work-h" class="vm-work-hero__h">100+ projects delivered<br />across India.</h1>
+      </section>
+
+      <!-- Filter bar -->
+      <nav class="vm-work-filter" aria-label="Filter by discipline">
+        <button class="vm-work-filter__btn is-active" data-filter-btn="">All</button>
+        <button class="vm-work-filter__btn" data-filter-btn="Workplace">Workplace</button>
+        <button class="vm-work-filter__btn" data-filter-btn="Healthcare">Healthcare</button>
+        <button class="vm-work-filter__btn" data-filter-btn="Hospitality">Hospitality</button>
+        <button class="vm-work-filter__btn" data-filter-btn="Commercial">Commercial</button>
+      </nav>
+
+      <!-- Project grid — hydrated by src/js/work.js -->
+      <div class="vm-work-grid" data-work-grid aria-label="Project portfolio"></div>
+    </main>
+
+    <div id="footer-mount" data-component="footer"></div>
+
+    <script type="module">
+      import { injectComponent, markActiveNavLink } from './js/components.js';
+      import { initWork } from './js/work.js';
+
+      async function init() {
+        await Promise.all([
+          injectComponent('#nav-mount', '/components/nav.html'),
+          injectComponent('#footer-mount', '/components/footer.html'),
+        ]);
+        markActiveNavLink();
+        initWork();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    </script>
+  </body>
+</html>

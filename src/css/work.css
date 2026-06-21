@@ -1,0 +1,169 @@
+/* ============================================================
+   Velmont — Work list page
+   Reference: plan/DESIGN_GUIDE.md §5, plan/MASTER_PLAN.md §Phase 3
+   ============================================================ */
+
+/* ----------------------------------------------------------------
+   Work hero
+   ---------------------------------------------------------------- */
+.vm-work-hero {
+  position: relative;
+  padding: 80px var(--pad-side) 64px;
+  border-bottom: 1px solid var(--mineral);
+}
+
+.vm-work-hero__eyebrow {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin: 0 0 24px;
+}
+
+.vm-work-hero__h {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  color: var(--vblack);
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------
+   Filter bar
+   ---------------------------------------------------------------- */
+.vm-work-filter {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 var(--pad-side);
+  border-bottom: 1px solid var(--mineral);
+}
+
+.vm-work-filter__btn {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--slate);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 18px 28px;
+  cursor: pointer;
+  transition:
+    color var(--t-fast) var(--ease-default),
+    border-color var(--t-fast) var(--ease-default);
+}
+
+.vm-work-filter__btn:hover {
+  color: var(--vblack);
+}
+
+.vm-work-filter__btn.is-active {
+  color: var(--vblack);
+  border-bottom-color: var(--terracotta);
+}
+
+/* ----------------------------------------------------------------
+   Project grid — 3 columns, tiles stack vertically
+   ---------------------------------------------------------------- */
+.vm-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--mineral);
+}
+
+/* ----------------------------------------------------------------
+   Project tile
+   ---------------------------------------------------------------- */
+.vm-grid-tile {
+  display: flex;
+  flex-direction: column;
+  padding: 36px var(--pad-tile-x) 32px; /* 36px 40px 32px */
+  border-right: 1px solid var(--mineral);
+  border-bottom: 1px solid var(--mineral);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--t-fast) var(--ease-default);
+  min-height: 340px;
+}
+
+.vm-grid-tile:nth-child(3n) {
+  border-right: 0;
+}
+
+.vm-grid-tile:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Hidden tiles when filter is active */
+.vm-grid-tile[hidden] {
+  display: none;
+}
+
+.vm-grid-tile__index {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--fs-display-num); /* 52px */
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--concrete);
+  margin: 0 0 20px;
+}
+
+.vm-grid-tile__discipline {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin: 0 0 14px;
+}
+
+.vm-grid-tile__name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-work-tile-name); /* 28px */
+  line-height: 1.18;
+  color: var(--vblack);
+  margin: 0 0 12px;
+  flex: 1;
+}
+
+.vm-grid-tile__meta {
+  font-family: var(--body);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--mineral);
+  margin: 0 0 24px;
+}
+
+.vm-grid-tile__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--mineral);
+  margin-top: auto;
+}
+
+.vm-grid-tile__year {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+
+.vm-grid-tile__arrow {
+  color: var(--terracotta);
+  font-size: 18px;
+}

@@ -13,10 +13,11 @@ test.describe('Phase 2 — home page', () => {
     );
   });
 
-  test('Selected Work strip renders exactly 3 project tiles', async ({ page }) => {
+  test('Selected Work strip renders all published project tiles', async ({ page }) => {
     await page.goto('/');
-    const tiles = page.locator('.vm-work__tile');
-    await expect(tiles).toHaveCount(3);
+    // Carousel renders all published projects; clones are marked data-clone and aria-hidden
+    const tiles = page.locator('.vm-work__tile:not([data-clone])');
+    await expect(tiles).toHaveCount(6);
   });
 
   test('each tile has discipline, name, and arrow', async ({ page }) => {
@@ -40,7 +41,7 @@ test.describe('Phase 2 — home page', () => {
 
   test('stats bar has 4 cells', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('.vm-stats__cell')).toHaveCount(4);
+    await expect(page.locator('.vm-finale__stat')).toHaveCount(4);
   });
 
   test('CTA banner Enquire link points at /contact', async ({ page }) => {

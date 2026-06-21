@@ -1,0 +1,256 @@
+/* ============================================================
+   Velmont — Project detail page
+   Reference: plan/DESIGN_GUIDE.md §5, plan/MASTER_PLAN.md §Phase 3
+   ============================================================ */
+
+/* ----------------------------------------------------------------
+   Breadcrumb
+   ---------------------------------------------------------------- */
+.vm-breadcrumb {
+  padding: 18px var(--pad-side);
+  border-bottom: 1px solid var(--mineral);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vm-breadcrumb__item {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate);
+  text-decoration: none;
+}
+
+.vm-breadcrumb__item:hover {
+  color: var(--vblack);
+}
+
+.vm-breadcrumb__sep {
+  font-family: var(--body);
+  font-size: 11px;
+  color: var(--mineral);
+  user-select: none;
+}
+
+.vm-breadcrumb__item--current {
+  color: var(--vblack);
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------------
+   Project hero — 520px, paper-toned gradient
+   ---------------------------------------------------------------- */
+.vm-proj-hero {
+  height: var(--project-hero-h); /* 520px */
+  padding: 60px var(--pad-side);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background:
+    linear-gradient(0deg, rgba(8, 8, 8, 0.55) 0%, rgba(8, 8, 8, 0.10) 50%, transparent 100%),
+    linear-gradient(135deg, rgba(244, 240, 235, 0.12), rgba(0, 0, 0, 0.24)),
+    radial-gradient(130% 130% at 60% 15%, #8c8680 0%, #5a5550 48%, #2e2b28 100%);
+}
+
+.vm-proj-hero__eyebrow {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(209, 200, 188, 0.80);
+  margin: 0 0 20px;
+}
+
+.vm-proj-hero__h1 {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: var(--fs-project-h1); /* 68px */
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  color: #fff;
+  margin: 0;
+  max-width: 900px;
+}
+
+/* ----------------------------------------------------------------
+   Spec bar — concrete bg, 2px terracotta top border
+   ---------------------------------------------------------------- */
+.vm-spec-bar {
+  background: var(--concrete);
+  border-top: 2px solid var(--terracotta);
+  border-bottom: 1px solid var(--mineral);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.vm-spec-bar__cell {
+  padding: 24px var(--pad-tile-x);
+  border-right: 1px solid rgba(187, 188, 195, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vm-spec-bar__cell:last-child {
+  border-right: 0;
+}
+
+.vm-spec-bar__label {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: var(--fs-spec-label); /* 10px */
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.vm-spec-bar__value {
+  font-family: var(--head);
+  font-weight: 500;
+  font-size: var(--fs-spec-value); /* 18px */
+  letter-spacing: -0.01em;
+  color: var(--vblack);
+  line-height: 1.3;
+}
+
+/* ----------------------------------------------------------------
+   Project body — 1.1fr 1fr, 80px gap
+   ---------------------------------------------------------------- */
+.vm-proj-body {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--col-gap); /* 80px */
+  padding: 72px var(--pad-side);
+  border-bottom: 1px solid var(--mineral);
+}
+
+.vm-proj-body__lead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-editorial-lead); /* 28px */
+  line-height: 1.5;
+  letter-spacing: 0.004em;
+  color: var(--vblack);
+  margin: 0;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+}
+
+.vm-proj-body__right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.vm-proj-body__para {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: var(--fs-body-sm); /* 14.5px */
+  line-height: 1.82;
+  color: var(--body-text);
+  margin: 0 0 22px;
+}
+
+.vm-proj-body__para:last-of-type {
+  margin-bottom: 32px;
+}
+
+.vm-proj-body__materials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.vm-material-tag {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: var(--fs-material-tag); /* 11.5px */
+  letter-spacing: 0.12em;
+  color: var(--body-text);
+  border: 1px solid var(--mineral);
+  padding: 7px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------------
+   Image gallery — 1.62fr 1fr, 2 rows, 560px total, 3px gap
+   ---------------------------------------------------------------- */
+.vm-proj-gallery {
+  display: grid;
+  grid-template-columns: 1.62fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  height: var(--gallery-h); /* 560px */
+}
+
+.vm-proj-gallery__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vm-proj-gallery__main {
+  grid-row: 1 / 3;
+}
+
+/* ----------------------------------------------------------------
+   Prev / Next project navigation
+   ---------------------------------------------------------------- */
+.vm-proj-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--mineral);
+}
+
+.vm-proj-nav__link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px var(--pad-side);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--t-fast) var(--ease-default);
+}
+
+.vm-proj-nav__link:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.vm-proj-nav__link--next {
+  border-left: 1px solid var(--mineral);
+  text-align: right;
+}
+
+.vm-proj-nav__dir {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.vm-proj-nav__name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--vblack);
+}
+
+.vm-proj-nav__arrow {
+  color: var(--terracotta);
+  font-size: 20px;
+}

@@ -60,8 +60,11 @@ export function mountFeatured(mount, projects) {
   const tiles = selectPublished(projects);
   if (!tiles.length) return 0;
   const tileHtml = tiles.map(renderWorkTile).join('');
-  // Clone first 3 tiles at the end for seamless wraparound
-  const cloneHtml = tiles.slice(0, 3).map(renderWorkTile).join('');
+  // Clone first 3 tiles at the end for seamless wraparound; marked as non-interactive
+  const cloneHtml = tiles
+    .slice(0, 3)
+    .map((p) => renderWorkTile(p).replace('<a class="vm-work__tile"', '<a class="vm-work__tile" data-clone="true" aria-hidden="true" tabindex="-1"'))
+    .join('');
   mount.innerHTML = tileHtml + cloneHtml;
   return tiles.length;
 }

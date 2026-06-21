@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200" />
+    <meta name="description" content="Velmont Design Studio — project detail." />
+    <title>Project — Velmont Design Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    />
+
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/project.css" />
+  </head>
+  <body>
+    <div id="nav-mount" data-component="nav"></div>
+
+    <main id="main">
+      <!-- Breadcrumb -->
+      <nav class="vm-breadcrumb" aria-label="Breadcrumb">
+        <a class="vm-breadcrumb__item" href="/work">Work</a>
+        <span class="vm-breadcrumb__sep" aria-hidden="true">/</span>
+        <a class="vm-breadcrumb__item" href="/work" data-breadcrumb-discipline>Discipline</a>
+        <span class="vm-breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="vm-breadcrumb__item vm-breadcrumb__item--current" aria-current="page" data-breadcrumb-project>Project</span>
+      </nav>
+
+      <!-- Project hero -->
+      <section class="vm-proj-hero" aria-labelledby="proj-h">
+        <p class="vm-proj-hero__eyebrow" data-proj-eyebrow>Discipline · Location</p>
+        <h1 id="proj-h" class="vm-proj-hero__h1" data-proj-h1>Project Name</h1>
+      </section>
+
+      <!-- Spec bar -->
+      <div class="vm-spec-bar" aria-label="Project specifications">
+        <div class="vm-spec-bar__cell">
+          <span class="vm-spec-bar__label">Industry</span>
+          <span class="vm-spec-bar__value" data-spec-industry>—</span>
+        </div>
+        <div class="vm-spec-bar__cell">
+          <span class="vm-spec-bar__label">Area</span>
+          <span class="vm-spec-bar__value" data-spec-area>—</span>
+        </div>
+        <div class="vm-spec-bar__cell">
+          <span class="vm-spec-bar__label">Year</span>
+          <span class="vm-spec-bar__value" data-spec-year>—</span>
+        </div>
+        <div class="vm-spec-bar__cell">
+          <span class="vm-spec-bar__label">Scope</span>
+          <span class="vm-spec-bar__value" data-spec-scope>—</span>
+        </div>
+      </div>
+
+      <!-- Project body -->
+      <div class="vm-proj-body">
+        <p class="vm-proj-body__lead" data-proj-lead></p>
+        <div class="vm-proj-body__right">
+          <div data-proj-body></div>
+          <div class="vm-proj-body__materials" data-proj-materials></div>
+        </div>
+      </div>
+
+      <!-- Image gallery -->
+      <div class="vm-proj-gallery" aria-label="Project gallery">
+        <img
+          class="vm-proj-gallery__img vm-proj-gallery__main"
+          data-gallery-main
+          src=""
+          alt=""
+          loading="lazy"
+          width="820"
+          height="560"
+        />
+        <img
+          class="vm-proj-gallery__img"
+          data-gallery-top-right
+          src=""
+          alt=""
+          loading="lazy"
+          width="380"
+          height="278"
+        />
+        <img
+          class="vm-proj-gallery__img"
+          data-gallery-bottom-right
+          src=""
+          alt=""
+          loading="lazy"
+          width="380"
+          height="278"
+        />
+      </div>
+
+      <!-- Prev / Next navigation -->
+      <nav class="vm-proj-nav" aria-label="Project navigation">
+        <a class="vm-proj-nav__link vm-proj-nav__link--prev" href="#" data-prev-link>
+          <span class="vm-proj-nav__dir">← Previous</span>
+          <span class="vm-proj-nav__name" data-prev-name></span>
+        </a>
+        <a class="vm-proj-nav__link vm-proj-nav__link--next" href="#" data-next-link>
+          <span class="vm-proj-nav__dir">Next →</span>
+          <span class="vm-proj-nav__name" data-next-name></span>
+        </a>
+      </nav>
+    </main>
+
+    <div id="footer-mount" data-component="footer"></div>
+
+    <script type="module">
+      import { injectComponent, markActiveNavLink } from '../js/components.js';
+      import { initProject } from '../js/project.js';
+
+      async function init() {
+        await Promise.all([
+          injectComponent('#nav-mount', '/components/nav.html'),
+          injectComponent('#footer-mount', '/components/footer.html'),
+        ]);
+        markActiveNavLink();
+        initProject();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    </script>
+  </body>
+</html>
