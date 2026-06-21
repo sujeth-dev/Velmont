@@ -13,4 +13,7 @@ yarn-error.log*
 coverage/
 playwright-report/
 test-results/
-.l
+.lighthouseci/
+vite.config.js.timestamp-*
+vitest.config.js.timestamp-*
+*.timestamp-*.mjs

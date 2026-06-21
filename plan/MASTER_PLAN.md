@@ -2,7 +2,7 @@
 
 ## Context
 
-All planning, design, and content is locked. The repo has 47 project images, 12 logo variants, 3 plan documents (DESIGN_GUIDE.md, WEBSITE_PLAN.md, CONTENT_PLAN.html), and detailed project data (PROJECT_DATA.md). No source code exists yet. This plan breaks the full build into 9 sequential phases. Each phase ends with: tests pass → commit → push → documentation updated → phase log entry written. Two approval gates require explicit sign-off before proceeding. An automated Claude Code loop runs each phase end-to-end.
+All planning, design, and content is locked. The repo has 47 project images, 12 logo variants, 3 plan documents (DESIGN_GUIDE.md, WEBSITE_PLAN.md, CONTENT_PLAN.html), and detailed project data (PROJECT_DATA.md). No source code exists yet. This plan breaks the full build into 9 sequential phases. Each phase ends with: tests pass → commit → push → documentation updated → phase log entry written. Two approval gates require explicit sign-off before proceeding. An automated loop runs each phase end-to-end.
 
 ---
 
@@ -36,7 +36,7 @@ All planning, design, and content is locked. The repo has 47 project images, 12 
 
 ## Automated Loop Design
 
-Each phase is driven by running `/loop` in Claude Code:
+Each phase is driven by running `/loop`:
 ```
 /loop "develop, test, commit and push Phase [N] of Velmont website per the master plan"
 ```
@@ -479,7 +479,7 @@ jobs:
 ## How to Run a Phase
 
 ```bash
-# In Claude Code terminal:
+# In terminal:
 /loop "develop, test, commit and push Phase 0 of Velmont website per the master plan at plan/MASTER_PLAN.md. Stop and notify me if an approval gate is reached or if any test fails that you cannot fix."
 ```
 

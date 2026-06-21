@@ -103,4 +103,10 @@ Source JPG photography for all 6 projects. Processed to WebP/AVIF in Phase 6. On
 Four logo JPG files are duplicates of their PNG equivalents and serve no purpose. Remove them during Phase 0 folder setup:
 
 ```
-assets/lo
+assets/logos/velmont-main.jpg
+assets/logos/velmont-white.jpg
+assets/logos/velmont-black.jpg
+assets/logos/velmont-orange.jpg
+```
+
+No other files are redundant. `velmont-black.png`, `velmont-orange.png`, `velmont-taglined.jpg`, `velmont-taglined-2.jpg`, and `color-palette.png` are brand archive files — not used by the website but not safe to delete without client sign-off.
