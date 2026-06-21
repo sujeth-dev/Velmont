@@ -34,9 +34,10 @@ const server = http.createServer((req, res) => {
   let urlPath = req.url.split('?')[0];
   if (urlPath === '/') urlPath = '/index.html';
 
-  // Rewrite /work/<slug> to the single project detail template
-  if (/^\/work\/[a-z0-9-]+\/?$/.test(urlPath)) {
-    urlPath = '/work/[slug].html';
+  // Rewrite /work/<slug> to the per-slug generated file
+  const slugMatch = urlPath.match(/^\/work\/([a-z0-9-]+)\/?$/);
+  if (slugMatch) {
+    urlPath = `/work/${slugMatch[1]}.html`;
   }
 
   // Resolve: src/ first (for index.html, css/, js/), then public/ (for /components/, /assets/, /data/)

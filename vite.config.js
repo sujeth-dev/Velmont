@@ -7,8 +7,10 @@ import { resolve } from 'node:path';
 function workSlugRewritePlugin() {
   function applyRewrite(middlewares) {
     middlewares.use((req, _res, next) => {
-      if (/^\/work\/[a-z0-9-]+\/?(\?.*)?$/.test(req.url)) {
-        req.url = '/work/%5Bslug%5D.html';
+      const m = req.url.match(/^\/work\/([a-z0-9-]+)\/?(\?.*)?$/);
+      if (m) {
+        // Serve the per-slug generated file (built by generate-project-pages.js)
+        req.url = `/work/${m[1]}.html`;
       }
       next();
     });

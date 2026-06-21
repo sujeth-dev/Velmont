@@ -6,7 +6,8 @@
   "description": "Velmont Design Studio — commercial interior contracting website",
   "scripts": {
     "dev": "npm run copy-components && npm run copy-data && vite",
-    "build": "npm run copy-components && npm run copy-data && npm run optimize-images && vite build",
+    "build": "npm run copy-components && npm run copy-data && npm run optimize-images && vite build && npm run generate-pages",
+    "generate-pages": "node scripts/generate-project-pages.js",
     "preview": "vite preview --port 5173",
     "preview:ci": "vite preview --port 5173",
     "copy-components": "node scripts/copy-components.js",
