@@ -43,7 +43,14 @@ export function hydratePage(project, prev, next) {
     bcDisc.href = `/work?filter=${encodeURIComponent(project.discipline || '')}`;
   }
 
-  // Hero
+  // Hero background image
+  const heroImg = document.querySelector('[data-proj-hero-img]');
+  if (heroImg && project.images?.hero) {
+    heroImg.src = project.images.hero;
+    heroImg.alt = `${project.title} — Velmont Design Studio`;
+  }
+
+  // Hero eyebrow
   const eyebrow = document.querySelector('[data-proj-eyebrow]');
   if (eyebrow) eyebrow.textContent = `${project.discipline || ''} · ${project.location || ''}`;
 
