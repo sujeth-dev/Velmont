@@ -2,7 +2,7 @@
 
 B2B commercial interior contracting company website for Velmont Design LLP, Bengaluru.
 
-**Status:** Phase 0 complete. Foundation, tooling, and CI in place.
+**Status:** Phase 1 complete. Foundation, tooling, CI, and shared nav + footer components in place.
 **Live domain:** velmontdesign.com (not yet deployed)
 **Stack:** Vanilla HTML/CSS/JS + Vite · Firebase · Vercel · Playwright · Vitest
 
@@ -100,13 +100,4 @@ Source JPG photography for all 6 projects. Processed to WebP/AVIF in Phase 6. On
 
 ## Redundancy Removal Plan
 
-Four logo JPG files are duplicates of their PNG equivalents and serve no purpose. Remove them during Phase 0 folder setup:
-
-```
-assets/logos/velmont-main.jpg
-assets/logos/velmont-white.jpg
-assets/logos/velmont-black.jpg
-assets/logos/velmont-orange.jpg
-```
-
-No other files are redundant. `velmont-black.png`, `velmont-orange.png`, `velmont-taglined.jpg`, `velmont-taglined-2.jpg`, and `color-palette.png` are brand archive files — not used by the website but not safe to delete without client sign-off.
+Fou

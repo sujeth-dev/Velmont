@@ -1,5 +1,18 @@
 // Velmont — main entry point.
-// Phase 0: bootstrap only. Pages wire up their own modules in later phases.
+// Phase 1: inject shared nav + footer on every page.
 
-// eslint-disable-next-line no-console
-console.info('Velmont Design Studio — Phase 0 bootstrap loaded.');
+import { injectComponent, markActiveNavLink } from './components.js';
+
+async function init() {
+  await Promise.all([
+    injectComponent('#nav-mount', '/components/nav.html'),
+    injectComponent('#footer-mount', '/components/footer.html'),
+  ]);
+  markActiveNavLink();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}

@@ -9,7 +9,6 @@
     />
     <title>Velmont Design Studio</title>
 
-    <!-- Google Fonts (DESIGN_GUIDE §3) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,13 +18,18 @@
 
     <link rel="stylesheet" href="./css/tokens.css" />
     <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
   </head>
   <body>
-    <main>
-      <p style="padding: 80px; font-family: var(--head); font-weight: 600">
-        Velmont Design Studio — site under construction.
-      </p>
+    <div id="nav-mount" data-component="nav"></div>
+
+    <main id="main" class="vm-phase-holder">
+      <p class="vm-phase-holder__msg">Velmont Design Studio — home page is wired in Phase 2.</p>
     </main>
+
+    <div id="footer-mount" data-component="footer"></div>
+
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>
