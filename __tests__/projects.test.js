@@ -67,13 +67,12 @@ describe('data/projects.json', () => {
     }
   });
 
-  it('images includes cover, hero, and 3-slot gallery', () => {
+  it('images includes cover, hero, and gallery array with at least 1 entry', () => {
     for (const p of projects) {
       expect(p.images).toHaveProperty('cover');
       expect(p.images).toHaveProperty('hero');
-      expect(p.images.gallery).toHaveProperty('main');
-      expect(p.images.gallery).toHaveProperty('topRight');
-      expect(p.images.gallery).toHaveProperty('bottomRight');
+      expect(Array.isArray(p.images.gallery)).toBe(true);
+      expect(p.images.gallery.length).toBeGreaterThanOrEqual(1);
     }
   });
 
