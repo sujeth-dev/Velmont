@@ -108,7 +108,6 @@ export function hydratePage(project) {
 
   // Page title
   document.title = `${project.title} — Velmont Design Studio`;
-
 }
 
 async function loadProjects() {
@@ -138,7 +137,9 @@ export async function initProject() {
   if (!project) {
     document.title = 'Project not found — Velmont Design Studio';
     const main = document.querySelector('#main');
-    if (main) main.innerHTML = '<p style="padding:80px var(--pad-side);font-family:var(--body);color:var(--slate)">Project not found.</p>';
+    if (main)
+      main.innerHTML =
+        '<p style="padding:80px var(--pad-side);font-family:var(--body);color:var(--slate)">Project not found.</p>';
     return;
   }
 

@@ -61,7 +61,7 @@
   font-family: var(--head);
   font-weight: 600;
   font-size: 64px;
-  line-height: 1.0;
+  line-height: 1;
   letter-spacing: -0.025em;
   color: #fff;
   max-width: 800px;

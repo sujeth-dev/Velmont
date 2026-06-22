@@ -63,7 +63,12 @@ export function mountFeatured(mount, projects) {
   // Clone first 3 tiles at the end for seamless wraparound; marked as non-interactive
   const cloneHtml = tiles
     .slice(0, 3)
-    .map((p) => renderWorkTile(p).replace('<a class="vm-work__tile"', '<a class="vm-work__tile" data-clone="true" aria-hidden="true" tabindex="-1"'))
+    .map((p) =>
+      renderWorkTile(p).replace(
+        '<a class="vm-work__tile"',
+        '<a class="vm-work__tile" data-clone="true" aria-hidden="true" tabindex="-1"',
+      ),
+    )
     .join('');
   mount.innerHTML = tileHtml + cloneHtml;
   return tiles.length;
@@ -114,9 +119,7 @@ export async function initHome() {
 
   // Manage transition directly via style — more reliable than class toggling
   function goTo(i, animate) {
-    mount.style.transition = animate
-      ? 'transform 0.85s cubic-bezier(0.4, 0, 0.2, 1)'
-      : 'none';
+    mount.style.transition = animate ? 'transform 0.85s cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
     mount.style.transform = `translateX(-${i * TILE_PCT}%)`;
   }
 

@@ -31,9 +31,9 @@ async function main() {
   await Promise.all(
     published.map((p) => {
       const out = path.join(DIST_WORK, `${p.slug}.html`);
-      return fs.writeFile(out, templateHtml, 'utf8').then(() =>
-        console.log(`[generate-pages] ${p.slug}.html`),
-      );
+      return fs
+        .writeFile(out, templateHtml, 'utf8')
+        .then(() => console.log(`[generate-pages] ${p.slug}.html`));
     }),
   );
 
