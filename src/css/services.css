@@ -15,14 +15,7 @@
   border: 0;
 }
 
-.vm-page-hero__sub {
-  font-family: var(--body);
-  font-size: var(--fs-hero-sub); /* 16px */
-  line-height: 1.72;
-  color: var(--body-text);
-  max-width: 620px;
-  margin: 28px 0 0;
-}
+/* .vm-page-hero__sub is defined in common.css */
 
 .vm-services {
   padding-top: 96px;
@@ -49,13 +42,13 @@
 }
 
 .vm-service:hover {
-  background: #fff;
+  background: #faf8f4; /* warm near-white; never use #fff per DESIGN_GUIDE §2 */
 }
 
 .vm-service__num {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 36px;
+  font-size: var(--fs-service-num); /* 36px */
   letter-spacing: 0.08em;
   line-height: 1;
   color: var(--mineral);
@@ -72,7 +65,7 @@
 
 .vm-service__desc {
   font-family: var(--body);
-  font-size: 14px;
+  font-size: var(--fs-body-sm); /* 14.5px */
   line-height: 1.72;
   color: var(--body-text);
   margin: 0;

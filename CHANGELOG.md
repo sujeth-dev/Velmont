@@ -2,6 +2,23 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 4 Polish — 2026-06-22
+
+### Design audit fixes (About, Services, Contact)
+- `src/css/common.css` (new) — shared layout components extracted from `home.css`: `.vm-section`, `.vm-kicker`, `.vm-link`, `.vm-stats` grid, `.vm-cta` band, `.vm-page-hero__sub`. All secondary pages now import `common.css` instead of `home.css`.
+- Fixed critical: `.vm-stats` / `.vm-stats__cell` had zero CSS — stats on About rendered as unstyled vertical list. Now a 4-column border grid.
+- Fixed critical: `.vm-cta` and all sub-classes had zero CSS — CTA band on About and Services was completely unstyled.
+- Fixed critical: `contact.html` missing import for `.vm-page-hero__sub` — hero sub-headline rendered as raw body text. Rule moved to `common.css`.
+- Fixed: `.vm-service:hover { background: #fff }` — violates DESIGN_GUIDE §2. Changed to `#faf8f4`.
+- Fixed: About H1 `64px` → `var(--fs-project-h1)` (68px token).
+- Fixed: About body font sizes hardcoded `16px`/`15px` → `var(--fs-hero-sub)` / `var(--fs-body)`.
+- Fixed: Contact form label `letter-spacing: 0.22em` → `0.28em`.
+- Fixed: Contact success `color: #2d7a3a` → `var(--success)`. Token added.
+- Fixed: `<select>` native browser chrome removed — `appearance: none` + SVG chevron matches underline input style.
+- Fixed: Manufacturing placeholder text removed from About and Services — clean empty dashed box only.
+- `tokens.css`: added `--success`, `--fs-service-num`, `--concrete-tint`.
+- Vitest 62/62 · Prettier clean · Vite build clean.
+
 ## Phase 4 — 2026-06-22
 
 - About page (src/about.html, src/css/about.css) — 6 sections per MASTER_PLAN §Phase 4.

@@ -46,6 +46,11 @@
   --fs-footer-link: 12px;
   --fs-copyright: 11px;
   --fs-material-tag: 11.5px;
+  --fs-service-num: 36px;
+
+  /* -- Derived color variants -- */
+  --concrete-tint: rgba(217, 220, 224, 0.35);
+  --success: #2d7a3a;
 
   /* -- Spacing tokens -- */
   --pad-side: 80px;

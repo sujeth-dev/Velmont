@@ -4,62 +4,8 @@
    Section ids: hero, work, studio, disciplines, process, stats, cta
    ============================================================ */
 
-/* ----------------------------------------------------------------
-   Shared section helpers
-   ---------------------------------------------------------------- */
-.vm-section {
-  padding: 96px var(--pad-side);
-}
-
-.vm-section--dark {
-  background: var(--vblack);
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.vm-kicker {
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: var(--fs-eyebrow);
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--slate);
-  margin: 0 0 28px;
-}
-
-.vm-section--dark .vm-kicker {
-  color: rgba(209, 200, 188, 0.82);
-}
-
-.vm-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--body);
-  font-weight: 500;
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--vblack);
-  text-decoration: none;
-  padding-bottom: 3px;
-  border-bottom: 1px solid var(--vblack);
-  transition: color var(--t-fast) var(--ease-default);
-}
-
-.vm-link__arrow {
-  color: var(--terracotta);
-  font-family: var(--body);
-}
-
-.vm-link:hover {
-  color: var(--terracotta);
-}
-
-.vm-section--dark .vm-link,
-.vm-section--dark .vm-link:hover {
-  color: #fff;
-  border-bottom-color: rgba(255, 255, 255, 0.6);
-}
+/* Shared layout classes (.vm-section, .vm-kicker, .vm-link, .vm-stats, .vm-cta)
+   live in common.css — imported by index.html before home.css. */
 
 /* ----------------------------------------------------------------
    01.1  Hero (700px, photo background + dark overlay)
@@ -441,27 +387,6 @@
   font-size: 14.5px;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.72);
-}
-
-/* ----------------------------------------------------------------
-   Stats numbers (reused in vm-finale)
-   ---------------------------------------------------------------- */
-.vm-stats__num {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: var(--fs-display-num); /* 52px */
-  letter-spacing: 0.06em;
-  line-height: 1;
-  color: var(--vblack);
-}
-
-.vm-stats__label {
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--slate);
 }
 
 /* ----------------------------------------------------------------

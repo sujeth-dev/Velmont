@@ -1,0 +1,193 @@
+/* ============================================================
+   Velmont — Shared layout components
+   Used by: home, about, services, contact, work, project pages.
+   Do NOT put page-specific rules here.
+   ============================================================ */
+
+/* ----------------------------------------------------------------
+   Section helpers
+   ---------------------------------------------------------------- */
+.vm-section {
+  padding: 96px var(--pad-side);
+}
+
+.vm-section--dark {
+  background: var(--vblack);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ----------------------------------------------------------------
+   Eyebrow / kicker label
+   ---------------------------------------------------------------- */
+.vm-kicker {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin: 0 0 28px;
+}
+
+.vm-section--dark .vm-kicker {
+  color: rgba(209, 200, 188, 0.82);
+}
+
+/* ----------------------------------------------------------------
+   Inline text link
+   ---------------------------------------------------------------- */
+.vm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vblack);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--vblack);
+  transition: color var(--t-fast) var(--ease-default);
+}
+
+.vm-link__arrow {
+  color: var(--terracotta);
+  font-family: var(--body);
+}
+
+.vm-link:hover {
+  color: var(--terracotta);
+}
+
+.vm-section--dark .vm-link,
+.vm-section--dark .vm-link:hover {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ----------------------------------------------------------------
+   Stats grid — used on About page (§04.3) and Home finale
+   ---------------------------------------------------------------- */
+.vm-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--mineral);
+  border-bottom: 1px solid var(--mineral);
+  padding: 56px var(--pad-side);
+}
+
+.vm-stats__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-right: 1px solid var(--mineral);
+  padding: 0 40px;
+}
+
+.vm-stats__cell:first-child {
+  padding-left: 0;
+}
+
+.vm-stats__cell:last-child {
+  border-right: 0;
+}
+
+.vm-stats__num {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--fs-display-num); /* 52px */
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--vblack);
+}
+
+.vm-stats__label {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* ----------------------------------------------------------------
+   CTA band — full-width row: text left, button right
+   Used on About (§04.6) and Services (§03.4) pages
+   ---------------------------------------------------------------- */
+.vm-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 80px var(--pad-side);
+  background: var(--paper);
+  border-top: 1px solid var(--mineral);
+  border-bottom: 1px solid var(--mineral);
+}
+
+.vm-cta__h {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: var(--fs-section-h2); /* 48px */
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--vblack);
+  margin: 0 0 16px;
+}
+
+.vm-cta__sub {
+  font-family: var(--body);
+  font-size: var(--fs-body); /* 15px */
+  line-height: 1.75;
+  color: var(--body-text);
+  margin: 0;
+  max-width: 520px;
+}
+
+.vm-cta__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vblack);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--terracotta);
+  border-radius: 2px;
+  padding: 14px 32px;
+  white-space: nowrap;
+  transition:
+    background var(--t-fast) var(--ease-default),
+    color var(--t-fast) var(--ease-default);
+}
+
+.vm-cta__link:hover {
+  background: var(--terracotta);
+  color: var(--paper);
+}
+
+.vm-cta__link__arrow {
+  color: var(--terracotta);
+}
+
+.vm-cta__link:hover .vm-cta__link__arrow {
+  color: var(--paper);
+}
+
+/* ----------------------------------------------------------------
+   Page hero sub-headline (Services + Contact hero)
+   ---------------------------------------------------------------- */
+.vm-page-hero__sub {
+  font-family: var(--body);
+  font-size: var(--fs-hero-sub); /* 16px */
+  line-height: 1.72;
+  color: var(--body-text);
+  max-width: 620px;
+  margin: 28px 0 0;
+}

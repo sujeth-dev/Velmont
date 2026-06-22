@@ -24,7 +24,7 @@
 .vm-page-hero__h1 {
   font-family: var(--head);
   font-weight: 600;
-  font-size: 64px;
+  font-size: var(--fs-project-h1); /* 68px — secondary page hero scale */
   line-height: 1.04;
   letter-spacing: -0.02em;
   color: var(--vblack);
@@ -39,7 +39,7 @@
 
 .vm-about-who__body {
   font-family: var(--body);
-  font-size: 16px;
+  font-size: var(--fs-hero-sub); /* 16px */
   line-height: 1.78;
   color: var(--body-text);
   max-width: 760px;
@@ -88,7 +88,7 @@
 
 .vm-approach__body p:not(.vm-approach__lead) {
   font-family: var(--body);
-  font-size: 15px;
+  font-size: var(--fs-body); /* 15px */
   line-height: 1.78;
   color: var(--body-text);
   max-width: 620px;
@@ -130,25 +130,8 @@
   gap: 12px;
   min-height: 320px;
   border: 1px dashed var(--mineral);
-  background: rgba(217, 220, 224, 0.35);
+  background: var(--concrete-tint);
   color: var(--slate);
   padding: 36px;
   text-align: center;
-}
-
-.vm-manuf__placeholder-eyebrow {
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--slate);
-}
-
-.vm-manuf__placeholder-label {
-  font-family: var(--body);
-  font-size: 13.5px;
-  letter-spacing: 0.06em;
-  color: var(--slate);
-  max-width: 320px;
 }
