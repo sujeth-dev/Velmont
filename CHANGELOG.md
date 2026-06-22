@@ -2,6 +2,32 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 3 Polish (cont.) — 2026-06-22 (session ~20:00+ IST)
+
+### Gallery lightbox viewer
+- Clicking any gallery thumbnail opens a full-screen lightbox (`vm-lightbox`).
+- Left/right arrow buttons (‹ ›) cycle through all gallery images; Escape key and backdrop click close.
+- 1-image projects (MEA Bangalore) hide navigation arrows automatically.
+- `src/work/[slug].html`: lightbox overlay div added after `.vm-proj-gallery`.
+- `src/css/project.css`: `.vm-lightbox` and related rules.
+- `src/js/project.js`: `initLightbox()` function; called at end of gallery hydration.
+
+### Gallery row heights increased
+- All data-count row heights bumped: count=5 260px→320px, count=4 230px→280px, count=3 280px→340px, count=1/2 520px→620px.
+- `cursor: pointer` added to `.vm-proj-gallery__img`.
+
+### Hero overlays lightened + heroes taller
+- Project hero: `75vh` → `85vh`; overlay bottom `0.62` → `0.42`.
+- Work hero: `65vh` → `78vh`; overlay bottom `0.62` → `0.42`.
+- Upper 60% of hero images now fully clean/unshaded.
+
+### Copy + test fixes
+- `Selected Work` → `Our Projects` everywhere (index.html, main.js, e2e test).
+- `Select Projects` → `Our Projects` on work page hero eyebrow.
+- `__tests__/projects.test.js`: gallery assertion updated to array shape.
+- Build scripts: Windows invocation guard removed from copy-data, copy-components, convert-images.
+- Prettier auto-format applied to 7 files.
+
 ## Phase 3 Polish — 2026-06-22 (session ~14:00–20:00 IST)
 
 ### Home hero carousel
