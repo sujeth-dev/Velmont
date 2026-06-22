@@ -129,6 +129,21 @@
           height="260"
         />
       </div>
+
+      <!-- Lightbox — opened when a gallery image is clicked -->
+      <div
+        class="vm-lightbox"
+        id="vm-lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image viewer"
+        hidden
+      >
+        <button class="vm-lightbox__close" aria-label="Close">&#215;</button>
+        <button class="vm-lightbox__prev" aria-label="Previous image">&#8249;</button>
+        <img class="vm-lightbox__img" src="" alt="" />
+        <button class="vm-lightbox__next" aria-label="Next image">&#8250;</button>
+      </div>
     </main>
 
     <div id="footer-mount" data-component="footer"></div>

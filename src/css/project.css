@@ -46,9 +46,9 @@
    ---------------------------------------------------------------- */
 .vm-proj-hero {
   position: relative;
-  height: 75vh;
-  min-height: 560px;
-  max-height: 820px;
+  height: 85vh;
+  min-height: 620px;
+  max-height: 980px;
   padding: 60px var(--pad-side);
   display: flex;
   flex-direction: column;
@@ -76,8 +76,8 @@
   z-index: 1;
   background: linear-gradient(
     0deg,
-    rgba(8, 8, 8, 0.62) 0%,
-    rgba(8, 8, 8, 0.12) 40%,
+    rgba(8, 8, 8, 0.42) 0%,
+    rgba(8, 8, 8, 0.08) 40%,
     rgba(8, 8, 8, 0) 100%
   );
 }
@@ -230,6 +230,7 @@
   object-fit: cover;
   display: block;
   min-height: 0; /* prevent grid blowout */
+  cursor: pointer;
 }
 
 /* Mobile — stack vertically */
@@ -246,22 +247,22 @@
 @media (min-width: 768px) {
   .vm-proj-gallery[data-count='1'] {
     grid-template-columns: 1fr;
-    grid-template-rows: 520px;
+    grid-template-rows: 620px;
   }
   .vm-proj-gallery[data-count='2'] {
     grid-template-columns: 1.62fr 1fr;
-    grid-template-rows: 520px;
+    grid-template-rows: 620px;
   }
   .vm-proj-gallery[data-count='3'] {
     grid-template-columns: 1.62fr 1fr;
-    grid-template-rows: 280px 280px;
+    grid-template-rows: 340px 340px;
   }
   .vm-proj-gallery[data-count='3'] .vm-proj-gallery__img:first-child {
     grid-row: 1 / 3;
   }
   .vm-proj-gallery[data-count='4'] {
     grid-template-columns: 1.62fr 1fr;
-    grid-template-rows: 230px 230px 230px;
+    grid-template-rows: 280px 280px 280px;
   }
   .vm-proj-gallery[data-count='4'] .vm-proj-gallery__img:first-child {
     grid-row: 1 / 3;
@@ -271,7 +272,7 @@
   }
   .vm-proj-gallery[data-count='5'] {
     grid-template-columns: 1.62fr 1fr;
-    grid-template-rows: 260px 260px 260px;
+    grid-template-rows: 320px 320px 320px;
   }
   .vm-proj-gallery[data-count='5'] .vm-proj-gallery__img:first-child {
     grid-row: 1 / 3;
@@ -279,4 +280,74 @@
   .vm-proj-gallery[data-count='5'] .vm-proj-gallery__img:nth-child(4) {
     grid-column: 1;
   }
+}
+
+/* ----------------------------------------------------------------
+   Lightbox — full-screen image viewer
+   ---------------------------------------------------------------- */
+.vm-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vm-lightbox[hidden] {
+  display: none;
+}
+
+.vm-lightbox__img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+}
+
+.vm-lightbox__close {
+  position: absolute;
+  top: 28px;
+  right: 36px;
+  font-size: 40px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.75);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.vm-lightbox__close:hover {
+  color: #fff;
+}
+
+.vm-lightbox__prev,
+.vm-lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 56px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.65);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 28px;
+  user-select: none;
+}
+
+.vm-lightbox__prev:hover,
+.vm-lightbox__next:hover {
+  color: #fff;
+}
+
+.vm-lightbox__prev {
+  left: 0;
+}
+
+.vm-lightbox__next {
+  right: 0;
 }

@@ -26,11 +26,55 @@ export function renderMaterials(materials) {
   return materials.map((m) => `<span class="vm-material-tag">${m}</span>`).join('');
 }
 
+function initLightbox(images, projectTitle) {
+  const lb = document.getElementById('vm-lightbox');
+  if (!lb || !images.length) return;
+  const lbImg = lb.querySelector('.vm-lightbox__img');
+  const closeBtn = lb.querySelector('.vm-lightbox__close');
+  const prevBtn = lb.querySelector('.vm-lightbox__prev');
+  const nextBtn = lb.querySelector('.vm-lightbox__next');
+  let cur = 0;
+
+  if (images.length <= 1) {
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+  }
+
+  function show(i) {
+    cur = ((i % images.length) + images.length) % images.length;
+    lbImg.src = images[cur];
+    lbImg.alt = `${projectTitle} — view ${cur + 1} of ${images.length}`;
+    lb.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function close() {
+    lb.setAttribute('hidden', '');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-gallery-img]').forEach((img) => {
+    const i = Number(img.dataset.galleryImg);
+    if (img.src) img.addEventListener('click', () => show(i));
+  });
+  prevBtn.addEventListener('click', () => show(cur - 1));
+  nextBtn.addEventListener('click', () => show(cur + 1));
+  closeBtn.addEventListener('click', close);
+  lb.addEventListener('click', (e) => {
+    if (e.target === lb) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (lb.hasAttribute('hidden')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+}
+
 /**
  * Hydrate the project detail page with data from the given project record.
- * @param {object} project
- * @param {object} prev - previous project (circular)
- * @param {object} next - next project (circular)
  */
 export function hydratePage(project) {
   // Breadcrumb
@@ -105,6 +149,8 @@ export function hydratePage(project) {
   });
 
   if (gallery) gallery.dataset.count = String(galleryCount);
+
+  initLightbox(galleryArr.slice(0, galleryCount), project.title);
 
   // Page title
   document.title = `${project.title} — Velmont Design Studio`;

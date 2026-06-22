@@ -8,9 +8,9 @@
    ---------------------------------------------------------------- */
 .vm-work-hero {
   position: relative;
-  height: 65vh;
-  min-height: 480px;
-  max-height: 720px;
+  height: 78vh;
+  min-height: 520px;
+  max-height: 860px;
   background: #2b2927;
   overflow: hidden;
   display: flex;
@@ -37,8 +37,8 @@
   z-index: 1;
   background: linear-gradient(
     0deg,
-    rgba(8, 8, 8, 0.62) 0%,
-    rgba(8, 8, 8, 0.18) 45%,
+    rgba(8, 8, 8, 0.42) 0%,
+    rgba(8, 8, 8, 0.1) 45%,
     rgba(8, 8, 8, 0) 100%
   );
 }
