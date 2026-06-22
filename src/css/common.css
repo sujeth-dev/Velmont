@@ -187,7 +187,9 @@
   font-family: var(--body);
   font-size: var(--fs-hero-sub); /* 16px */
   line-height: 1.72;
-  color: var(--body-text);
+  color: rgba(209, 200, 188, 0.78);
   max-width: 620px;
   margin: 28px 0 0;
+  position: relative;
+  z-index: 2;
 }

@@ -2,6 +2,16 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 4 Photo Heroes — 2026-06-23
+
+- About, Services, and Contact page heroes converted from text-only (paper background) to full-height photo heroes matching the Work page standard.
+- `src/css/about.css`: `.vm-page-hero` → 78vh photo container (position: relative, flex, justify-content: flex-end); `::after` bottom-weighted gradient overlay; `.vm-page-hero__bg` absolute cover rule; eyebrow and H1 updated to white/warm light text with z-index layering.
+- `src/css/common.css`: `.vm-page-hero__sub` updated to `rgba(209,200,188,0.78)` and `z-index: 2` so sub-headline is visible over the overlay.
+- About hero image: `marriott-marquis-delhi/interior-4.webp`.
+- Services hero image: `taj-exotica-andaman/villa-2.webp`.
+- Contact hero image: `taj-exotica-andaman/room-3.webp`.
+- Vitest 62/62 · Prettier clean · Vite build clean.
+
 ## Phase 4 Polish — 2026-06-22
 
 ### Design audit fixes (About, Services, Contact)
