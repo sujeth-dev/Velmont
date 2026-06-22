@@ -1,6 +1,6 @@
 // Velmont — main entry point.
 // Phase 1: inject shared nav + footer.
-// Phase 2: hydrate the home page Selected Work strip.
+// Phase 2: hydrate the home page Our Projects strip.
 
 import { injectComponent, markActiveNavLink } from './components.js';
 import { initHome } from './home.js';

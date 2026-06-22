@@ -13,7 +13,7 @@ test.describe('Phase 2 — home page', () => {
     );
   });
 
-  test('Selected Work strip renders all published project tiles', async ({ page }) => {
+  test('Our Projects strip renders all published project tiles', async ({ page }) => {
     await page.goto('/');
     // Carousel renders all published projects; clones are marked data-clone and aria-hidden
     const tiles = page.locator('.vm-work__tile:not([data-clone])');
