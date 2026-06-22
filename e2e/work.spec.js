@@ -77,10 +77,8 @@ test.describe('Phase 3 — Project detail pages', () => {
       await expect(page.locator('[data-breadcrumb-project]')).toHaveText(proj.title);
       await expect(page.locator('[data-breadcrumb-discipline]')).toHaveText(proj.discipline);
 
-      // Gallery: 3 images present (main + topRight + bottomRight)
-      await expect(page.locator('[data-gallery-main]')).toHaveAttribute('src', /.+/);
-      await expect(page.locator('[data-gallery-top-right]')).toHaveAttribute('src', /.+/);
-      await expect(page.locator('[data-gallery-bottom-right]')).toHaveAttribute('src', /.+/);
+      // Gallery: first image hydrated with a real src (1–5 images per project)
+      await expect(page.locator('[data-gallery-img="0"]')).toHaveAttribute('src', /.+/);
     });
   }
 });

@@ -42,12 +42,9 @@ async function main() {
   console.log('[copy-components] wrote', files.length, 'fragments to public/components/');
 }
 
-const invoked = import.meta.url === 'file://' + process.argv[1];
-if (invoked) {
-  main().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-}
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
 
 export { main as copyComponents };

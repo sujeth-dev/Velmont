@@ -36,12 +36,9 @@ async function main() {
   console.log('[copy-data] wrote', files.length, 'json file(s) to public/data/');
 }
 
-const invoked = import.meta.url === 'file://' + process.argv[1];
-if (invoked) {
-  main().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-}
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
 
 export { main as copyData };

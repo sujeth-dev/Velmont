@@ -127,12 +127,9 @@ async function main() {
   );
 }
 
-const invoked = import.meta.url === 'file://' + process.argv[1];
-if (invoked) {
-  main().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-}
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
 
 export { convertProjects, convertLogos, SLUG_MAP };

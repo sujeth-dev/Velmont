@@ -76,15 +76,26 @@
   background: #2b2927; /* dark fallback if image fails */
 }
 
-/* Background photo — fills the full hero behind the overlay */
-.vm-hero__bg {
+/* Hero crossfade carousel — multiple background images that dissolve into each other */
+.vm-hero__slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.vm-hero__slide {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.vm-hero__slide.is-active {
+  opacity: 1;
 }
 
 /* Gradient overlay sits on top of the photo */

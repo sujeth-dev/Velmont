@@ -38,6 +38,26 @@ Significant decisions that shaped the project. Add a new entry here **before** w
 
 ---
 
+## 2026-06-22 — Gallery data structure: object → array, gallery[0] = hero
+
+**What:** `images.gallery` in `data/projects.json` changed from a 3-key named object (`{main, topRight, bottomRight}`) to a variable-length array (1–5 items). `gallery[0]` is always the same image as `images.hero`.
+**Why:** Named keys limited the gallery to exactly 3 images and caused a coupling problem — the array approach scales to any count and enforces the consistency rule that the main gallery image must match the project hero. Work-list tile also changed to use `images.hero` (not `images.cover`) for the same reason.
+**Alternatives considered:** Keep 3-key object and add 2 new keys (`bottomLeft`, `extra`) — works but doesn't scale and doesn't enforce the hero-match rule.
+**Impact:** `src/js/project.js` hydration uses a `forEach` loop with `data-gallery-img="N"` attribute; CSS uses `data-count` attribute set by JS to drive layout. MEA Bangalore has only 1 image and renders as a single full-width panel.
+**Status:** Done
+
+---
+
+## 2026-06-22 — Home hero: single image → 5-image crossfade carousel
+
+**What:** The home hero background changed from a single `<img>` to a crossfade carousel of 5 images cycling every 5 seconds (opacity transition 1.5 s).
+**Why:** Client request — show bar, restaurant, exterior, and luxury interior images in rotation to represent the breadth of hospitality work.
+**Alternatives considered:** Slide-based carousel — rejected in favour of crossfade as more editorial/luxury.
+**Impact:** First image loads `eager`/`fetchpriority="high"`; remaining 4 load `lazy`. The `::after` gradient overlay stays at z-index 1, always above the slides at z-index 0.
+**Status:** Done
+
+---
+
 ## 2026-06-21 — Firebase as full backend (Firestore + Auth + Storage)
 
 **What:** Firebase handles all three backend concerns: Firestore for data, Firebase Auth for admin login, Firebase Storage for image uploads.

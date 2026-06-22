@@ -42,11 +42,13 @@
 }
 
 /* ----------------------------------------------------------------
-   Project hero — 520px, photo background + dark overlay
+   Project hero — tall enough to show images without heavy crop
    ---------------------------------------------------------------- */
 .vm-proj-hero {
   position: relative;
-  height: var(--project-hero-h); /* 520px */
+  height: 75vh;
+  min-height: 560px;
+  max-height: 820px;
   padding: 60px var(--pad-side);
   display: flex;
   flex-direction: column;
@@ -55,26 +57,29 @@
   background: #2e2b28; /* dark fallback if image fails */
 }
 
-/* Background photo */
+/* Background photo — cover at natural centre, no forced position bias */
 .vm-proj-hero__bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   z-index: 0;
 }
 
-/* Gradient overlay — keeps text readable over any photo */
+/* Gradient overlay — only bottom 40% darkened so image stays vibrant */
 .vm-proj-hero::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(0deg, rgba(8, 8, 8, 0.72) 0%, rgba(8, 8, 8, 0.22) 52%, rgba(8, 8, 8, 0.08) 100%),
-    linear-gradient(135deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.32));
+  background: linear-gradient(
+    0deg,
+    rgba(8, 8, 8, 0.62) 0%,
+    rgba(8, 8, 8, 0.12) 40%,
+    rgba(8, 8, 8, 0) 100%
+  );
 }
 
 .vm-proj-hero__eyebrow,
@@ -209,15 +214,13 @@
 }
 
 /* ----------------------------------------------------------------
-   Image gallery — 1.62fr 1fr, 2 rows, 560px total, 3px gap
+   Image gallery — adaptive layout driven by data-count (1–5 images)
+   Mobile: single-column stack; desktop: editorial grid.
+   Uses explicit pixel row heights so overflow:hidden cannot clip rows.
    ---------------------------------------------------------------- */
 .vm-proj-gallery {
   display: grid;
-  grid-template-columns: 1.62fr 1fr;
-  grid-template-rows: 1fr 1fr;
   gap: 3px;
-  height: var(--gallery-h); /* 560px */
-  overflow: hidden; /* clip images to grid bounds */
   border-bottom: 1px solid var(--mineral);
 }
 
@@ -226,9 +229,55 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  min-height: 0; /* prevent grid blowout */
 }
 
-.vm-proj-gallery__main {
-  grid-row: 1 / 3;
+/* Mobile — stack vertically */
+@media (max-width: 767px) {
+  .vm-proj-gallery {
+    grid-template-columns: 1fr;
+  }
+  .vm-proj-gallery__img {
+    height: 280px;
+  }
+}
+
+/* Desktop — editorial grid per image count */
+@media (min-width: 768px) {
+  .vm-proj-gallery[data-count="1"] {
+    grid-template-columns: 1fr;
+    grid-template-rows: 520px;
+  }
+  .vm-proj-gallery[data-count="2"] {
+    grid-template-columns: 1.62fr 1fr;
+    grid-template-rows: 520px;
+  }
+  .vm-proj-gallery[data-count="3"] {
+    grid-template-columns: 1.62fr 1fr;
+    grid-template-rows: 280px 280px;
+  }
+  .vm-proj-gallery[data-count="3"] .vm-proj-gallery__img:first-child {
+    grid-row: 1 / 3;
+  }
+  .vm-proj-gallery[data-count="4"] {
+    grid-template-columns: 1.62fr 1fr;
+    grid-template-rows: 230px 230px 230px;
+  }
+  .vm-proj-gallery[data-count="4"] .vm-proj-gallery__img:first-child {
+    grid-row: 1 / 3;
+  }
+  .vm-proj-gallery[data-count="4"] .vm-proj-gallery__img:nth-child(4) {
+    grid-column: 1;
+  }
+  .vm-proj-gallery[data-count="5"] {
+    grid-template-columns: 1.62fr 1fr;
+    grid-template-rows: 260px 260px 260px;
+  }
+  .vm-proj-gallery[data-count="5"] .vm-proj-gallery__img:first-child {
+    grid-row: 1 / 3;
+  }
+  .vm-proj-gallery[data-count="5"] .vm-proj-gallery__img:nth-child(4) {
+    grid-column: 1;
+  }
 }
 

@@ -80,7 +80,21 @@ async function loadProjects() {
   }
 }
 
+function initHeroCarousel() {
+  const slides = document.querySelectorAll('.vm-hero__slide');
+  if (!slides.length) return;
+  let cur = 0;
+  slides[cur].classList.add('is-active');
+  setInterval(() => {
+    slides[cur].classList.remove('is-active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('is-active');
+  }, 5000);
+}
+
 export async function initHome() {
+  initHeroCarousel();
+
   const mount = document.querySelector('[data-tiles]');
   if (!mount) return;
 

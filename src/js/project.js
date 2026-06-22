@@ -86,24 +86,25 @@ export function hydratePage(project) {
   const matsEl = document.querySelector('[data-proj-materials]');
   if (matsEl) matsEl.innerHTML = renderMaterials(project.materials || []);
 
-  // Gallery images
-  const imgMain = document.querySelector('[data-gallery-main]');
-  if (imgMain && project.images?.gallery?.main) {
-    imgMain.src = project.images.gallery.main;
-    imgMain.alt = `${project.title} — main gallery image`;
-  }
+  // Gallery — adaptive, supports 1–5 images; sets data-count for CSS layout
+  const gallery = document.querySelector('.vm-proj-gallery');
+  const galleryImgs = document.querySelectorAll('[data-gallery-img]');
+  const galleryArr = Array.isArray(project.images?.gallery) ? project.images.gallery : [];
+  let galleryCount = 0;
 
-  const imgTR = document.querySelector('[data-gallery-top-right]');
-  if (imgTR && project.images?.gallery?.topRight) {
-    imgTR.src = project.images.gallery.topRight;
-    imgTR.alt = `${project.title} — detail view`;
-  }
+  galleryImgs.forEach((img) => {
+    const i = Number(img.dataset.galleryImg);
+    const src = galleryArr[i];
+    if (src) {
+      img.src = src;
+      img.alt = `${project.title} — view ${i + 1}`;
+      galleryCount++;
+    } else {
+      img.style.display = 'none';
+    }
+  });
 
-  const imgBR = document.querySelector('[data-gallery-bottom-right]');
-  if (imgBR && project.images?.gallery?.bottomRight) {
-    imgBR.src = project.images.gallery.bottomRight;
-    imgBR.alt = `${project.title} — detail view`;
-  }
+  if (gallery) gallery.dataset.count = String(galleryCount);
 
   // Page title
   document.title = `${project.title} — Velmont Design Studio`;

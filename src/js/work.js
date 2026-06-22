@@ -21,7 +21,7 @@ export function renderGridTile(p, index) {
   const year = p.year != null ? String(p.year) : '—';
   const loc = String(p.location || '');
   const meta = loc && year !== '—' ? `${loc} · ${year}` : loc || year;
-  const cover = String(p.images?.cover || '');
+  const cover = String(p.images?.hero || '');
   const title = String(p.title || '');
   return [
     `<a class="vm-grid-tile" href="/work/${slug}" data-discipline="${p.discipline || ''}" data-tile="${slug}">`,

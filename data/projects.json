@@ -25,11 +25,13 @@
     "images": {
       "cover": "/assets/projects/jw-marriott-bengaluru/exterior.webp",
       "hero": "/assets/projects/jw-marriott-bengaluru/lobby.webp",
-      "gallery": {
-        "main": "/assets/projects/jw-marriott-bengaluru/villa-living.webp",
-        "topRight": "/assets/projects/jw-marriott-bengaluru/suite.webp",
-        "bottomRight": "/assets/projects/jw-marriott-bengaluru/banquet.webp"
-      }
+      "gallery": [
+        "/assets/projects/jw-marriott-bengaluru/lobby.webp",
+        "/assets/projects/jw-marriott-bengaluru/villa-living.webp",
+        "/assets/projects/jw-marriott-bengaluru/suite.webp",
+        "/assets/projects/jw-marriott-bengaluru/banquet.webp",
+        "/assets/projects/jw-marriott-bengaluru/exterior.webp"
+      ]
     },
     "featured": true,
     "published": true
@@ -60,11 +62,13 @@
     "images": {
       "cover": "/assets/projects/taj-malabar-kochi/cover.webp",
       "hero": "/assets/projects/taj-malabar-kochi/bar.webp",
-      "gallery": {
-        "main": "/assets/projects/taj-malabar-kochi/suite.webp",
-        "topRight": "/assets/projects/taj-malabar-kochi/restaurant.webp",
-        "bottomRight": "/assets/projects/taj-malabar-kochi/dining.webp"
-      }
+      "gallery": [
+        "/assets/projects/taj-malabar-kochi/bar.webp",
+        "/assets/projects/taj-malabar-kochi/suite.webp",
+        "/assets/projects/taj-malabar-kochi/restaurant.webp",
+        "/assets/projects/taj-malabar-kochi/dining.webp",
+        "/assets/projects/taj-malabar-kochi/interior-1.webp"
+      ]
     },
     "featured": true,
     "published": true
@@ -95,11 +99,13 @@
     "images": {
       "cover": "/assets/projects/itc-ratnadipa-colombo/cover.webp",
       "hero": "/assets/projects/itc-ratnadipa-colombo/lobby.webp",
-      "gallery": {
-        "main": "/assets/projects/itc-ratnadipa-colombo/bar-lounge.webp",
-        "topRight": "/assets/projects/itc-ratnadipa-colombo/bedroom.webp",
-        "bottomRight": "/assets/projects/itc-ratnadipa-colombo/bar-entrance.webp"
-      }
+      "gallery": [
+        "/assets/projects/itc-ratnadipa-colombo/lobby.webp",
+        "/assets/projects/itc-ratnadipa-colombo/bar-lounge.webp",
+        "/assets/projects/itc-ratnadipa-colombo/bedroom.webp",
+        "/assets/projects/itc-ratnadipa-colombo/bar-entrance.webp",
+        "/assets/projects/itc-ratnadipa-colombo/cityview.webp"
+      ]
     },
     "featured": true,
     "published": true
@@ -129,12 +135,14 @@
     ],
     "images": {
       "cover": "/assets/projects/marriott-marquis-delhi/cover.webp",
-      "hero": "/assets/projects/marriott-marquis-delhi/exterior.webp",
-      "gallery": {
-        "main": "/assets/projects/marriott-marquis-delhi/interior-1.webp",
-        "topRight": "/assets/projects/marriott-marquis-delhi/interior-2.webp",
-        "bottomRight": "/assets/projects/marriott-marquis-delhi/interior-3.webp"
-      }
+      "hero": "/assets/projects/marriott-marquis-delhi/cover.webp",
+      "gallery": [
+        "/assets/projects/marriott-marquis-delhi/cover.webp",
+        "/assets/projects/marriott-marquis-delhi/exterior.webp",
+        "/assets/projects/marriott-marquis-delhi/interior-1.webp",
+        "/assets/projects/marriott-marquis-delhi/interior-2.webp",
+        "/assets/projects/marriott-marquis-delhi/interior-3.webp"
+      ]
     },
     "featured": true,
     "published": true
@@ -162,11 +170,9 @@
     "images": {
       "cover": "/assets/projects/mea-bangalore/cover.webp",
       "hero": "/assets/projects/mea-bangalore/cover.webp",
-      "gallery": {
-        "main": "/assets/projects/mea-bangalore/cover.webp",
-        "topRight": "/assets/projects/mea-bangalore/cover.webp",
-        "bottomRight": "/assets/projects/mea-bangalore/cover.webp"
-      }
+      "gallery": [
+        "/assets/projects/mea-bangalore/cover.webp"
+      ]
     },
     "featured": false,
     "published": true
@@ -197,11 +203,13 @@
     "images": {
       "cover": "/assets/projects/taj-exotica-andaman/villa-1.webp",
       "hero": "/assets/projects/taj-exotica-andaman/villa-2.webp",
-      "gallery": {
-        "main": "/assets/projects/taj-exotica-andaman/room-1.webp",
-        "topRight": "/assets/projects/taj-exotica-andaman/pool.webp",
-        "bottomRight": "/assets/projects/taj-exotica-andaman/exterior.webp"
-      }
+      "gallery": [
+        "/assets/projects/taj-exotica-andaman/villa-2.webp",
+        "/assets/projects/taj-exotica-andaman/room-1.webp",
+        "/assets/projects/taj-exotica-andaman/pool.webp",
+        "/assets/projects/taj-exotica-andaman/exterior.webp",
+        "/assets/projects/taj-exotica-andaman/room-2.webp"
+      ]
     },
     "featured": true,
     "published": true
