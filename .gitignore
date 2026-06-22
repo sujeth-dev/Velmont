@@ -20,3 +20,5 @@ vitest.config.js.timestamp-*
 *.timestamp-*.mjs
 
 public/data/
+preview.err
+serve-preview.py

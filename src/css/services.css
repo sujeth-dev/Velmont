@@ -1,0 +1,100 @@
+/* ============================================================
+   Velmont — Services page
+   3×2 service grid, dark manufacturing block, CTA.
+   ============================================================ */
+
+.vm-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.vm-page-hero__sub {
+  font-family: var(--body);
+  font-size: var(--fs-hero-sub); /* 16px */
+  line-height: 1.72;
+  color: var(--body-text);
+  max-width: 620px;
+  margin: 28px 0 0;
+}
+
+.vm-services {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.vm-services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  border-top: 1px solid var(--mineral);
+  border-left: 1px solid var(--mineral);
+}
+
+.vm-service {
+  padding: 44px 40px;
+  border-right: 1px solid var(--mineral);
+  border-bottom: 1px solid var(--mineral);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--paper);
+  transition: background var(--t-fast) var(--ease-default);
+}
+
+.vm-service:hover {
+  background: #fff;
+}
+
+.vm-service__num {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 36px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--mineral);
+}
+
+.vm-service__title {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--vblack);
+  margin: 0;
+}
+
+.vm-service__desc {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--body-text);
+  margin: 0;
+  max-width: 280px;
+}
+
+/* Dark manufacturing block overrides for tokens */
+.vm-manuf--dark .vm-manuf__h {
+  color: #fff;
+}
+
+.vm-manuf--dark .vm-manuf__copy {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.vm-manuf--dark .vm-manuf__photo-placeholder {
+  border-color: rgba(187, 188, 195, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.vm-manuf--dark .vm-manuf__placeholder-eyebrow,
+.vm-manuf--dark .vm-manuf__placeholder-label {
+  color: rgba(255, 255, 255, 0.6);
+}

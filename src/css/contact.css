@@ -1,0 +1,213 @@
+/* ============================================================
+   Velmont — Contact page (form + details + map)
+   ============================================================ */
+
+.vm-contact {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+.vm-contact__h {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  color: var(--vblack);
+  margin: 0 0 32px;
+}
+
+/* ---- Form ---- */
+.vm-contact__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 32px;
+}
+
+.vm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vm-field--half {
+  grid-column: span 1;
+}
+
+.vm-field--full {
+  grid-column: span 2;
+}
+
+.vm-field label {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.vm-field input,
+.vm-field select,
+.vm-field textarea {
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--vblack);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--mineral);
+  padding: 8px 0 10px;
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease-default);
+}
+
+.vm-field textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.vm-field input:focus,
+.vm-field select:focus,
+.vm-field textarea:focus {
+  border-bottom-color: var(--vblack);
+  outline: none;
+}
+
+.vm-field.is-invalid input,
+.vm-field.is-invalid select,
+.vm-field.is-invalid textarea {
+  border-bottom-color: var(--terracotta);
+}
+
+.vm-field__error {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--terracotta);
+  margin-top: 4px;
+  min-height: 14px;
+}
+
+/* ---- Honeypot — invisible to humans ---- */
+.vm-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---- Submit ---- */
+.vm-field--actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.vm-contact__submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vblack);
+  background: transparent;
+  border: 1px solid var(--terracotta);
+  border-radius: 2px;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease-default),
+    color var(--t-fast) var(--ease-default);
+}
+
+.vm-contact__submit:hover {
+  background: var(--terracotta);
+  color: var(--paper);
+}
+
+.vm-contact__submit__arrow {
+  color: var(--terracotta);
+}
+
+.vm-contact__submit:hover .vm-contact__submit__arrow {
+  color: var(--paper);
+}
+
+.vm-contact__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.vm-contact__status {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+  margin: 0;
+}
+
+.vm-contact__status.is-success {
+  color: #2d7a3a;
+}
+
+.vm-contact__status.is-error {
+  color: var(--terracotta);
+}
+
+/* ---- Details ---- */
+.vm-contact__dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.vm-contact__item dt {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+
+.vm-contact__item dd {
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--body-text);
+  margin: 0;
+}
+
+.vm-contact__item dd a {
+  color: inherit;
+  border-bottom: 1px solid var(--mineral);
+  text-decoration: none;
+  transition: border-color var(--t-fast) var(--ease-default);
+}
+
+.vm-contact__item dd a:hover {
+  border-bottom-color: var(--terracotta);
+}
+
+/* ---- Map ---- */
+.vm-contact-map {
+  border-top: 1px solid var(--mineral);
+  height: 480px;
+  background: var(--concrete);
+}
+
+.vm-contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}

@@ -4,6 +4,72 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Phase 4 — About, Services, Contact Pages + Form
+
+| Field | Value |
+|---|---|
+| Date | 2026-06-22 |
+| Status | Complete |
+| Branch | main |
+
+### What shipped
+
+**About page** (`src/about.html`, `src/css/about.css`) — 6 sections per MASTER_PLAN §Phase 4:
+1. Page hero: "The Studio" / "Built to deliver, from first sketch to final handover."
+2. Who We Are: copy + 4 highlight pills (End-to-End / In-House Manufacturing / Hospitality, Corporate & Commercial / Quality-Driven).
+3. Track Record: 4 stat blocks (15+ / 100+ / 5M+ / 200+) reusing `.vm-stats` from Phase 2.
+4. Our Approach: "How We Think" kicker + italic editorial lead + supporting body.
+5. Manufacturing Capability: "In-house. In control." + styled photo placeholder (4–5 photos pending client).
+6. CTA: "Work with us." → "Get in Touch →" to `/contact`.
+
+**Services page** (`src/services.html`, `src/css/services.css`) — 4 sections:
+1. Hero: "What We Do" / "Specialist services for commercial interiors."
+2. 3×2 grid: 6 service cards (Commercial Interiors / Turnkey Fit-Outs / Furniture Manufacturing / Project Execution / Technical Support / Carpentry & Joinery) — each with index, title, description.
+3. Dark Manufacturing Capability block with the same placeholder.
+4. CTA: "Start your project with us." → "Enquire →".
+
+**Contact page** (`src/contact.html`, `src/css/contact.css`, `src/js/contact.js`) — 4 sections:
+1. Hero: "Get in Touch" / "Let's build something exceptional together."
+2. Enquiry form: Full Name* / Company / Email* / Phone / Project Type (select) / Project Location / Message* — with a visually hidden honeypot (`name="website"`, tabindex -1).
+3. Studio details: Address / Phone & WhatsApp / Email / Business Hours.
+4. Google Maps embed iframe at `google.com/maps?q=Velmont+Design+LLP...&output=embed`.
+
+**Form behaviour:**
+- Pure `validate(values)` exported for unit tests — required-field + email-format checks; honeypot triggers a silent reject.
+- DOM submit handler reads values, paints `.is-invalid` on bad fields, surfaces inline `.vm-field__error` messages, posts to EmailJS using `VITE_EMAILJS_*` env vars when set; falls back to a console warning in dev when keys are missing so manual UI testing still works.
+- Status line announces sending / success / error via `aria-live="polite"`.
+
+**Wiring**
+- `src/js/main.js` — dispatches by `<main data-page>`: contact page initialises the form, default (home) keeps `initHome`.
+- `vite.config.js` — renamed existing rewrite plugin to `cleanUrlsPlugin`; now also rewrites `/about`, `/services`, `/contact`, and `/work` to their `.html` siblings in both dev and preview servers. `about`, `services`, `contact` added to `rollupOptions.input`.
+- `vercel.json` — `cleanUrls: true` already covered production routing.
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| ESLint | Pass |
+| Prettier | Pass |
+| Vitest | Pass — **62 / 62** (8 new `contact.test.js`: full submission accepted / required name / required email / bad email format / required message / multi-field errors / honeypot silent-reject / undefined input) |
+| Vite build | Pass — `dist/about.html` 5.98 kB, `dist/contact.html` 6.60 kB, plus per-page CSS chunks. |
+| Preview smoke (curl) | `/`, `/about`, `/services`, `/contact` all return 200 with correct titles; map iframe src includes `google.com/maps`. |
+| Playwright (about / services / contact specs) | Deferred to CI — sandbox blocks Chrome download. Specs cover every MASTER_PLAN Phase 4 assertion: section presence, stat numbers, 6 service titles, CTA hrefs, empty-form validation, bad-email validation, map iframe, honeypot hidden + tabindex -1. |
+| Lighthouse CI | Will run on first CI execution. |
+
+### Carry-overs
+
+- Manufacturing facility photos — placeholder block used; replace with real images when client provides.
+- EmailJS credentials — `VITE_EMAILJS_SERVICE_ID`, `_TEMPLATE_ID`, `_PUBLIC_KEY` to be set in Vercel; until then the form simulates success on submit.
+- Social handles still pending.
+
+### Commit
+
+- Message: `Phase 4: About, Services, and Contact pages with form validation`
+- Branch: main (push from local machine — sandbox has no git credentials)
+
+---
+
+
 ## Post-Phase 3 Polish — Hero Images + UI Fixes
 
 | Field | Value |

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200" />
+    <meta
+      name="description"
+      content="Velmont services — turnkey fit-outs, furniture manufacturing, joinery, project execution, and technical support for commercial interiors across India."
+    />
+    <title>Services — Velmont Design Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    />
+
+    <link rel="stylesheet" href="./css/tokens.css" />
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/about.css" />
+    <link rel="stylesheet" href="./css/services.css" />
+  </head>
+  <body>
+    <div id="nav-mount" data-component="nav"></div>
+
+    <main id="main" data-page="services">
+      <!-- 03.1 PAGE HERO -->
+      <section class="vm-page-hero" aria-labelledby="services-hero-h">
+        <p class="vm-page-hero__eyebrow">What We Do</p>
+        <h1 id="services-hero-h" class="vm-page-hero__h1">
+          Specialist services for commercial interiors.
+        </h1>
+        <p class="vm-page-hero__sub">
+          Turnkey fit-outs, furniture manufacturing, carpentry, joinery, and project execution —
+          delivered by one specialist contracting team.
+        </p>
+      </section>
+
+      <!-- 03.2 SERVICES GRID -->
+      <section class="vm-section vm-services" aria-labelledby="services-grid-h">
+        <h2 id="services-grid-h" class="vm-visually-hidden">Service areas</h2>
+        <div class="vm-services__grid" data-service-grid>
+          <article class="vm-service" data-service="01">
+            <span class="vm-service__num">01</span>
+            <h3 class="vm-service__title">Commercial Interiors</h3>
+            <p class="vm-service__desc">
+              End-to-end interior solutions for hospitality, corporate, and commercial environments.
+            </p>
+          </article>
+          <article class="vm-service" data-service="02">
+            <span class="vm-service__num">02</span>
+            <h3 class="vm-service__title">Turnkey Fit-Outs</h3>
+            <p class="vm-service__desc">
+              Comprehensive project delivery from planning to handover.
+            </p>
+          </article>
+          <article class="vm-service" data-service="03">
+            <span class="vm-service__num">03</span>
+            <h3 class="vm-service__title">Furniture Manufacturing</h3>
+            <p class="vm-service__desc">
+              Custom furniture solutions crafted through our in-house facility.
+            </p>
+          </article>
+          <article class="vm-service" data-service="04">
+            <span class="vm-service__num">04</span>
+            <h3 class="vm-service__title">Project Execution</h3>
+            <p class="vm-service__desc">
+              Coordinated site management focused on quality and efficiency.
+            </p>
+          </article>
+          <article class="vm-service" data-service="05">
+            <span class="vm-service__num">05</span>
+            <h3 class="vm-service__title">Technical Support</h3>
+            <p class="vm-service__desc">
+              Detailed planning and technical expertise at every stage, supporting smooth execution.
+            </p>
+          </article>
+          <article class="vm-service" data-service="06">
+            <span class="vm-service__num">06</span>
+            <h3 class="vm-service__title">Carpentry &amp; Joinery</h3>
+            <p class="vm-service__desc">
+              Bespoke woodwork and joinery tailored to project requirements.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 03.3 MANUFACTURING -->
+      <section
+        class="vm-section vm-section--dark vm-manuf vm-manuf--dark"
+        aria-labelledby="svc-manuf-h"
+      >
+        <header class="vm-manuf__head">
+          <p class="vm-kicker">Manufacturing Capability</p>
+          <h2 id="svc-manuf-h" class="vm-manuf__h">A state-of-the-art manufacturing facility.</h2>
+          <p class="vm-manuf__copy">
+            Our in-house manufacturing facility is equipped to handle custom furniture, joinery, and
+            specialist interior components — built to precise specifications by our own craftsmen.
+            Every piece is quality-checked under one roof before it reaches your site.
+          </p>
+        </header>
+        <div class="vm-manuf__photos" aria-label="Manufacturing facility photos placeholder">
+          <div class="vm-manuf__photo-placeholder" data-placeholder>
+            <span class="vm-manuf__placeholder-eyebrow">Photos pending</span>
+            <span class="vm-manuf__placeholder-label">
+              4–5 facility photographs to be provided by client.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03.4 CTA -->
+      <section class="vm-cta" aria-labelledby="services-cta-h">
+        <div>
+          <h2 id="services-cta-h" class="vm-cta__h">Start your project with us.</h2>
+          <p class="vm-cta__sub">Send a brief or just say hello — we read every enquiry.</p>
+        </div>
+        <a class="vm-cta__link" href="/contact" data-cta="enquire">
+          Enquire <span class="vm-cta__link__arrow" aria-hidden="true">→</span>
+        </a>
+      </section>
+    </main>
+
+    <div id="footer-mount" data-component="footer"></div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

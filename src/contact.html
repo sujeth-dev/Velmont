@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200" />
+    <meta
+      name="description"
+      content="Contact Velmont Design Studio — Bengaluru. Enquire about turnkey commercial interior fit-outs, furniture manufacturing, and joinery."
+    />
+    <title>Contact — Velmont Design Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    />
+
+    <link rel="stylesheet" href="./css/tokens.css" />
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/about.css" />
+    <link rel="stylesheet" href="./css/contact.css" />
+  </head>
+  <body>
+    <div id="nav-mount" data-component="nav"></div>
+
+    <main id="main" data-page="contact">
+      <!-- 05.1 PAGE HERO -->
+      <section class="vm-page-hero" aria-labelledby="contact-hero-h">
+        <p class="vm-page-hero__eyebrow">Get in Touch</p>
+        <h1 id="contact-hero-h" class="vm-page-hero__h1">
+          Let's build something exceptional together.
+        </h1>
+        <p class="vm-page-hero__sub">
+          Whether you have a brief ready or are just beginning to explore — we'd like to hear about
+          your project.
+        </p>
+      </section>
+
+      <!-- 05.2 ENQUIRY FORM + 05.3 CONTACT DETAILS -->
+      <section class="vm-section vm-contact" aria-labelledby="contact-form-h">
+        <div class="vm-contact__form-wrap">
+          <h2 id="contact-form-h" class="vm-contact__h">Send an enquiry</h2>
+          <form
+            class="vm-contact__form"
+            id="contact-form"
+            data-contact-form
+            novalidate
+            autocomplete="on"
+          >
+            <div class="vm-field vm-field--half">
+              <label for="cf-name">Full Name <span aria-hidden="true">*</span></label>
+              <input id="cf-name" name="name" type="text" required aria-required="true" />
+            </div>
+            <div class="vm-field vm-field--half">
+              <label for="cf-company">Company / Organisation</label>
+              <input id="cf-company" name="company" type="text" />
+            </div>
+            <div class="vm-field vm-field--half">
+              <label for="cf-email">Email Address <span aria-hidden="true">*</span></label>
+              <input id="cf-email" name="email" type="email" required aria-required="true" />
+            </div>
+            <div class="vm-field vm-field--half">
+              <label for="cf-phone">Phone Number</label>
+              <input id="cf-phone" name="phone" type="tel" />
+            </div>
+            <div class="vm-field vm-field--half">
+              <label for="cf-type">Project Type</label>
+              <select id="cf-type" name="projectType">
+                <option value="">Select…</option>
+                <option value="Hospitality">Hospitality</option>
+                <option value="Workplace">Workplace</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="vm-field vm-field--half">
+              <label for="cf-location">Project Location</label>
+              <input id="cf-location" name="location" type="text" />
+            </div>
+            <div class="vm-field vm-field--full">
+              <label for="cf-message"
+                >Tell us about your project <span aria-hidden="true">*</span></label
+              >
+              <textarea
+                id="cf-message"
+                name="message"
+                rows="6"
+                required
+                aria-required="true"
+              ></textarea>
+            </div>
+
+            <!-- Honeypot — bots fill, humans don't. CSS hides + tabindex out of order. -->
+            <div class="vm-honeypot" aria-hidden="true">
+              <label for="cf-website">Website (leave blank)</label>
+              <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="vm-field vm-field--full vm-field--actions">
+              <button class="vm-contact__submit" type="submit" data-submit>
+                Send Enquiry <span class="vm-contact__submit__arrow" aria-hidden="true">→</span>
+              </button>
+              <p class="vm-contact__status" data-form-status role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+
+        <aside class="vm-contact__details">
+          <h2 class="vm-contact__h">Studio details</h2>
+          <dl class="vm-contact__dl">
+            <div class="vm-contact__item">
+              <dt>Office Address</dt>
+              <dd>
+                Site No. 60/1, Anagalapura Village,<br />
+                Bidarahalli Hobli,<br />
+                Bangalore – 560077
+              </dd>
+            </div>
+            <div class="vm-contact__item">
+              <dt>Phone &amp; WhatsApp</dt>
+              <dd><a href="tel:+919362236718">+91 93622 36718</a></dd>
+            </div>
+            <div class="vm-contact__item">
+              <dt>Email</dt>
+              <dd>
+                <a href="mailto:Info@velmontdesign.com">Info@velmontdesign.com</a>
+              </dd>
+            </div>
+            <div class="vm-contact__item">
+              <dt>Business Hours</dt>
+              <dd>Monday – Saturday<br />9:00 am – 9:00 pm</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <!-- 05.4 MAP -->
+      <section class="vm-contact-map" aria-label="Studio location map">
+        <iframe
+          title="Velmont Design LLP — Anagalapura Village, Bengaluru"
+          src="https://www.google.com/maps?q=Velmont+Design+LLP+Anagalapura+Village+Bangalore&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </section>
+    </main>
+
+    <div id="footer-mount" data-component="footer"></div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

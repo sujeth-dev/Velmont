@@ -2,6 +2,18 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 4 — 2026-06-22
+
+- About page (src/about.html, src/css/about.css) — 6 sections per MASTER_PLAN §Phase 4.
+- Services page (src/services.html, src/css/services.css) — hero, 6-card service grid, dark manufacturing block, CTA.
+- Contact page (src/contact.html, src/css/contact.css, src/js/contact.js) — hero, enquiry form with EmailJS submit, studio details, Google Maps embed.
+- Pure validate() exported for unit tests; honeypot field for spam.
+- src/js/main.js dispatches by data-page attribute.
+- vite.config.js: cleanUrlsPlugin rewrites /about, /services, /contact, /work in dev + preview; about/services/contact added to rollupOptions.input.
+- Vitest now 62/62 (8 new contact tests).
+- Playwright specs added under e2e/about.spec.js, e2e/services.spec.js, e2e/contact.spec.js.
+
+
 ## Phase 3 Polish (cont.) — 2026-06-22 (session ~20:00+ IST)
 
 ### Gallery lightbox viewer
