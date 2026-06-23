@@ -2,6 +2,25 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 5 — Firebase + Admin Panel — 2026-06-23
+
+- `src/lib/firebase.js` — Firebase app init, exports `db` (Firestore), `auth`, `storage` from `VITE_FIREBASE_*` env vars.
+- `src/lib/firebase-data.js` — `getPublishedProjects()`, `getAllProjects()`, `getProjectBySlug()`, `createProject()`, `updateProject()`, `deleteProject()`.
+- `src/js/home.js`, `work.js`, `project.js` — `loadProjects()` now tries Firestore first (when `VITE_FIREBASE_PROJECT_ID` is set), falls back to `data/projects.json`.
+- `src/admin/login.html`, `dashboard.html`, `project-form.html`, `project-edit.html` — admin panel pages; no public nav/footer, standalone `admin.css` only.
+- `src/js/admin.js` — Firebase Auth login/logout, auth guard (`requireAuth()` with `auth.authStateReady()` + 8s fallback), dashboard CRUD, image upload to Storage, delete with modal confirmation.
+- `src/js/admin-utils.js` — Pure utility functions (`validateProjectForm`, `parseMaterials`, `slugify`) extracted for Vitest testability.
+- `src/css/admin.css` — Standalone functional admin stylesheet; `adm-` class prefix, no brand token system (intentional per quality gate §7).
+- `firestore.rules` — Public read for `published == true`; authenticated write only.
+- `storage.rules` — Public read; authenticated write only for `projects/` path.
+- `firebase.json`, `firestore.indexes.json`, `.firebaserc` — Firebase project config and emulator setup.
+- `scripts/seed-firestore.js` — One-time seed script using `firebase-admin`; reads `data/projects.json`, writes to Firestore; idempotent (skips existing slugs).
+- `vite.config.js` — Added admin pages to `rollupOptions.input`; extended `cleanUrlsPlugin` for `/admin/*` routes; **fixed `envDir: __dirname`** so `VITE_*` env vars from project-root `.env` are correctly loaded (was defaulting to `src/` root, leaving all Firebase/EmailJS credentials undefined).
+- `__tests__/admin.test.js` — 22 new Vitest tests: Firestore rules pattern checks, storage rules checks, `validateProjectForm` 9 cases, `parseMaterials` 4 cases, `slugify` 3 cases. Total: 84/84.
+- `e2e/admin.spec.js` — Playwright: 4 unauthenticated tests (login form, dashboard redirect, project-form redirect, wrong-credentials error) always run; 8 authenticated CRUD tests skip unless `VITE_ADMIN_TEST_EMAIL` / `VITE_ADMIN_TEST_PASSWORD` are set.
+- `package.json` — `seed` script added; `firebase-admin` in devDependencies.
+- Vitest 84/84 · Prettier clean · Lint clean · Vite build clean · E2E unauthenticated 4/4 passing.
+
 ## Content Polish — 2026-06-23
 
 ### Hero animation + em dash cleanup

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200" />
+    <title>Dashboard — Velmont Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <header class="adm-header">
+      <span class="adm-header__brand">Velmont Admin</span>
+      <nav class="adm-header__nav">
+        <a href="/admin/dashboard" class="adm-nav-link is-active">Projects</a>
+        <button class="adm-btn adm-btn--ghost" type="button" data-logout>Sign out</button>
+      </nav>
+    </header>
+
+    <main class="adm-main" data-page="admin-dashboard">
+      <div class="adm-toolbar">
+        <h2 class="adm-page-title">Projects</h2>
+        <a href="/admin/project-form" class="adm-btn adm-btn--primary">+ Add Project</a>
+      </div>
+
+      <div class="adm-project-list" data-project-list>
+        <div class="adm-project-list__head">
+          <span>Title</span>
+          <span>Discipline</span>
+          <span>Year</span>
+          <span>Status</span>
+          <span>Actions</span>
+        </div>
+        <p class="adm-loading" data-list-loading>Loading…</p>
+      </div>
+    </main>
+
+    <!-- Delete confirmation modal -->
+    <div class="adm-modal" data-confirm-modal hidden>
+      <div class="adm-modal__box">
+        <p class="adm-modal__msg">Delete this project? This cannot be undone.</p>
+        <div class="adm-modal__actions">
+          <button class="adm-btn adm-btn--ghost" type="button" data-modal-cancel>Cancel</button>
+          <button class="adm-btn adm-btn--danger" type="button" data-modal-confirm>Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="../js/admin.js"></script>
+  </body>
+</html>

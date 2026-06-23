@@ -65,6 +65,14 @@ export function applyFilter(grid, discipline) {
 }
 
 async function loadProjects() {
+  if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+    try {
+      const { getPublishedProjects } = await import('../lib/firebase-data.js');
+      return await getPublishedProjects();
+    } catch (err) {
+      console.warn('[work] Firestore unavailable, falling back to JSON:', err && err.message);
+    }
+  }
   try {
     const res = await fetch('/data/projects.json', { credentials: 'same-origin' });
     if (!res.ok) return null;

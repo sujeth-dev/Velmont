@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'node:path';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Rewrites for clean URLs in dev + preview.
 // /work/<slug>         -> /work/<slug>.html  (project detail)
@@ -7,8 +10,15 @@ import { resolve } from 'node:path';
 //                      -> /<page>.html       (multi-page entries)
 function cleanUrlsPlugin() {
   const PAGES = ['about', 'services', 'contact', 'work'];
+  const ADMIN_PAGES = ['login', 'dashboard', 'project-form', 'project-edit'];
   function applyRewrite(middlewares) {
     middlewares.use((req, _res, next) => {
+      // Admin pages: /admin/<page>
+      const admin = req.url.match(/^\/admin\/([a-z0-9-]+)\/?(\?.*)?$/);
+      if (admin && ADMIN_PAGES.includes(admin[1])) {
+        req.url = `/admin/${admin[1]}.html${admin[2] || ''}`;
+        return next();
+      }
       // Project detail: /work/<slug>
       const slug = req.url.match(/^\/work\/([a-z0-9-]+)\/?(\?.*)?$/);
       if (slug) {
@@ -35,9 +45,13 @@ function cleanUrlsPlugin() {
 }
 
 // Vite config for Velmont website.
-// Multi-page: index (home), work list, project detail, about, services, contact.
+// Multi-page: index (home), work list, project detail, about, services, contact,
+// and admin panel (login, dashboard, project-form, project-edit).
 export default defineConfig({
   root: 'src',
+  // envDir defaults to root ('src'), but .env lives in the project root.
+  // Explicitly point to the project root so VITE_* vars are loaded correctly.
+  envDir: __dirname,
   publicDir: resolve(__dirname, 'public'),
   plugins: [cleanUrlsPlugin()],
   build: {
@@ -51,6 +65,10 @@ export default defineConfig({
         about: resolve(__dirname, 'src/about.html'),
         services: resolve(__dirname, 'src/services.html'),
         contact: resolve(__dirname, 'src/contact.html'),
+        adminLogin: resolve(__dirname, 'src/admin/login.html'),
+        adminDashboard: resolve(__dirname, 'src/admin/dashboard.html'),
+        adminProjectForm: resolve(__dirname, 'src/admin/project-form.html'),
+        adminProjectEdit: resolve(__dirname, 'src/admin/project-edit.html'),
       },
     },
   },

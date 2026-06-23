@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200" />
+    <title>Login — Velmont Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <main class="adm-login" data-page="admin-login">
+      <h1 class="adm-login__title">Velmont Admin</h1>
+
+      <form class="adm-form" data-login-form novalidate>
+        <div class="adm-field">
+          <label class="adm-label" for="email">Email</label>
+          <input
+            class="adm-input"
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="adm-field">
+          <label class="adm-label" for="password">Password</label>
+          <input
+            class="adm-input"
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <p class="adm-error" data-login-error hidden></p>
+
+        <button class="adm-btn adm-btn--primary" type="submit" data-login-submit>Sign in</button>
+      </form>
+    </main>
+
+    <script type="module" src="../js/admin.js"></script>
+  </body>
+</html>
