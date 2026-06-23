@@ -17,6 +17,7 @@
     "format": "prettier --write \"src/**/*.{js,css,html}\" \"scripts/**/*.js\"",
     "format:check": "prettier --check \"src/**/*.{js,css,html}\" \"scripts/**/*.js\"",
     "seed": "node scripts/seed-firestore.js",
+    "upload-images": "node scripts/upload-project-images.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",

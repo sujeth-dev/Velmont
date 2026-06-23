@@ -1,14 +1,20 @@
 /**
- * One-time seed script: writes all projects from data/projects.json to Firestore.
+ * Seed Firestore with all projects from data/projects.json.
+ *
+ * Uses Firebase client SDK with email/password auth — no service account required.
+ * Credentials are read from .env (which is gitignored).
  *
  * Prerequisites:
- *   1. npm install (firebase-admin must be in devDependencies)
- *   2. Download a service account key from Firebase Console → Project Settings → Service Accounts
- *   3. Set env var: GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
- *      OR set FIREBASE_SERVICE_ACCOUNT_JSON with the JSON content as a string
- *   4. Run: node scripts/seed-firestore.js
+ *   .env must contain:
+ *     VITE_FIREBASE_API_KEY=...
+ *     VITE_FIREBASE_AUTH_DOMAIN=...
+ *     VITE_FIREBASE_PROJECT_ID=...
+ *     VITE_FIREBASE_ADMIN_EMAIL=...
+ *     VITE_FIREBASE_ADMIN_PASSWORD=...
  *
- * Idempotent: existing slugs are skipped. Re-run safely.
+ * Run: npm run seed
+ *
+ * Idempotent: existing slugs are skipped. Safe to re-run.
  */
 
 import { readFileSync } from 'node:fs';
@@ -17,54 +23,89 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Load firebase-admin dynamically so the script gives a clear error if not installed.
-let admin;
-try {
-  const mod = await import('firebase-admin/app');
-  const firestoreMod = await import('firebase-admin/firestore');
-  admin = {
-    initializeApp: mod.initializeApp,
-    cert: mod.cert,
-    getFirestore: firestoreMod.getFirestore,
-  };
-} catch {
-  console.error(
-    '[seed] firebase-admin is not installed. Run: npm install --save-dev firebase-admin',
-  );
-  process.exit(1);
+// ─── Load .env manually (no dotenv dep needed) ────────────────────────────────
+
+function loadEnv() {
+  const envPath = resolve(__dirname, '..', '.env');
+  const env = {};
+  try {
+    const lines = readFileSync(envPath, 'utf8').split('\n');
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eq = trimmed.indexOf('=');
+      if (eq === -1) continue;
+      const key = trimmed.slice(0, eq).trim();
+      const val = trimmed.slice(eq + 1).trim();
+      env[key] = val;
+    }
+  } catch {
+    console.error('[seed] Could not read .env file at', envPath);
+    process.exit(1);
+  }
+  return env;
 }
 
-// Resolve service account credentials
-function getCredential() {
-  if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
-    const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
-    return admin.cert(sa);
+const env = loadEnv();
+
+const REQUIRED = [
+  'VITE_FIREBASE_API_KEY',
+  'VITE_FIREBASE_AUTH_DOMAIN',
+  'VITE_FIREBASE_PROJECT_ID',
+  'VITE_FIREBASE_ADMIN_EMAIL',
+  'VITE_FIREBASE_ADMIN_PASSWORD',
+];
+
+for (const key of REQUIRED) {
+  if (!env[key]) {
+    console.error(`[seed] Missing required env var: ${key}`);
+    process.exit(1);
   }
-  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    return admin.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS);
-  }
-  console.error(
-    '[seed] No credentials found.\n' +
-      'Set GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json\n' +
-      'or FIREBASE_SERVICE_ACCOUNT_JSON with the JSON string.',
-  );
-  process.exit(1);
 }
 
-// Read projects.json
+// ─── Firebase client SDK ──────────────────────────────────────────────────────
+
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  where,
+} from 'firebase/firestore';
+
+const app = initializeApp({
+  apiKey: env.VITE_FIREBASE_API_KEY,
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || '',
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || '',
+  appId: env.VITE_FIREBASE_APP_ID || '',
+});
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ─── Seed ─────────────────────────────────────────────────────────────────────
+
 const DATA_PATH = resolve(__dirname, '..', 'data', 'projects.json');
 const projects = JSON.parse(readFileSync(DATA_PATH, 'utf8'));
 
-// Init admin app
-admin.initializeApp({ credential: getCredential() });
-const db = admin.getFirestore();
-
 async function main() {
-  console.log(`[seed] Seeding ${projects.length} projects into Firestore…`);
+  console.log('[seed] Signing in…');
+  await signInWithEmailAndPassword(auth, env.VITE_FIREBASE_ADMIN_EMAIL, env.VITE_FIREBASE_ADMIN_PASSWORD);
+  console.log('[seed] Signed in as', auth.currentUser.email);
 
-  // Fetch existing slugs to enable idempotent re-runs
-  const existing = await db.collection('projects').get();
+  console.log(`[seed] Checking existing documents…`);
+  const existing = await getDocs(collection(db, 'projects'));
   const existingSlugs = new Set(existing.docs.map((d) => d.data().slug));
+  console.log(`[seed] Found ${existingSlugs.size} existing project(s) in Firestore`);
 
   let created = 0;
   let skipped = 0;
@@ -75,19 +116,22 @@ async function main() {
       skipped++;
       continue;
     }
-    await db.collection('projects').add({
+    await addDoc(collection(db, 'projects'), {
       ...project,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     });
     console.log(`  ADD   ${project.slug}`);
     created++;
   }
 
   console.log(`\n[seed] Done. Created: ${created}, Skipped: ${skipped}`);
+  await signOut(auth);
+  console.log('[seed] Signed out.');
+  process.exit(0);
 }
 
 main().catch((err) => {
-  console.error('[seed] Fatal:', err);
+  console.error('[seed] Fatal:', err.code || err.message);
   process.exit(1);
 });

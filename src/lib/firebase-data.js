@@ -5,7 +5,6 @@ import {
   doc,
   query,
   where,
-  orderBy,
   addDoc,
   updateDoc,
   deleteDoc,
@@ -16,18 +15,13 @@ import { db } from './firebase.js';
 const COLLECTION = 'projects';
 
 export async function getPublishedProjects() {
-  const q = query(
-    collection(db, COLLECTION),
-    where('published', '==', true),
-    orderBy('year', 'desc'),
-  );
+  const q = query(collection(db, COLLECTION), where('published', '==', true));
   const snap = await getDocs(q);
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
 export async function getAllProjects() {
-  const q = query(collection(db, COLLECTION), orderBy('year', 'desc'));
-  const snap = await getDocs(q);
+  const snap = await getDocs(collection(db, COLLECTION));
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 

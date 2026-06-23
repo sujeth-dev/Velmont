@@ -2,6 +2,14 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 5 Post-commit Fixes — 2026-06-23
+
+- `scripts/seed-firestore.js` — rewritten to use Firebase client SDK with email/password auth; no service account required. Reads credentials from `.env` (`VITE_FIREBASE_ADMIN_EMAIL` / `VITE_FIREBASE_ADMIN_PASSWORD`).
+- `scripts/upload-project-images.js` (new) — uploads all images for `itc-ratnadipa-colombo` to Firebase Storage and updates its Firestore doc with Storage download URLs; also creates `test-1` project end-to-end. Run via `npm run upload-images`.
+- `package.json` — added `upload-images` script.
+- `vite.config.js` — fixed dev server project detail routing: dev mode now rewrites `/work/<slug>` → `/work/[slug].html` (the template); preview mode keeps per-slug HTML files. Previously all `/work/<slug>` navigations fell back to the home page in dev mode.
+- `src/lib/firebase-data.js` — removed `orderBy('year', 'desc')` from `getPublishedProjects()` and `getAllProjects()` queries; this was causing a Firestore "missing composite index" error which silently fell back to local JSON, hiding Firestore-only projects (e.g. test-1). Sorting is now left to Firestore's natural document-ID order (matches seed order).
+
 ## Phase 5 — Firebase + Admin Panel — 2026-06-23
 
 - `src/lib/firebase.js` — Firebase app init, exports `db` (Firestore), `auth`, `storage` from `VITE_FIREBASE_*` env vars.
