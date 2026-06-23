@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=1200" />
     <title>Dashboard — Velmont Admin</title>
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
     <link rel="stylesheet" href="../css/admin.css" />
   </head>
   <body>
@@ -12,35 +18,75 @@
       <span class="adm-header__brand">Velmont Admin</span>
       <nav class="adm-header__nav">
         <a href="/admin/dashboard" class="adm-nav-link is-active">Projects</a>
-        <button class="adm-btn adm-btn--ghost" type="button" data-logout>Sign out</button>
+        <span class="adm-header__user" data-user-initials>VA</span>
+        <button
+          class="adm-btn adm-btn--ghost adm-btn--sm"
+          type="button"
+          data-logout
+          style="color: rgba(255, 255, 255, 0.6); border-color: rgba(255, 255, 255, 0.15)"
+        >
+          Sign out
+        </button>
       </nav>
     </header>
 
     <main class="adm-main" data-page="admin-dashboard">
       <div class="adm-toolbar">
-        <h2 class="adm-page-title">Projects</h2>
-        <a href="/admin/project-form" class="adm-btn adm-btn--primary">+ Add Project</a>
+        <div class="adm-page-header">
+          <h2 class="adm-page-title">Projects</h2>
+          <p class="adm-page-sub">Manage all published and draft projects</p>
+        </div>
+        <a href="/admin/project-form" class="adm-btn adm-btn--primary"> + Add Project </a>
       </div>
 
+      <!-- Stats bar — populated by JS -->
+      <div class="adm-stats-bar" data-stats-bar>
+        <div class="adm-stat-card">
+          <p class="adm-stat-card__label">Total Projects</p>
+          <p class="adm-stat-card__value" data-stat-total>—</p>
+        </div>
+        <div class="adm-stat-card">
+          <p class="adm-stat-card__label">Published</p>
+          <p class="adm-stat-card__value" data-stat-published>—</p>
+        </div>
+        <div class="adm-stat-card">
+          <p class="adm-stat-card__label">Drafts</p>
+          <p class="adm-stat-card__value is-accent" data-stat-drafts>—</p>
+        </div>
+      </div>
+
+      <!-- Project table -->
       <div class="adm-project-list" data-project-list>
         <div class="adm-project-list__head">
+          <span></span>
           <span>Title</span>
           <span>Discipline</span>
           <span>Year</span>
           <span>Status</span>
           <span>Actions</span>
         </div>
-        <p class="adm-loading" data-list-loading>Loading…</p>
+        <p class="adm-loading" data-list-loading>Loading projects…</p>
       </div>
     </main>
 
     <!-- Delete confirmation modal -->
     <div class="adm-modal" data-confirm-modal hidden>
       <div class="adm-modal__box">
-        <p class="adm-modal__msg">Delete this project? This cannot be undone.</p>
+        <p class="adm-modal__title">Delete project?</p>
+        <p class="adm-modal__msg">
+          This will permanently remove the project and all associated Storage images. This cannot be
+          undone.
+        </p>
         <div class="adm-modal__actions">
           <button class="adm-btn adm-btn--ghost" type="button" data-modal-cancel>Cancel</button>
-          <button class="adm-btn adm-btn--danger" type="button" data-modal-confirm>Delete</button>
+          <button
+            class="adm-btn adm-btn--primary"
+            type="button"
+            data-modal-confirm
+            style="background: #ef4444; border-color: #ef4444"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

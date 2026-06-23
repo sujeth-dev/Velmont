@@ -9,7 +9,7 @@
  * Run: npm run upload-images
  */
 
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -38,15 +38,33 @@ function loadEnv() {
 
 const env = loadEnv();
 
-for (const k of ['VITE_FIREBASE_API_KEY', 'VITE_FIREBASE_AUTH_DOMAIN', 'VITE_FIREBASE_PROJECT_ID', 'VITE_FIREBASE_STORAGE_BUCKET', 'VITE_FIREBASE_ADMIN_EMAIL', 'VITE_FIREBASE_ADMIN_PASSWORD']) {
-  if (!env[k]) { console.error('[upload] Missing env var:', k); process.exit(1); }
+for (const k of [
+  'VITE_FIREBASE_API_KEY',
+  'VITE_FIREBASE_AUTH_DOMAIN',
+  'VITE_FIREBASE_PROJECT_ID',
+  'VITE_FIREBASE_STORAGE_BUCKET',
+  'VITE_FIREBASE_ADMIN_EMAIL',
+  'VITE_FIREBASE_ADMIN_PASSWORD',
+]) {
+  if (!env[k]) {
+    console.error('[upload] Missing env var:', k);
+    process.exit(1);
+  }
 }
 
 // ─── Firebase ─────────────────────────────────────────────────────────────────
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, collection, query, where, getDocs, updateDoc, addDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  updateDoc,
+  addDoc,
+  query,
+  where,
+} from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const app = initializeApp({
@@ -86,7 +104,11 @@ async function findDocBySlug(slug) {
 
 async function main() {
   console.log('[upload] Signing in…');
-  await signInWithEmailAndPassword(auth, env.VITE_FIREBASE_ADMIN_EMAIL, env.VITE_FIREBASE_ADMIN_PASSWORD);
+  await signInWithEmailAndPassword(
+    auth,
+    env.VITE_FIREBASE_ADMIN_EMAIL,
+    env.VITE_FIREBASE_ADMIN_PASSWORD,
+  );
   console.log('[upload] Signed in as', auth.currentUser.email);
 
   // ── 1. itc-ratnadipa-colombo ─────────────────────────────────────────────
@@ -95,13 +117,22 @@ async function main() {
   const itcDir = resolve(ASSETS, ITC);
   console.log(`\n[upload] Uploading images for ${ITC}…`);
 
-  const coverUrl  = await uploadFile(resolve(itcDir, 'cover.webp'),       `projects/${ITC}/cover.webp`);
-  const heroUrl   = await uploadFile(resolve(itcDir, 'lobby.webp'),       `projects/${ITC}/hero.webp`);
-  const g0Url     = await uploadFile(resolve(itcDir, 'lobby.webp'),       `projects/${ITC}/gallery-0.webp`);
-  const g1Url     = await uploadFile(resolve(itcDir, 'bar-lounge.webp'),  `projects/${ITC}/gallery-1.webp`);
-  const g2Url     = await uploadFile(resolve(itcDir, 'bedroom.webp'),     `projects/${ITC}/gallery-2.webp`);
-  const g3Url     = await uploadFile(resolve(itcDir, 'bar-entrance.webp'),`projects/${ITC}/gallery-3.webp`);
-  const g4Url     = await uploadFile(resolve(itcDir, 'cityview.webp'),    `projects/${ITC}/gallery-4.webp`);
+  const coverUrl = await uploadFile(resolve(itcDir, 'cover.webp'), `projects/${ITC}/cover.webp`);
+  const heroUrl = await uploadFile(resolve(itcDir, 'lobby.webp'), `projects/${ITC}/hero.webp`);
+  const g0Url = await uploadFile(resolve(itcDir, 'lobby.webp'), `projects/${ITC}/gallery-0.webp`);
+  const g1Url = await uploadFile(
+    resolve(itcDir, 'bar-lounge.webp'),
+    `projects/${ITC}/gallery-1.webp`,
+  );
+  const g2Url = await uploadFile(resolve(itcDir, 'bedroom.webp'), `projects/${ITC}/gallery-2.webp`);
+  const g3Url = await uploadFile(
+    resolve(itcDir, 'bar-entrance.webp'),
+    `projects/${ITC}/gallery-3.webp`,
+  );
+  const g4Url = await uploadFile(
+    resolve(itcDir, 'cityview.webp'),
+    `projects/${ITC}/gallery-4.webp`,
+  );
 
   const itcImages = {
     cover: coverUrl,
@@ -123,8 +154,8 @@ async function main() {
 
   const itcExterior = resolve(itcDir, 'exterior.webp');
   const t1CoverUrl = await uploadFile(itcExterior, 'projects/test-1/cover.webp');
-  const t1HeroUrl  = await uploadFile(itcExterior, 'projects/test-1/hero.webp');
-  const t1G0Url    = await uploadFile(itcExterior, 'projects/test-1/gallery-0.webp');
+  const t1HeroUrl = await uploadFile(itcExterior, 'projects/test-1/hero.webp');
+  const t1G0Url = await uploadFile(itcExterior, 'projects/test-1/gallery-0.webp');
 
   // Skip if already exists
   const existing = await findDocBySlug('test-1');

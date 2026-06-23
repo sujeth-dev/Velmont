@@ -2,6 +2,16 @@
 
 All notable changes per push. Most recent first.
 
+## Admin Panel Redesign + Storage Browser — 2026-06-23
+
+- `src/css/admin.css` — full rewrite: new design system (terracotta accent #FF4015, dark header, card-based layout, Inter font). New components: stats bar, thumbnail rows, inline publish toggle, two-column form layout, image slot cards, storage picker modal (`adm-sp-*`).
+- `src/admin/login.html` — split-panel layout: dark brand side with "V." Cormorant Garamond logo, white form panel.
+- `src/admin/dashboard.html` — stats bar (Total / Published / Drafts), table with thumbnail column and inline publish toggle per row.
+- `src/admin/project-form.html` / `project-edit.html` — two-column layout (form body + sticky aside panel), image slots replaced with card components (Browse Storage / Upload buttons), storage picker modal included.
+- `src/js/admin-storage.js` (new) — Firebase Storage browser: `openStoragePicker()` opens modal, lists `projects/` folders, navigates into folders, shows image thumbnails, handles select / upload / delete per image.
+- `src/js/admin.js` — updated `renderProjectRow()` to include thumbnails + inline publish toggle; `initAdminDashboard()` now renders stats bar; `initProjectForm/Edit()` use new `wireImageSlots()` (browse + upload + clear per slot) and `readImageSlots()` helpers; old `uploadFormImages()` replaced.
+- Vitest 84/84 · Prettier clean · Lint clean · Build clean.
+
 ## Phase 5 Post-commit Fixes — 2026-06-23
 
 - `scripts/seed-firestore.js` — rewritten to use Firebase client SDK with email/password auth; no service account required. Reads credentials from `.env` (`VITE_FIREBASE_ADMIN_EMAIL` / `VITE_FIREBASE_ADMIN_PASSWORD`).

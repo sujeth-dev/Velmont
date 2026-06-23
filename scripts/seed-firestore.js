@@ -66,19 +66,8 @@ for (const key of REQUIRED) {
 // ─── Firebase client SDK ──────────────────────────────────────────────────────
 
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-  query,
-  where,
-} from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
 
 const app = initializeApp({
   apiKey: env.VITE_FIREBASE_API_KEY,
@@ -99,7 +88,11 @@ const projects = JSON.parse(readFileSync(DATA_PATH, 'utf8'));
 
 async function main() {
   console.log('[seed] Signing in…');
-  await signInWithEmailAndPassword(auth, env.VITE_FIREBASE_ADMIN_EMAIL, env.VITE_FIREBASE_ADMIN_PASSWORD);
+  await signInWithEmailAndPassword(
+    auth,
+    env.VITE_FIREBASE_ADMIN_EMAIL,
+    env.VITE_FIREBASE_ADMIN_PASSWORD,
+  );
   console.log('[seed] Signed in as', auth.currentUser.email);
 
   console.log(`[seed] Checking existing documents…`);

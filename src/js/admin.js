@@ -12,18 +12,12 @@ import {
   deleteProject,
 } from '../lib/firebase-data.js';
 import { validateProjectForm, parseMaterials, slugify } from './admin-utils.js';
+import { openStoragePicker } from './admin-storage.js';
 
 export { validateProjectForm, parseMaterials, slugify };
 
 // ─── Auth guard ───────────────────────────────────────────────────────────────
 
-/**
- * Resolves with the current user once Firebase has determined auth state.
- * Uses auth.authStateReady() (Firebase 9.23+) which resolves after the first
- * auth state is known — faster than setting up an onAuthStateChanged listener.
- * Falls back to redirect after 8 s if Firebase is unreachable.
- * @returns {Promise<import('firebase/auth').User|null>}
- */
 async function requireAuth() {
   const timeoutMs = 8000;
   const ready =
@@ -45,36 +39,95 @@ async function requireAuth() {
   return auth.currentUser;
 }
 
-// ─── Image upload helper ──────────────────────────────────────────────────────
+// ─── Image slot wiring ────────────────────────────────────────────────────────
 
 /**
- * Upload a File to Firebase Storage under projects/<slug>/<slot>/<filename>.
- * @param {File} file
- * @param {string} slug
- * @param {string} slot - e.g. "cover", "hero", "gallery-0"
- * @returns {Promise<string>} download URL
+ * Set a URL on a named image slot: update the hidden input + show preview.
  */
-async function uploadImage(file, slug, slot) {
-  const ext = file.name.split('.').pop();
-  const path = `projects/${slug}/${slot}.${ext}`;
-  const ref = storageRef(storage, path);
-  const snap = await uploadBytes(ref, file);
-  return await getDownloadURL(snap.ref);
+function setSlotUrl(form, slotName, url) {
+  const hiddenInput = form.querySelector(`[data-img-url="${slotName}"]`);
+  if (hiddenInput) hiddenInput.value = url || '';
+
+  const preview = form.querySelector(`[data-preview="${slotName}"]`);
+  if (preview) {
+    preview.src = url || '';
+    preview.classList.toggle('is-set', Boolean(url));
+  }
 }
 
 /**
- * Delete an image from Storage by its download URL.
- * Silently skips if URL is not a Storage URL.
+ * Read the current URL for a slot (from hidden input).
  */
-async function deleteImageByUrl(url) {
-  if (!url || !url.includes('firebasestorage')) return;
-  try {
-    // Extract storage path from URL
-    const decodedPath = decodeURIComponent(url.split('/o/')[1].split('?')[0]);
-    await deleteObject(storageRef(storage, decodedPath));
-  } catch {
-    // Non-fatal: image may have already been deleted
+function getSlotUrl(form, slotName) {
+  return form.querySelector(`[data-img-url="${slotName}"]`)?.value || '';
+}
+
+/**
+ * Wire all image slots on a form:
+ * - "Browse" button → openStoragePicker → setSlotUrl
+ * - "Upload" file input → upload to Storage → setSlotUrl
+ * - "✕" clear button → clear slot
+ */
+function wireImageSlots(form, slugProvider) {
+  // Browse buttons
+  form.querySelectorAll('[data-pick-slot]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const slot = btn.dataset.pickSlot;
+      const url = await openStoragePicker(slot);
+      if (url) setSlotUrl(form, slot, url);
+    });
+  });
+
+  // Direct upload file inputs
+  form.querySelectorAll('[data-upload-slot]').forEach((input) => {
+    input.addEventListener('change', async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const slot = input.dataset.uploadSlot;
+      const slug = slugProvider ? slugProvider() : 'uploads';
+      const ext = file.name.split('.').pop() || 'webp';
+      const path = `projects/${slug}/${slot}.${ext}`;
+
+      const btn = input.closest('label');
+      if (btn) btn.style.opacity = '0.5';
+
+      try {
+        const r = storageRef(storage, path);
+        await uploadBytes(r, file, { contentType: file.type || 'image/webp' });
+        const url = await getDownloadURL(r);
+        setSlotUrl(form, slot, url);
+      } catch (err) {
+        console.error('[admin] Upload failed:', err);
+        alert('Upload failed: ' + (err.message || err.code));
+      } finally {
+        if (btn) btn.style.opacity = '';
+        input.value = '';
+      }
+    });
+  });
+
+  // Clear buttons
+  form.querySelectorAll('[data-clear-slot]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setSlotUrl(form, btn.dataset.clearSlot, '');
+    });
+  });
+}
+
+/**
+ * Read all image slot URLs from a form into an images object.
+ */
+function readImageSlots(form) {
+  const gallery = [];
+  for (let i = 0; i < 5; i++) {
+    const url = getSlotUrl(form, `gallery-${i}`);
+    if (url) gallery.push(url);
   }
+  return {
+    cover: getSlotUrl(form, 'cover'),
+    hero: getSlotUrl(form, 'hero'),
+    gallery,
+  };
 }
 
 // ─── Shared form helpers ──────────────────────────────────────────────────────
@@ -91,12 +144,10 @@ function clearErrors(form) {
 }
 
 function setFormStatus(container, type, msg) {
+  if (!container) return;
   container.innerHTML = `<p class="adm-status adm-status--${type}">${msg}</p>`;
 }
 
-/**
- * Read all form fields into a plain object.
- */
 function readFormValues(form) {
   const fd = new FormData(form);
   return {
@@ -116,63 +167,20 @@ function readFormValues(form) {
   };
 }
 
-/**
- * Wire image file pickers so they show a preview on selection.
- */
-function wireImagePreviews(form) {
-  form.querySelectorAll('[data-img-slot]').forEach((input) => {
-    const slot = input.dataset.imgSlot;
-    const preview = form.querySelector(`[data-preview="${slot}"]`);
-    input.addEventListener('change', () => {
-      const file = input.files?.[0];
-      if (file && preview) {
-        preview.src = URL.createObjectURL(file);
-        preview.classList.add('is-visible');
-      }
-    });
+/** Wire slug preview on the title input */
+function wireSlugPreview(form) {
+  const titleInput = form.querySelector('#title');
+  const previews = document.querySelectorAll('[data-slug-preview]');
+  if (!titleInput || !previews.length) return;
+  titleInput.addEventListener('input', () => {
+    const slug = slugify(titleInput.value);
+    previews.forEach((el) => (el.textContent = `/work/${slug}`));
   });
 }
 
-/**
- * Upload any new image files chosen in the form and return a merged images object.
- * Existing URLs (from hidden fields or passed-in existingImages) are kept for
- * slots where no new file was selected.
- */
-async function uploadFormImages(form, slug, existingImages = {}) {
-  const images = {
-    cover: existingImages.cover || '',
-    hero: existingImages.hero || '',
-    gallery: [...(existingImages.gallery || [])],
-  };
-
-  const uploads = [];
-
-  form.querySelectorAll('[data-img-slot]').forEach((input) => {
-    const file = input.files?.[0];
-    if (!file) return;
-    const slot = input.dataset.imgSlot;
-    uploads.push(
-      uploadImage(file, slug, slot).then((url) => {
-        if (slot === 'cover') images.cover = url;
-        else if (slot === 'hero') images.hero = url;
-        else if (slot.startsWith('gallery-')) {
-          const i = Number(slot.replace('gallery-', ''));
-          images.gallery[i] = url;
-        }
-      }),
-    );
-  });
-
-  await Promise.all(uploads);
-  // Remove empty gallery slots
-  images.gallery = images.gallery.filter(Boolean);
-  return images;
-}
-
-// ─── Login page ───────────────────────────────────────────────────────────────
+// ─── Login ────────────────────────────────────────────────────────────────────
 
 function initAdminLogin() {
-  // Already logged in? Go straight to dashboard
   onAuthStateChanged(auth, (user) => {
     if (user) window.location.replace('/admin/dashboard');
   });
@@ -198,7 +206,6 @@ function initAdminLogin() {
     const password = form.querySelector('#password')?.value || '';
 
     try {
-      // Race the auth call against a 12 s timeout so the UI never hangs indefinitely
       const timeout = new Promise((_, reject) =>
         setTimeout(
           () => reject(Object.assign(new Error('timeout'), { code: 'auth/timeout' })),
@@ -229,18 +236,28 @@ function initAdminLogin() {
 // ─── Dashboard ────────────────────────────────────────────────────────────────
 
 function renderProjectRow(p) {
-  const badge = p.published
-    ? '<span class="adm-badge adm-badge--published">Published</span>'
-    : '<span class="adm-badge adm-badge--draft">Draft</span>';
+  const thumb = p.images?.cover || p.images?.hero || '';
+  const thumbHtml = thumb
+    ? `<img class="adm-row-thumb" src="${thumb}" alt="${p.title || ''}" loading="lazy" />`
+    : `<div class="adm-row-thumb--empty" title="No image">🖼</div>`;
+
+  const pubToggle = `<button class="adm-pub-toggle" type="button"
+    data-toggle-published="${p.id}" data-published="${p.published}"
+    title="${p.published ? 'Set to draft' : 'Publish'}">
+    <span class="adm-pub-toggle__dot"></span>
+    ${p.published ? 'Published' : 'Draft'}
+  </button>`;
+
   return [
     `<div class="adm-project-row" data-project-id="${p.id}">`,
+    thumbHtml,
     `<span class="adm-project-row__title">${p.title || ''}</span>`,
     `<span class="adm-project-row__discipline">${p.discipline || ''}</span>`,
     `<span class="adm-project-row__year">${p.year || ''}</span>`,
-    badge,
+    pubToggle,
     `<div class="adm-project-row__actions">`,
-    `<a class="adm-btn adm-btn--ghost" href="/admin/project-edit?id=${p.id}">Edit</a>`,
-    `<button class="adm-btn adm-btn--danger" type="button" data-delete-id="${p.id}" data-delete-title="${p.title || ''}">Delete</button>`,
+    `<a class="adm-btn adm-btn--ghost adm-btn--sm" href="/admin/project-edit?id=${p.id}">Edit</a>`,
+    `<button class="adm-btn adm-btn--danger adm-btn--sm" type="button" data-delete-id="${p.id}">Delete</button>`,
     `</div>`,
     `</div>`,
   ].join('');
@@ -255,6 +272,16 @@ async function initAdminDashboard() {
   const modalConfirm = document.querySelector('[data-modal-confirm]');
   const modalCancel = document.querySelector('[data-modal-cancel]');
   const logoutBtn = document.querySelector('[data-logout]');
+
+  // User initials
+  const initialsEl = document.querySelector('[data-user-initials]');
+  if (initialsEl && auth.currentUser?.email) {
+    const parts = auth.currentUser.email.split('@')[0].split(/[._-]/);
+    initialsEl.textContent = parts
+      .slice(0, 2)
+      .map((p) => p[0]?.toUpperCase() || '')
+      .join('');
+  }
 
   if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
@@ -271,8 +298,18 @@ async function initAdminDashboard() {
       allProjects = await getAllProjects();
       if (loadingEl) loadingEl.remove();
 
-      const head = listEl.querySelector('.adm-project-list__head');
-      // Remove existing rows (keep header)
+      // Update stats bar
+      const total = allProjects.length;
+      const published = allProjects.filter((p) => p.published).length;
+      const drafts = total - published;
+      const statTotal = document.querySelector('[data-stat-total]');
+      const statPublished = document.querySelector('[data-stat-published]');
+      const statDrafts = document.querySelector('[data-stat-drafts]');
+      if (statTotal) statTotal.textContent = total;
+      if (statPublished) statPublished.textContent = published;
+      if (statDrafts) statDrafts.textContent = drafts;
+
+      // Re-render rows
       listEl.querySelectorAll('.adm-project-row').forEach((r) => r.remove());
 
       if (!allProjects.length) {
@@ -283,6 +320,7 @@ async function initAdminDashboard() {
         return;
       }
 
+      const head = listEl.querySelector('.adm-project-list__head');
       const rowsHtml = allProjects.map(renderProjectRow).join('');
       if (head) {
         head.insertAdjacentHTML('afterend', rowsHtml);
@@ -295,6 +333,40 @@ async function initAdminDashboard() {
         btn.addEventListener('click', () => {
           pendingDeleteId = btn.dataset.deleteId;
           if (modal) modal.removeAttribute('hidden');
+        });
+      });
+
+      // Wire inline publish toggles
+      listEl.querySelectorAll('[data-toggle-published]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.togglePublished;
+          const project = allProjects.find((p) => p.id === id);
+          if (!project) return;
+          const newVal = !project.published;
+          btn.disabled = true;
+          try {
+            await updateProject(id, { published: newVal });
+            project.published = newVal;
+            btn.dataset.published = String(newVal);
+            btn.querySelector('.adm-pub-toggle__dot').style.background = '';
+            btn.innerHTML = `<span class="adm-pub-toggle__dot"></span>${newVal ? 'Published' : 'Draft'}`;
+            btn.dataset.published = String(newVal);
+            // Update badge in same row
+            const row = btn.closest('.adm-project-row');
+            if (row) {
+              const badge = row.querySelector('.adm-badge');
+              if (badge) {
+                badge.className = newVal
+                  ? 'adm-badge adm-badge--published'
+                  : 'adm-badge adm-badge--draft';
+                badge.textContent = newVal ? 'Published' : 'Draft';
+              }
+            }
+          } catch (err) {
+            console.error('[admin] Toggle failed:', err);
+          } finally {
+            btn.disabled = false;
+          }
         });
       });
     } catch (err) {
@@ -317,9 +389,7 @@ async function initAdminDashboard() {
       if (!pendingDeleteId) return;
       modalConfirm.disabled = true;
       modalConfirm.textContent = 'Deleting…';
-
       try {
-        // Delete Storage images before removing Firestore doc
         const project = allProjects.find((p) => p.id === pendingDeleteId);
         if (project?.images) {
           const urls = [
@@ -327,13 +397,22 @@ async function initAdminDashboard() {
             project.images.hero,
             ...(project.images.gallery || []),
           ];
-          await Promise.all(urls.map(deleteImageByUrl));
+          await Promise.all(
+            urls.filter(Boolean).map((url) => {
+              if (!url.includes('firebasestorage')) return Promise.resolve();
+              try {
+                const decoded = decodeURIComponent(url.split('/o/')[1].split('?')[0]);
+                return deleteObject(storageRef(storage, decoded)).catch(() => {});
+              } catch {
+                return Promise.resolve();
+              }
+            }),
+          );
         }
         await deleteProject(pendingDeleteId);
       } catch (err) {
         console.error('[admin] Delete failed:', err);
       }
-
       pendingDeleteId = null;
       if (modal) modal.setAttribute('hidden', '');
       modalConfirm.disabled = false;
@@ -352,7 +431,7 @@ async function initProjectForm() {
 
   const form = document.querySelector('[data-project-form]');
   const statusEl = document.getElementById('form-status');
-  const submitBtn = form?.querySelector('[data-form-submit]');
+  const submitBtn = document.querySelector('[data-form-submit]');
   const logoutBtn = document.querySelector('[data-logout]');
 
   if (logoutBtn) {
@@ -361,10 +440,10 @@ async function initProjectForm() {
       window.location.replace('/admin/login');
     });
   }
-
   if (!form) return;
 
-  wireImagePreviews(form);
+  wireSlugPreview(form);
+  wireImageSlots(form, () => slugify(form.querySelector('#title')?.value || 'new-project'));
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -372,7 +451,6 @@ async function initProjectForm() {
 
     const values = readFormValues(form);
     const { valid, errors } = validateProjectForm(values);
-
     if (!valid) {
       showErrors(form, errors);
       return;
@@ -385,7 +463,7 @@ async function initProjectForm() {
 
     try {
       const slug = slugify(values.title);
-      const images = await uploadFormImages(form, slug);
+      const images = readImageSlots(form);
       const body = [values.body0, values.body1, values.body2].filter(Boolean);
       const materials = parseMaterials(values.materials);
 
@@ -405,11 +483,11 @@ async function initProjectForm() {
         featured: values.featured,
       });
 
-      if (statusEl) setFormStatus(statusEl, 'success', 'Project saved successfully.');
+      setFormStatus(statusEl, 'success', 'Project saved successfully.');
       setTimeout(() => window.location.replace('/admin/dashboard'), 1200);
     } catch (err) {
       console.error('[admin] Save failed:', err);
-      if (statusEl) setFormStatus(statusEl, 'error', 'Save failed. Please try again.');
+      setFormStatus(statusEl, 'error', 'Save failed. Please try again.');
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Save Project';
@@ -418,15 +496,16 @@ async function initProjectForm() {
   });
 }
 
-// ─── Project edit (Edit) ──────────────────────────────────────────────────────
+// ─── Project edit ─────────────────────────────────────────────────────────────
 
 async function initProjectEdit() {
   await requireAuth();
 
-  const form = document.querySelector('[data-project-form]');
   const loadingEl = document.querySelector('[data-edit-loading]');
+  const readyEl = document.querySelector('[data-edit-ready]');
+  const form = document.querySelector('[data-project-form]');
   const statusEl = document.getElementById('form-status');
-  const submitBtn = form?.querySelector('[data-form-submit]');
+  const submitBtn = document.querySelector('[data-form-submit]');
   const logoutBtn = document.querySelector('[data-logout]');
 
   if (logoutBtn) {
@@ -438,7 +517,6 @@ async function initProjectEdit() {
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-
   if (!id) {
     if (loadingEl) loadingEl.textContent = 'No project ID specified.';
     return;
@@ -451,16 +529,29 @@ async function initProjectEdit() {
     if (loadingEl) loadingEl.textContent = 'Failed to load project.';
     return;
   }
-
   if (!existingProject) {
     if (loadingEl) loadingEl.textContent = 'Project not found.';
     return;
   }
 
-  // Pre-fill form
+  // Reveal form
   if (loadingEl) loadingEl.remove();
-  if (form) form.removeAttribute('hidden');
+  if (readyEl) readyEl.removeAttribute('hidden');
 
+  // Set edit page title
+  const editTitle = document.querySelector('[data-edit-title]');
+  if (editTitle) editTitle.textContent = `Edit: ${existingProject.title || ''}`;
+
+  // Set last updated
+  const updatedEl = document.querySelector('[data-edit-updated]');
+  if (updatedEl && existingProject.updatedAt) {
+    const d = new Date(existingProject.updatedAt);
+    updatedEl.textContent = isNaN(d)
+      ? existingProject.updatedAt
+      : d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  // Pre-fill fields
   function setVal(name, value) {
     const el = form.querySelector(`[name="${name}"]`);
     if (!el) return;
@@ -475,7 +566,6 @@ async function initProjectEdit() {
   setVal('area', existingProject.area);
   setVal('scope', existingProject.scope);
   setVal('lead', existingProject.lead);
-
   const body = existingProject.body || [];
   setVal('body0', body[0] || '');
   setVal('body1', body[1] || '');
@@ -484,24 +574,23 @@ async function initProjectEdit() {
   setVal('published', existingProject.published);
   setVal('featured', existingProject.featured);
 
-  // Show existing images in previews
-  function showExistingPreview(slot, url) {
-    if (!url) return;
-    const preview = form.querySelector(`[data-preview="${slot}"]`);
-    const urlInput = form.querySelector(`[data-img-url="${slot}"]`);
-    if (preview) {
-      preview.src = url;
-      preview.classList.add('is-visible');
-    }
-    if (urlInput) urlInput.value = url;
-  }
-
+  // Pre-fill image slots
   const imgs = existingProject.images || {};
-  showExistingPreview('cover', imgs.cover);
-  showExistingPreview('hero', imgs.hero);
-  (imgs.gallery || []).forEach((url, i) => showExistingPreview(`gallery-${i}`, url));
+  setSlotUrl(form, 'cover', imgs.cover || '');
+  setSlotUrl(form, 'hero', imgs.hero || '');
+  (imgs.gallery || []).forEach((url, i) => setSlotUrl(form, `gallery-${i}`, url));
 
-  wireImagePreviews(form);
+  // Update slug previews
+  const slug = existingProject.slug || slugify(existingProject.title || '');
+  document.querySelectorAll('[data-slug-preview]').forEach((el) => {
+    el.textContent = `/work/${slug}`;
+  });
+
+  wireSlugPreview(form);
+  wireImageSlots(
+    form,
+    () => existingProject.slug || slugify(form.querySelector('#title')?.value || 'project'),
+  );
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -509,7 +598,6 @@ async function initProjectEdit() {
 
     const values = readFormValues(form);
     const { valid, errors } = validateProjectForm(values);
-
     if (!valid) {
       showErrors(form, errors);
       return;
@@ -521,13 +609,12 @@ async function initProjectEdit() {
     }
 
     try {
-      const slug = existingProject.slug || slugify(values.title);
-      const images = await uploadFormImages(form, slug, existingProject.images || {});
+      const images = readImageSlots(form);
       const body = [values.body0, values.body1, values.body2].filter(Boolean);
       const materials = parseMaterials(values.materials);
 
       await updateProject(id, {
-        slug,
+        slug: existingProject.slug || slugify(values.title),
         title: values.title.trim(),
         discipline: values.discipline,
         location: values.location.trim(),
@@ -542,11 +629,11 @@ async function initProjectEdit() {
         featured: values.featured,
       });
 
-      if (statusEl) setFormStatus(statusEl, 'success', 'Changes saved.');
+      setFormStatus(statusEl, 'success', 'Changes saved.');
       setTimeout(() => window.location.replace('/admin/dashboard'), 1200);
     } catch (err) {
       console.error('[admin] Update failed:', err);
-      if (statusEl) setFormStatus(statusEl, 'error', 'Save failed. Please try again.');
+      setFormStatus(statusEl, 'error', 'Save failed. Please try again.');
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Save Changes';
@@ -555,7 +642,7 @@ async function initProjectEdit() {
   });
 }
 
-// ─── Router (browser-only) ────────────────────────────────────────────────────
+// ─── Router ───────────────────────────────────────────────────────────────────
 
 if (typeof document !== 'undefined') {
   const page = document.querySelector('main')?.dataset.page;

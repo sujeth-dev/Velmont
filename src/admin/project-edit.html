@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=1200" />
     <title>Edit Project — Velmont Admin</title>
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
     <link rel="stylesheet" href="../css/admin.css" />
   </head>
   <body>
@@ -12,231 +18,502 @@
       <span class="adm-header__brand">Velmont Admin</span>
       <nav class="adm-header__nav">
         <a href="/admin/dashboard" class="adm-nav-link">Projects</a>
-        <button class="adm-btn adm-btn--ghost" type="button" data-logout>Sign out</button>
+        <button
+          class="adm-btn adm-btn--ghost adm-btn--sm"
+          type="button"
+          data-logout
+          style="color: rgba(255, 255, 255, 0.6); border-color: rgba(255, 255, 255, 0.15)"
+        >
+          Sign out
+        </button>
       </nav>
     </header>
 
     <main class="adm-main" data-page="admin-project-edit">
       <a class="adm-back" href="/admin/dashboard">← Back to Projects</a>
-      <div class="adm-toolbar">
-        <h2 class="adm-page-title">Edit Project</h2>
-      </div>
 
       <p class="adm-loading" data-edit-loading>Loading project…</p>
 
-      <form class="adm-form adm-form--wide" data-project-form novalidate hidden>
-        <p class="adm-section-title">Basic Info</p>
-        <div class="adm-fieldset">
-          <div class="adm-field adm-field--full">
-            <label class="adm-label" for="title">Title *</label>
-            <input class="adm-input" id="title" name="title" type="text" required />
-            <span class="adm-field__error" data-err="title"></span>
-          </div>
-
-          <div class="adm-field">
-            <label class="adm-label" for="discipline">Discipline *</label>
-            <select class="adm-select" id="discipline" name="discipline" required>
-              <option value="">Select…</option>
-              <option value="Hospitality">Hospitality</option>
-              <option value="Workplace">Workplace</option>
-              <option value="Healthcare">Healthcare</option>
-              <option value="Commercial">Commercial</option>
-            </select>
-            <span class="adm-field__error" data-err="discipline"></span>
-          </div>
-
-          <div class="adm-field">
-            <label class="adm-label" for="location">Location *</label>
-            <input class="adm-input" id="location" name="location" type="text" required />
-            <span class="adm-field__error" data-err="location"></span>
-          </div>
-
-          <div class="adm-field">
-            <label class="adm-label" for="year">Year *</label>
-            <input
-              class="adm-input"
-              id="year"
-              name="year"
-              type="number"
-              min="2000"
-              max="2099"
-              required
-            />
-            <span class="adm-field__error" data-err="year"></span>
-          </div>
-
-          <div class="adm-field">
-            <label class="adm-label" for="area">Area</label>
-            <input class="adm-input" id="area" name="area" type="text" />
-          </div>
-
-          <div class="adm-field">
-            <label class="adm-label" for="scope">Scope</label>
-            <input class="adm-input" id="scope" name="scope" type="text" />
+      <div class="adm-form-layout" hidden data-edit-ready>
+        <div class="adm-toolbar" style="grid-column: 1/-1; margin-bottom: 0">
+          <div class="adm-page-header">
+            <h2 class="adm-page-title" data-edit-title>Edit Project</h2>
+            <p class="adm-page-sub">Changes are saved directly to Firestore</p>
           </div>
         </div>
 
-        <p class="adm-section-title">Content</p>
-        <div class="adm-form" style="gap: 16px">
-          <div class="adm-field">
-            <label class="adm-label" for="lead">Editorial Lead *</label>
-            <textarea
-              class="adm-textarea adm-textarea--tall"
-              id="lead"
-              name="lead"
-              required
-            ></textarea>
-            <span class="adm-field__error" data-err="lead"></span>
-          </div>
+        <!-- ── Left: form sections ── -->
+        <form class="adm-form-body" id="project-form" data-project-form novalidate>
+          <!-- Basic Info -->
+          <div class="adm-section-card">
+            <p class="adm-section-title">Basic Info</p>
+            <div class="adm-fieldset">
+              <div class="adm-field adm-field--full">
+                <label class="adm-label" for="title">Title <span class="adm-req">*</span></label>
+                <input class="adm-input" id="title" name="title" type="text" required />
+                <span class="adm-field__error" data-err="title"></span>
+                <p class="adm-slug-preview">Slug: <code data-slug-preview>/work/</code></p>
+              </div>
 
-          <div class="adm-field">
-            <label class="adm-label" for="body0">Body Paragraph 1 *</label>
-            <textarea
-              class="adm-textarea adm-textarea--tall"
-              id="body0"
-              name="body0"
-              required
-            ></textarea>
-            <span class="adm-field__error" data-err="body0"></span>
-          </div>
+              <div class="adm-field">
+                <label class="adm-label" for="discipline"
+                  >Discipline <span class="adm-req">*</span></label
+                >
+                <select class="adm-select" id="discipline" name="discipline" required>
+                  <option value="">Select discipline…</option>
+                  <option value="Hospitality">Hospitality</option>
+                  <option value="Workplace">Workplace</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Commercial">Commercial</option>
+                </select>
+                <span class="adm-field__error" data-err="discipline"></span>
+              </div>
 
-          <div class="adm-field">
-            <label class="adm-label" for="body1">Body Paragraph 2</label>
-            <textarea class="adm-textarea" id="body1" name="body1"></textarea>
-          </div>
+              <div class="adm-field">
+                <label class="adm-label" for="location"
+                  >Location <span class="adm-req">*</span></label
+                >
+                <input class="adm-input" id="location" name="location" type="text" required />
+                <span class="adm-field__error" data-err="location"></span>
+              </div>
 
-          <div class="adm-field">
-            <label class="adm-label" for="body2">Body Paragraph 3</label>
-            <textarea class="adm-textarea" id="body2" name="body2"></textarea>
-          </div>
+              <div class="adm-field">
+                <label class="adm-label" for="year">Year <span class="adm-req">*</span></label>
+                <input
+                  class="adm-input"
+                  id="year"
+                  name="year"
+                  type="number"
+                  min="2000"
+                  max="2099"
+                  required
+                />
+                <span class="adm-field__error" data-err="year"></span>
+              </div>
 
-          <div class="adm-field">
-            <label class="adm-label" for="materials">Materials (comma-separated)</label>
-            <input class="adm-input" id="materials" name="materials" type="text" />
-          </div>
-        </div>
+              <div class="adm-field">
+                <label class="adm-label" for="area">Area</label>
+                <input class="adm-input" id="area" name="area" type="text" />
+              </div>
 
-        <p class="adm-section-title">Flags</p>
-        <div class="adm-fieldset">
-          <div class="adm-field">
-            <div class="adm-toggle-wrap">
-              <input class="adm-toggle" id="published" name="published" type="checkbox" />
-              <label class="adm-toggle-label" for="published">Published (visible on site)</label>
+              <div class="adm-field">
+                <label class="adm-label" for="scope">Scope</label>
+                <input class="adm-input" id="scope" name="scope" type="text" />
+              </div>
             </div>
           </div>
-          <div class="adm-field">
+
+          <!-- Content -->
+          <div class="adm-section-card">
+            <p class="adm-section-title">Content</p>
+
+            <div class="adm-field">
+              <label class="adm-label" for="lead"
+                >Editorial Lead <span class="adm-req">*</span></label
+              >
+              <textarea
+                class="adm-textarea adm-textarea--tall"
+                id="lead"
+                name="lead"
+                required
+              ></textarea>
+              <span class="adm-field__error" data-err="lead"></span>
+            </div>
+
+            <div class="adm-field">
+              <label class="adm-label" for="body0"
+                >Body Paragraph 1 <span class="adm-req">*</span></label
+              >
+              <textarea
+                class="adm-textarea adm-textarea--tall"
+                id="body0"
+                name="body0"
+                required
+              ></textarea>
+              <span class="adm-field__error" data-err="body0"></span>
+            </div>
+
+            <div class="adm-field">
+              <label class="adm-label" for="body1">Body Paragraph 2</label>
+              <textarea class="adm-textarea" id="body1" name="body1"></textarea>
+            </div>
+
+            <div class="adm-field">
+              <label class="adm-label" for="body2">Body Paragraph 3</label>
+              <textarea class="adm-textarea" id="body2" name="body2"></textarea>
+            </div>
+
+            <div class="adm-field">
+              <label class="adm-label" for="materials"
+                >Materials
+                <span style="font-weight: 400; color: #a1a1aa">(comma-separated)</span></label
+              >
+              <input class="adm-input" id="materials" name="materials" type="text" />
+            </div>
+          </div>
+
+          <!-- Images -->
+          <div class="adm-section-card">
+            <p class="adm-section-title">Images</p>
+            <div class="adm-img-grid">
+              <div class="adm-img-slot" data-img-slot="cover">
+                <p class="adm-img-slot__label">Cover</p>
+                <div class="adm-img-slot__card">
+                  <img class="adm-img-slot__preview" data-preview="cover" alt="" />
+                  <div class="adm-img-slot__empty">
+                    <span class="adm-img-slot__empty-icon">🖼</span>
+                    <span>No image</span>
+                  </div>
+                  <button
+                    class="adm-img-slot__clear"
+                    type="button"
+                    data-clear-slot="cover"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div class="adm-img-slot__actions">
+                  <button
+                    class="adm-btn adm-btn--ghost adm-btn--sm"
+                    type="button"
+                    data-pick-slot="cover"
+                  >
+                    Browse
+                  </button>
+                  <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+                    Upload<input
+                      type="file"
+                      accept="image/*"
+                      data-upload-slot="cover"
+                      style="display: none"
+                    />
+                  </label>
+                </div>
+                <input type="hidden" name="img-cover-url" data-img-url="cover" />
+              </div>
+
+              <div class="adm-img-slot" data-img-slot="hero">
+                <p class="adm-img-slot__label">Hero</p>
+                <div class="adm-img-slot__card">
+                  <img class="adm-img-slot__preview" data-preview="hero" alt="" />
+                  <div class="adm-img-slot__empty">
+                    <span class="adm-img-slot__empty-icon">🖼</span>
+                    <span>No image</span>
+                  </div>
+                  <button
+                    class="adm-img-slot__clear"
+                    type="button"
+                    data-clear-slot="hero"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div class="adm-img-slot__actions">
+                  <button
+                    class="adm-btn adm-btn--ghost adm-btn--sm"
+                    type="button"
+                    data-pick-slot="hero"
+                  >
+                    Browse
+                  </button>
+                  <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+                    Upload<input
+                      type="file"
+                      accept="image/*"
+                      data-upload-slot="hero"
+                      style="display: none"
+                    />
+                  </label>
+                </div>
+                <input type="hidden" name="img-hero-url" data-img-url="hero" />
+              </div>
+
+              <div class="adm-img-slot" data-img-slot="gallery-0">
+                <p class="adm-img-slot__label">Gallery 1</p>
+                <div class="adm-img-slot__card">
+                  <img class="adm-img-slot__preview" data-preview="gallery-0" alt="" />
+                  <div class="adm-img-slot__empty">
+                    <span class="adm-img-slot__empty-icon">🖼</span>
+                    <span>No image</span>
+                  </div>
+                  <button
+                    class="adm-img-slot__clear"
+                    type="button"
+                    data-clear-slot="gallery-0"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div class="adm-img-slot__actions">
+                  <button
+                    class="adm-btn adm-btn--ghost adm-btn--sm"
+                    type="button"
+                    data-pick-slot="gallery-0"
+                  >
+                    Browse
+                  </button>
+                  <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+                    Upload<input
+                      type="file"
+                      accept="image/*"
+                      data-upload-slot="gallery-0"
+                      style="display: none"
+                    />
+                  </label>
+                </div>
+                <input type="hidden" name="img-g0-url" data-img-url="gallery-0" />
+              </div>
+
+              <div class="adm-img-slot" data-img-slot="gallery-1">
+                <p class="adm-img-slot__label">Gallery 2</p>
+                <div class="adm-img-slot__card">
+                  <img class="adm-img-slot__preview" data-preview="gallery-1" alt="" />
+                  <div class="adm-img-slot__empty">
+                    <span class="adm-img-slot__empty-icon">🖼</span>
+                    <span>No image</span>
+                  </div>
+                  <button
+                    class="adm-img-slot__clear"
+                    type="button"
+                    data-clear-slot="gallery-1"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div class="adm-img-slot__actions">
+                  <button
+                    class="adm-btn adm-btn--ghost adm-btn--sm"
+                    type="button"
+                    data-pick-slot="gallery-1"
+                  >
+                    Browse
+                  </button>
+                  <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+                    Upload<input
+                      type="file"
+                      accept="image/*"
+                      data-upload-slot="gallery-1"
+                      style="display: none"
+                    />
+                  </label>
+                </div>
+                <input type="hidden" name="img-g1-url" data-img-url="gallery-1" />
+              </div>
+
+              <div class="adm-img-slot" data-img-slot="gallery-2">
+                <p class="adm-img-slot__label">Gallery 3</p>
+                <div class="adm-img-slot__card">
+                  <img class="adm-img-slot__preview" data-preview="gallery-2" alt="" />
+                  <div class="adm-img-slot__empty">
+                    <span class="adm-img-slot__empty-icon">🖼</span>
+                    <span>No image</span>
+                  </div>
+                  <button
+                    class="adm-img-slot__clear"
+                    type="button"
+                    data-clear-slot="gallery-2"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div class="adm-img-slot__actions">
+                  <button
+                    class="adm-btn adm-btn--ghost adm-btn--sm"
+                    type="button"
+                    data-pick-slot="gallery-2"
+                  >
+                    Browse
+                  </button>
+                  <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+                    Upload<input
+                      type="file"
+                      accept="image/*"
+                      data-upload-slot="gallery-2"
+                      style="display: none"
+                    />
+                  </label>
+                </div>
+                <input type="hidden" name="img-g2-url" data-img-url="gallery-2" />
+              </div>
+
+              <div class="adm-img-slot" data-img-slot="gallery-3">
+                <p class="adm-img-slot__label">Gallery 4</p>
+                <div class="adm-img-slot__card">
+                  <img class="adm-img-slot__preview" data-preview="gallery-3" alt="" />
+                  <div class="adm-img-slot__empty">
+                    <span class="adm-img-slot__empty-icon">🖼</span>
+                    <span>No image</span>
+                  </div>
+                  <button
+                    class="adm-img-slot__clear"
+                    type="button"
+                    data-clear-slot="gallery-3"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div class="adm-img-slot__actions">
+                  <button
+                    class="adm-btn adm-btn--ghost adm-btn--sm"
+                    type="button"
+                    data-pick-slot="gallery-3"
+                  >
+                    Browse
+                  </button>
+                  <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+                    Upload<input
+                      type="file"
+                      accept="image/*"
+                      data-upload-slot="gallery-3"
+                      style="display: none"
+                    />
+                  </label>
+                </div>
+                <input type="hidden" name="img-g3-url" data-img-url="gallery-3" />
+              </div>
+
+              <div class="adm-img-slot" data-img-slot="gallery-4">
+                <p class="adm-img-slot__label">Gallery 5</p>
+                <div class="adm-img-slot__card">
+                  <img class="adm-img-slot__preview" data-preview="gallery-4" alt="" />
+                  <div class="adm-img-slot__empty">
+                    <span class="adm-img-slot__empty-icon">🖼</span>
+                    <span>No image</span>
+                  </div>
+                  <button
+                    class="adm-img-slot__clear"
+                    type="button"
+                    data-clear-slot="gallery-4"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div class="adm-img-slot__actions">
+                  <button
+                    class="adm-btn adm-btn--ghost adm-btn--sm"
+                    type="button"
+                    data-pick-slot="gallery-4"
+                  >
+                    Browse
+                  </button>
+                  <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+                    Upload<input
+                      type="file"
+                      accept="image/*"
+                      data-upload-slot="gallery-4"
+                      style="display: none"
+                    />
+                  </label>
+                </div>
+                <input type="hidden" name="img-g4-url" data-img-url="gallery-4" />
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- ── Right: sticky action panel ── -->
+        <aside class="adm-form-aside">
+          <div class="adm-aside-card">
+            <p class="adm-aside-card__title">Publish</p>
+            <div class="adm-toggle-wrap" style="margin-bottom: 14px">
+              <input class="adm-toggle" id="published" name="published" type="checkbox" />
+              <label class="adm-toggle-label" for="published">Visible on site</label>
+            </div>
             <div class="adm-toggle-wrap">
               <input class="adm-toggle" id="featured" name="featured" type="checkbox" />
-              <label class="adm-toggle-label" for="featured">Featured (shown in home strip)</label>
+              <label class="adm-toggle-label" for="featured">Featured on home</label>
             </div>
           </div>
-        </div>
 
-        <p class="adm-section-title">Images</p>
-        <div class="adm-fieldset">
-          <div class="adm-field">
-            <label class="adm-label" for="img-cover">Cover Image</label>
-            <img class="adm-file-preview" data-preview="cover" alt="Cover preview" />
-            <input
-              class="adm-input"
-              id="img-cover"
-              name="img-cover"
-              type="file"
-              accept="image/*"
-              data-img-slot="cover"
-            />
-            <input type="hidden" name="img-cover-url" data-img-url="cover" />
+          <div class="adm-aside-card">
+            <p class="adm-aside-card__title">Actions</p>
+            <div class="adm-aside-card__actions">
+              <button
+                class="adm-btn adm-btn--primary"
+                type="submit"
+                form="project-form"
+                data-form-submit
+              >
+                Save Changes
+              </button>
+              <a class="adm-btn adm-btn--ghost" href="/admin/dashboard">Cancel</a>
+            </div>
+            <div id="form-status" style="margin-top: 12px"></div>
           </div>
-          <div class="adm-field">
-            <label class="adm-label" for="img-hero">Hero Image</label>
-            <img class="adm-file-preview" data-preview="hero" alt="Hero preview" />
-            <input
-              class="adm-input"
-              id="img-hero"
-              name="img-hero"
-              type="file"
-              accept="image/*"
-              data-img-slot="hero"
-            />
-            <input type="hidden" name="img-hero-url" data-img-url="hero" />
-          </div>
-          <div class="adm-field">
-            <label class="adm-label" for="img-g0">Gallery Image 1</label>
-            <img class="adm-file-preview" data-preview="gallery-0" alt="Gallery 1 preview" />
-            <input
-              class="adm-input"
-              id="img-g0"
-              name="img-g0"
-              type="file"
-              accept="image/*"
-              data-img-slot="gallery-0"
-            />
-            <input type="hidden" name="img-g0-url" data-img-url="gallery-0" />
-          </div>
-          <div class="adm-field">
-            <label class="adm-label" for="img-g1">Gallery Image 2</label>
-            <img class="adm-file-preview" data-preview="gallery-1" alt="Gallery 2 preview" />
-            <input
-              class="adm-input"
-              id="img-g1"
-              name="img-g1"
-              type="file"
-              accept="image/*"
-              data-img-slot="gallery-1"
-            />
-            <input type="hidden" name="img-g1-url" data-img-url="gallery-1" />
-          </div>
-          <div class="adm-field">
-            <label class="adm-label" for="img-g2">Gallery Image 3</label>
-            <img class="adm-file-preview" data-preview="gallery-2" alt="Gallery 3 preview" />
-            <input
-              class="adm-input"
-              id="img-g2"
-              name="img-g2"
-              type="file"
-              accept="image/*"
-              data-img-slot="gallery-2"
-            />
-            <input type="hidden" name="img-g2-url" data-img-url="gallery-2" />
-          </div>
-          <div class="adm-field">
-            <label class="adm-label" for="img-g3">Gallery Image 4</label>
-            <img class="adm-file-preview" data-preview="gallery-3" alt="Gallery 4 preview" />
-            <input
-              class="adm-input"
-              id="img-g3"
-              name="img-g3"
-              type="file"
-              accept="image/*"
-              data-img-slot="gallery-3"
-            />
-            <input type="hidden" name="img-g3-url" data-img-url="gallery-3" />
-          </div>
-          <div class="adm-field">
-            <label class="adm-label" for="img-g4">Gallery Image 5</label>
-            <img class="adm-file-preview" data-preview="gallery-4" alt="Gallery 5 preview" />
-            <input
-              class="adm-input"
-              id="img-g4"
-              name="img-g4"
-              type="file"
-              accept="image/*"
-              data-img-slot="gallery-4"
-            />
-            <input type="hidden" name="img-g4-url" data-img-url="gallery-4" />
-          </div>
-        </div>
 
-        <div id="form-status"></div>
-
-        <div class="adm-form-actions">
-          <button class="adm-btn adm-btn--primary" type="submit" data-form-submit>
-            Save Changes
-          </button>
-          <a class="adm-btn adm-btn--ghost" href="/admin/dashboard">Cancel</a>
-        </div>
-      </form>
+          <div class="adm-aside-card">
+            <p class="adm-aside-card__title">Details</p>
+            <dl class="adm-aside-meta">
+              <dt>Slug</dt>
+              <dd>
+                <code
+                  data-slug-preview
+                  style="
+                    font-family: monospace;
+                    font-size: 11px;
+                    background: #f4f4f5;
+                    border: 1px solid #e4e4e7;
+                    border-radius: 4px;
+                    padding: 2px 6px;
+                    color: #ff4015;
+                    word-break: break-all;
+                  "
+                  >/work/</code
+                >
+              </dd>
+              <dt>Last updated</dt>
+              <dd data-edit-updated style="font-size: 12px">—</dd>
+            </dl>
+          </div>
+        </aside>
+      </div>
     </main>
+
+    <!-- Storage picker modal -->
+    <div class="adm-sp-overlay" id="storage-picker" hidden>
+      <div class="adm-sp-modal">
+        <div class="adm-sp-header">
+          <span class="adm-sp-header__title">Storage Browser</span>
+          <div class="adm-sp-breadcrumb" data-sp-breadcrumb>
+            <span class="adm-sp-breadcrumb__part" data-sp-crumb="projects">projects/</span>
+          </div>
+          <button class="adm-sp-close" data-sp-close type="button">✕</button>
+        </div>
+        <div class="adm-sp-body">
+          <div class="adm-sp-grid" data-sp-grid>
+            <p class="adm-sp-loading">Loading…</p>
+          </div>
+        </div>
+        <div class="adm-sp-footer">
+          <div class="adm-sp-footer__left">
+            <label class="adm-btn adm-btn--ghost adm-btn--sm" style="cursor: pointer">
+              ↑ Upload here
+              <input type="file" accept="image/*" class="adm-sp-upload-input" data-sp-upload />
+            </label>
+          </div>
+          <div class="adm-sp-footer__right">
+            <button class="adm-btn adm-btn--ghost adm-btn--sm" data-sp-cancel type="button">
+              Cancel
+            </button>
+            <button
+              class="adm-btn adm-btn--primary adm-btn--sm"
+              data-sp-select
+              type="button"
+              disabled
+            >
+              Select Image
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="../js/admin.js"></script>
   </body>
