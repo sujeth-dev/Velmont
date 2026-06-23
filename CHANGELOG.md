@@ -2,6 +2,15 @@
 
 All notable changes per push. Most recent first.
 
+## Content Polish — 2026-06-23
+
+### Hero animation + em dash cleanup
+- `src/css/base.css`: `@keyframes vm-hero-appear` — opacity 0→1, scale 1.06→1, 1.8s ease. Applied to all static hero bg images site-wide.
+- `src/css/about.css`, `work.css`, `project.css`: `.vm-page-hero__bg`, `.vm-work-hero__bg`, `.vm-proj-hero__bg` — animation added.
+- Em dashes removed from body copy across `index.html`, `about.html`, `services.html`, `contact.html` — replaced with commas or sentence breaks (10 instances).
+- `data/projects.json`: All 20 em dashes in project lead and body text replaced — colons where introducing a list of details, commas elsewhere. 1 intentional em dash kept in `"Ministry of External Affairs — Bangalore"` title field (name/location separator).
+- Vitest 62/62 · Prettier clean · Vite build clean.
+
 ## Phase 4 Photo Heroes — 2026-06-23
 
 - About, Services, and Contact page heroes converted from text-only (paper background) to full-height photo heroes matching the Work page standard.
