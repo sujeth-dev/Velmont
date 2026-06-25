@@ -2,6 +2,11 @@
 
 All notable changes per push. Most recent first.
 
+## Bug Fixes — 2026-06-25
+
+- `src/js/admin.js` — fixed publish/featured checkboxes always saving as `false`. Root cause: two-column form layout places the checkboxes in `<aside>` (outside `<form>`); `form.querySelector('#published')` returned `null`. Fixed by switching to `document.getElementById` in `readFormValues` and adding a `?? document.querySelector` fallback in `setVal` so the edit form pre-fills published state correctly.
+- `vercel.json` — added `/work/:slug` → `/work/[slug]` rewrite so Vercel serves the project detail template for Firestore-only projects (e.g. `test-1`) that have no static per-slug HTML file.
+
 ## Admin Panel Redesign + Storage Browser — 2026-06-23
 
 - `src/css/admin.css` — full rewrite: new design system (terracotta accent #FF4015, dark header, card-based layout, Inter font). New components: stats bar, thumbnail rows, inline publish toggle, two-column form layout, image slot cards, storage picker modal (`adm-sp-*`).
