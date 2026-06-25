@@ -5,7 +5,9 @@
   "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [],
+  "rewrites": [
+    { "source": "/work/:slug", "destination": "/work/[slug]" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
