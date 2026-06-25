@@ -162,8 +162,8 @@ function readFormValues(form) {
     body1: fd.get('body1') || '',
     body2: fd.get('body2') || '',
     materials: fd.get('materials') || '',
-    published: form.querySelector('#published')?.checked ?? false,
-    featured: form.querySelector('#featured')?.checked ?? false,
+    published: document.getElementById('published')?.checked ?? false,
+    featured: document.getElementById('featured')?.checked ?? false,
   };
 }
 
@@ -553,7 +553,7 @@ async function initProjectEdit() {
 
   // Pre-fill fields
   function setVal(name, value) {
-    const el = form.querySelector(`[name="${name}"]`);
+    const el = form.querySelector(`[name="${name}"]`) ?? document.querySelector(`[name="${name}"]`);
     if (!el) return;
     if (el.type === 'checkbox') el.checked = Boolean(value);
     else el.value = value ?? '';
