@@ -2,6 +2,16 @@
 
 All notable changes per push. Most recent first.
 
+## Seed 12 New Projects + Marriott Marquis Refresh — 2026-06-30
+
+- `data/projects.json` — added 12 new projects sourced from the client's project archive (`velmont_data/projects/`), cross-checked against `project-2.xlsx`: Allianz Trivandrum, Apollo Hospital Gurugram, Embassy Chennai, Gopalan Mall Bangalore, Ireo Grand Hyatt Gurugram, Kauvery Hospital Chennai, Moxy Bangalore Airport, Shangri-La Bangalore, Shell NCTB Bangalore, Shibaura Machine Chennai, Taj CIAL Kochi (distinct from the existing `taj-malabar-kochi`), and Wells Fargo Chennai. All published live; `featured: false` (doesn't disturb the curated home-page strip).
+- `public/assets/projects/_placeholder/placeholder.webp` (new) + `scripts/generate-placeholder.js` (new) — none of the 12 new projects have approved photography yet, so all reference one shared branded placeholder image (paper background, terracotta accent line, "Photography Pending" label) for cover/hero/gallery. Swap in real photos per-project later via the admin panel or `convert-images.js` once available — no schema changes needed.
+- `data/projects.json` — refreshed `marriott-marquis-delhi` body copy: corrected an unverified "6 basements and 7 upper floors" claim (that figure belonged to a neighboring building on the same campus) to the verified "7.70-acre site rising seven storeys." Room count (590), meeting space (85,000 sq ft), and construction area (2.5M sq ft) were web-verified as accurate and left unchanged.
+- `scripts/update-project-content.js` (new) — one-off content-refresh script: pushes `lead`/`body`/`materials`/`title`/`area`/`scope` from `data/projects.json` to an already-seeded Firestore doc by slug, without touching its images. Used to push the Marriott Marquis Delhi refresh.
+- `__tests__/projects.test.js` — updated project-count assertion from 6 to 18.
+- `npm run seed` — created 12, skipped 6 (idempotent, confirmed).
+- Vitest 84/84 · Build clean · 18 project pages generated.
+
 ## Bug Fixes — 2026-06-25
 
 - `src/js/admin.js` — fixed publish/featured checkboxes always saving as `false`. Root cause: two-column form layout places the checkboxes in `<aside>` (outside `<form>`); `form.querySelector('#published')` returned `null`. Fixed by switching to `document.getElementById` in `readFormValues` and adding a `?? document.querySelector` fallback in `setVal` so the edit form pre-fills published state correctly.
