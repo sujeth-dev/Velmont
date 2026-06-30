@@ -60,7 +60,11 @@ if (!project) {
 }
 
 async function main() {
-  await signInWithEmailAndPassword(auth, env.VITE_FIREBASE_ADMIN_EMAIL, env.VITE_FIREBASE_ADMIN_PASSWORD);
+  await signInWithEmailAndPassword(
+    auth,
+    env.VITE_FIREBASE_ADMIN_EMAIL,
+    env.VITE_FIREBASE_ADMIN_PASSWORD,
+  );
   const q = query(collection(db, 'projects'), where('slug', '==', slug));
   const snap = await getDocs(q);
   if (snap.empty) {

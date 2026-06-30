@@ -3,7 +3,7 @@
 
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { auth, storage } from '../lib/firebase.js';
+import { auth, storage } from '../lib/firebase-admin.js';
 import {
   getAllProjects,
   getProjectById,

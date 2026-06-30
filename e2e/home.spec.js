@@ -17,11 +17,12 @@ test.describe('Phase 2 — home page', () => {
     await page.goto('/');
     // Carousel renders all published projects; clones are marked data-clone and aria-hidden
     const tiles = page.locator('.vm-work__tile:not([data-clone])');
-    await expect(tiles).toHaveCount(6);
+    await expect(tiles).toHaveCount(18);
   });
 
   test('each tile has discipline, name, and arrow', async ({ page }) => {
     await page.goto('/');
+    await page.waitForSelector('.vm-work__tile');
     const tiles = page.locator('.vm-work__tile');
     const n = await tiles.count();
     expect(n).toBeGreaterThan(0);

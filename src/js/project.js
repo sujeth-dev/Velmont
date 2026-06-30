@@ -2,6 +2,8 @@
 // Reads slug from window.location.pathname, fetches projects.json,
 // and hydrates all project detail sections.
 
+import { avifFor } from './picture-utils.js';
+
 /**
  * Extract the project slug from a pathname like /work/jw-marriott-bengaluru
  * @param {string} [pathname]
@@ -24,6 +26,19 @@ export function slugFromPath(pathname) {
 export function renderMaterials(materials) {
   if (!Array.isArray(materials) || !materials.length) return '';
   return materials.map((m) => `<span class="vm-material-tag">${m}</span>`).join('');
+}
+
+/**
+ * Set (or clear) an <source type="image/avif"> sibling's srcset based on
+ * whether the given image URL has a local AVIF counterpart.
+ * @param {Element|null} source
+ * @param {string} url
+ */
+function setAvifSource(source, url) {
+  if (!source) return;
+  const avif = avifFor(url);
+  if (avif) source.setAttribute('srcset', avif);
+  else source.removeAttribute('srcset');
 }
 
 function initLightbox(images, projectTitle) {
@@ -90,6 +105,7 @@ export function hydratePage(project) {
   // Hero background image
   const heroImg = document.querySelector('[data-proj-hero-img]');
   if (heroImg && project.images?.hero) {
+    setAvifSource(document.querySelector('[data-proj-hero-avif]'), project.images.hero);
     heroImg.src = project.images.hero;
     heroImg.alt = `${project.title} — Velmont Design Studio`;
   }
@@ -140,10 +156,12 @@ export function hydratePage(project) {
     const i = Number(img.dataset.galleryImg);
     const src = galleryArr[i];
     if (src) {
+      setAvifSource(document.querySelector(`[data-gallery-avif="${i}"]`), src);
       img.src = src;
       img.alt = `${project.title} — view ${i + 1}`;
       galleryCount++;
     } else {
+      img.closest('picture')?.style.setProperty('display', 'none');
       img.style.display = 'none';
     }
   });

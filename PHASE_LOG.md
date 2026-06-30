@@ -4,6 +4,48 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Phase 6 — Image Optimization + Performance Pass
+
+| Field | Value |
+|---|---|
+| Date | 2026-06-30 |
+| Status | Complete (responsive-image srcset follow-up recommended, not done) |
+| Branch | main |
+
+### What shipped
+
+- AVIF generation added to `scripts/convert-images.js` and `scripts/generate-placeholder.js` (quality 70, alongside existing WebP at quality 82).
+- Every local-image `<img>` site-wide converted to `<picture><source type="image/avif">…<img></picture>` (home hero carousel, work hero, work-grid tiles, project hero, project gallery). Firebase Storage URLs are left as plain `<img>` since there's no guaranteed AVIF sibling for admin-uploaded images.
+- CSS fix: `.vm-proj-gallery picture` and `.vm-grid-tile__img-wrap picture` set to `display: contents` so the new wrapper doesn't break Grid placement or percentage-height image sizing. Gallery grid-area selectors switched from `:first-child`/`:nth-child(4)` to `[data-gallery-img="0"]`/`[data-gallery-img="3"]` (the old positional selectors silently stopped matching once an extra `<picture>` level was introduced — verified the bug and the fix with a real Playwright run, not just unit tests).
+- Firebase code-split: `src/lib/firebase.js` now only loads `app` + `firestore`; `getAuth`/`getStorage` moved to new `src/lib/firebase-admin.js`, used only by the admin panel. Shrank the public-facing `firebase-data` chunk 726 KB → 568 KB (gzip 182 KB → 150 KB).
+- Fixed the actual home-page LCP bottleneck: the hero's first slide was invisible (`opacity:0`) until `initHeroCarousel()` ran post-`DOMContentLoaded`, well after nav/footer component fetches resolved. Added `is-active` to the first slide directly in HTML.
+- Deferred the home carousel's Firestore fetch by one paint frame so it doesn't compete with the hero's first paint.
+- Async Google Fonts loading (`media="print"` swap pattern) across all 6 public pages, removing it from the render-blocking path.
+- Added `<link rel="preload">` for each page's LCP hero image (home, work).
+- **Cleanup**: deleted a leftover `test-1` Firestore document (from earlier Phase 5 debugging) that was live and featured on the public site — confirmed with user before deleting.
+- **Test fixes**: `e2e/work.spec.js` / `e2e/home.spec.js` had hardcoded counts from the original 6-project dataset (broken by today's 12-project seed) and a pre-existing race condition against the real Firestore fetch — both fixed; full per-project-detail coverage extended to all 18 published projects.
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | Pass — 84/84 |
+| Playwright (full run, real Chromium — not deferred to CI this time) | Pass — 53/53 (8 admin tests skipped, need test credentials) |
+| ESLint / Prettier | Clean |
+| Vite build | Clean — AVIF + WebP both emit, 18 project pages generated |
+| Lighthouse (desktop preset, local static `dist/`) | Performance 0.72 → 0.79, Accessibility 0.95, Best Practices 0.96, SEO 1.0 |
+
+### Carry-overs
+
+- Performance is short of the MASTER_PLAN's ≥90 target. Remaining gap is dominated by `uses-responsive-images` (619 KB potential savings — images served larger than their display size) and Speed Index (6.5s). Fixing this properly needs per-breakpoint `srcset`/`sizes` width variants across every image consumer — a larger, separate piece of work, recommended as a Phase 6.x follow-up rather than folded into this pass.
+- This was also the first time Lighthouse was actually run against this site (prior phase logs all said "will run on first CI execution" but CI had never executed it) — so these numbers are the real baseline, not a regression from a previously-passing score.
+
+### Commit
+
+- Part of the same push as the 12-new-project seed; see CHANGELOG.md for full detail.
+
+---
+
 ## Seed 12 New Projects + Marriott Marquis Refresh — 2026-06-30
 
 | Field | Value |

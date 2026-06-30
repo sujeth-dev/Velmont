@@ -1,6 +1,8 @@
 // Velmont — Work list page.
 // Fetches /data/projects.json, renders the project grid, and wires the discipline filter.
 
+import { avifFor } from './picture-utils.js';
+
 /**
  * Pad a tile index to two digits: 1 → "01"
  * @param {number} n
@@ -22,11 +24,15 @@ export function renderGridTile(p, index) {
   const loc = String(p.location || '');
   const meta = loc && year !== '—' ? `${loc} · ${year}` : loc || year;
   const cover = String(p.images?.hero || '');
+  const avif = avifFor(cover);
   const title = String(p.title || '');
   return [
     `<a class="vm-grid-tile" href="/work/${slug}" data-discipline="${p.discipline || ''}" data-tile="${slug}">`,
     `<div class="vm-grid-tile__img-wrap">`,
+    `<picture>`,
+    avif ? `<source type="image/avif" srcset="${avif}" />` : '',
     `<img class="vm-grid-tile__img" src="${cover}" alt="${title}" loading="lazy" width="760" height="500" />`,
+    `</picture>`,
     `</div>`,
     `<div class="vm-grid-tile__content">`,
     `<div>`,

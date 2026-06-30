@@ -10,7 +10,8 @@
  * data/projects.json. Source folder names may differ — the SLUG_MAP below
  * resolves this.
  *
- * Phase 0: WebP only at quality 82. Phase 6 will add AVIF + sizing.
+ * Phase 0: WebP only at quality 82. Phase 6 added AVIF at quality 70
+ * (same source, written alongside the .webp as a sibling .avif file).
  */
 
 import sharp from 'sharp';
@@ -38,6 +39,7 @@ const SLUG_MAP = {
 };
 
 const WEBP_QUALITY = 82;
+const AVIF_QUALITY = 70;
 const MAX_LONG_EDGE = 4000;
 
 async function ensureDir(dir) {
@@ -46,15 +48,17 @@ async function ensureDir(dir) {
 
 async function convertOne(srcFile, outFile) {
   await ensureDir(path.dirname(outFile));
-  await sharp(srcFile)
-    .resize({
-      width: MAX_LONG_EDGE,
-      height: MAX_LONG_EDGE,
-      fit: 'inside',
-      withoutEnlargement: true,
-    })
-    .webp({ quality: WEBP_QUALITY })
-    .toFile(outFile);
+  const resized = sharp(srcFile).resize({
+    width: MAX_LONG_EDGE,
+    height: MAX_LONG_EDGE,
+    fit: 'inside',
+    withoutEnlargement: true,
+  });
+  await resized.clone().webp({ quality: WEBP_QUALITY }).toFile(outFile);
+  await resized
+    .clone()
+    .avif({ quality: AVIF_QUALITY })
+    .toFile(outFile.replace(/\.webp$/, '.avif'));
 }
 
 async function listImages(dir) {

@@ -143,6 +143,11 @@
   overflow: hidden;
 }
 
+/* AVIF <picture> wrapper must not break the img's height:100% chain */
+.vm-grid-tile__img-wrap picture {
+  display: contents;
+}
+
 .vm-grid-tile__img {
   width: 100%;
   height: 100%;

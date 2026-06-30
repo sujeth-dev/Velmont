@@ -11,7 +11,15 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      />
+    </noscript>
 
     <link rel="stylesheet" href="../css/tokens.css" />
     <link rel="stylesheet" href="../css/base.css" />
@@ -39,15 +47,18 @@
 
       <!-- Project hero -->
       <section class="vm-proj-hero" aria-labelledby="proj-h">
-        <img
-          class="vm-proj-hero__bg"
-          data-proj-hero-img
-          src=""
-          alt=""
-          width="1440"
-          height="520"
-          loading="eager"
-        />
+        <picture>
+          <source type="image/avif" data-proj-hero-avif />
+          <img
+            class="vm-proj-hero__bg"
+            data-proj-hero-img
+            src=""
+            alt=""
+            width="1440"
+            height="520"
+            loading="eager"
+          />
+        </picture>
         <p class="vm-proj-hero__eyebrow" data-proj-eyebrow>Discipline · Location</p>
         <h1 id="proj-h" class="vm-proj-hero__h1" data-proj-h1>Project Name</h1>
       </section>
@@ -83,51 +94,66 @@
 
       <!-- Image gallery — up to 5 images; JS sets data-count for CSS layout -->
       <div class="vm-proj-gallery" aria-label="Project gallery">
-        <img
-          class="vm-proj-gallery__img"
-          data-gallery-img="0"
-          src=""
-          alt=""
-          loading="lazy"
-          width="820"
-          height="520"
-        />
-        <img
-          class="vm-proj-gallery__img"
-          data-gallery-img="1"
-          src=""
-          alt=""
-          loading="lazy"
-          width="380"
-          height="256"
-        />
-        <img
-          class="vm-proj-gallery__img"
-          data-gallery-img="2"
-          src=""
-          alt=""
-          loading="lazy"
-          width="380"
-          height="256"
-        />
-        <img
-          class="vm-proj-gallery__img"
-          data-gallery-img="3"
-          src=""
-          alt=""
-          loading="lazy"
-          width="820"
-          height="260"
-        />
-        <img
-          class="vm-proj-gallery__img"
-          data-gallery-img="4"
-          src=""
-          alt=""
-          loading="lazy"
-          width="380"
-          height="260"
-        />
+        <picture>
+          <source type="image/avif" data-gallery-avif="0" />
+          <img
+            class="vm-proj-gallery__img"
+            data-gallery-img="0"
+            src=""
+            alt=""
+            loading="lazy"
+            width="820"
+            height="520"
+          />
+        </picture>
+        <picture>
+          <source type="image/avif" data-gallery-avif="1" />
+          <img
+            class="vm-proj-gallery__img"
+            data-gallery-img="1"
+            src=""
+            alt=""
+            loading="lazy"
+            width="380"
+            height="256"
+          />
+        </picture>
+        <picture>
+          <source type="image/avif" data-gallery-avif="2" />
+          <img
+            class="vm-proj-gallery__img"
+            data-gallery-img="2"
+            src=""
+            alt=""
+            loading="lazy"
+            width="380"
+            height="256"
+          />
+        </picture>
+        <picture>
+          <source type="image/avif" data-gallery-avif="3" />
+          <img
+            class="vm-proj-gallery__img"
+            data-gallery-img="3"
+            src=""
+            alt=""
+            loading="lazy"
+            width="820"
+            height="260"
+          />
+        </picture>
+        <picture>
+          <source type="image/avif" data-gallery-avif="4" />
+          <img
+            class="vm-proj-gallery__img"
+            data-gallery-img="4"
+            src=""
+            alt=""
+            loading="lazy"
+            width="380"
+            height="260"
+          />
+        </picture>
       </div>
 
       <!-- Lightbox — opened when a gallery image is clicked -->

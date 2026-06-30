@@ -2,6 +2,22 @@
 
 All notable changes per push. Most recent first.
 
+## Phase 6 — Image Optimization + Performance Pass — 2026-06-30
+
+- `scripts/convert-images.js` — now emits AVIF (quality 70) alongside the existing WebP (quality 82) for every local project image; `scripts/generate-placeholder.js` does the same for the shared placeholder.
+- All `<img>` tags serving local images (home hero carousel, work-page hero, work-grid tiles, project hero, project gallery) converted to `<picture><source type="image/avif">…<img></picture>` — modern browsers get AVIF, everyone else falls back to the existing WebP. Non-local images (Firebase Storage URLs) are left as plain `<img>` since we can't assume an AVIF sibling exists.
+- `src/css/project.css`, `src/css/work.css` — added scoped `picture { display: contents; }` so the new wrapper doesn't break the gallery's CSS Grid placement or the work-tile's percentage-height image sizing; the gallery's old `:first-child`/`:nth-child(4)` grid-area selectors were swapped for `[data-gallery-img="0"]` / `[data-gallery-img="3"]` since `:nth-child` is DOM-position-based and no longer pointed at the right image once each was wrapped in `<picture><source><img>`.
+- `src/lib/firebase.js` — now only initializes Firestore (`app` + `db`); `getAuth`/`getStorage` moved to new `src/lib/firebase-admin.js`, imported only by `admin.js`/`admin-storage.js`. Public pages (home/work/project) no longer pull the Auth + Storage SDKs into their Firestore fetch — shrank the lazy-loaded `firebase-data` chunk from 726 KB to 568 KB (gzip 182 KB → 150 KB).
+- `src/index.html`, `src/work.html` — added `<link rel="preload" as="image" type="image/avif">` for each page's LCP hero image.
+- `scripts/generate-project-pages.js` unchanged (still copies the built template per slug); per-project hero preload was out of scope since the template has no per-slug build step.
+- `src/index.html` — fixed the actual home-page LCP bottleneck: the first hero slide relied on `opacity:0 → 1` toggled by JS (`initHeroCarousel()`), which doesn't run until nav/footer fragments fetch and `DOMContentLoaded` fires — so the image was visually painted late even though it loaded fast. Added `is-active` directly to the first slide's markup so it's visible immediately; JS now just manages cycling.
+- `src/js/home.js` — the "Our Projects" carousel's Firestore fetch is now deferred one paint frame (double `requestAnimationFrame`) past `initHeroCarousel()`, so the (large) `firebase-data` chunk's evaluation doesn't compete with the hero's first paint.
+- All public pages' Google Fonts `<link>` switched to the standard `media="print" onload="this.media='all'"` async-load pattern (with a `<noscript>` fallback), removing it from the render-blocking path.
+- Cleanup: deleted a leftover `test-1` Firestore document from earlier debugging that was live and **featured** on the public site/home carousel — confirmed with the user before deleting.
+- Lighthouse (desktop preset, local static build): Performance 0.72 → 0.79, Accessibility 0.95, Best Practices 0.96, SEO 1.0 (LCP 3.0s → 2.1s, FCP 1.0 score, TBT 0ms). Remaining gap to the 0.85 target is dominated by `uses-responsive-images` (619 KB) — serving width-appropriate `srcset` variants per breakpoint is a larger follow-up, not done in this pass.
+- `e2e/work.spec.js`, `e2e/home.spec.js` — updated hardcoded project/discipline counts (6 → 18 total; Hospitality 5 → 9, Workplace 1 → 6) to match the seeded dataset; added `page.waitForSelector` before filter-button clicks to fix a pre-existing race condition against the real Firestore fetch. Full project-detail-page coverage extended to all 18 published projects.
+- Vitest 84/84 · Playwright 53/53 (8 admin tests skipped, need test credentials) · ESLint clean · Prettier clean · Build clean.
+
 ## Seed 12 New Projects + Marriott Marquis Refresh — 2026-06-30
 
 - `data/projects.json` — added 12 new projects sourced from the client's project archive (`velmont_data/projects/`), cross-checked against `project-2.xlsx`: Allianz Trivandrum, Apollo Hospital Gurugram, Embassy Chennai, Gopalan Mall Bangalore, Ireo Grand Hyatt Gurugram, Kauvery Hospital Chennai, Moxy Bangalore Airport, Shangri-La Bangalore, Shell NCTB Bangalore, Shibaura Machine Chennai, Taj CIAL Kochi (distinct from the existing `taj-malabar-kochi`), and Wells Fargo Chennai. All published live; `featured: false` (doesn't disturb the curated home-page strip).

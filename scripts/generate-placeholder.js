@@ -21,6 +21,7 @@ const ROOT = path.resolve(__dirname, '..');
 
 const OUT_DIR = path.join(ROOT, 'public', 'assets', 'projects', '_placeholder');
 const OUT_FILE = path.join(OUT_DIR, 'placeholder.webp');
+const OUT_FILE_AVIF = path.join(OUT_DIR, 'placeholder.avif');
 
 const WIDTH = 1600;
 const HEIGHT = 1067;
@@ -41,8 +42,10 @@ const svg = `
 
 async function main() {
   await fs.mkdir(OUT_DIR, { recursive: true });
-  await sharp(Buffer.from(svg)).webp({ quality: 82 }).toFile(OUT_FILE);
-  console.log('[generate-placeholder] wrote', OUT_FILE);
+  const rendered = sharp(Buffer.from(svg));
+  await rendered.clone().webp({ quality: 82 }).toFile(OUT_FILE);
+  await rendered.clone().avif({ quality: 70 }).toFile(OUT_FILE_AVIF);
+  console.log('[generate-placeholder] wrote', OUT_FILE, 'and', OUT_FILE_AVIF);
 }
 
 main().catch((err) => {

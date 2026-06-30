@@ -111,6 +111,10 @@ export async function initHome() {
   const mount = document.querySelector('[data-tiles]');
   if (!mount) return;
 
+  // Yield for one paint before the Firestore fetch — keeps the hero's LCP
+  // image off the same task as the (large) firebase-data chunk evaluation.
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
   const projects = await loadProjects();
   if (!projects) {
     mount.innerHTML = '<p style="padding: 40px; color: var(--slate);">Projects loading…</p>';

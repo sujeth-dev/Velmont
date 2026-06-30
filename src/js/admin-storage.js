@@ -4,7 +4,7 @@
 // Also handles delete of individual Storage objects from within the modal.
 
 import { ref, listAll, getDownloadURL, uploadBytes, deleteObject } from 'firebase/storage';
-import { storage } from '../lib/firebase.js';
+import { storage } from '../lib/firebase-admin.js';
 
 const ROOT = 'projects';
 
