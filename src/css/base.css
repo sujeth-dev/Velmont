@@ -85,6 +85,14 @@ video {
   max-width: 100%;
 }
 
+/* <source> must never generate a box — browsers don't apply display:none to
+   it by default, so a display:contents <picture> (used for AVIF gallery/grid
+   wrappers) would otherwise lift it into the layout as a phantom flex/grid
+   item and break sibling placement. */
+source {
+  display: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;

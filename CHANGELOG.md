@@ -2,6 +2,12 @@
 
 All notable changes per push. Most recent first.
 
+## Fix — Phase 6 gallery/grid layout broken by AVIF picture wrapper — 2026-06-30
+
+- `src/css/base.css` — added `source { display: none; }`. Root cause: `<source>` elements are never visually rendered as a `<picture>` child, but browsers don't apply `display:none` to them by default — they're just excluded from rendering through a separate HTML content-model rule. Once `.vm-proj-gallery picture` / `.vm-grid-tile__img-wrap picture` were set to `display: contents` (Phase 6, to keep the gallery's CSS Grid `:nth-child`-style placement and the work-tile's percentage-height sizing working through the new AVIF wrapper), that `display:contents` lifted each `<source>` into the grid/layout as a real "phantom" item (computed `display: block`), which broke CSS Grid's auto-placement — every project's adaptive 1–5 image editorial gallery collapsed into a single stacked column instead of the intended 2-column layout.
+- Verified the fix with a real Playwright run: confirmed `<source>` computes to `display: none`, confirmed the 5-image gallery's grid (`grid-template-columns: 1.62fr 1fr`, 3 explicit rows) and item placement (image 0 spanning rows 1–2, images 1–4 filling the remaining cells) match the original design exactly, and captured a screenshot for visual confirmation.
+- Vitest 84/84 · Playwright 53/53 · ESLint clean · Prettier clean · Build clean.
+
 ## Phase 6 — Image Optimization + Performance Pass — 2026-06-30
 
 - `scripts/convert-images.js` — now emits AVIF (quality 70) alongside the existing WebP (quality 82) for every local project image; `scripts/generate-placeholder.js` does the same for the shared placeholder.
