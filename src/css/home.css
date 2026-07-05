@@ -235,6 +235,116 @@
 }
 
 /* ----------------------------------------------------------------
+   01.35  Clients — "Trusted by" logo marquee
+   ---------------------------------------------------------------- */
+.vm-clients {
+  border-bottom: 1px solid var(--mineral);
+  overflow: hidden;
+}
+
+.vm-clients__header {
+  padding: 28px var(--pad-side) 0;
+}
+
+.vm-clients__kicker {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin: 0;
+}
+
+.vm-clients__viewport {
+  overflow: hidden;
+  /* fade the strip in/out at the edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  padding: 34px 0;
+}
+
+.vm-clients__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 72px;
+  animation: vm-marquee 46s linear infinite;
+}
+
+.vm-clients:hover .vm-clients__track {
+  animation-play-state: paused;
+}
+
+.vm-clients__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 40px;
+}
+
+.vm-clients__logo {
+  max-height: 34px;
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition:
+    filter var(--t-fast) var(--ease-default),
+    opacity var(--t-fast) var(--ease-default);
+}
+
+.vm-clients__item:hover .vm-clients__logo {
+  filter: none;
+  opacity: 1;
+}
+
+/* Text fallback shown until a real logo file is supplied */
+.vm-clients__wordmark {
+  font-family: var(--serif);
+  font-size: 22px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--slate);
+  opacity: 0.6;
+  transition: opacity var(--t-fast) var(--ease-default);
+}
+
+.vm-clients__item:hover .vm-clients__wordmark {
+  opacity: 1;
+}
+
+@keyframes vm-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* set is rendered twice; shifting one full set width loops seamlessly */
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-clients__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+    gap: 48px 72px;
+    padding: 0 var(--pad-side);
+  }
+  .vm-clients__viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  /* no scroll = no need for the duplicated set */
+  .vm-clients__item[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* ----------------------------------------------------------------
    01.4  About Velmont — two-column
    ---------------------------------------------------------------- */
 .vm-studio {

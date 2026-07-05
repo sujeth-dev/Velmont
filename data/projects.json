@@ -1,36 +1,36 @@
 [
   {
-    "slug": "jw-marriott-bengaluru",
-    "title": "JW Marriott Bengaluru Prestige Golfshire",
+    "slug": "itc-ratnadipa-colombo",
+    "title": "ITC Ratnadipa, Colombo",
     "discipline": "Hospitality",
-    "location": "Nandi Hills, Bangalore, Karnataka",
-    "year": 2022,
-    "area": "35,000 sq ft (Convention Centre scope)",
-    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
-    "lead": "A resort of significant scale on a 22-acre Nandi Hills estate: 301 keys, a 35,000 sq ft convention centre, and a pillarless ballroom requiring precision joinery and bespoke furniture across every category.",
+    "location": "Colombo, Sri Lanka",
+    "year": 2024,
+    "area": "352 rooms, 33 floors, 40,000 sq ft banquet",
+    "scope": "Custom Furniture Manufacturing & Joinery Fit-Out",
+    "lead": "A 33-storey coastal tower opening onto Colombo's Galle Face Green: 352 rooms, 12 food and beverage outlets, and 40,000 sq ft of banqueting space requiring bespoke furniture and joinery manufactured to international luxury brand specification.",
     "body": [
-      "Velmont delivered the complete interior fit-out for JW Marriott Bengaluru Prestige Golfshire Resort & Spa, working across rooms, suites, villas, and the resort's extensive convention facilities. The scope spanned custom furniture manufacturing, built-in joinery, wall panelling, and soft furnishings, all produced and quality-checked at Velmont's in-house facility before site delivery.",
-      "The convention centre alone required coordination across 35,000 sq ft of event space, including a 24,000 sq ft pillarless ballroom with specification-grade AV integration, bespoke ceiling treatments, and full banqueting furniture packages. Villa and suite interiors were executed to Hirsch Bedner Associates' design drawings, with Velmont managing procurement, fabrication, and on-site installation.",
-      "Delivered on schedule to Marriott brand standards, a project that established Velmont's capability at the highest tier of luxury hospitality fit-out."
+      "Velmont supplied custom furniture and bespoke joinery for ITC Ratnadipa, Colombo, ITC Hotels' landmark entry into Sri Lanka and one of South Asia's most significant luxury hotel openings of 2024. With a 33-floor tower comprising 352 rooms and suites and 12 distinct restaurants and bars, the project demanded high-volume precision manufacturing with no compromise on finish quality.",
+      "Velmont's in-house manufacturing facility produced room casegoods, in-room joinery, and upholstered furniture packages across all room categories, from standard rooms to the property's signature suites. Items were quality-checked in Velmont's Bangalore facility, packed to international shipping standards, and delivered on a phased schedule aligned with the main contractor's fit-out programme.",
+      "The hotel opened on schedule in April 2024 to critical acclaim, positioning ITC Ratnadipa as Colombo's premier luxury address."
     ],
     "materials": [
-      "Custom Joinery",
-      "Solid Timber Panelling",
-      "Upholstered Seating",
-      "Bespoke Casegoods",
-      "Acoustic Ceiling Systems",
-      "Stone Flooring",
-      "Decorative Lighting"
+      "High-Gloss Lacquered Joinery",
+      "Upholstered Bedheads",
+      "Custom Casegoods",
+      "Veneer Panelling",
+      "Solid Teak Accents",
+      "Decorative Metalwork",
+      "Bespoke Soft Furnishings"
     ],
     "images": {
-      "cover": "/assets/projects/jw-marriott-bengaluru/exterior.webp",
-      "hero": "/assets/projects/jw-marriott-bengaluru/lobby.webp",
+      "cover": "/assets/projects/itc-ratnadipa-colombo/cover.webp",
+      "hero": "/assets/projects/itc-ratnadipa-colombo/lobby.webp",
       "gallery": [
-        "/assets/projects/jw-marriott-bengaluru/lobby.webp",
-        "/assets/projects/jw-marriott-bengaluru/villa-living.webp",
-        "/assets/projects/jw-marriott-bengaluru/suite.webp",
-        "/assets/projects/jw-marriott-bengaluru/banquet.webp",
-        "/assets/projects/jw-marriott-bengaluru/exterior.webp"
+        "/assets/projects/itc-ratnadipa-colombo/lobby.webp",
+        "/assets/projects/itc-ratnadipa-colombo/bar-lounge.webp",
+        "/assets/projects/itc-ratnadipa-colombo/bedroom.webp",
+        "/assets/projects/itc-ratnadipa-colombo/bar-entrance.webp",
+        "/assets/projects/itc-ratnadipa-colombo/cityview.webp"
       ]
     },
     "featured": true,
@@ -74,43 +74,6 @@
     "published": true
   },
   {
-    "slug": "itc-ratnadipa-colombo",
-    "title": "ITC Ratnadipa, Colombo",
-    "discipline": "Hospitality",
-    "location": "Colombo, Sri Lanka",
-    "year": 2024,
-    "area": "352 rooms, 33 floors, 40,000 sq ft banquet",
-    "scope": "Custom Furniture Manufacturing & Joinery Fit-Out",
-    "lead": "A 33-storey coastal tower opening onto Colombo's Galle Face Green: 352 rooms, 12 food and beverage outlets, and 40,000 sq ft of banqueting space requiring bespoke furniture and joinery manufactured to international luxury brand specification.",
-    "body": [
-      "Velmont supplied custom furniture and bespoke joinery for ITC Ratnadipa, Colombo, ITC Hotels' landmark entry into Sri Lanka and one of South Asia's most significant luxury hotel openings of 2024. With a 33-floor tower comprising 352 rooms and suites and 12 distinct restaurants and bars, the project demanded high-volume precision manufacturing with no compromise on finish quality.",
-      "Velmont's in-house manufacturing facility produced room casegoods, in-room joinery, and upholstered furniture packages across all room categories, from standard rooms to the property's signature suites. Items were quality-checked in Velmont's Bangalore facility, packed to international shipping standards, and delivered on a phased schedule aligned with the main contractor's fit-out programme.",
-      "The hotel opened on schedule in April 2024 to critical acclaim, positioning ITC Ratnadipa as Colombo's premier luxury address."
-    ],
-    "materials": [
-      "High-Gloss Lacquered Joinery",
-      "Upholstered Bedheads",
-      "Custom Casegoods",
-      "Veneer Panelling",
-      "Solid Teak Accents",
-      "Decorative Metalwork",
-      "Bespoke Soft Furnishings"
-    ],
-    "images": {
-      "cover": "/assets/projects/itc-ratnadipa-colombo/cover.webp",
-      "hero": "/assets/projects/itc-ratnadipa-colombo/lobby.webp",
-      "gallery": [
-        "/assets/projects/itc-ratnadipa-colombo/lobby.webp",
-        "/assets/projects/itc-ratnadipa-colombo/bar-lounge.webp",
-        "/assets/projects/itc-ratnadipa-colombo/bedroom.webp",
-        "/assets/projects/itc-ratnadipa-colombo/bar-entrance.webp",
-        "/assets/projects/itc-ratnadipa-colombo/cityview.webp"
-      ]
-    },
-    "featured": true,
-    "published": true
-  },
-  {
     "slug": "marriott-marquis-delhi",
     "title": "Marriott Marquis New Delhi",
     "discipline": "Hospitality",
@@ -145,36 +108,6 @@
       ]
     },
     "featured": true,
-    "published": true
-  },
-  {
-    "slug": "mea-bangalore",
-    "title": "Ministry of External Affairs — Bangalore",
-    "discipline": "Workplace",
-    "location": "Bangalore, Karnataka",
-    "year": null,
-    "area": null,
-    "scope": "Workplace Interior Fit-Out",
-    "lead": "A government workplace delivered to specification for the Ministry of External Affairs, demanding precision, discretion, and adherence to public sector procurement and quality standards.",
-    "body": [
-      "Velmont delivered the interior fit-out for the Ministry of External Affairs' Bangalore office, a government workplace project requiring compliance with public sector procurement standards alongside the quality benchmarks Velmont applies to all projects in its portfolio.",
-      "The scope encompassed workstation systems, partitioning, joinery, storage solutions, and public-facing counter areas, all manufactured at Velmont's in-house facility and installed by Velmont's site teams."
-    ],
-    "materials": [
-      "Modular Workstations",
-      "Partition Systems",
-      "Built-In Storage Joinery",
-      "Anti-Static Flooring",
-      "False Ceiling Systems"
-    ],
-    "images": {
-      "cover": "/assets/projects/mea-bangalore/cover.webp",
-      "hero": "/assets/projects/mea-bangalore/cover.webp",
-      "gallery": [
-        "/assets/projects/mea-bangalore/cover.webp"
-      ]
-    },
-    "featured": false,
     "published": true
   },
   {
@@ -215,6 +148,110 @@
     "published": true
   },
   {
+    "slug": "jw-marriott-bengaluru",
+    "title": "JW Marriott Bengaluru Prestige Golfshire",
+    "discipline": "Hospitality",
+    "location": "Nandi Hills, Bangalore, Karnataka",
+    "year": 2022,
+    "area": "35,000 sq ft (Convention Centre scope)",
+    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
+    "lead": "A resort of significant scale on a 22-acre Nandi Hills estate: 301 keys, a 35,000 sq ft convention centre, and a pillarless ballroom requiring precision joinery and bespoke furniture across every category.",
+    "body": [
+      "Velmont delivered the complete interior fit-out for JW Marriott Bengaluru Prestige Golfshire Resort & Spa, working across rooms, suites, villas, and the resort's extensive convention facilities. The scope spanned custom furniture manufacturing, built-in joinery, wall panelling, and soft furnishings, all produced and quality-checked at Velmont's in-house facility before site delivery.",
+      "The convention centre alone required coordination across 35,000 sq ft of event space, including a 24,000 sq ft pillarless ballroom with specification-grade AV integration, bespoke ceiling treatments, and full banqueting furniture packages. Villa and suite interiors were executed to Hirsch Bedner Associates' design drawings, with Velmont managing procurement, fabrication, and on-site installation.",
+      "Delivered on schedule to Marriott brand standards, a project that established Velmont's capability at the highest tier of luxury hospitality fit-out."
+    ],
+    "materials": [
+      "Custom Joinery",
+      "Solid Timber Panelling",
+      "Upholstered Seating",
+      "Bespoke Casegoods",
+      "Acoustic Ceiling Systems",
+      "Stone Flooring",
+      "Decorative Lighting"
+    ],
+    "images": {
+      "cover": "/assets/projects/jw-marriott-bengaluru/exterior.webp",
+      "hero": "/assets/projects/jw-marriott-bengaluru/lobby.webp",
+      "gallery": [
+        "/assets/projects/jw-marriott-bengaluru/lobby.webp",
+        "/assets/projects/jw-marriott-bengaluru/villa-living.webp",
+        "/assets/projects/jw-marriott-bengaluru/suite.webp",
+        "/assets/projects/jw-marriott-bengaluru/banquet.webp",
+        "/assets/projects/jw-marriott-bengaluru/exterior.webp"
+      ]
+    },
+    "featured": true,
+    "published": true
+  },
+  {
+    "slug": "shell-nctb-bangalore",
+    "title": "Shell Technology Centre Bangalore",
+    "discipline": "Workplace",
+    "location": "Bagalur Road, Bengaluru, Karnataka",
+    "year": 2016,
+    "area": null,
+    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
+    "lead": "A LEED Gold-certified, 52-acre R&D campus housing up to 1,500 engineers — one of only three Shell technology centres worldwide.",
+    "body": [
+      "Velmont delivered interior fit-out works for Shell Technology Centre Bangalore, an innovation hub for LNG, subsurface modelling, data analytics, engineering design, distillation, and water technology, and one of Shell's three global technology centres alongside facilities in the USA and Netherlands.",
+      "The scope covered office and lab-support interiors across the LEED Gold-certified campus, built to the standards of a global energy-sector R&D facility."
+    ],
+    "materials": [
+      "Modular Workstations",
+      "Raised Access Flooring",
+      "Acoustic Ceiling Systems",
+      "Glazed Meeting Rooms",
+      "Laminate Joinery"
+    ],
+    "images": {
+      "cover": "/assets/projects/shell-nctb-bangalore/atrium.webp",
+      "hero": "/assets/projects/shell-nctb-bangalore/lounge.webp",
+      "gallery": [
+        "/assets/projects/shell-nctb-bangalore/lounge.webp",
+        "/assets/projects/shell-nctb-bangalore/atrium.webp",
+        "/assets/projects/shell-nctb-bangalore/awards.webp"
+      ]
+    },
+    "featured": false,
+    "published": true
+  },
+  {
+    "slug": "itc-grand-chola-chennai",
+    "title": "ITC Grand Chola, Chennai",
+    "discipline": "Hospitality",
+    "location": "Guindy, Mount Road, Chennai, Tamil Nadu",
+    "year": 2013,
+    "area": "600 keys, ~1.6 million sq ft",
+    "scope": "Interior Fit-Out & Custom Furniture Manufacturing",
+    "lead": "One of India's largest luxury hotels: a 600-key, LEED Platinum landmark on Chennai's Mount Road, conceived as a tribute to the architecture and grandeur of the 11th-century Chola dynasty.",
+    "body": [
+      "Velmont contributed to the interior fit-out of ITC Grand Chola, Chennai, a 600-room super-luxury hotel and one of the largest single-building hotels in India, designed in homage to the imperial Chola era.",
+      "The property spans roughly 1.6 million sq ft across guest rooms, suites, ten restaurants, extensive banqueting, and a spa. Velmont's scope covered custom furniture and joinery executed to ITC's Luxury Collection standards, with detailing that references traditional South Indian craftsmanship.",
+      "ITC Grand Chola opened in 2013 and remains a benchmark for large-format luxury hospitality in India, holding LEED Platinum certification as one of the world's largest green hotels."
+    ],
+    "materials": [
+      "Custom Joinery",
+      "Solid Timber Panelling",
+      "Upholstered Seating",
+      "Bespoke Casegoods",
+      "Stone Flooring",
+      "Decorative Lighting",
+      "Handcrafted Detailing"
+    ],
+    "images": {
+      "cover": "/assets/projects/itc-grand-chola-chennai/bedroom.webp",
+      "hero": "/assets/projects/itc-grand-chola-chennai/lounge.webp",
+      "gallery": [
+        "/assets/projects/itc-grand-chola-chennai/staircase.webp",
+        "/assets/projects/itc-grand-chola-chennai/bedroom.webp",
+        "/assets/projects/itc-grand-chola-chennai/spa.webp"
+      ]
+    },
+    "featured": false,
+    "published": true
+  },
+  {
     "slug": "allianz-trivandrum",
     "title": "Allianz Technology, Technopark Phase III",
     "discipline": "Workplace",
@@ -235,12 +272,168 @@
       "Glazed Cabin Partitions"
     ],
     "images": {
-      "cover": "/assets/projects/_placeholder/placeholder.webp",
-      "hero": "/assets/projects/_placeholder/placeholder.webp",
+      "cover": "/assets/projects/allianz-trivandrum/lounge.webp",
+      "hero": "/assets/projects/allianz-trivandrum/branch.webp",
       "gallery": [
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp"
+        "/assets/projects/allianz-trivandrum/lounge.webp",
+        "/assets/projects/allianz-trivandrum/branch.webp",
+        "/assets/projects/allianz-trivandrum/reception.webp"
+      ]
+    },
+    "featured": false,
+    "published": true
+  },
+  {
+    "slug": "wells-fargo-chennai",
+    "title": "Wells Fargo, Embassy Splendid TechZone",
+    "discipline": "Workplace",
+    "location": "Pallavaram, Chennai, Tamil Nadu",
+    "year": 2023,
+    "area": null,
+    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
+    "lead": "A corporate office fit-out for Wells Fargo within Embassy Splendid TechZone, one of Chennai's largest Grade-A SEZ tech parks.",
+    "body": [
+      "Velmont delivered the interior fit-out for Wells Fargo International Solutions' office at Embassy Splendid TechZone, a roughly 5 million sq ft SEZ campus on Chennai's Pallavaram-Thoraipakkam Radial Road.",
+      "The scope covered workstation and cabin furniture, meeting room joinery, and finishes to the corporate-standard specification expected of a global financial-services tenant."
+    ],
+    "materials": [
+      "Modular Workstations",
+      "Raised Access Flooring",
+      "Glazed Meeting Rooms",
+      "Acoustic Ceiling Tiles",
+      "Custom Reception Joinery"
+    ],
+    "images": {
+      "cover": "/assets/projects/wells-fargo-chennai/office.webp",
+      "hero": "/assets/projects/wells-fargo-chennai/cafeteria.webp",
+      "gallery": [
+        "/assets/projects/wells-fargo-chennai/office.webp",
+        "/assets/projects/wells-fargo-chennai/cafeteria.webp",
+        "/assets/projects/wells-fargo-chennai/overview.webp"
+      ]
+    },
+    "featured": false,
+    "published": true
+  },
+  {
+    "slug": "kauvery-hospital-chennai",
+    "title": "Kauvery Hospital, Kovilambakkam",
+    "discipline": "Healthcare",
+    "location": "Radial Road, Kovilambakkam, Chennai, Tamil Nadu",
+    "year": 2023,
+    "area": null,
+    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
+    "lead": "Kauvery Hospitals' second Chennai multi-specialty facility on Radial Road, Kovilambakkam, with Centres of Excellence spanning Neuro, Cardiac, Gastro, Renal, and Women & Childcare.",
+    "body": [
+      "Velmont delivered the interior fit-out for Kauvery Hospital's Kovilambakkam facility, a multi-specialty hospital roughly 9 km from Chennai International Airport, covering Centres of Excellence in Neuro, Cardiac, Gastro, Renal, Women & Childcare, and Trauma & Emergency Medicine.",
+      "The scope spanned clinical and patient-care interiors, nurse stations, and waiting areas, built to healthcare-grade finish and hygiene standards."
+    ],
+    "materials": [
+      "Anti-Microbial Vinyl Flooring",
+      "Nurse Station Joinery",
+      "Modular Wall Cladding",
+      "Patient Room Casegoods",
+      "Acoustic Ceiling Systems"
+    ],
+    "images": {
+      "cover": "/assets/projects/kauvery-hospital-chennai/reception.webp",
+      "hero": "/assets/projects/kauvery-hospital-chennai/room.webp",
+      "gallery": [
+        "/assets/projects/kauvery-hospital-chennai/room.webp",
+        "/assets/projects/kauvery-hospital-chennai/reception.webp",
+        "/assets/projects/kauvery-hospital-chennai/waiting.webp"
+      ]
+    },
+    "featured": false,
+    "published": true
+  },
+  {
+    "slug": "shibaura-machine-chennai",
+    "title": "Shibaura Machine India HQ",
+    "discipline": "Workplace",
+    "location": "Chembarambakkam, Poonamallee, Chennai, Tamil Nadu",
+    "year": 2026,
+    "area": null,
+    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
+    "lead": "The India head office and manufacturing facility for Shibaura Machine, a Japanese plastic injection moulding machine manufacturer operating since 1991.",
+    "body": [
+      "Velmont is delivering interior fit-out works for Shibaura Machine India's head office and manufacturing facility on the Chennai-Bangalore Highway, Poonamallee Taluk — the Indian subsidiary of Japan's Shibaura Machine Co. (formerly Toshiba Machine).",
+      "The scope covers administrative office interiors alongside the facility's manufacturing operations, serving Shibaura's automotive, medical, FMCG, and packaging-industry clients."
+    ],
+    "materials": [
+      "Modular Workstations",
+      "Laminate Joinery",
+      "Glazed Cabin Partitions",
+      "Industrial-Grade Flooring",
+      "Acoustic Ceiling Tiles"
+    ],
+    "images": {
+      "cover": "/assets/projects/shibaura-machine-chennai/exterior.webp",
+      "hero": "/assets/projects/shibaura-machine-chennai/exterior-2.webp",
+      "gallery": [
+        "/assets/projects/shibaura-machine-chennai/exterior.webp",
+        "/assets/projects/shibaura-machine-chennai/exterior-2.webp",
+        "/assets/projects/shibaura-machine-chennai/exterior.webp"
+      ]
+    },
+    "featured": false,
+    "published": true
+  },
+  {
+    "slug": "mea-bangalore",
+    "title": "Ministry of External Affairs — Bangalore",
+    "discipline": "Workplace",
+    "location": "Bangalore, Karnataka",
+    "year": null,
+    "area": null,
+    "scope": "Workplace Interior Fit-Out",
+    "lead": "A government workplace delivered to specification for the Ministry of External Affairs, demanding precision, discretion, and adherence to public sector procurement and quality standards.",
+    "body": [
+      "Velmont delivered the interior fit-out for the Ministry of External Affairs' Bangalore office, a government workplace project requiring compliance with public sector procurement standards alongside the quality benchmarks Velmont applies to all projects in its portfolio.",
+      "The scope encompassed workstation systems, partitioning, joinery, storage solutions, and public-facing counter areas, all manufactured at Velmont's in-house facility and installed by Velmont's site teams."
+    ],
+    "materials": [
+      "Modular Workstations",
+      "Partition Systems",
+      "Built-In Storage Joinery",
+      "Anti-Static Flooring",
+      "False Ceiling Systems"
+    ],
+    "images": {
+      "cover": "/assets/projects/mea-bangalore/cover.webp",
+      "hero": "/assets/projects/mea-bangalore/cover.webp",
+      "gallery": [
+        "/assets/projects/mea-bangalore/cover.webp"
+      ]
+    },
+    "featured": false,
+    "published": true
+  },
+  {
+    "slug": "moxy-bangalore-airport",
+    "title": "Moxy Bengaluru Airport",
+    "discipline": "Hospitality",
+    "location": "Prestige Tech Cloud, Devanahalli, Bengaluru, Karnataka",
+    "year": 2023,
+    "area": null,
+    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
+    "lead": "India's first Moxy-branded hotel, 128 rooms minutes from Kempegowda International Airport within the Prestige Tech Cloud development.",
+    "body": [
+      "Velmont delivered the interior fit-out for Moxy Bengaluru Airport, the first Moxy-branded property in India, located within the Prestige Tech Cloud development near Kempegowda International Airport.",
+      "The 128-key hotel includes six suites, two restaurants, two bars, and an outdoor pool — Velmont's scope covered guest room furniture, joinery, and F&B interiors to Marriott brand standards."
+    ],
+    "materials": [
+      "Custom Joinery",
+      "Upholstered Furniture",
+      "Bespoke Casegoods",
+      "Decorative Lighting",
+      "Soft Furnishings"
+    ],
+    "images": {
+      "cover": "/assets/projects/moxy-bangalore-airport/entrance.webp",
+      "hero": "/assets/projects/moxy-bangalore-airport/entrance.webp",
+      "gallery": [
+        "/assets/projects/moxy-bangalore-airport/entrance.webp"
       ]
     },
     "featured": false,
@@ -375,70 +568,6 @@
     "published": true
   },
   {
-    "slug": "kauvery-hospital-chennai",
-    "title": "Kauvery Hospital, Kovilambakkam",
-    "discipline": "Healthcare",
-    "location": "Radial Road, Kovilambakkam, Chennai, Tamil Nadu",
-    "year": 2023,
-    "area": null,
-    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
-    "lead": "Kauvery Hospitals' second Chennai multi-specialty facility on Radial Road, Kovilambakkam, with Centres of Excellence spanning Neuro, Cardiac, Gastro, Renal, and Women & Childcare.",
-    "body": [
-      "Velmont delivered the interior fit-out for Kauvery Hospital's Kovilambakkam facility, a multi-specialty hospital roughly 9 km from Chennai International Airport, covering Centres of Excellence in Neuro, Cardiac, Gastro, Renal, Women & Childcare, and Trauma & Emergency Medicine.",
-      "The scope spanned clinical and patient-care interiors, nurse stations, and waiting areas, built to healthcare-grade finish and hygiene standards."
-    ],
-    "materials": [
-      "Anti-Microbial Vinyl Flooring",
-      "Nurse Station Joinery",
-      "Modular Wall Cladding",
-      "Patient Room Casegoods",
-      "Acoustic Ceiling Systems"
-    ],
-    "images": {
-      "cover": "/assets/projects/_placeholder/placeholder.webp",
-      "hero": "/assets/projects/_placeholder/placeholder.webp",
-      "gallery": [
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp"
-      ]
-    },
-    "featured": false,
-    "published": true
-  },
-  {
-    "slug": "moxy-bangalore-airport",
-    "title": "Moxy Bengaluru Airport",
-    "discipline": "Hospitality",
-    "location": "Prestige Tech Cloud, Devanahalli, Bengaluru, Karnataka",
-    "year": 2023,
-    "area": null,
-    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
-    "lead": "India's first Moxy-branded hotel, 128 rooms minutes from Kempegowda International Airport within the Prestige Tech Cloud development.",
-    "body": [
-      "Velmont delivered the interior fit-out for Moxy Bengaluru Airport, the first Moxy-branded property in India, located within the Prestige Tech Cloud development near Kempegowda International Airport.",
-      "The 128-key hotel includes six suites, two restaurants, two bars, and an outdoor pool — Velmont's scope covered guest room furniture, joinery, and F&B interiors to Marriott brand standards."
-    ],
-    "materials": [
-      "Custom Joinery",
-      "Upholstered Furniture",
-      "Bespoke Casegoods",
-      "Decorative Lighting",
-      "Soft Furnishings"
-    ],
-    "images": {
-      "cover": "/assets/projects/_placeholder/placeholder.webp",
-      "hero": "/assets/projects/_placeholder/placeholder.webp",
-      "gallery": [
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp"
-      ]
-    },
-    "featured": false,
-    "published": true
-  },
-  {
     "slug": "shangri-la-bangalore",
     "title": "Shangri-La Bengaluru",
     "discipline": "Hospitality",
@@ -471,70 +600,6 @@
     "published": true
   },
   {
-    "slug": "shell-nctb-bangalore",
-    "title": "Shell Technology Centre Bangalore",
-    "discipline": "Workplace",
-    "location": "Bagalur Road, Bengaluru, Karnataka",
-    "year": 2016,
-    "area": null,
-    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
-    "lead": "A LEED Gold-certified, 52-acre R&D campus housing up to 1,500 engineers — one of only three Shell technology centres worldwide.",
-    "body": [
-      "Velmont delivered interior fit-out works for Shell Technology Centre Bangalore, an innovation hub for LNG, subsurface modelling, data analytics, engineering design, distillation, and water technology, and one of Shell's three global technology centres alongside facilities in the USA and Netherlands.",
-      "The scope covered office and lab-support interiors across the LEED Gold-certified campus, built to the standards of a global energy-sector R&D facility."
-    ],
-    "materials": [
-      "Modular Workstations",
-      "Raised Access Flooring",
-      "Acoustic Ceiling Systems",
-      "Glazed Meeting Rooms",
-      "Laminate Joinery"
-    ],
-    "images": {
-      "cover": "/assets/projects/_placeholder/placeholder.webp",
-      "hero": "/assets/projects/_placeholder/placeholder.webp",
-      "gallery": [
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp"
-      ]
-    },
-    "featured": false,
-    "published": true
-  },
-  {
-    "slug": "shibaura-machine-chennai",
-    "title": "Shibaura Machine India HQ",
-    "discipline": "Workplace",
-    "location": "Chembarambakkam, Poonamallee, Chennai, Tamil Nadu",
-    "year": 2026,
-    "area": null,
-    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
-    "lead": "The India head office and manufacturing facility for Shibaura Machine, a Japanese plastic injection moulding machine manufacturer operating since 1991.",
-    "body": [
-      "Velmont is delivering interior fit-out works for Shibaura Machine India's head office and manufacturing facility on the Chennai-Bangalore Highway, Poonamallee Taluk — the Indian subsidiary of Japan's Shibaura Machine Co. (formerly Toshiba Machine).",
-      "The scope covers administrative office interiors alongside the facility's manufacturing operations, serving Shibaura's automotive, medical, FMCG, and packaging-industry clients."
-    ],
-    "materials": [
-      "Modular Workstations",
-      "Laminate Joinery",
-      "Glazed Cabin Partitions",
-      "Industrial-Grade Flooring",
-      "Acoustic Ceiling Tiles"
-    ],
-    "images": {
-      "cover": "/assets/projects/_placeholder/placeholder.webp",
-      "hero": "/assets/projects/_placeholder/placeholder.webp",
-      "gallery": [
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp"
-      ]
-    },
-    "featured": false,
-    "published": true
-  },
-  {
     "slug": "taj-cial-kochi",
     "title": "Taj Cochin International Airport",
     "discipline": "Hospitality",
@@ -553,38 +618,6 @@
       "Stone & Timber Flooring",
       "Decorative Lighting",
       "Bespoke Casegoods"
-    ],
-    "images": {
-      "cover": "/assets/projects/_placeholder/placeholder.webp",
-      "hero": "/assets/projects/_placeholder/placeholder.webp",
-      "gallery": [
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp",
-        "/assets/projects/_placeholder/placeholder.webp"
-      ]
-    },
-    "featured": false,
-    "published": true
-  },
-  {
-    "slug": "wells-fargo-chennai",
-    "title": "Wells Fargo, Embassy Splendid TechZone",
-    "discipline": "Workplace",
-    "location": "Pallavaram, Chennai, Tamil Nadu",
-    "year": 2023,
-    "area": null,
-    "scope": "Turnkey Interior Fit-Out & Furniture Manufacturing",
-    "lead": "A corporate office fit-out for Wells Fargo within Embassy Splendid TechZone, one of Chennai's largest Grade-A SEZ tech parks.",
-    "body": [
-      "Velmont delivered the interior fit-out for Wells Fargo International Solutions' office at Embassy Splendid TechZone, a roughly 5 million sq ft SEZ campus on Chennai's Pallavaram-Thoraipakkam Radial Road.",
-      "The scope covered workstation and cabin furniture, meeting room joinery, and finishes to the corporate-standard specification expected of a global financial-services tenant."
-    ],
-    "materials": [
-      "Modular Workstations",
-      "Raised Access Flooring",
-      "Glazed Meeting Rooms",
-      "Acoustic Ceiling Tiles",
-      "Custom Reception Joinery"
     ],
     "images": {
       "cover": "/assets/projects/_placeholder/placeholder.webp",

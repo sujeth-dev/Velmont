@@ -356,3 +356,37 @@ All images located at `assets/projects/taj-andaman/`
 - [ ] **All projects** — Confirm years Velmont was on-site (not hotel opening years) if different
 - [ ] **Social proof** — Any Velmont mentions in trade press for any of these projects?
 - [ ] **More projects** — Client mentioned 100+ projects; above is current launch set of 6
+
+---
+
+## Addendum — 2026-07-05 update
+
+The site now carries **19 projects** in three display tiers (live → newly-seeded → placeholder backlog),
+ordered in `data/projects.json`; the Work grid alternates image side automatically per row.
+
+### Newly wired with real photos (were placeholders)
+| Slug | Images | Source folder | Note |
+|---|---:|---|---|
+| `allianz-trivandrum` | 3 | `assets/projects/allianz-trivandrum/` | lounge / branch / reception |
+| `wells-fargo-chennai` | 3 | `assets/projects/wells-fargo-chennai/` | office / cafeteria / overview |
+| `kauvery-hospital-chennai` | 3 | `assets/projects/kauvery-hospital-chennai/` | reception / room / waiting |
+| `shell-nctb-bangalore` | 4 | `assets/projects/shell-nctb-bangalore/` | atrium / lounge / awards / entrance |
+| `shibaura-machine-chennai` | 2 | `assets/projects/shibaura-machine-chennai/` | ⚠️ both exterior — needs interiors |
+
+### New project (not in Excel master)
+- **`itc-grand-chola-chennai`** — ITC Grand Chola, Chennai (2013), 4 images. Ask client to add to sheet.
+
+### Data note
+- **Taj Malabar (`taj-malabar-kochi`, live) ≠ Taj CIAL (`taj-cial-kochi`, placeholder).** The
+  `velmont_data/.../Taj - Kochi/` folder held Taj **Malabar** images (label corrected). Taj CIAL still
+  needs its own airport-hotel photos.
+
+### Client-logo carousel (homepage "Trusted by")
+- New section between the projects reel and About Velmont; pure-CSS marquee in `src/css/home.css`,
+  rendered by `mountClients` in `src/js/home.js`, driven by
+  `public/assets/logos/clients/clients.json` (14 clients). Shows text wordmarks until real logo files
+  are dropped into `public/assets/logos/clients/` — see that folder's `README.md`.
+
+### Still outstanding
+- See `velmont_data/projects/_images-needed.md` for the full client image-request list (7 backlog
+  projects + MEA/Shibaura thin).

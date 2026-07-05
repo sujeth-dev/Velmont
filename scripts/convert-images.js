@@ -36,6 +36,13 @@ const SLUG_MAP = {
   'marriott-marquis-delhi': 'marriott-marquis-delhi',
   'mea-bangalore': 'mea-bangalore',
   'taj-exotica-andaman': 'taj-andaman',
+  'allianz-trivandrum': 'allianz-trivandrum',
+  'wells-fargo-chennai': 'wells-fargo-chennai',
+  'kauvery-hospital-chennai': 'kauvery-hospital-chennai',
+  'shell-nctb-bangalore': 'shell-nctb-bangalore',
+  'shibaura-machine-chennai': 'shibaura-machine-chennai',
+  'itc-grand-chola-chennai': 'itc-grand-chola-chennai',
+  'moxy-bangalore-airport': 'moxy-bangalore-airport',
 };
 
 const WEBP_QUALITY = 82;

@@ -93,6 +93,81 @@ async function loadProjects() {
   }
 }
 
+/**
+ * Build one logo item. Renders an <img> pointing at the client logo; if the
+ * file is missing it swaps to a clean text wordmark so the strip works before
+ * real logos are supplied.
+ * @param {{name:string,file:string}} c
+ * @param {boolean} clone - mark duplicated set as aria-hidden
+ * @returns {HTMLElement}
+ */
+export function renderClientItem(c, clone) {
+  const item = document.createElement('div');
+  item.className = 'vm-clients__item';
+  if (clone) item.setAttribute('aria-hidden', 'true');
+
+  const name = String(c.name || '');
+  const file = String(c.file || '').replace(/[^a-z0-9._-]/gi, '');
+
+  const wordmark = () => {
+    const span = document.createElement('span');
+    span.className = 'vm-clients__wordmark';
+    span.textContent = name;
+    item.replaceChildren(span);
+  };
+
+  if (!file) {
+    wordmark();
+    return item;
+  }
+  const img = document.createElement('img');
+  img.className = 'vm-clients__logo';
+  img.src = '/assets/logos/clients/' + file;
+  img.alt = name;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.addEventListener('error', wordmark, { once: true });
+  item.appendChild(img);
+  return item;
+}
+
+/**
+ * Mount the "Trusted by" logo marquee. Renders the client set twice so the
+ * pure-CSS marquee (translateX -50%) loops seamlessly.
+ * @param {HTMLElement} track
+ * @param {{name:string,file:string}[]} clients
+ */
+export function mountClients(track, clients) {
+  if (!track || !Array.isArray(clients) || !clients.length) return 0;
+  const frag = document.createDocumentFragment();
+  clients.forEach((c) => frag.appendChild(renderClientItem(c, false)));
+  clients.forEach((c) => frag.appendChild(renderClientItem(c, true)));
+  track.replaceChildren(frag);
+  return clients.length;
+}
+
+async function loadClients() {
+  try {
+    const res = await fetch('/assets/logos/clients/clients.json', { credentials: 'same-origin' });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+async function initClients() {
+  const track = document.querySelector('[data-clients]');
+  if (!track) return;
+  const clients = await loadClients();
+  if (!clients) {
+    const section = track.closest('.vm-clients');
+    if (section) section.hidden = true;
+    return;
+  }
+  mountClients(track, clients);
+}
+
 function initHeroCarousel() {
   const slides = document.querySelectorAll('.vm-hero__slide');
   if (!slides.length) return;
@@ -107,6 +182,7 @@ function initHeroCarousel() {
 
 export async function initHome() {
   initHeroCarousel();
+  initClients();
 
   const mount = document.querySelector('[data-tiles]');
   if (!mount) return;

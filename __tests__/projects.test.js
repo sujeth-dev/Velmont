@@ -27,9 +27,9 @@ const VALID_DISCIPLINES = ['Workplace', 'Healthcare', 'Hospitality', 'Commercial
 describe('data/projects.json', () => {
   const projects = JSON.parse(readFileSync(DATA_PATH, 'utf8'));
 
-  it('contains all 18 projects (6 launch + 12 seeded)', () => {
+  it('contains all 19 projects (6 launch + 12 seeded + ITC Grand Chola)', () => {
     expect(Array.isArray(projects)).toBe(true);
-    expect(projects).toHaveLength(18);
+    expect(projects).toHaveLength(19);
   });
 
   it.each(REQUIRED_FIELDS)('every project declares a "%s" field', (field) => {
