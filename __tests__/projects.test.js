@@ -8,6 +8,7 @@ const DATA_PATH = resolve(__dirname, '..', 'data', 'projects.json');
 
 const REQUIRED_FIELDS = [
   'slug',
+  'order',
   'title',
   'discipline',
   'location',
@@ -44,6 +45,12 @@ describe('data/projects.json', () => {
     for (const s of slugs) {
       expect(s).toMatch(/^[a-z0-9-]+$/);
     }
+  });
+
+  it('order is a unique integer per project (drives /work display order)', () => {
+    const orders = projects.map((p) => p.order);
+    for (const o of orders) expect(Number.isInteger(o)).toBe(true);
+    expect(new Set(orders).size).toBe(orders.length);
   });
 
   it('every discipline is one of the four approved categories', () => {

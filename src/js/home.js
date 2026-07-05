@@ -36,7 +36,7 @@ export function renderWorkTile(p) {
  * @returns {object[]}
  */
 export function selectPublished(projects) {
-  return projects.filter((p) => p.published);
+  return projects.filter((p) => p.published).sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 }
 
 /**

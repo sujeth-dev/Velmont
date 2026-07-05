@@ -295,7 +295,7 @@ async function initAdminDashboard() {
 
   async function loadAndRender() {
     try {
-      allProjects = await getAllProjects();
+      allProjects = (await getAllProjects()).sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
       if (loadingEl) loadingEl.remove();
 
       // Update stats bar

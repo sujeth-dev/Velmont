@@ -99,7 +99,9 @@ export async function initWork() {
     return;
   }
 
-  const published = projects.filter((p) => p.published);
+  const published = projects
+    .filter((p) => p.published)
+    .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
   grid.innerHTML = published.map((p, i) => renderGridTile(p, i + 1)).join('');
 
   // Wire filter buttons
