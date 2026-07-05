@@ -281,23 +281,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 120px;
-  height: 40px;
+  min-width: 150px;
+  height: 56px;
 }
 
 .vm-clients__logo {
-  max-height: 34px;
+  max-height: 48px;
   width: auto;
-  filter: grayscale(1);
-  opacity: 0.5;
-  transition:
-    filter var(--t-fast) var(--ease-default),
-    opacity var(--t-fast) var(--ease-default);
+  transition: transform var(--t-fast) var(--ease-default);
 }
 
 .vm-clients__item:hover .vm-clients__logo {
-  filter: none;
-  opacity: 1;
+  transform: scale(1.05);
 }
 
 /* Text fallback shown until a real logo file is supplied */
@@ -307,12 +302,6 @@
   letter-spacing: 0.01em;
   white-space: nowrap;
   color: var(--slate);
-  opacity: 0.6;
-  transition: opacity var(--t-fast) var(--ease-default);
-}
-
-.vm-clients__item:hover .vm-clients__wordmark {
-  opacity: 1;
 }
 
 @keyframes vm-marquee {
