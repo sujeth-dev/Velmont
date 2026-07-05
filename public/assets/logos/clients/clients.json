@@ -9,7 +9,7 @@
   { "name": "Apollo Hospitals", "file": "apollo.svg", "covers": "Apollo Hospital, Gurugram" },
   { "name": "Kauvery Hospital", "file": "kauvery.svg", "covers": "Kauvery Hospital, Chennai" },
   { "name": "Shell", "file": "shell.svg", "covers": "Shell Technology Centre, Bangalore" },
-  { "name": "Embassy Group", "file": "embassy.svg", "covers": "Embassy Splendid TechZone" },
+  { "name": "Embassy Group", "file": "embassy.png", "covers": "Embassy Splendid TechZone" },
   { "name": "Shibaura Machine", "file": "shibaura.svg", "covers": "Shibaura Machine India HQ" },
   { "name": "Gopalan Enterprises", "file": "gopalan.svg", "covers": "Gopalan Signature Mall" },
   { "name": "Ministry of External Affairs", "file": "mea.svg", "covers": "MEA, Bangalore" }
