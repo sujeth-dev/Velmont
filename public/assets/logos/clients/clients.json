@@ -3,14 +3,14 @@
   { "name": "Taj (IHCL)", "file": "taj.svg", "covers": "Taj Malabar, Taj Exotica Andaman, Taj CIAL" },
   { "name": "ITC Hotels", "file": "itc.svg", "covers": "ITC Ratnadipa, ITC Grand Chola" },
   { "name": "Hyatt", "file": "hyatt.svg", "covers": "Grand Hyatt, Ireo City" },
-  { "name": "Shangri-La", "file": "shangri-la.svg", "covers": "Shangri-La Bengaluru" },
+  { "name": "Shangri-La", "file": "shangri-la.webp", "covers": "Shangri-La Bengaluru" },
   { "name": "Allianz", "file": "allianz.svg", "covers": "Allianz Technology, Trivandrum" },
   { "name": "Wells Fargo", "file": "wells-fargo.svg", "covers": "Wells Fargo, Chennai" },
   { "name": "Apollo Hospitals", "file": "apollo.svg", "covers": "Apollo Hospital, Gurugram" },
   { "name": "Kauvery Hospital", "file": "kauvery.svg", "covers": "Kauvery Hospital, Chennai" },
   { "name": "Shell", "file": "shell.svg", "covers": "Shell Technology Centre, Bangalore" },
   { "name": "Embassy Group", "file": "embassy.png", "covers": "Embassy Splendid TechZone" },
-  { "name": "Shibaura Machine", "file": "shibaura.svg", "covers": "Shibaura Machine India HQ" },
+  { "name": "Shibaura Machine", "file": "shibaura.webp", "covers": "Shibaura Machine India HQ" },
   { "name": "Gopalan Enterprises", "file": "gopalan.svg", "covers": "Gopalan Signature Mall" },
   { "name": "Ministry of External Affairs", "file": "mea.svg", "covers": "MEA, Bangalore" }
 ]

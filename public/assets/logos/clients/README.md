@@ -12,13 +12,13 @@ carousel looks for here.
 ## To add a real logo
 1. Drop the logo file into this folder using the exact `file` name from `clients.json`
    (e.g. `marriott.svg`).
-2. Prefer **SVG** (or a transparent-background PNG, ~120px tall). Single-colour / monochrome
-   works best — the carousel renders logos greyscale by default and full-colour on hover.
-3. No build step needed for SVG/PNG here; they are served straight from `public/`.
+2. Prefer **SVG** (or a transparent-background PNG/WebP, ~120px tall). The carousel shows logos
+   at full color and size at rest, with a subtle scale-up on hover.
+3. No build step needed for SVG/PNG/WebP here; they are served straight from `public/`.
 
-## Status — 8 of 14 sourced (2026-07-05)
+## Status — 13 of 14 sourced (2026-07-05)
 
-Downloaded from Wikimedia Commons (public-domain / trademark-tagged files, free to reuse for
+8 downloaded from Wikimedia Commons (public-domain / trademark-tagged files, free to reuse for
 factual "our clients" reference — the marks themselves remain each owner's trademark):
 
 | Client | File | Source |
@@ -32,16 +32,22 @@ factual "our clients" reference — the marks themselves remain each owner's tra
 | Embassy Group | `embassy.png` | [File:Embassy_Group_Logo.png](https://commons.wikimedia.org/wiki/File:Embassy_Group_Logo.png) |
 | Ministry of External Affairs | `mea.svg` | [File:Ministry_of_External_Affairs_India.svg](https://commons.wikimedia.org/wiki/File:Ministry_of_External_Affairs_India.svg) |
 
-## Still to source manually (6)
+5 more supplied directly by the client and wired in (identified by inspecting each file's actual
+content, not filename, to avoid a wrong-brand mix-up):
+
+| Client | File |
+|---|---|
+| Allianz | `allianz.svg` |
+| Apollo Hospitals | `apollo.svg` |
+| Shangri-La | `shangri-la.webp` |
+| Shibaura Machine | `shibaura.webp` |
+| Gopalan Enterprises | `gopalan.svg` |
+
+## Still to source manually (1)
 
 | Client | Why not auto-sourced |
 |---|---|
-| **Allianz** | Was on Wikimedia Commons (`File:Allianz.svg`) but the CDN returned a persistent error during download — retry the same URL later, or grab from [Allianz's press/brand page](https://www.allianz.com/en/mediacenter.html). |
-| **Shangri-La** | Logo exists on English Wikipedia but is flagged non-free there (not mirrored to Commons) — source from [Shangri-La's official site](https://www.shangri-la.com) media kit instead. |
-| **Apollo Hospitals** | Not found on Wikimedia Commons. Source from Apollo Hospitals' official press kit. |
 | **Kauvery Hospital** | Only building photos on Commons, no logo mark. Source from kauveryhospital.com. |
-| **Shibaura Machine** | Search only surfaced an unrelated company ("IHI Shibaura") — do not use it, wrong brand. Source from shibaura-machine.co.jp. |
-| **Gopalan Enterprises** | No usable public source found. Source from gopalanenterprises.com. |
 
 Confirm usage rights before publishing (most brands permit factual "our clients" reference,
 but always worth a quick check against each brand's own guidelines).

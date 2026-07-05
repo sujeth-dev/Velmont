@@ -134,8 +134,10 @@
    01.3  Our Projects — sliding window carousel (3 visible, 1 advances)
    ---------------------------------------------------------------- */
 .vm-work {
-  border-top: 1px solid var(--mineral);
-  border-bottom: 1px solid var(--mineral);
+  background: var(--vblack);
+  color: rgba(255, 255, 255, 0.92);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
 }
 
@@ -144,7 +146,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 28px var(--pad-side);
-  border-bottom: 1px solid var(--mineral);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .vm-work__kicker {
@@ -153,7 +155,7 @@
   font-size: var(--fs-eyebrow);
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: rgba(209, 200, 188, 0.82);
   margin: 0;
 }
 
@@ -168,7 +170,7 @@
 
 .vm-work__tile {
   min-width: calc(100% / 3);
-  min-height: 360px;
+  min-height: 440px;
   flex-shrink: 0;
   padding: var(--pad-tile-y) var(--pad-tile-x); /* 28px 40px */
   display: flex;
@@ -176,12 +178,12 @@
   justify-content: space-between;
   text-decoration: none;
   color: inherit;
-  border-right: 1px solid var(--mineral);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
   transition: background var(--t-fast) var(--ease-default);
 }
 
 .vm-work__tile:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .vm-work__tile__discipline {
@@ -190,7 +192,7 @@
   font-size: 11px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: rgba(255, 255, 255, 0.6);
   margin: 0 0 24px;
 }
 
@@ -200,14 +202,14 @@
   font-weight: 400;
   font-size: var(--fs-work-tile-name); /* 28px */
   line-height: 1.18;
-  color: var(--vblack);
+  color: #fff;
   margin: 0 0 16px;
 }
 
 .vm-work__tile__location {
   font-family: var(--body);
   font-size: 13px;
-  color: var(--mineral);
+  color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.04em;
   margin: 0 0 28px;
 }
@@ -217,7 +219,7 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 18px;
-  border-top: 1px solid var(--mineral);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .vm-work__tile__year {
@@ -225,7 +227,7 @@
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--mineral);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .vm-work__tile__arrow {
@@ -281,12 +283,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 150px;
-  height: 56px;
+  min-width: 180px;
+  height: 96px;
 }
 
 .vm-clients__logo {
-  max-height: 48px;
+  max-height: 76px;
   width: auto;
   transition: transform var(--t-fast) var(--ease-default);
 }
@@ -367,50 +369,58 @@
    Grid: 240px label + 4 disciplines
    ---------------------------------------------------------------- */
 .vm-disciplines {
+  min-height: 100vh;
+  padding: 120px var(--pad-side);
   display: grid;
-  grid-template-columns: 240px repeat(4, 1fr);
+  grid-template-columns: 340px 1fr;
+  gap: 100px;
+  align-items: center;
   border-top: 1px solid var(--mineral);
   border-bottom: 1px solid var(--mineral);
 }
 
 .vm-disciplines__intro {
-  padding: 34px 0 34px var(--pad-side);
-  border-right: 1px solid var(--mineral);
   display: flex;
   align-items: center;
 }
 
-.vm-disciplines__cell {
-  padding: 34px 40px;
-  border-right: 1px solid var(--mineral);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.vm-disciplines__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.vm-disciplines__cell:last-child {
-  border-right: 0;
+.vm-disciplines__cell {
+  padding: 0 36px;
+  border-left: 1px solid var(--mineral);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.vm-disciplines__cell:first-child {
+  padding-left: 0;
+  border-left: 0;
 }
 
 .vm-disciplines__num {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 22px;
-  letter-spacing: 0.16em;
+  font-size: 64px;
+  letter-spacing: 0.06em;
   color: var(--mineral);
 }
 
 .vm-disciplines__name {
   font-family: var(--head);
   font-weight: 600;
-  font-size: 22px;
+  font-size: 28px;
   letter-spacing: -0.01em;
   color: var(--vblack);
 }
 
 .vm-disciplines__desc {
   font-family: var(--body);
-  font-size: 12.5px;
+  font-size: 14.5px;
   letter-spacing: 0.04em;
   color: var(--slate);
 }
