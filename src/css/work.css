@@ -177,15 +177,6 @@
   padding: 52px var(--pad-tile-x) 52px var(--pad-side);
 }
 
-.vm-grid-tile__index {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: var(--fs-display-num); /* 52px */
-  letter-spacing: 0.06em;
-  line-height: 1;
-  color: var(--concrete);
-  margin: 0 0 28px;
-}
 
 .vm-grid-tile__discipline {
   font-family: var(--body);

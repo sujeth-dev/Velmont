@@ -290,6 +290,133 @@
 }
 
 /* ----------------------------------------------------------------
+   Prev / Next project navigation bar
+   ---------------------------------------------------------------- */
+.vm-proj-nav {
+  display: flex;
+  border-bottom: 1px solid var(--mineral);
+}
+
+.vm-proj-nav__btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 36px var(--pad-side);
+  text-decoration: none;
+  color: var(--vblack);
+  transition: background 0.2s;
+}
+
+.vm-proj-nav__btn:hover {
+  background: var(--concrete);
+}
+
+.vm-proj-nav__btn--next {
+  justify-content: flex-end;
+  border-left: 1px solid var(--mineral);
+}
+
+.vm-proj-nav__arrow {
+  font-size: 24px;
+  color: var(--terracotta);
+  flex-shrink: 0;
+}
+
+.vm-proj-nav__label {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.vm-proj-nav__title {
+  font-family: var(--head);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  display: block;
+}
+
+/* ----------------------------------------------------------------
+   Other Projects strip
+   ---------------------------------------------------------------- */
+.vm-other-projects {
+  padding: 72px var(--pad-side);
+  border-bottom: 1px solid var(--mineral);
+}
+
+.vm-other-projects__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.vm-other-projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--col-gap, 80px);
+}
+
+.vm-other-tile {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vm-other-tile__img-wrap {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--concrete);
+}
+
+.vm-other-tile__img-wrap picture {
+  display: contents;
+}
+
+.vm-other-tile__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.vm-other-tile:hover .vm-other-tile__img {
+  transform: scale(1.04);
+}
+
+.vm-other-tile__disc {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.vm-other-tile__title {
+  font-family: var(--head);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 4px 0 0;
+}
+
+.vm-other-tile__loc {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--slate);
+}
+
+/* ----------------------------------------------------------------
    Lightbox — full-screen image viewer
    ---------------------------------------------------------------- */
 .vm-lightbox {

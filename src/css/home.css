@@ -371,10 +371,10 @@
 .vm-disciplines {
   min-height: 100vh;
   padding: 120px var(--pad-side);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 64px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 100px;
+  align-items: center;
   border-top: 1px solid var(--mineral);
   border-bottom: 1px solid var(--mineral);
 }
@@ -386,16 +386,20 @@
 
 .vm-disciplines__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .vm-disciplines__cell {
-  padding: 40px;
-  border: 1px solid var(--mineral);
+  padding: 0 36px;
+  border-left: 1px solid var(--mineral);
   display: flex;
   flex-direction: column;
   gap: 22px;
+}
+
+.vm-disciplines__cell:first-child {
+  padding-left: 0;
+  border-left: 0;
 }
 
 .vm-disciplines__num {

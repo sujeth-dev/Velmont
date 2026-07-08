@@ -89,6 +89,72 @@ function initLightbox(images, projectTitle) {
 }
 
 /**
+ * Build a cover-image tile for the "Other Projects" strip.
+ * @param {object} p - project record
+ * @returns {string}
+ */
+export function renderOtherTile(p) {
+  const slug = String(p.slug || '').replace(/[^a-z0-9-]/gi, '');
+  const title = String(p.title || '');
+  const cover = String(p.images?.cover || p.images?.hero || '');
+  const avif = avifFor(cover);
+  return [
+    `<a class="vm-other-tile" href="/work/${slug}">`,
+    `<div class="vm-other-tile__img-wrap">`,
+    `<picture>`,
+    avif ? `<source type="image/avif" srcset="${avif}" />` : '',
+    `<img class="vm-other-tile__img" src="${cover}" alt="${title}" loading="lazy" width="480" height="360" />`,
+    `</picture>`,
+    `</div>`,
+    `<p class="vm-other-tile__disc">${p.discipline || ''}</p>`,
+    `<p class="vm-other-tile__title">${title}</p>`,
+    `<p class="vm-other-tile__loc">${p.location || ''}</p>`,
+    `</a>`,
+  ].join('');
+}
+
+/**
+ * Wire prev/next nav buttons and the "Other Projects" strip.
+ * @param {string} slug - current project slug
+ * @param {object[]} published - all published projects (unsorted)
+ */
+function hydrateNav(slug, published) {
+  const sorted = [...published].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+  const idx = sorted.findIndex((p) => p.slug === slug);
+
+  const prevProj = idx > 0 ? sorted[idx - 1] : null;
+  const nextProj = idx < sorted.length - 1 ? sorted[idx + 1] : null;
+
+  function wireBtn(btnSel, titleSel, proj) {
+    const btn = document.querySelector(btnSel);
+    if (!btn || !proj) return;
+    btn.href = '/work/' + proj.slug;
+    const titleEl = document.querySelector(titleSel);
+    if (titleEl) titleEl.textContent = proj.title;
+    btn.removeAttribute('hidden');
+  }
+
+  wireBtn('[data-proj-nav-prev]', '[data-proj-nav-prev-title]', prevProj);
+  wireBtn('[data-proj-nav-next]', '[data-proj-nav-next-title]', nextProj);
+
+  // Other Projects: up to 3 projects adjacent to current, excluding self
+  const others = sorted.filter((p) => p.slug !== slug).slice(
+    Math.max(0, idx - 1),
+    Math.max(0, idx - 1) + 3,
+  );
+  // Fall back to first 3 if we don't have enough adjacent ones
+  const fill = others.length < 3
+    ? sorted.filter((p) => p.slug !== slug && !others.includes(p)).slice(0, 3 - others.length)
+    : [];
+  const tiles = [...others, ...fill].slice(0, 3);
+
+  const otherGrid = document.querySelector('[data-other-projects]');
+  if (otherGrid && tiles.length) {
+    otherGrid.innerHTML = tiles.map(renderOtherTile).join('');
+  }
+}
+
+/**
  * Hydrate the project detail page with data from the given project record.
  */
 export function hydratePage(project) {
@@ -149,7 +215,7 @@ export function hydratePage(project) {
   // Gallery — adaptive, supports 1–5 images; sets data-count for CSS layout
   const gallery = document.querySelector('.vm-proj-gallery');
   const galleryImgs = document.querySelectorAll('[data-gallery-img]');
-  const galleryArr = Array.isArray(project.images?.gallery) ? project.images.gallery : [];
+  const galleryArr = (Array.isArray(project.images?.gallery) ? project.images.gallery : []).filter(Boolean);
   let galleryCount = 0;
 
   galleryImgs.forEach((img) => {
@@ -216,4 +282,5 @@ export async function initProject() {
   }
 
   hydratePage(project);
+  hydrateNav(slug, published);
 }

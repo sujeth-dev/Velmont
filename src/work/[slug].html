@@ -170,6 +170,35 @@
         <img class="vm-lightbox__img" src="" alt="" />
         <button class="vm-lightbox__next" aria-label="Next image">&#8250;</button>
       </div>
+
+      <!-- Prev / Next project navigation -->
+      <nav class="vm-proj-nav" aria-label="Project navigation">
+        <a class="vm-proj-nav__btn vm-proj-nav__btn--prev" data-proj-nav-prev href="#" hidden>
+          <span class="vm-proj-nav__arrow" aria-hidden="true">←</span>
+          <span class="vm-proj-nav__meta">
+            <span class="vm-proj-nav__label">Previous</span>
+            <span class="vm-proj-nav__title" data-proj-nav-prev-title></span>
+          </span>
+        </a>
+        <a class="vm-proj-nav__btn vm-proj-nav__btn--next" data-proj-nav-next href="#" hidden>
+          <span class="vm-proj-nav__meta">
+            <span class="vm-proj-nav__label">Next</span>
+            <span class="vm-proj-nav__title" data-proj-nav-next-title></span>
+          </span>
+          <span class="vm-proj-nav__arrow" aria-hidden="true">→</span>
+        </a>
+      </nav>
+
+      <!-- Other Projects -->
+      <section class="vm-other-projects" aria-labelledby="other-proj-h">
+        <header class="vm-other-projects__hd">
+          <p class="vm-kicker" id="other-proj-h">Other Projects</p>
+          <a class="vm-link" href="/work">View All <span aria-hidden="true">→</span></a>
+        </header>
+        <div class="vm-other-projects__grid" data-other-projects>
+          <!-- Hydrated by project.js -->
+        </div>
+      </section>
     </main>
 
     <div id="footer-mount" data-component="footer"></div>

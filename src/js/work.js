@@ -4,21 +4,11 @@
 import { avifFor } from './picture-utils.js';
 
 /**
- * Pad a tile index to two digits: 1 → "01"
- * @param {number} n
- * @returns {string}
- */
-function padIndex(n) {
-  return String(n).padStart(2, '0');
-}
-
-/**
  * Build the HTML for a single project grid tile.
  * @param {object} p - project record
- * @param {number} index - 1-based display index
  * @returns {string}
  */
-export function renderGridTile(p, index) {
+export function renderGridTile(p) {
   const slug = String(p.slug || '').replace(/[^a-z0-9-]/gi, '');
   const year = p.year != null ? String(p.year) : '—';
   const loc = String(p.location || '');
@@ -36,7 +26,6 @@ export function renderGridTile(p, index) {
     `</div>`,
     `<div class="vm-grid-tile__content">`,
     `<div>`,
-    `<span class="vm-grid-tile__index">${padIndex(index)}</span>`,
     `<p class="vm-grid-tile__discipline">${p.discipline || ''}</p>`,
     `<p class="vm-grid-tile__name">${title}</p>`,
     `<p class="vm-grid-tile__meta">${meta}</p>`,
@@ -102,7 +91,7 @@ export async function initWork() {
   const published = projects
     .filter((p) => p.published)
     .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
-  grid.innerHTML = published.map((p, i) => renderGridTile(p, i + 1)).join('');
+  grid.innerHTML = published.map((p) => renderGridTile(p)).join('');
 
   // Wire filter buttons
   const filterBtns = document.querySelectorAll('[data-filter-btn]');
