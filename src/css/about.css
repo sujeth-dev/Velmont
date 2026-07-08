@@ -43,11 +43,6 @@
   animation: vm-page-hero-fade 1.4s ease forwards;
 }
 
-@keyframes vm-page-hero-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
 .vm-page-hero picture {
   display: contents;
 }
