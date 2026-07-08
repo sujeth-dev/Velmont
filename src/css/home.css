@@ -369,8 +369,7 @@
    Grid: 240px label + 4 disciplines
    ---------------------------------------------------------------- */
 .vm-disciplines {
-  min-height: 100vh;
-  padding: 120px var(--pad-side);
+  padding: 72px var(--pad-side);
   display: grid;
   grid-template-columns: 340px 1fr;
   gap: 100px;
