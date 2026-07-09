@@ -17,6 +17,21 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    // Mobile/tablet run on Chromium (not WebKit) to match this project's
+    // Chromium-only browser install (see `npm run e2e:install`).
+    {
+      name: 'mobile',
+      use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'tablet',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 768, height: 1024 },
+        hasTouch: true,
+        isMobile: true,
+      },
+    },
   ],
   webServer: {
     command: 'npm run preview:ci',

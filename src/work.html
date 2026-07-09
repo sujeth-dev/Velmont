@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1200" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="Velmont Design Studio project portfolio — 100+ commercial interior projects across hospitality, workplace, healthcare and commercial fit-out."
@@ -100,7 +100,7 @@
     <div id="footer-mount" data-component="footer"></div>
 
     <script type="module">
-      import { injectComponent, markActiveNavLink } from './js/components.js';
+      import { injectComponent, markActiveNavLink, initMobileNav } from './js/components.js';
       import { initWork } from './js/work.js';
 
       async function init() {
@@ -109,6 +109,7 @@
           injectComponent('#footer-mount', '/components/footer.html'),
         ]);
         markActiveNavLink();
+        initMobileNav();
         initWork();
       }
 

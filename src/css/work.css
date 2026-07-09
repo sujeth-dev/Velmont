@@ -227,3 +227,60 @@
   color: var(--terracotta);
   font-size: 20px;
 }
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+@media (max-width: 1023px) {
+  .vm-work-hero {
+    padding: 40px var(--pad-side);
+    min-height: 440px;
+    max-height: 600px;
+  }
+
+  .vm-work-hero__h {
+    font-size: 44px;
+  }
+
+  /* Filter bar — 5 buttons don't fit a narrow viewport; scroll instead
+     of wrap so the underline/active-state interaction stays intact. */
+  .vm-work-filter {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .vm-work-filter__btn {
+    flex-shrink: 0;
+    padding: 16px 18px;
+  }
+
+  .vm-grid-tile {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .vm-grid-tile__img-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .vm-grid-tile:nth-child(even) .vm-grid-tile__img-wrap {
+    order: 0;
+  }
+
+  .vm-grid-tile__content,
+  .vm-grid-tile:nth-child(even) .vm-grid-tile__content {
+    border-left: 0;
+    border-right: 0;
+    padding: 32px var(--pad-side);
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-work-hero {
+    min-height: 380px;
+    max-height: 480px;
+    padding: 28px var(--pad-side);
+  }
+
+  .vm-work-hero__h {
+    font-size: 32px;
+  }
+}

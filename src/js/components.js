@@ -62,3 +62,55 @@ export function markActiveNavLink(pathname) {
     link.setAttribute('aria-current', 'page');
   }
 }
+
+function closeNavPanel(nav, toggle) {
+  nav.classList.remove('vm-nav--open');
+  toggle.setAttribute('aria-expanded', 'false');
+  document.documentElement.classList.remove('vm-nav-open-lock');
+}
+
+function openNavPanel(nav, toggle) {
+  nav.classList.add('vm-nav--open');
+  toggle.setAttribute('aria-expanded', 'true');
+  document.documentElement.classList.add('vm-nav-open-lock');
+}
+
+/**
+ * Wires the mobile hamburger menu (nav.html's `.vm-nav__toggle` button).
+ * Uses delegated events on `document` rather than binding directly to the
+ * injected nav element, since `injectComponent` resolves the nav markup
+ * asynchronously and this can safely be called before or after that
+ * resolves. Kept here (in the module every page already imports) rather
+ * than as its own file, so it shares this module's existing JS chunk
+ * instead of creating a second one that would reorder page CSS.
+ */
+export function initMobileNav() {
+  document.addEventListener('click', (e) => {
+    const toggle = e.target.closest('.vm-nav__toggle');
+    if (toggle) {
+      const nav = toggle.closest('.vm-nav');
+      if (!nav) return;
+      if (nav.classList.contains('vm-nav--open')) closeNavPanel(nav, toggle);
+      else openNavPanel(nav, toggle);
+      return;
+    }
+
+    // Clicking a link inside the open panel (or the brand logo) closes it.
+    const link = e.target.closest('.vm-nav__panel a, .vm-nav__brand');
+    if (link) {
+      const nav = link.closest('.vm-nav');
+      const navToggle = nav && nav.querySelector('.vm-nav__toggle');
+      if (nav && navToggle && nav.classList.contains('vm-nav--open')) {
+        closeNavPanel(nav, navToggle);
+      }
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const openNav = document.querySelector('.vm-nav--open');
+    if (!openNav) return;
+    const toggle = openNav.querySelector('.vm-nav__toggle');
+    if (toggle) closeNavPanel(openNav, toggle);
+  });
+}

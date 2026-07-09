@@ -91,3 +91,24 @@
 .vm-manuf--dark .vm-manuf__placeholder-label {
   color: rgba(255, 255, 255, 0.6);
 }
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+@media (max-width: 1023px) {
+  .vm-services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vm-service {
+    padding: 28px 20px;
+  }
+
+  .vm-service__title {
+    font-size: 20px;
+  }
+}

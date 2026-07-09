@@ -49,6 +49,25 @@ export function selectFeatured(projects) {
 }
 
 /**
+ * Measures one tile's rendered width as a percentage of its slider
+ * viewport's width. Replaces a hardcoded "100/3" constant so the slide
+ * transform math stays correct at any tile width the CSS sets per
+ * breakpoint (desktop shows 3 tiles, mobile/tablet show fewer).
+ * @param {HTMLElement} mount - the sliding `.vm-work__slides` track
+ * @returns {number} percentage (0-100)
+ */
+export function measureTilePct(mount) {
+  const FALLBACK = 100 / 3;
+  const tile = mount && mount.querySelector('.vm-work__tile');
+  const viewport = mount && mount.parentElement;
+  if (!tile || !viewport) return FALLBACK;
+  const tileWidth = tile.getBoundingClientRect().width;
+  const viewportWidth = viewport.getBoundingClientRect().width;
+  if (!tileWidth || !viewportWidth) return FALLBACK;
+  return (tileWidth / viewportWidth) * 100;
+}
+
+/**
  * Mount sliding-window carousel.
  * Renders all published tiles, then appends clones of the first 3 so the
  * loop can snap back to index 0 without a visible jump.
@@ -200,15 +219,17 @@ export async function initHome() {
   const n = mountFeatured(mount, projects);
   if (!n) return;
 
-  // One tile width = 100% / 3 of the slider container
-  const TILE_PCT = 100 / 3;
+  // Tile width as a % of the viewport — measured, not hardcoded, since
+  // responsive.css shows a different tile count per breakpoint (3 on
+  // desktop, ~2 on tablet, ~1 on mobile).
+  let tilePct = measureTilePct(mount);
   let index = 0;
   let timer;
 
   // Manage transition directly via style — more reliable than class toggling
   function goTo(i, animate) {
     mount.style.transition = animate ? 'transform 0.85s cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
-    mount.style.transform = `translateX(-${i * TILE_PCT}%)`;
+    mount.style.transform = `translateX(-${i * tilePct}%)`;
   }
 
   function advance() {
@@ -243,4 +264,16 @@ export async function initHome() {
       timer = setInterval(advance, 4500);
     });
   }
+
+  // Re-measure on resize/orientation change (e.g. rotating a phone, or a
+  // breakpoint change) — the current slide is kept, just re-positioned at
+  // the newly-correct percentage, with no transition so it doesn't jump.
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      tilePct = measureTilePct(mount);
+      goTo(index, false);
+    }, 150);
+  });
 }

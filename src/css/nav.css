@@ -74,6 +74,52 @@
   border-bottom-color: var(--terracotta);
 }
 
+/* ---- Mobile menu toggle + panel ----
+   Hidden at desktop by default; the responsive block at the end of this
+   file activates them below 1024px. .vm-nav__panel uses display:contents
+   at desktop so its children (links + CTA) remain direct flex items of
+   .vm-nav — this preserves the exact original 3-item space-between
+   layout without any desktop-specific styling needed here. */
+.vm-nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.vm-nav__toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--vblack);
+  transition:
+    transform var(--t-fast) var(--ease-default),
+    opacity var(--t-fast) var(--ease-default);
+}
+
+.vm-nav--open .vm-nav__toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.vm-nav--open .vm-nav__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.vm-nav--open .vm-nav__toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.vm-nav__panel {
+  display: contents;
+}
+
 /* ---- Enquire CTA ---- */
 .vm-nav__cta {
   display: inline-block;
@@ -96,4 +142,61 @@
 .vm-nav__cta:hover {
   background: var(--terracotta);
   color: var(--paper);
+}
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+@media (max-width: 1023px) {
+  .vm-nav__toggle {
+    display: flex;
+  }
+
+  .vm-nav__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 32px;
+    position: fixed;
+    inset: var(--nav-h) 0 0 0;
+    background: var(--paper);
+    padding: 40px var(--pad-side);
+    overflow-y: auto;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition:
+      transform var(--t-base) var(--ease-default),
+      visibility 0s linear var(--t-base);
+    z-index: 19;
+  }
+
+  .vm-nav--open .vm-nav__panel {
+    transform: translateX(0);
+    visibility: visible;
+    transition:
+      transform var(--t-base) var(--ease-default),
+      visibility 0s linear 0s;
+  }
+
+  .vm-nav__links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .vm-nav__link {
+    font-size: 20px;
+    padding: 10px 0;
+    display: block;
+  }
+
+  .vm-nav__cta {
+    width: 100%;
+    text-align: center;
+    padding: 16px 28px;
+  }
+
+  html.vm-nav-open-lock {
+    overflow: hidden;
+  }
 }

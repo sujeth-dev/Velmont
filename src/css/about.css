@@ -175,3 +175,32 @@
   padding: 36px;
   text-align: center;
 }
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ----
+   .vm-page-hero here is shared by about.html, services.html, contact.html
+   (all three load about.css). */
+@media (max-width: 1023px) {
+  .vm-page-hero {
+    padding: 40px var(--pad-side);
+    min-height: 440px;
+    max-height: 600px;
+  }
+
+  .vm-approach,
+  .vm-manuf {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .vm-manuf__h {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-page-hero {
+    min-height: 380px;
+    max-height: 480px;
+    padding: 28px var(--pad-side);
+  }
+}

@@ -469,7 +469,7 @@ display: flex; justify-content: space-between; align-items: center
 | Hero eyebrow color (on dark bg) | "rgba warm" (vague) | `rgba(209,200,188,0.82)` — exact |
 | Nav link color (inactive) | slate `#68778D` | `#5a5550` — warm near-black |
 | Mineral token usage | borders only | Also used as **muted text** in `wt-year`, `ws-note`, `wt-ind` fallback |
-| Body min-width | not documented | `min-width: 1200px` — **desktop-only layout, no mobile breakpoints in reference** |
+| Body min-width | not documented | `min-width: 1200px` at desktop (≥1024px) — see "Mobile / Responsiveness" below |
 | Project body text size | 14–16px generic | `14.5px` specifically in `.proj-text-col p` |
 | Studio body text size | 14–16px generic | `15px` specifically in `.studio-text p` |
 | Studio body max-width | not noted | `max-width: 460px` |
@@ -477,7 +477,12 @@ display: flex; justify-content: space-between; align-items: center
 | Process head p max-width | not noted | `max-width: 300px` |
 
 ### Mobile / Responsiveness
-The approved reference files (`index.html`, `work.html`) contain **zero `@media` queries**. The body has `min-width: 1200px`. The design is **desktop-only** as approved. A responsive build would require additional design decisions beyond what the reference provides.
+As of 2026-07-10 (see `DECISIONS.md`), the 6 public pages are responsive at three tiers:
+- **Mobile** — up to 599px
+- **Tablet** — 600–1023px
+- **Desktop** — 1024px+ (the layout documented throughout this guide — `min-width: 1200px` applies here, unchanged)
+
+No mobile mockups were provided by the client, so the mobile/tablet adaptation (nav collapse into an off-canvas hamburger panel, grid stacking order, fluid type scale via `clamp()`) is an engineering judgment call that preserves the desktop brand look rather than a spec handed down from design. Every responsive rule lives in a `max-width` media query appended to the end of its page/component's own CSS file (`nav.css`, `home.css`, `work.css`, etc. — not a separate stylesheet, see `DECISIONS.md` for why), so desktop rendering at ≥1024px is unchanged from what's documented in the rest of this guide. The admin panel remains desktop-only (internal tool, out of scope).
 
 ---
 

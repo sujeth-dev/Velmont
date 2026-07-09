@@ -4,6 +4,45 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Mobile-Responsive Retrofit — Public Site
+
+| Field | Value |
+|---|---|
+| Date | 2026-07-10 |
+| Status | Complete |
+| Branch | main |
+
+### What shipped
+
+- **Unlocked the viewport** on all 6 public pages: `<meta name="viewport">` changed from `content="width=1200"` to `content="width=device-width, initial-scale=1"`; `body { min-width: 1200px }` in `base.css` scoped to `@media (min-width: 1024px)` only. Admin panel left untouched (still locked to 1200 — out of scope, confirmed with client).
+- **Three-tier breakpoint system** — mobile (≤599px), tablet (600–1023px), desktop (≥1024px, unchanged). Every page/component CSS file (`nav.css`, `footer.css`, `common.css`, `home.css`, `work.css`, `project.css`, `about.css`, `services.css`, `contact.css`) got its own `@media` override block appended at the end of that same file, plus a shared spacing/sizing token override block in `base.css`. A single new `responsive.css` file was tried first and abandoned — Vite's CSS code-splitting doesn't reliably preserve `<link>` order across chunks once a page's CSS is split, which silently broke every override (see `DECISIONS.md`).
+- **Fluid typography** — `--fs-hero-h1`, `--fs-project-h1`, `--fs-section-h2`, `--fs-section-h3-dark`, `--fs-editorial-lead`, `--fs-work-tile-name`, `--fs-display-num` converted to `clamp()` in `tokens.css`, upper-bounded at the exact pre-existing desktop value so ≥1024px renders pixel-identical to before.
+- **Mobile nav** — new hamburger toggle + off-canvas panel: markup in `src/components/nav.html`, `initMobileNav()` added to `src/js/components.js` (delegated `document` listeners so it works regardless of which of the 3 different nav-injection call sites ran), CSS in `nav.css` (`.vm-nav__panel` uses `display: contents` at desktop so it's a no-op there, `position: fixed` + `transform`/`visibility` toggle below 1024px).
+- **Home carousel fix** (`src/js/home.js`) — the "Our Projects" slider's `translateX` math was hardcoded to `TILE_PCT = 100/3` (assuming exactly 3 visible tiles). New `measureTilePct()` reads the actual rendered tile width at runtime instead, recalculated on debounced resize — needed since mobile/tablet show fewer visible tiles.
+- **Real bug found and fixed**: `.vm-proj-gallery__img` (project detail gallery) was missing `min-width: 0`, so grid items blew out past their track on the *existing*, pre-existing `@media (max-width: 767px)` mobile rule in `project.css` — this bug has existed since Phase 3 but was invisible until the `width=1200` viewport lock was removed.
+- **Testing**: `playwright.config.js` gained `mobile` (Pixel 5 viewport) and `tablet` (768×1024) projects — both Chromium-based (WebKit device profiles were tried first but this repo only has Chromium installed). New `e2e/mobile-nav.spec.js` covers hamburger open/close/Escape. Full existing suite re-run across all 3 projects.
+- **Accessibility**: fixed a pre-existing near-miss contrast failure on `.vm-footer__tagline` (4.47:1 vs 4.5:1 required) — surfaced for the first time by this being the first-ever mobile-emulated Lighthouse run on this site (previous runs were all desktop-preset).
+- Docs updated: `DECISIONS.md` (new entry, supersedes the 2026-06-21 "No responsive/mobile design" entry), `plan/DESIGN_GUIDE.md` §4 "Mobile / Responsiveness" section corrected.
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | Pass — 89/89 (4 new `measureTilePct` tests in `home.test.js`) |
+| ESLint / Prettier | Clean |
+| Vite build | Clean — desktop output byte-for-byte unaffected at ≥1024px (verified via scrollWidth/clientWidth parity across all 6 pages) |
+| Playwright (chromium/mobile/tablet × 8 spec files) | 117 passed, 7 new mobile-nav tests passed. 42 failures — identical across all 3 projects, confirming pre-existing data drift (`e2e/work.spec.js`/`home.spec.js` hardcode "18 project tiles"; `data/projects.json` now has 19 published projects), not a responsive regression. Not fixed — out of scope (content sync, not layout). |
+| Manual overflow check (Playwright, 6 pages × 3 viewports) | 375px, 768px, 1440px — zero horizontal overflow on any page after fixes |
+| Lighthouse (mobile-emulated, first ever mobile run on this site) | Accessibility 0.95, SEO 1.0, Best Practices 1.0, Performance 0.50 (expected — no responsive `srcset` work done, images stay full desktop-resolution on mobile; flagged as a follow-up, not fixed here) |
+
+### Carry-overs
+
+- Performance on mobile (0.50) is meaningfully lower than desktop — the image pipeline (`scripts/convert-images.js`) only emits one fixed resolution per image; real mobile performance gains need multi-width `srcset` generation, a separate, larger piece of work.
+- `e2e/work.spec.js` / `e2e/home.spec.js` project-count and title assertions are stale (18 vs 19 published projects, at least one renamed project). Pre-existing, unrelated to this phase — needs a content-sync pass.
+- Admin panel is still desktop-only by design (internal tool). Revisit if the client wants to manage content from a phone/tablet.
+
+---
+
 ## Phase 7 — Production Hardening (SEO, Brand Assets, Accessibility)
 
 | Field | Value |

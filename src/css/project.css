@@ -236,7 +236,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  min-height: 0; /* prevent grid blowout */
+  min-width: 0; /* prevent grid blowout (horizontal) */
+  min-height: 0; /* prevent grid blowout (vertical) */
   cursor: pointer;
 }
 
@@ -484,4 +485,52 @@
 
 .vm-lightbox__next {
   right: 0;
+}
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+@media (max-width: 1023px) {
+  .vm-proj-hero {
+    padding: 40px var(--pad-side);
+    min-height: 440px;
+    max-height: 600px;
+  }
+
+  .vm-spec-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vm-spec-bar__cell:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .vm-spec-bar__cell:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(187, 188, 195, 0.55);
+  }
+
+  .vm-proj-body {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 48px var(--pad-side);
+  }
+
+  .vm-proj-body__lead {
+    position: static;
+    top: auto;
+  }
+
+  .vm-other-projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-proj-hero {
+    min-height: 380px;
+    max-height: 480px;
+    padding: 28px var(--pad-side);
+  }
+
+  .vm-other-projects__grid {
+    grid-template-columns: 1fr;
+  }
 }

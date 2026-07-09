@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { selectFeatured, renderWorkTile } from '../src/js/home.js';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { JSDOM } from 'jsdom';
+import { selectFeatured, renderWorkTile, measureTilePct } from '../src/js/home.js';
 
 const sample = [
   { slug: 'a', title: 'A', discipline: 'Hospitality', location: 'Goa', year: 2020, featured: true, published: true },
@@ -54,5 +55,49 @@ describe('renderWorkTile', () => {
   it('handles missing year gracefully', () => {
     const html = renderWorkTile({ slug: 's', title: 'T', discipline: 'D', location: 'L' });
     expect(html).toContain('href="/work/s"');
+  });
+});
+
+describe('measureTilePct', () => {
+  let dom;
+
+  beforeEach(() => {
+    dom = new JSDOM('<!doctype html><html><body></body></html>', { url: 'http://localhost/' });
+    globalThis.document = dom.window.document;
+  });
+
+  afterEach(() => {
+    delete globalThis.document;
+  });
+
+  function mountWithWidths(tileWidth, viewportWidth) {
+    const viewport = document.createElement('div');
+    const mount = document.createElement('div');
+    const tile = document.createElement('a');
+    tile.className = 'vm-work__tile';
+    mount.appendChild(tile);
+    viewport.appendChild(mount);
+    viewport.getBoundingClientRect = () => ({ width: viewportWidth });
+    tile.getBoundingClientRect = () => ({ width: tileWidth });
+    return mount;
+  }
+
+  it('computes tile width as a percentage of the viewport width', () => {
+    const mount = mountWithWidths(400, 1200); // 3 tiles visible
+    expect(measureTilePct(mount)).toBeCloseTo(33.33, 1);
+  });
+
+  it('reflects a narrower mobile tile (~1 visible)', () => {
+    const mount = mountWithWidths(330, 375);
+    expect(measureTilePct(mount)).toBeCloseTo(88, 1);
+  });
+
+  it('falls back to 100/3 when there is no tile or no measurable width', () => {
+    const emptyMount = document.createElement('div');
+    document.body.appendChild(emptyMount);
+    expect(measureTilePct(emptyMount)).toBeCloseTo(100 / 3, 5);
+
+    const zeroWidthMount = mountWithWidths(0, 0);
+    expect(measureTilePct(zeroWidthMount)).toBeCloseTo(100 / 3, 5);
   });
 });

@@ -3,7 +3,7 @@
 // Phase 2: hydrate the home page Our Projects strip.
 // Phase 4: wire contact form when present.
 
-import { injectComponent, markActiveNavLink } from './components.js';
+import { injectComponent, markActiveNavLink, initMobileNav } from './components.js';
 import { initHome } from './home.js';
 import { initContactForm } from './contact.js';
 
@@ -13,6 +13,7 @@ async function init() {
     injectComponent('#footer-mount', '/components/footer.html'),
   ]);
   markActiveNavLink();
+  initMobileNav();
 
   const page = document.querySelector('main')?.dataset.page;
   if (page === 'contact') {

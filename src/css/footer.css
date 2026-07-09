@@ -41,7 +41,7 @@
   font-size: var(--fs-nav-tagline); /* 9.5px */
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.46); /* was .45 — WCAG AA needs 4.5:1, .45 gave 4.47:1 */
 }
 
 /* ---- Nav + Social lists ---- */
@@ -117,4 +117,17 @@
   font-size: var(--fs-copyright); /* 11px */
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+@media (max-width: 1023px) {
+  .vm-footer__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+  }
+
+  .vm-footer__contact {
+    max-width: none;
+  }
 }

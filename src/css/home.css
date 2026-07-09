@@ -529,7 +529,7 @@
 .vm-finale__h {
   font-family: var(--head);
   font-weight: 600;
-  font-size: 48px;
+  font-size: var(--fs-section-h2); /* 48px */
   line-height: 1.06;
   letter-spacing: -0.02em;
   color: var(--vblack);
@@ -569,4 +569,102 @@
 .vm-finale__link:hover {
   background: var(--terracotta);
   color: var(--paper);
+}
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+@media (max-width: 1023px) {
+  .vm-studio,
+  .vm-disciplines,
+  .vm-process {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .vm-process {
+    min-height: auto;
+    padding: 56px var(--pad-side);
+  }
+
+  .vm-process__head h2 {
+    font-size: 32px;
+    max-width: none;
+  }
+
+  .vm-process__step__num {
+    font-size: 44px;
+  }
+
+  .vm-disciplines__grid,
+  .vm-process__steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 0;
+  }
+
+  .vm-disciplines__cell,
+  .vm-process__step {
+    border-left: 0;
+    padding: 0;
+  }
+
+  .vm-disciplines__name {
+    font-size: 22px;
+  }
+
+  .vm-finale__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vm-finale__stat {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--mineral);
+  }
+
+  .vm-finale__stat:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .vm-finale__stat:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  /* "Our Projects" slider — ~2 tiles visible on tablet */
+  .vm-work__tile {
+    min-width: 46%;
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-disciplines__grid,
+  .vm-process__steps {
+    grid-template-columns: 1fr;
+  }
+
+  .vm-disciplines__cell,
+  .vm-process__step {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--mineral);
+  }
+
+  .vm-process__step {
+    border-bottom-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .vm-disciplines__cell:last-child,
+  .vm-process__step:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .vm-process__head h2 {
+    font-size: 26px;
+  }
+
+  .vm-process__step__num {
+    font-size: 36px;
+  }
+
+  /* ~1 tile visible on mobile */
+  .vm-work__tile {
+    min-width: 88%;
+  }
 }

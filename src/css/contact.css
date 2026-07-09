@@ -221,3 +221,34 @@
   border: 0;
   display: block;
 }
+
+/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+@media (max-width: 1023px) {
+  .vm-contact {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .vm-contact-map {
+    height: 280px;
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-contact__form {
+    grid-template-columns: 1fr;
+  }
+
+  .vm-field--half,
+  .vm-field--full {
+    grid-column: span 1;
+  }
+
+  .vm-contact__h {
+    font-size: 22px;
+  }
+
+  .vm-contact-map {
+    height: 220px;
+  }
+}

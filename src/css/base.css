@@ -54,6 +54,10 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Safety net for the off-canvas mobile nav panel (translateX(100%) is
+     still part of the fixed-position element's paint/scroll bounds even
+     though it's visually off-screen) and any other transform-based UI. */
+  overflow-x: hidden;
 }
 
 body,
@@ -123,7 +127,15 @@ body {
   line-height: 1.72;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 1200px;
+}
+
+/* The 1200px-tuned desktop layout only gets its min-width floor once it's
+   actually active. Below 1024px, the responsive overrides at the end of
+   this file (and of each page's own CSS file) take over instead. */
+@media (min-width: 1024px) {
+  body {
+    min-width: 1200px;
+  }
 }
 
 /* Focus visible — accessibility */
@@ -175,5 +187,44 @@ body {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Responsive — spacing/sizing token overrides (mobile + tablet)
+   Every consumer across every page CSS file reads these via var(), so
+   redefining them here cascades everywhere with no other file needing
+   to know about breakpoints for spacing/sizing purposes. Kept in THIS
+   file (not a separate responsive.css) because Vite's CSS chunking
+   does not reliably preserve <link> order across separate stylesheet
+   files once it splits a page's CSS into multiple chunks — appending
+   to the end of each page's already-loaded file guarantees correct
+   cascade order regardless of chunking. See DECISIONS.md.
+
+   Breakpoints: mobile <=599px, tablet 600-1023px, desktop >=1024px
+   (unchanged from the pre-existing design).
+   ---------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  :root {
+    --pad-side: 40px;
+    --pad-tile-x: 28px;
+    --pad-tile-y: 24px;
+    --col-gap: 40px;
+    --gap-nav-links: 24px;
+    --nav-h: 72px;
+    --logo-h: 56px;
+    --hero-h: 540px;
+  }
+}
+
+@media (max-width: 599px) {
+  :root {
+    --pad-side: 20px;
+    --pad-tile-x: 20px;
+    --pad-tile-y: 20px;
+    --col-gap: 28px;
+    --nav-h: 64px;
+    --logo-h: 40px;
+    --hero-h: 440px;
   }
 }
