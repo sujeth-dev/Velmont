@@ -18,6 +18,14 @@
   /* Body paragraph text — warm near-black, NOT vblack, NOT slate */
   --body-text: #5a5550;
 
+  /* Darkened text-safe variants (WCAG AA, 4.5:1 on --paper) of --slate
+     and --mineral. The base tokens are pinned to DESIGN_GUIDE §2 exact
+     values (see __tests__/tokens.test.js) and stay untouched — --mineral
+     is also used as a border color ~20x across the site. Every current
+     text usage of --slate/--mineral has been switched to these instead. */
+  --slate-text: #5c697c;
+  --mineral-text: #67676b;
+
   /* -- Typography stacks (DESIGN_GUIDE §3) -- */
   --display: 'The Seasons', 'Cormorant Garamond', Georgia, serif;
   --serif: 'Cormorant Garamond', Georgia, serif;

@@ -4,6 +4,48 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Phase 7 — Production Hardening (SEO, Brand Assets, Accessibility)
+
+| Field | Value |
+|---|---|
+| Date | 2026-07-09 |
+| Status | Complete |
+| Branch | main |
+
+### What shipped
+
+- **Brand assets** — `scripts/generate-brand-assets.js` (new, one-time, sharp): crops the terracotta "M" chair-mark out of `velmont-main.png` and composites it onto a `--paper` square for `public/favicon-32.png`, `favicon-16.png`, `apple-touch-icon.png` (180×180); also renders `public/assets/og/default-og.jpg` (1200×630, full wordmark centered on `--paper` with a terracotta accent rule). Not wired into `npm run build` — output is committed, re-run manually if the source logo changes.
+- **`public/robots.txt`** — allows all, disallows `/admin/`, points to the sitemap.
+- **`public/sitemap.xml`** — new `scripts/generate-sitemap.js`, wired into `npm run build` (after `generate-pages`). Writes `dist/sitemap.xml` directly: 5 static pages + one `/work/<slug>` entry per published project (24 URLs today).
+- **Canonical / OG / Twitter meta** — added to all 6 page `<head>`s (`index`, `work`, `about`, `services`, `contact`, `work/[slug]`). Project pages get real per-project values (title, description from `lead`, `og:image`/`twitter:image` from `images.cover`) via a new hydration step in `scripts/generate-project-pages.js` (placeholder-string substitution on the compiled template, same pattern the script already used for slug cloning).
+- **Branded 404** — `public/404.html`, fully self-contained (inline CSS, no dependency on Vite's hashed per-page CSS chunks since it isn't a Rollup entry point). Vercel serves it automatically from the output root for unmatched static routes — not yet verified against an actual Vercel deploy (Phase 8).
+- **Accessibility fixes**, driven by a fresh Lighthouse a11y run against the built `dist/`:
+  - Skip-to-content link (`.vm-skip-link` in `base.css`, first element in `<body>` on all 6 templates, targets the existing `#main`).
+  - `label-content-name-mismatch` — nav/footer brand-link `aria-label` reworded to include the visible tagline text ("Defining Environments.").
+  - Footer social placeholders (`href="#"`) converted to non-interactive `<span aria-hidden="true">` — removes the dead-link anti-pattern until real handles arrive.
+  - Contrast: added `--slate-text` (`#5c697c`) and `--mineral-text` (`#67676b`) tokens for the ~20 text call sites that were using the base `--slate`/`--mineral` brand tokens at a failing ratio on `--paper`. The base tokens themselves are untouched — they're pinned to `DESIGN_GUIDE.md §2` exact values by `__tests__/tokens.test.js`, and `--mineral` is also load-bearing as a border color elsewhere. Also raised footer text opacity (`.vm-footer__link`, `.vm-footer__contact-label`, `.vm-footer__copyright`) from ~0.2–0.4 to 0.5 to clear 4.5:1 on the dark footer background.
+  - **Not fixed, flagged instead**: `.vm-process__step__num` (home page "01/02/03/04" ghost watermark numerals, `#3a3a3a` on `#1a1a1a`, 1.53:1 vs the 3:1 large-text requirement) — left as-is since it's a deliberate low-opacity editorial device reinforced by adjacent step-title text, not the sole conveyor of step order. Needs a design call, not a unilateral code fix.
+- Full `DECISIONS.md` entry added (2026-07-09) per this being a Major-class change (17+ files).
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | Pass — 86/86 (`tokens.test.js` initially broke when `--slate` was edited directly — fixed by reverting the base token and adding `--slate-text` instead, matching the existing `--mineral`/border pattern) |
+| ESLint | Clean |
+| Prettier | Clean (ran `npm run format`, 8 files reformatted — mix of pre-existing drift and new markup) |
+| Vite build | Clean — `dist/404.html`, `robots.txt`, `sitemap.xml` (24 URLs), favicons, `assets/og/default-og.jpg`, 19 project pages all hydrated with unique meta, all present and spot-checked |
+| Lighthouse (desktop preset, local static `dist/`) | Accessibility 0.95, SEO 1.0, Best Practices 0.96, Performance 0.79 (unchanged — Phase 7 was not a performance pass). `label-content-name-mismatch` and `link-name` now pass (were failing). `color-contrast` down from 14 failing nodes to 4 (all `.vm-process__step__num`, the flagged design-call item above) |
+| Manual (Playwright screenshot) | Skip link visible + focused on first Tab; 404 page renders on-brand |
+
+### Carry-overs
+
+- `.vm-process__step__num` contrast — needs a client/designer decision (see above), not folded into this pass.
+- Vercel's automatic `404.html` static-route fallback is unverified against a real deploy — `vite preview`'s dev-server SPA fallback means this can only be confirmed in Phase 8.
+- Phase 8 (domain/DNS for `velmontdesign.com`, Vercel project linking) is the only remaining item before launch.
+
+---
+
 ## Phase 6 — Image Optimization + Performance Pass
 
 | Field | Value |

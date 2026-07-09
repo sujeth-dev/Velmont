@@ -254,7 +254,7 @@
   font-size: var(--fs-eyebrow);
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--slate-text);
   margin: 0;
 }
 
@@ -303,7 +303,7 @@
   font-size: 22px;
   letter-spacing: 0.01em;
   white-space: nowrap;
-  color: var(--slate);
+  color: var(--slate-text);
 }
 
 @keyframes vm-marquee {
@@ -401,7 +401,6 @@
   border-left: 0;
 }
 
-
 .vm-disciplines__name {
   font-family: var(--head);
   font-weight: 600;
@@ -414,7 +413,7 @@
   font-family: var(--body);
   font-size: 14.5px;
   letter-spacing: 0.04em;
-  color: var(--slate);
+  color: var(--slate-text);
 }
 
 /* ----------------------------------------------------------------

@@ -48,6 +48,17 @@ Significant decisions that shaped the project. Add a new entry here **before** w
 
 ---
 
+## 2026-07-09 — Phase 7 production hardening: SEO, brand assets, contrast tokens
+
+**What:** Added favicons + a generated default OG image (`scripts/generate-brand-assets.js`, one-time, output committed), `public/robots.txt`, a build-time `sitemap.xml` generator (`scripts/generate-sitemap.js`, wired into `npm run build`), canonical/OG/Twitter meta on all 6 page templates (with per-project hydration added to `scripts/generate-project-pages.js`), a branded self-contained `public/404.html`, a skip-to-content link, and three token/CSS-level contrast fixes: `--slate` darkened from `#68778d` to `#5c697c`, a new `--mineral-text` token (`#67676b`) split off from the border-only `--mineral` token for its ~4 text call sites, and the footer's white-on-black text opacities raised (`.vm-footer__link`, `.vm-footer__contact-label`, `.vm-footer__copyright`) to clear WCAG AA on the dark footer background. Also reworded the brand-link `aria-label` on nav/footer to include the visible tagline, and converted the two pending footer social links from dead `href="#"` anchors to non-interactive `<span aria-hidden="true">`.
+**Why:** Canonical domain `https://velmontdesign.com` (bare apex, confirmed with client) was going live with zero SEO/social/crawler infrastructure and a blank default 404. A prior Lighthouse run also flagged real WCAG failures (contrast, label-in-name) that needed fixing before launch.
+**Alternatives considered:** A shared head-partial/include system for the meta block — rejected as unnecessary abstraction since each page's head is already maintained independently and only 6 files needed the block. Darkening `--mineral` globally instead of splitting a new `--mineral-text` token — rejected because `--mineral` is used as a border color at ~20 call sites and darkening it there would visibly change the site's border language.
+**Impact:** `--slate` is now visibly slightly darker everywhere it's used as text (nav links, kickers, meta labels, site-wide). `.vm-process__step__num` (the large ghost "01/02/03/04" watermark numerals on the home process section, `#3a3a3a` on `#1a1a1a`, 1.53:1) still fails WCAG large-text contrast (needs 3:1) — left as-is because it's a deliberate low-opacity editorial watermark reinforced by adjacent step-title text, not the sole conveyor of the step order; flagged for the client/designer to decide rather than unilaterally changed.
+**Rollback plan:** Each piece is independent and revertible file-by-file; no schema or architecture change.
+**Status:** Done
+
+---
+
 ## 2026-06-22 — Home hero: single image → 5-image crossfade carousel
 
 **What:** The home hero background changed from a single `<img>` to a crossfade carousel of 5 images cycling every 5 seconds (opacity transition 1.5 s).

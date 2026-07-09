@@ -21,7 +21,7 @@
   font-size: 11.5px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--slate-text);
   text-decoration: none;
 }
 
@@ -32,7 +32,7 @@
 .vm-breadcrumb__sep {
   font-family: var(--body);
   font-size: 11px;
-  color: var(--mineral);
+  color: var(--mineral-text);
   user-select: none;
 }
 
@@ -139,7 +139,7 @@
   font-size: var(--fs-spec-label); /* 10px */
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--slate-text);
 }
 
 .vm-spec-bar__value {
@@ -329,7 +329,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--slate-text);
   display: block;
   margin-bottom: 6px;
 }
@@ -413,7 +413,7 @@
 .vm-other-tile__loc {
   font-family: var(--body);
   font-size: 13px;
-  color: var(--slate);
+  color: var(--slate-text);
 }
 
 /* ----------------------------------------------------------------

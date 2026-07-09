@@ -1,7 +1,11 @@
 <!-- Velmont — Footer (DESIGN_GUIDE §5, WEBSITE_PLAN §4.5) -->
 <footer class="vm-footer" role="contentinfo">
   <div class="vm-footer__row">
-    <a class="vm-footer__brand" href="/" aria-label="Velmont Design Studio — home">
+    <a
+      class="vm-footer__brand"
+      href="/"
+      aria-label="Velmont Design Studio — Defining Environments. — Home"
+    >
       <picture class="vm-footer__logo">
         <source srcset="/assets/logos/velmont-white.webp" type="image/webp" />
         <img
@@ -40,12 +44,13 @@
     </address>
 
     <ul class="vm-footer__social" role="list" aria-label="Social">
-      <!-- Social handles to be provided by client (per MASTER_PLAN outstanding items) -->
+      <!-- Social handles to be provided by client (per MASTER_PLAN outstanding items).
+           Rendered as non-interactive spans, not dead links, until real URLs exist. -->
       <li>
-        <a class="vm-footer__link" href="#" aria-label="Instagram (handle pending)">Instagram</a>
+        <span class="vm-footer__link" aria-hidden="true">Instagram</span>
       </li>
       <li>
-        <a class="vm-footer__link" href="#" aria-label="LinkedIn (handle pending)">LinkedIn</a>
+        <span class="vm-footer__link" aria-hidden="true">LinkedIn</span>
       </li>
     </ul>
   </div>

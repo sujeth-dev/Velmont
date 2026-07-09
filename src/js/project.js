@@ -138,14 +138,14 @@ function hydrateNav(slug, published) {
   wireBtn('[data-proj-nav-next]', '[data-proj-nav-next-title]', nextProj);
 
   // Other Projects: up to 3 projects adjacent to current, excluding self
-  const others = sorted.filter((p) => p.slug !== slug).slice(
-    Math.max(0, idx - 1),
-    Math.max(0, idx - 1) + 3,
-  );
+  const others = sorted
+    .filter((p) => p.slug !== slug)
+    .slice(Math.max(0, idx - 1), Math.max(0, idx - 1) + 3);
   // Fall back to first 3 if we don't have enough adjacent ones
-  const fill = others.length < 3
-    ? sorted.filter((p) => p.slug !== slug && !others.includes(p)).slice(0, 3 - others.length)
-    : [];
+  const fill =
+    others.length < 3
+      ? sorted.filter((p) => p.slug !== slug && !others.includes(p)).slice(0, 3 - others.length)
+      : [];
   const tiles = [...others, ...fill].slice(0, 3);
 
   const otherGrid = document.querySelector('[data-other-projects]');
@@ -215,7 +215,9 @@ export function hydratePage(project) {
   // Gallery — adaptive, supports 1–5 images; sets data-count for CSS layout
   const gallery = document.querySelector('.vm-proj-gallery');
   const galleryImgs = document.querySelectorAll('[data-gallery-img]');
-  const galleryArr = (Array.isArray(project.images?.gallery) ? project.images.gallery : []).filter(Boolean);
+  const galleryArr = (Array.isArray(project.images?.gallery) ? project.images.gallery : []).filter(
+    Boolean,
+  );
   let galleryCount = 0;
 
   galleryImgs.forEach((img) => {

@@ -86,7 +86,7 @@
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--slate-text);
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
@@ -177,14 +177,13 @@
   padding: 52px var(--pad-tile-x) 52px var(--pad-side);
 }
 
-
 .vm-grid-tile__discipline {
   font-family: var(--body);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--slate-text);
   margin: 0 0 16px;
 }
 
@@ -202,7 +201,7 @@
   font-family: var(--body);
   font-size: 13px;
   letter-spacing: 0.04em;
-  color: var(--mineral);
+  color: var(--mineral-text);
   margin: 0 0 0;
   flex: 1;
 }
@@ -221,7 +220,7 @@
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--mineral);
+  color: var(--mineral-text);
 }
 
 .vm-grid-tile__arrow {

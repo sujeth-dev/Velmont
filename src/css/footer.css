@@ -60,7 +60,7 @@
   font-weight: 400;
   font-size: var(--fs-footer-link); /* 12px */
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   transition: color var(--t-fast) var(--ease-default);
 }
@@ -106,7 +106,7 @@
   font-size: 9px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.5);
   margin-bottom: 4px;
 }
 
@@ -116,5 +116,5 @@
   font-family: var(--body);
   font-size: var(--fs-copyright); /* 11px */
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.5);
 }

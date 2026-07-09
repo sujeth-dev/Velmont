@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Page not found — Velmont Design Studio</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f4f0eb" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap"
+    />
+
+    <style>
+      :root {
+        --vblack: #1a1a1a;
+        --terracotta: #ff4015;
+        --paper: #f4f0eb;
+        --body-text: #5a5550;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        min-height: 100vh;
+        padding: 24px;
+        background: var(--paper);
+        color: var(--vblack);
+        font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        text-align: center;
+      }
+
+      .vm-404__logo {
+        height: 44px;
+        width: auto;
+      }
+
+      .vm-404__code {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(64px, 12vw, 120px);
+        line-height: 1;
+        font-weight: 500;
+        margin: 0;
+        color: var(--vblack);
+      }
+
+      .vm-404__code span {
+        color: var(--terracotta);
+      }
+
+      .vm-404__message {
+        font-size: 16px;
+        color: var(--body-text);
+        max-width: 40ch;
+        margin: 0;
+      }
+
+      .vm-404__home {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+        padding: 14px 28px;
+        border: 1px solid var(--vblack);
+        color: var(--vblack);
+        text-decoration: none;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .vm-404__home:hover,
+      .vm-404__home:focus-visible {
+        background: var(--vblack);
+        color: var(--paper);
+      }
+    </style>
+  </head>
+  <body>
+    <img class="vm-404__logo" src="/assets/logos/velmont-main.png" alt="Velmont Design Studio" />
+    <p class="vm-404__code">4<span>0</span>4</p>
+    <p class="vm-404__message">
+      The page you're looking for doesn't exist, or may have moved.
+    </p>
+    <a class="vm-404__home" href="/">Back to home</a>
+  </body>
+</html>

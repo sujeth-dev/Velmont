@@ -18,6 +18,38 @@ const ROOT = path.resolve(__dirname, '..');
 const DIST_WORK = path.join(ROOT, 'dist', 'work');
 const TEMPLATE = path.join(DIST_WORK, '[slug].html');
 const DATA = path.join(ROOT, 'data', 'projects.json');
+const SITE = 'https://velmontdesign.com';
+
+const PLACEHOLDER_TITLE = 'Project — Velmont Design Studio';
+const PLACEHOLDER_DESCRIPTION = 'Velmont Design Studio — project detail.';
+const PLACEHOLDER_URL = `${SITE}/work/PROJECT_SLUG`;
+const PLACEHOLDER_IMAGE = `${SITE}/assets/og/default-og.jpg`;
+
+function escapeAttr(str) {
+  return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+
+function truncate(str, max) {
+  if (str.length <= max) return str;
+  return `${str.slice(0, max - 1).trimEnd()}…`;
+}
+
+function hydrateHead(templateHtml, project) {
+  const title = `${project.title} — Velmont Design Studio`;
+  const description = truncate(project.lead || PLACEHOLDER_DESCRIPTION, 155);
+  const url = `${SITE}/work/${project.slug}`;
+  const cover = project.images?.cover ? `${SITE}${project.images.cover}` : PLACEHOLDER_IMAGE;
+
+  return templateHtml
+    .split(PLACEHOLDER_TITLE)
+    .join(escapeAttr(title))
+    .split(PLACEHOLDER_DESCRIPTION)
+    .join(escapeAttr(description))
+    .split(PLACEHOLDER_URL)
+    .join(url)
+    .split(PLACEHOLDER_IMAGE)
+    .join(cover);
+}
 
 async function main() {
   const [templateHtml, raw] = await Promise.all([
@@ -31,8 +63,9 @@ async function main() {
   await Promise.all(
     published.map((p) => {
       const out = path.join(DIST_WORK, `${p.slug}.html`);
+      const html = hydrateHead(templateHtml, p);
       return fs
-        .writeFile(out, templateHtml, 'utf8')
+        .writeFile(out, html, 'utf8')
         .then(() => console.log(`[generate-pages] ${p.slug}.html`));
     }),
   );

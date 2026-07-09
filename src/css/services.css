@@ -51,7 +51,7 @@
   font-size: var(--fs-service-num); /* 36px */
   letter-spacing: 0.08em;
   line-height: 1;
-  color: var(--mineral);
+  color: var(--mineral-text);
 }
 
 .vm-service__title {

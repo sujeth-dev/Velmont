@@ -39,7 +39,7 @@
   font-size: var(--fs-nav-tagline); /* 9.5px */
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--slate-text);
 }
 
 /* ---- Links ---- */
