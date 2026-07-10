@@ -130,4 +130,17 @@
   .vm-footer__contact {
     max-width: none;
   }
+
+  /* Tagline's negative margin-top is tuned for the 82px desktop logo
+     (see .vm-footer__tagline above); scale it down with --logo-h so it
+     keeps closing whitespace instead of overlapping the shrunk logo. */
+  .vm-footer__tagline {
+    margin-top: -14px; /* 56/82 of -20px */
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-footer__tagline {
+    margin-top: -10px; /* 40/82 of -20px */
+  }
 }

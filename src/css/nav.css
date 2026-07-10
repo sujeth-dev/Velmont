@@ -199,4 +199,18 @@
   html.vm-nav-open-lock {
     overflow: hidden;
   }
+
+  /* Tagline's negative margin-top is tuned for the 82px desktop logo
+     (see comment above .vm-nav__tagline); scale it down with --logo-h
+     so it keeps closing whitespace instead of overlapping the shrunk
+     logo (was causing visible overlap at tablet/mobile widths). */
+  .vm-nav__tagline {
+    margin-top: -22px; /* -14px base (56/82 of -20px) - 8px translateY comp */
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-nav__tagline {
+    margin-top: -18px; /* -10px base (40/82 of -20px) - 8px translateY comp */
+  }
 }
