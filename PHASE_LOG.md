@@ -4,6 +4,42 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Post-Retrofit Polish — Nav/Footer, Hero, Stats Grid
+
+| Field | Value |
+|---|---|
+| Date | 2026-07-10 |
+| Status | Complete |
+| Branch | main |
+| Commit | 431d41b |
+
+### What shipped
+
+Follow-up pass on top of the Mobile-Responsive Retrofit below, fixing issues surfaced by the client on real small-viewport testing (320/375/425px):
+
+- **Nav/footer logo+tagline overlap** — `.vm-nav__tagline`/`.vm-footer__tagline` used a flat desktop-tuned negative `margin-top` that didn't scale down with `--logo-h` at tablet/mobile, pulling the tagline up into the shrunk logo. Fixed with breakpoint-specific margins proportional to the logo height at each tier (`nav.css`, `footer.css`).
+- **Hero eyebrow clipping/low contrast** — `.vm-hero` used a fixed `height` with `overflow: hidden`, clipping the "Defining Environments." eyebrow on narrow viewports; switched to `height: auto; min-height: var(--hero-h)` so the box grows to fit content. Also strengthened the overlay gradient and added text-shadow to the eyebrow so it stays legible against every slide image, not just darker ones (`home.css`).
+- **Mobile hero decluttering** — tightened breakpoint-specific vertical rhythm (eyebrow/H1/CTA/meta spacing) and moved `.vm-hero__meta` (location/est. year) from absolute positioning — which competed visually with the CTA — into normal flow below it, separated by a hairline divider (`home.css`).
+- **Hero description paragraph removed site-wide** — `.vm-hero__sub` deleted from `index.html` and its CSS rule dropped entirely; hero is now eyebrow → H1 → CTA → meta only, with headline-to-CTA spacing rebalanced (44px desktop / 30px tablet / 24px mobile) to keep the shorter content block visually centered.
+- **Stats grid (15+/100+/5M+/200+) alignment fix** — the mobile 2×2 grid inherited desktop-only `:first-child`/`:last-child` padding rules, which broke padding symmetry and made the center divider look off-axis. Replaced with `:nth-child`-based rules so all four cells have matching padding and the dividers cross precisely at center; also capped the section's `min-height: 80vh` down to `auto` with tighter padding/gap on mobile and tablet to remove excess whitespace above/below the grid (`home.css`).
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | Pass — 89/89 |
+| ESLint | Clean |
+| Prettier | Clean |
+| Vite build | Clean |
+| Manual (Playwright screenshot + bounding-box checks, ad-hoc, not committed) | 320/375/425/768/1440px — zero horizontal overflow, `.vm-hero__sub` count 0, stats dividers/padding symmetric, hero eyebrow fully visible on all 5 background slides |
+
+### Carry-overs
+
+- Kept the hero's bottom-anchored (`justify-content: flex-end`) layout rather than switching to literal `justify-content: center` — interpreted the client's "content remains vertically centered" note as "visually balanced" given the established editorial design. Flagged to the client for confirmation; revisit if they want true vertical centering instead.
+- All carry-overs from the Mobile-Responsive Retrofit below (mobile image `srcset`/performance, `e2e/work.spec.js`/`home.spec.js` stale project-count assertions, admin panel desktop-only) remain open — not addressed by this pass.
+
+---
+
 ## Mobile-Responsive Retrofit — Public Site
 
 | Field | Value |
