@@ -15,11 +15,18 @@
   border: 0;
 }
 
-/* .vm-page-hero__sub is defined in common.css */
-
 .vm-services {
   padding-top: 96px;
   padding-bottom: 96px;
+}
+
+.vm-services__intro {
+  font-family: var(--body);
+  font-size: var(--fs-hero-sub); /* 16px */
+  line-height: 1.72;
+  color: var(--body-text);
+  max-width: 700px;
+  margin: 0 0 40px;
 }
 
 .vm-services__grid {

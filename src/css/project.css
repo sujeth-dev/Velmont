@@ -96,15 +96,15 @@
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: rgba(209, 200, 188, 0.8);
-  margin: 0 0 20px;
+  margin: 0 0 24px;
 }
 
 .vm-proj-hero__h1 {
   font-family: var(--head);
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--fs-project-h1); /* 68px */
-  line-height: 1;
-  letter-spacing: -0.025em;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
   color: #fff;
   margin: 0;
   max-width: 900px;

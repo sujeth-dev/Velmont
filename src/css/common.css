@@ -181,21 +181,83 @@
 }
 
 /* ----------------------------------------------------------------
-   Page hero sub-headline (Services + Contact hero)
+   Page hero — shared by About, Services, Contact, Work
    ---------------------------------------------------------------- */
-.vm-page-hero__sub {
+.vm-page-hero {
+  position: relative;
+  height: 78vh;
+  min-height: 520px;
+  max-height: 860px;
+  background: #2b2927;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px var(--pad-side);
+  border-bottom: 1px solid var(--mineral);
+}
+
+.vm-page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 8, 8, 0.52) 0%,
+    rgba(8, 8, 8, 0.08) 45%,
+    rgba(8, 8, 8, 0) 100%
+  );
+}
+
+.vm-page-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+  animation: vm-page-hero-fade 1.4s ease forwards;
+}
+
+.vm-page-hero picture {
+  display: contents;
+}
+
+.vm-page-hero__eyebrow {
   font-family: var(--body);
-  font-size: var(--fs-hero-sub); /* 16px */
-  line-height: 1.72;
-  color: rgba(209, 200, 188, 0.78);
-  max-width: 620px;
-  margin: 28px 0 0;
+  font-weight: 600;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(209, 200, 188, 0.82);
+  margin: 0 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.vm-page-hero__h1 {
+  font-family: var(--head);
+  font-weight: 600;
+  font-size: var(--fs-project-h1); /* 68px — secondary page hero scale */
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+  max-width: 900px;
   position: relative;
   z-index: 2;
 }
 
 /* ---- Responsive (see base.css for the shared media-query rationale) ---- */
 @media (max-width: 1023px) {
+  .vm-page-hero {
+    padding: 40px var(--pad-side);
+    min-height: 440px;
+    max-height: 600px;
+  }
+
   .vm-stats {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -223,5 +285,13 @@
   .vm-cta__link {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 599px) {
+  .vm-page-hero {
+    min-height: 380px;
+    max-height: 480px;
+    padding: 28px var(--pad-side);
   }
 }

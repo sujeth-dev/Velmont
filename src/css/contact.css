@@ -18,6 +18,15 @@
   margin: 0 0 32px;
 }
 
+.vm-contact__intro {
+  font-family: var(--body);
+  font-size: var(--fs-hero-sub); /* 16px */
+  line-height: 1.72;
+  color: var(--body-text);
+  max-width: 480px;
+  margin: 0 0 32px;
+}
+
 /* ---- Form ---- */
 .vm-contact__form {
   display: grid;

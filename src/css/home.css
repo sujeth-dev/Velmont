@@ -74,7 +74,7 @@
   text-transform: uppercase;
   color: rgba(224, 217, 207, 0.92);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-  margin: 0 0 28px;
+  margin: 0 0 24px;
 }
 
 /* Margin-bottom widened from 28px to 44px — the headline now leads
@@ -280,12 +280,14 @@
   align-items: center;
   justify-content: center;
   min-width: 180px;
-  height: 96px;
+  height: 80px;
 }
 
 .vm-clients__logo {
-  max-height: 76px;
+  max-height: 64px;
+  max-width: 140px;
   width: auto;
+  height: auto;
   transition: transform var(--t-fast) var(--ease-default);
 }
 

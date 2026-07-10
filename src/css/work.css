@@ -3,71 +3,7 @@
    Reference: plan/DESIGN_GUIDE.md §5, plan/MASTER_PLAN.md §Phase 3
    ============================================================ */
 
-/* ----------------------------------------------------------------
-   Work hero — photo background with dark overlay
-   ---------------------------------------------------------------- */
-.vm-work-hero {
-  position: relative;
-  height: 78vh;
-  min-height: 520px;
-  max-height: 860px;
-  background: #2b2927;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px var(--pad-side);
-  border-bottom: 1px solid var(--mineral);
-}
-
-.vm-work-hero__bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  z-index: 0;
-  animation: vm-page-hero-fade 1.4s ease forwards;
-}
-
-.vm-work-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    0deg,
-    rgba(8, 8, 8, 0.42) 0%,
-    rgba(8, 8, 8, 0.1) 45%,
-    rgba(8, 8, 8, 0) 100%
-  );
-}
-
-.vm-work-hero__eyebrow {
-  position: relative;
-  z-index: 2;
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: var(--fs-eyebrow);
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: rgba(209, 200, 188, 0.82);
-  margin: 0 0 20px;
-}
-
-.vm-work-hero__h {
-  position: relative;
-  z-index: 2;
-  font-family: var(--head);
-  font-weight: 600;
-  font-size: 64px;
-  line-height: 1;
-  letter-spacing: -0.025em;
-  color: #fff;
-  max-width: 800px;
-  margin: 0;
-}
+/* ---- Work hero — see common.css (.vm-page-hero, shared by About/Services/Contact/Work) ---- */
 
 /* ----------------------------------------------------------------
    Filter bar
@@ -228,18 +164,9 @@
   font-size: 20px;
 }
 
-/* ---- Responsive (see base.css for the shared media-query rationale) ---- */
+/* ---- Responsive (see base.css for the shared media-query rationale) ----
+   .vm-page-hero responsive rules moved to common.css. */
 @media (max-width: 1023px) {
-  .vm-work-hero {
-    padding: 40px var(--pad-side);
-    min-height: 440px;
-    max-height: 600px;
-  }
-
-  .vm-work-hero__h {
-    font-size: 44px;
-  }
-
   /* Filter bar — 5 buttons don't fit a narrow viewport; scroll instead
      of wrap so the underline/active-state interaction stays intact. */
   .vm-work-filter {
@@ -270,17 +197,5 @@
     border-left: 0;
     border-right: 0;
     padding: 32px var(--pad-side);
-  }
-}
-
-@media (max-width: 599px) {
-  .vm-work-hero {
-    min-height: 380px;
-    max-height: 480px;
-    padding: 28px var(--pad-side);
-  }
-
-  .vm-work-hero__h {
-    font-size: 32px;
   }
 }
