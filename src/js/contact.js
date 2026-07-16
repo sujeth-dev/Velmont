@@ -125,7 +125,7 @@ async function submitToEmailJS(values) {
       project_type: values.projectType,
       project_location: values.location,
       message: values.message,
-      to_email: 'Info@velmontdesign.com',
+      to_email: 'velmont@velmontdesign.com',
     },
   };
 
@@ -177,7 +177,7 @@ export function initContactForm(selector) {
       setStatus(
         form,
         'error',
-        "Something didn't go through. Please email Info@velmontdesign.com directly.",
+        "Something didn't go through. Please email velmont@velmontdesign.com directly.",
       );
     } finally {
       if (submit) submit.disabled = false;

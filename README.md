@@ -2,7 +2,7 @@
 
 B2B commercial interior contracting company website for Velmont Design LLP, Bengaluru.
 
-**Status:** Phase 4 complete. Home, Work, Project detail, About, Services, and Contact pages wired; enquiry form with EmailJS submit; Google Maps embed.
+**Status:** Phase 7 complete (production hardening) + mobile-responsive retrofit. All pages wired; enquiry form with EmailJS submit; Google Maps embed. Awaiting Phase 8 (Vercel deploy + domain).
 **Live domain:** velmontdesign.com (not yet deployed)
 **Stack:** Vanilla HTML/CSS/JS + Vite · Firebase · Vercel · Playwright · Vitest
 
@@ -94,4 +94,4 @@ Source JPG photography for all 6 projects. Processed to WebP/AVIF in Phase 6. On
 | `itc-colombo/` | 8 | Yes |
 | `marriott-marquis-delhi/` | 7 | Yes |
 | `taj-andaman/` | 7 | Yes |
-| `mea-bangalore/` | 1 | **No — additional photos + year/area needed from c
+| `mea-bangalore/` | 1 | **No — additional photos + year/area needed from client** |

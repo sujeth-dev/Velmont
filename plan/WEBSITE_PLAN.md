@@ -279,7 +279,7 @@ velmont-website/
 |---|---|
 | Address | Site No. 60/1, Anagalapura Village, Bidarahalli Hobli, Bangalore – 560077 |
 | Phone / WhatsApp | +91 93622 36718 |
-| Email | Info@velmontdesign.com |
+| Email | velmont@velmontdesign.com |
 | Business Hours | 9am – 9pm |
 | Google Maps | https://www.google.com/maps/place/Velmont+design+LLP/... |
 

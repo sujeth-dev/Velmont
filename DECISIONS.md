@@ -93,7 +93,7 @@ Significant decisions that shaped the project. Add a new entry here **before** w
 
 ## 2026-06-21 — EmailJS for contact form (no backend)
 
-**What:** Contact form submissions are sent via EmailJS client SDK directly to Info@velmontdesign.com.
+**What:** Contact form submissions are sent via EmailJS client SDK directly to velmont@velmontdesign.com (originally Info@velmontdesign.com; corrected 2026-07-16).
 **Why:** No backend server, no API routes — pure client-side solution that works with the vanilla stack and Vercel static hosting. Free tier covers expected enquiry volume.
 **Alternatives considered:** Formspree — similar free tier, slightly less control over email template. Vercel Serverless Functions — adds a server layer that is unnecessary for a single contact form.
 **Impact:** `VITE_EMAILJS_*` environment variables required in Vercel. Honeypot field added to form for spam protection (Phase 7).
