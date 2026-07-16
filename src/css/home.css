@@ -268,6 +268,11 @@
   width: max-content;
   gap: 72px;
   animation: vm-marquee 46s linear infinite;
+  /* Promote to its own compositor layer so the transform animation runs on the
+     GPU and stays smooth while logos rasterise on first load (mobile jank fix). */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .vm-clients:hover .vm-clients__track {

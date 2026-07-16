@@ -143,7 +143,10 @@ export function renderClientItem(c, clone) {
   img.className = 'vm-clients__logo';
   img.src = '/assets/logos/clients/' + file;
   img.alt = name;
-  img.loading = 'lazy';
+  // Eager, not lazy: the marquee moves logos with a CSS transform, which does
+  // NOT trigger lazy-load. Deferred logos would otherwise decode mid-scroll and
+  // stutter on a cold cache (first visit). The full logo set is small.
+  img.loading = 'eager';
   img.decoding = 'async';
   img.addEventListener('error', wordmark, { once: true });
   item.appendChild(img);
