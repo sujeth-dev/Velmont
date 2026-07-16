@@ -12,7 +12,7 @@ B2B commercial interior contracting company website for Velmont Design LLP, Beng
 
 ```bash
 npm install
-npm run optimize-images   # produce WebP assets from /assets/projects
+npm run optimize-images   # WebP/AVIF from /assets — incremental; add -- --force to re-encode all
 npm run dev               # http://localhost:5173
 npm test                  # vitest
 npm run e2e               # playwright (requires browsers installed)

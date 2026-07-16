@@ -4,6 +4,17 @@ Significant decisions that shaped the project. Add a new entry here **before** w
 
 ---
 
+## 2026-07-16 — Incremental image conversion (faster deploys)
+
+**What:** `scripts/convert-images.js` now skips any source image whose `.webp` and `.avif` outputs already exist, instead of re-encoding all 66 images on every build. A `--force` flag / `FORCE_IMAGES=1` re-encodes everything.
+**Why:** The optimised outputs are committed under `public/assets`, so re-encoding them on every `npm run build` (which Vercel runs per deploy) was pure wasted CPU — the AVIF pass dominated build time — and produced non-deterministic AVIF bytes (spurious git churn). Reuse cuts the `optimize-images` step from ~minutes to ~2s when nothing changed.
+**Alternatives considered:** (a) Drop `optimize-images` from the `build` script and run it only manually — faster still, but risks a new source image shipping without its optimised output. (b) mtime-based freshness — unreliable after a fresh `git clone` on Vercel (all files share checkout mtime). Existence-based skip keeps the auto-convert safety net for new images while staying deterministic on Vercel.
+**Impact:** Replacing an existing source image *in place* (same filename) now requires `-- --force` or deleting its outputs first, since the presence of an output means "skip". Documented in README quick-start.
+**Rollback plan:** Remove the `FORCE`/`outputsExist` guard in `convertOne` to restore unconditional re-encoding.
+**Status:** Done
+
+---
+
 ## 2026-06-21 — Vanilla HTML/CSS/JS over Next.js
 
 **What:** Build the site with Vanilla HTML/CSS/JS + Vite instead of Next.js.

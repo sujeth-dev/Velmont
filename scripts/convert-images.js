@@ -52,11 +52,36 @@ const WEBP_QUALITY = 82;
 const AVIF_QUALITY = 70;
 const MAX_LONG_EDGE = 4000;
 
+// Optimised WebP/AVIF outputs are committed to /public/assets, so a normal
+// build (local or on Vercel) can reuse them instead of re-encoding all 66
+// source images — the AVIF pass in particular dominates build time. We skip
+// any image whose .webp AND .avif both already exist. Pass --force (or set
+// FORCE_IMAGES=1) to re-encode everything, e.g. after replacing a source file
+// in place or changing the quality settings above.
+const FORCE = process.argv.includes('--force') || process.env.FORCE_IMAGES === '1';
+
+let convertedCount = 0;
+let skippedCount = 0;
+
 async function ensureDir(dir) {
   await fs.mkdir(dir, { recursive: true });
 }
 
+async function outputsExist(webpFile) {
+  const avifFile = webpFile.replace(/\.webp$/, '.avif');
+  try {
+    await Promise.all([fs.access(webpFile), fs.access(avifFile)]);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function convertOne(srcFile, outFile) {
+  if (!FORCE && (await outputsExist(outFile))) {
+    skippedCount += 1;
+    return;
+  }
   await ensureDir(path.dirname(outFile));
   const resized = sharp(srcFile).resize({
     width: MAX_LONG_EDGE,
@@ -69,6 +94,7 @@ async function convertOne(srcFile, outFile) {
     .clone()
     .avif({ quality: AVIF_QUALITY })
     .toFile(outFile.replace(/\.webp$/, '.avif'));
+  convertedCount += 1;
 }
 
 async function listImages(dir) {
@@ -144,15 +170,27 @@ async function main() {
   const projects = await convertProjects();
   const facility = await convertFacility();
   const logos = await convertLogos();
+  const total = projects.length + facility.length + logos.length;
   console.log(
-    '[convert-images] wrote',
-    projects.length,
-    'project images,',
-    facility.length,
-    'facility images and',
-    logos.length,
-    'logos',
+    '[convert-images] ' +
+      total +
+      ' images (' +
+      projects.length +
+      ' project, ' +
+      facility.length +
+      ' facility, ' +
+      logos.length +
+      ' logos) — ' +
+      convertedCount +
+      ' encoded, ' +
+      skippedCount +
+      ' reused' +
+      (FORCE ? ' (--force)' : '') +
+      '.',
   );
+  if (!FORCE && convertedCount === 0) {
+    console.log('[convert-images] all outputs up to date; nothing re-encoded.');
+  }
 }
 
 main().catch((err) => {
