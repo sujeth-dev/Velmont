@@ -95,3 +95,7 @@ Source JPG photography for all 6 projects. Processed to WebP/AVIF in Phase 6. On
 | `marriott-marquis-delhi/` | 7 | Yes |
 | `taj-andaman/` | 7 | Yes |
 | `mea-bangalore/` | 1 | **No — additional photos + year/area needed from client** |
+
+#### `assets/facility/`
+
+5 client-delivered 16:9 manufacturing facility photos (2026-07-16). Converted to WebP/AVIF in `public/assets/facility/` by the same pipeline; used in the Manufacturing sections of About (4, in a dark 2×2 fill-slide grid) and Services (1 panorama).

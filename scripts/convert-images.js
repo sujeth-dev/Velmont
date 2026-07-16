@@ -2,9 +2,10 @@
 /**
  * Velmont — Image conversion script
  *
- * Reads source JPGs from /assets/projects/<sourceFolder>/ and logos from
- * /assets/logos/, writes optimised WebP into /public/assets/projects/<slug>/
- * and /public/assets/logos/.
+ * Reads source JPGs from /assets/projects/<sourceFolder>/, facility photos
+ * from /assets/facility/, and logos from /assets/logos/, writes optimised
+ * WebP into /public/assets/projects/<slug>/, /public/assets/facility/ and
+ * /public/assets/logos/.
  *
  * Slugs in /public/assets/projects/ are the canonical URL slugs from
  * data/projects.json. Source folder names may differ — the SLUG_MAP below
@@ -25,8 +26,10 @@ const ROOT = path.resolve(__dirname, '..');
 
 const SRC_PROJECTS = path.join(ROOT, 'assets', 'projects');
 const SRC_LOGOS = path.join(ROOT, 'assets', 'logos');
+const SRC_FACILITY = path.join(ROOT, 'assets', 'facility');
 const OUT_PROJECTS = path.join(ROOT, 'public', 'assets', 'projects');
 const OUT_LOGOS = path.join(ROOT, 'public', 'assets', 'logos');
+const OUT_FACILITY = path.join(ROOT, 'public', 'assets', 'facility');
 
 // canonical slug → source folder name on disk
 const SLUG_MAP = {
@@ -104,6 +107,17 @@ async function convertProjects() {
   return results;
 }
 
+async function convertFacility() {
+  const results = [];
+  const files = await listImages(SRC_FACILITY);
+  for (const file of files) {
+    const base = path.basename(file, path.extname(file));
+    await convertOne(path.join(SRC_FACILITY, file), path.join(OUT_FACILITY, base + '.webp'));
+    results.push({ facility: base + '.webp' });
+  }
+  return results;
+}
+
 async function convertLogos() {
   const results = [];
   const wanted = ['velmont-main.png', 'velmont-white.png'];
@@ -128,11 +142,14 @@ async function convertLogos() {
 async function main() {
   console.log('[convert-images] starting');
   const projects = await convertProjects();
+  const facility = await convertFacility();
   const logos = await convertLogos();
   console.log(
     '[convert-images] wrote',
     projects.length,
-    'project images and',
+    'project images,',
+    facility.length,
+    'facility images and',
     logos.length,
     'logos',
   );
@@ -143,4 +160,4 @@ main().catch((err) => {
   process.exit(1);
 });
 
-export { convertProjects, convertLogos, SLUG_MAP };
+export { convertProjects, convertFacility, convertLogos, SLUG_MAP };

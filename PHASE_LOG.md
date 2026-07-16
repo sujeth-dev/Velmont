@@ -4,6 +4,35 @@ Living record of every phase. One entry per phase. Updated after every push.
 
 ---
 
+## Client Content Delivery — Facility Photos + Social Links
+
+| Field | Value |
+|---|---|
+| Date | 2026-07-16 |
+| Status | Complete |
+| Branch | main |
+
+### What shipped
+
+- **Contact email correction** — `Info@velmontdesign.com` → `velmont@velmontdesign.com` across form submit target (`contact.js`), footer, contact page, and plan docs (finished + committed leftover working-tree change).
+- **Manufacturing facility photos** — client delivered 5 edited 16:9 photos. Renamed to descriptive slugs under `assets/facility/` (facility-panorama, edge-banding-line, production-floor, sliding-table-saw, panel-saw-line). `scripts/convert-images.js` gained a `convertFacility()` pass → `public/assets/facility/*.{webp,avif}` (4000×2250, WebP 82 / AVIF 70). Dashed `.vm-manuf__photo-placeholder` blocks replaced with real `<picture>` stacks — About shows 4 in a dark 2×2 fill-slide grid (`vm-manuf--dark vm-manuf--fill`, `min-height: 100vh`, narrow text column beside a wide `.vm-manuf__photos--grid`), Services shows 1 panorama, no duplication. New `.vm-manuf__photos` grid CSS (16:9 aspect-ratio, cover) plus dark colour overrides in `about.css`; dark placeholder overrides removed from `services.css`. Hero images untouched (client constraint).
+- **Social links live** — footer spans converted to real anchors: instagram.com/velmontdesign + linkedin.com/company/velmont-design-llp (`target="_blank" rel="noopener"`); "Follow" item added to contact Studio details.
+- **Docs sync** — MASTER_PLAN/WEBSITE_PLAN outstanding items marked delivered; DECISIONS.md entry added; README status line un-staled (was "Phase 4 complete") and truncated tail repaired.
+
+### Tests
+
+| Suite | Result |
+|---|---|
+| Vitest | see A4 verification |
+| Vite build | see A4 verification |
+
+### Carry-overs
+
+- ITC Grand Chola: 6 new photos converted on disk but not wired into gallery (live data comes from Firebase; user chose to keep minimal for now).
+- Remaining pre-launch items: EmailJS credentials, Vercel project + domain DNS (Phase 8), project photography for 6 placeholder projects, MEA Bangalore photos/year/area, The Seasons OTFs.
+
+---
+
 ## Post-Retrofit Polish — Nav/Footer, Hero, Stats Grid
 
 | Field | Value |

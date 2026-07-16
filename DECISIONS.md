@@ -102,4 +102,14 @@ Significant decisions that shaped the project. Add a new entry here **before** w
 
 ---
 
+## 2026-07-16 — Client content delivered: facility photos + social links
+
+**What:** Client delivered 5 edited 16:9 manufacturing facility photos and the studio's social profiles (instagram.com/velmontdesign, linkedin.com/company/velmont-design-llp). Photos placed with no duplication across pages: 4 on About (production-floor, edge-banding-line, sliding-table-saw, panel-saw-line) in a dark 2×2 "fill-slide" grid styled like the Services manufacturing block, and 1 on Services (facility-panorama), replacing the dashed `.vm-manuf__photo-placeholder` blocks. Footer social spans converted back to real anchors (`target="_blank" rel="noopener"`); a "Follow" item added to the contact page Studio details list. `scripts/convert-images.js` gained a `convertFacility()` pass (`assets/facility/` → `public/assets/facility/`, same WebP 82 / AVIF 70 / 4000px pipeline).
+**Why:** These were the two remaining client-content placeholders on built pages (per MASTER_PLAN Outstanding Items). Split rather than duplicated so About and Services each show distinct photography; Services (the manufacturing-focused page) gets the wider set including the panorama.
+**Impact:** `.vm-manuf__photo-placeholder` CSS retired from `about.css`/`services.css`, replaced by a `.vm-manuf__photos` grid (16:9 `aspect-ratio`, `object-fit: cover`). About's manufacturing section became a dark `vm-section--dark vm-manuf--dark vm-manuf--fill` block: `min-height: 100vh`, a narrow text column (`minmax(300px, 380px)`) beside a `.vm-manuf__photos--grid` (2×2), so the four photos claim the slide width and the section reads as one screen. Dark `.vm-manuf__h`/`.vm-manuf__copy` colour overrides added to `about.css` (About does not load `services.css`). Hero images untouched (explicit user constraint). Source JPGs committed under `assets/facility/`.
+**Rollback plan:** Restore the placeholder divs + CSS from git history; photos remain on disk.
+**Status:** Done
+
+---
+
 <!-- Add new entries above this line, newest first -->

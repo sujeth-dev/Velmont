@@ -88,17 +88,6 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
-.vm-manuf--dark .vm-manuf__photo-placeholder {
-  border-color: rgba(187, 188, 195, 0.28);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.vm-manuf--dark .vm-manuf__placeholder-eyebrow,
-.vm-manuf--dark .vm-manuf__placeholder-label {
-  color: rgba(255, 255, 255, 0.6);
-}
-
 /* ---- Responsive (see base.css for the shared media-query rationale) ---- */
 @media (max-width: 1023px) {
   .vm-services__grid {

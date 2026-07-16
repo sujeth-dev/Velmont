@@ -465,9 +465,9 @@ jobs:
 | Item | Needed For | Owner |
 |---|---|---|
 | The Seasons font OTF files (5 files) | Phase 0 / Phase 1 | Client |
-| Manufacturing facility photos (4-5 images) | Phase 4 (About, Services) | Client |
+| ~~Manufacturing facility photos (4-5 images)~~ ✅ Delivered 2026-07-16 (5 photos, placed) | Phase 4 (About, Services) | Client |
 | MEA Bangalore: additional project photos + year/area | Phase 3 | Client |
-| Social media handles | Phase 4 (Footer) | Client |
+| ~~Social media handles~~ ✅ Delivered 2026-07-16 (Instagram + LinkedIn, live) | Phase 4 (Footer) | Client |
 | EmailJS account + template ID | Phase 4 | Developer setup |
 | Firebase project (API keys) | Phase 5 | Developer setup |
 | Domain registrar access (velmontdesign.com) | Phase 8 | Client |

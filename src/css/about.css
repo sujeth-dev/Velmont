@@ -77,6 +77,25 @@
   align-items: flex-start;
 }
 
+/* Fill-slide variant (About): section occupies one screen, content centred,
+   text kept to a narrow column so the 2x2 photo grid claims the width */
+.vm-manuf--fill {
+  min-height: 100vh;
+  grid-template-columns: minmax(300px, 380px) 1fr;
+  gap: 64px;
+  align-content: center;
+  align-items: center;
+}
+
+/* Dark manufacturing overrides (About loads about.css, not services.css) */
+.vm-manuf--dark .vm-manuf__h {
+  color: #fff;
+}
+
+.vm-manuf--dark .vm-manuf__copy {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .vm-manuf__h {
   font-family: var(--head);
   font-weight: 600;
@@ -96,18 +115,22 @@
   margin: 0;
 }
 
-.vm-manuf__photo-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  min-height: 320px;
-  border: 1px dashed var(--mineral);
-  background: var(--concrete-tint);
-  color: var(--slate-text);
-  padding: 36px;
-  text-align: center;
+.vm-manuf__photos {
+  display: grid;
+  gap: 16px;
+}
+
+/* 2x2 grid variant (About manufacturing) */
+.vm-manuf__photos--grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.vm-manuf__photos img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 /* ---- Responsive (see base.css for the shared media-query rationale) ----
@@ -117,6 +140,10 @@
   .vm-manuf {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .vm-manuf--fill {
+    min-height: 0;
   }
 
   .vm-manuf__h {

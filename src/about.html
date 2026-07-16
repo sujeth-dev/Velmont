@@ -141,7 +141,10 @@
       </section>
 
       <!-- 04.5 MANUFACTURING -->
-      <section class="vm-section vm-manuf" aria-labelledby="manuf-h">
+      <section
+        class="vm-section vm-section--dark vm-manuf vm-manuf--dark vm-manuf--fill"
+        aria-labelledby="manuf-h"
+      >
         <header class="vm-manuf__head">
           <p class="vm-kicker">Manufacturing Capability</p>
           <h2 id="manuf-h" class="vm-manuf__h">In-house. In control.</h2>
@@ -151,9 +154,55 @@
             Everything built under one roof, to one standard.
           </p>
         </header>
-        <div class="vm-manuf__photos" aria-label="Manufacturing facility photos placeholder">
-          <!-- Facility photos pending client (per MASTER_PLAN outstanding items) -->
-          <div class="vm-manuf__photo-placeholder" data-placeholder></div>
+        <div class="vm-manuf__photos vm-manuf__photos--grid">
+          <picture>
+            <source srcset="/assets/facility/production-floor.avif" type="image/avif" />
+            <source srcset="/assets/facility/production-floor.webp" type="image/webp" />
+            <img
+              src="/assets/facility/production-floor.webp"
+              alt="Velmont manufacturing facility — production floor with finished panel stacks awaiting dispatch"
+              width="4000"
+              height="2250"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <picture>
+            <source srcset="/assets/facility/edge-banding-line.avif" type="image/avif" />
+            <source srcset="/assets/facility/edge-banding-line.webp" type="image/webp" />
+            <img
+              src="/assets/facility/edge-banding-line.webp"
+              alt="Velmont manufacturing facility — automated edge-banding line"
+              width="4000"
+              height="2250"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <picture>
+            <source srcset="/assets/facility/sliding-table-saw.avif" type="image/avif" />
+            <source srcset="/assets/facility/sliding-table-saw.webp" type="image/webp" />
+            <img
+              src="/assets/facility/sliding-table-saw.webp"
+              alt="Velmont manufacturing facility — precision sliding table saw station"
+              width="4000"
+              height="2250"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <picture>
+            <source srcset="/assets/facility/panel-saw-line.avif" type="image/avif" />
+            <source srcset="/assets/facility/panel-saw-line.webp" type="image/webp" />
+            <img
+              src="/assets/facility/panel-saw-line.webp"
+              alt="Velmont manufacturing facility — computerised panel saw with dust extraction"
+              width="4000"
+              height="2250"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
       </section>
 

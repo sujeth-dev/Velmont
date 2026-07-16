@@ -301,10 +301,10 @@ velmont-website/
 ## 9. Outstanding Items (Awaiting Client)
 
 - [ ] Design direction / visual references (mentioned as "coming soon")
-- [ ] Social media links
+- [x] Social media links — delivered 2026-07-16 (instagram.com/velmontdesign, linkedin.com/company/velmont-design-llp); live in footer + contact page
 - [ ] Full project list beyond JW Marriott & Taj (100+ projects — select which to feature)
 - [ ] Project photos / gallery images per project
-- [ ] Manufacturing facility photos (placeholders shown in PDF)
+- [x] Manufacturing facility photos — delivered 2026-07-16 (5 × 16:9 edited photos; About shows 4 in a dark 2×2 fill-slide grid, Services shows 1 panorama)
 - [ ] Team / leadership info (if About page needs a team section)
 - [ ] Preferred backend: static JSON vs Firebase vs Node server
 

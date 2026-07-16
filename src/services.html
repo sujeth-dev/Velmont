@@ -148,8 +148,19 @@
             Every piece is quality-checked under one roof before it reaches your site.
           </p>
         </header>
-        <div class="vm-manuf__photos" aria-label="Manufacturing facility photos placeholder">
-          <div class="vm-manuf__photo-placeholder" data-placeholder></div>
+        <div class="vm-manuf__photos">
+          <picture>
+            <source srcset="/assets/facility/facility-panorama.avif" type="image/avif" />
+            <source srcset="/assets/facility/facility-panorama.webp" type="image/webp" />
+            <img
+              src="/assets/facility/facility-panorama.webp"
+              alt="Velmont manufacturing facility — full production floor with panel processing machinery"
+              width="4000"
+              height="2250"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
       </section>
 
