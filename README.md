@@ -12,7 +12,7 @@ B2B commercial interior contracting company website for Velmont Design LLP, Beng
 
 ```bash
 npm install
-npm run optimize-images   # WebP/AVIF from /assets — incremental; add -- --force to re-encode all
+npm run optimize-images   # WebP/AVIF from /assets — run only when photos change (see plan/IMAGE_WORKFLOW.md)
 npm run dev               # http://localhost:5173
 npm test                  # vitest
 npm run e2e               # playwright (requires browsers installed)
@@ -50,6 +50,7 @@ Planning documents. All are active references during build. Do not delete any of
 |---|---|
 | `MASTER_PLAN.md` | **Primary build reference.** 9-phase plan with dev tasks, tests, commit messages, and approval gates per phase. Start here. |
 | `CHANGE_GUIDE.md` | **Change management.** How to classify, apply, and track any future change. Includes dependency map, playbooks, sync checklist, commit protocol, branch strategy. Read before making any post-build change. |
+| `IMAGE_WORKFLOW.md` | **Image pipeline guide.** How photos get onto the site: optimised outputs are committed to `public/assets` and shipped as-is; conversion is a manual, incremental step run only when photos change. Read before adding client photos. |
 | `DESIGN_GUIDE.md` | Brand and design source of truth — all CSS variables, type scale, component specs, grid patterns, spacing. Used during Phase 0–7 to implement the CSS system. Do not deviate without logging in `DECISIONS.md`. |
 | `CONTENT_PLAN.html` | Approved page copy — every headline, body paragraph, section label, CTA, and status badge (Approved / Needs Review / Client to Provide) for all 5 pages. Open in a browser. Source of truth for all HTML content. |
 | `WEBSITE_PLAN.md` | Original site architecture doc — page structure, content map, contact details, services list, tone direction, tech stack rationale. Build order section is superseded by `MASTER_PLAN.md`; the rest (copy, contact info, services) remains useful reference. |

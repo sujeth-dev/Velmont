@@ -4,13 +4,13 @@ Significant decisions that shaped the project. Add a new entry here **before** w
 
 ---
 
-## 2026-07-16 — Incremental image conversion (faster deploys)
+## 2026-07-16 — Decouple image conversion from the build (faster deploys)
 
-**What:** `scripts/convert-images.js` now skips any source image whose `.webp` and `.avif` outputs already exist, instead of re-encoding all 66 images on every build. A `--force` flag / `FORCE_IMAGES=1` re-encodes everything.
-**Why:** The optimised outputs are committed under `public/assets`, so re-encoding them on every `npm run build` (which Vercel runs per deploy) was pure wasted CPU — the AVIF pass dominated build time — and produced non-deterministic AVIF bytes (spurious git churn). Reuse cuts the `optimize-images` step from ~minutes to ~2s when nothing changed.
-**Alternatives considered:** (a) Drop `optimize-images` from the `build` script and run it only manually — faster still, but risks a new source image shipping without its optimised output. (b) mtime-based freshness — unreliable after a fresh `git clone` on Vercel (all files share checkout mtime). Existence-based skip keeps the auto-convert safety net for new images while staying deterministic on Vercel.
-**Impact:** Replacing an existing source image *in place* (same filename) now requires `-- --force` or deleting its outputs first, since the presence of an output means "skip". Documented in README quick-start.
-**Rollback plan:** Remove the `FORCE`/`outputsExist` guard in `convertOne` to restore unconditional re-encoding.
+**What:** The build no longer converts images. `npm run build` now runs a fast, stat-only `verify-images` guard instead of `optimize-images`, and ships the WebP/AVIF files committed under `public/assets` directly (Vite copies `public/` into `dist/`). Conversion (`scripts/convert-images.js`) is a manual step, made incremental (skips images whose `.webp`+`.avif` already exist; `-- --force` / `FORCE_IMAGES=1` re-encodes all). Full workflow documented in `plan/IMAGE_WORKFLOW.md`.
+**Why:** Re-encoding all 66 source images to WebP **and** AVIF on every `npm run build` (which Vercel runs per deploy) was pure wasted CPU — the AVIF pass dominated build time — and produced non-deterministic AVIF bytes (spurious git churn), even though the outputs were already committed. Referencing the committed outputs directly removes image work from the deploy entirely; local build dropped to ~13s.
+**Alternatives considered:** (a) Keep conversion in the build but make it incremental — safer against a forgotten output, but still runs a redundant pass every deploy and can't use mtime reliably after a fresh `git clone` (all files share checkout mtime). (b) Drop conversion with no guard — fastest, but a new source image committed without its output would silently ship broken. Chosen approach = (b) plus a stat-only `verify-images` gate that fails the build early and names the offending files, getting the speed of decoupling without the footgun. The incremental skip in `convert-images.js` was also kept so the manual `optimize-images` run is cheap.
+**Impact:** Adding photos is now a documented manual step (`plan/IMAGE_WORKFLOW.md`): add source → `npm run optimize-images` → commit source **and** `public/assets` outputs together. Replacing a source in place requires `-- --force` or deleting its outputs first. `convert-images.js` `main()` is now guarded to run only when invoked directly, so `verify-images.js` can import its enumeration helpers. Firebase/admin image path (`upload-project-images.js`, `firebase-data.js`) is unaffected — separate pipeline.
+**Rollback plan:** Put `npm run optimize-images` back into the `build` script (replacing `verify-images`).
 **Status:** Done
 
 ---

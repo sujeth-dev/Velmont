@@ -6,7 +6,7 @@
   "description": "Velmont Design Studio — commercial interior contracting website",
   "scripts": {
     "dev": "npm run copy-components && npm run copy-data && vite",
-    "build": "npm run copy-components && npm run copy-data && npm run optimize-images && vite build && npm run generate-pages && npm run generate-sitemap",
+    "build": "npm run copy-components && npm run copy-data && npm run verify-images && vite build && npm run generate-pages && npm run generate-sitemap",
     "generate-pages": "node scripts/generate-project-pages.js",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "preview": "vite preview --port 5173",
@@ -14,6 +14,7 @@
     "copy-components": "node scripts/copy-components.js",
     "copy-data": "node scripts/copy-data.js",
     "optimize-images": "node scripts/convert-images.js",
+    "verify-images": "node scripts/verify-images.js",
     "lint": "eslint \"src/**/*.{js,mjs}\" \"scripts/**/*.js\" \"__tests__/**/*.js\" \"e2e/**/*.js\"",
     "format": "prettier --write \"src/**/*.{js,css,html}\" \"scripts/**/*.js\"",
     "format:check": "prettier --check \"src/**/*.{js,css,html}\" \"scripts/**/*.js\"",

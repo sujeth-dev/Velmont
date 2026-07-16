@@ -193,9 +193,27 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Only run when invoked directly (node scripts/convert-images.js), not when
+// imported for its enumeration helpers (e.g. by scripts/verify-images.js).
+const invokedDirectly =
+  process.argv[1] && path.resolve(process.argv[1]) === path.resolve(__filename);
+if (invokedDirectly) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
 
-export { convertProjects, convertFacility, convertLogos, SLUG_MAP };
+export {
+  convertProjects,
+  convertFacility,
+  convertLogos,
+  listImages,
+  SLUG_MAP,
+  SRC_PROJECTS,
+  SRC_FACILITY,
+  SRC_LOGOS,
+  OUT_PROJECTS,
+  OUT_FACILITY,
+  OUT_LOGOS,
+};
