@@ -48,6 +48,7 @@ function initLightbox(images, projectTitle) {
   const closeBtn = lb.querySelector('.vm-lightbox__close');
   const prevBtn = lb.querySelector('.vm-lightbox__prev');
   const nextBtn = lb.querySelector('.vm-lightbox__next');
+  let lastActiveEl = null;
   let cur = 0;
 
   if (images.length <= 1) {
@@ -55,19 +56,21 @@ function initLightbox(images, projectTitle) {
     nextBtn.style.display = 'none';
   }
 
-  function show(i) {
+  function show(i, { focusClose = false } = {}) {
     cur = ((i % images.length) + images.length) % images.length;
     lbImg.src = images[cur];
     lbImg.alt = `${projectTitle} — view ${cur + 1} of ${images.length}`;
     lb.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
-    closeBtn.focus();
+    lastActiveEl = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    if (focusClose) closeBtn.focus({ preventScroll: true });
   }
 
   function close() {
     lb.setAttribute('hidden', '');
     lbImg.src = '';
     document.body.style.overflow = '';
+    if (lastActiveEl && lastActiveEl.isConnected) lastActiveEl.focus({ preventScroll: true });
   }
 
   document.querySelectorAll('[data-gallery-img]').forEach((img) => {
