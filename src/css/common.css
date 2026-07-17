@@ -263,12 +263,25 @@
   }
 
   .vm-stats__cell {
+    min-width: 0;
     padding: 0 20px 24px;
     border-bottom: 1px solid var(--mineral);
   }
 
+  .vm-stats__cell:first-child {
+    padding-left: 20px;
+  }
+
+  .vm-stats__cell:last-child {
+    padding-right: 20px;
+  }
+
   .vm-stats__cell:nth-child(2n) {
     border-right: 0;
+  }
+
+  .vm-stats__cell:nth-child(n + 3) {
+    padding-top: 12px;
   }
 
   .vm-stats__cell:nth-last-child(-n + 2) {
