@@ -245,15 +245,7 @@ export function hydratePage(project) {
   document.title = `${project.title} — Velmont Design Studio`;
 }
 
-async function loadProjects() {
-  if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-    try {
-      const { getPublishedProjects } = await import('../lib/firebase-data.js');
-      return await getPublishedProjects();
-    } catch (err) {
-      console.warn('[project] Firestore unavailable, falling back to JSON:', err && err.message);
-    }
-  }
+async function loadLocalProjects() {
   try {
     const res = await fetch('/data/projects.json', { credentials: 'same-origin' });
     if (!res.ok) return null;
@@ -264,6 +256,44 @@ async function loadProjects() {
   }
 }
 
+export async function loadProjectBySlug(slug) {
+  if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+    try {
+      const { getPublishedProjectBySlug } = await import('../lib/firebase-data.js');
+      return await getPublishedProjectBySlug(slug);
+    } catch (err) {
+      console.warn('[project] Firestore unavailable, falling back to JSON:', err && err.message);
+    }
+  }
+  const projects = await loadLocalProjects();
+  return projects?.find((p) => p.published && p.slug === slug) || null;
+}
+
+async function loadNavigationProjects() {
+  if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+    try {
+      const { getPublishedProjects } = await import('../lib/firebase-data.js');
+      return await getPublishedProjects();
+    } catch (err) {
+      console.warn(
+        '[project] Firestore navigation unavailable, falling back to JSON:',
+        err && err.message,
+      );
+    }
+  }
+  const projects = await loadLocalProjects();
+  return projects?.filter((p) => p.published) || [];
+}
+
+function markPageLoaded() {
+  const main = document.querySelector('#main');
+  if (!main) return;
+  requestAnimationFrame(() => {
+    main.dataset.projectState = 'loaded';
+    main.setAttribute('aria-busy', 'false');
+  });
+}
+
 export async function initProject() {
   const slug = slugFromPath();
   if (!slug) {
@@ -271,11 +301,7 @@ export async function initProject() {
     return;
   }
 
-  const projects = await loadProjects();
-  if (!projects) return;
-
-  const published = projects.filter((p) => p.published);
-  const project = published.find((p) => p.slug === slug);
+  const project = await loadProjectBySlug(slug);
 
   if (!project) {
     document.title = 'Project not found — Velmont Design Studio';
@@ -287,5 +313,10 @@ export async function initProject() {
   }
 
   hydratePage(project);
-  hydrateNav(slug, published);
+  markPageLoaded();
+
+  // Navigation is useful, but should never make the main project wait.
+  loadNavigationProjects()
+    .then((published) => hydrateNav(slug, published))
+    .catch((err) => console.warn('[project] Navigation unavailable:', err && err.message));
 }

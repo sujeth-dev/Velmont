@@ -20,6 +20,19 @@ export async function getPublishedProjects() {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
+/** Fetch one published project for the public detail page. */
+export async function getPublishedProjectBySlug(slug) {
+  const q = query(
+    collection(db, COLLECTION),
+    where('slug', '==', slug),
+    where('published', '==', true),
+  );
+  const snap = await getDocs(q);
+  if (snap.empty) return null;
+  const d = snap.docs[0];
+  return { id: d.id, ...d.data() };
+}
+
 export async function getAllProjects() {
   const snap = await getDocs(collection(db, COLLECTION));
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));

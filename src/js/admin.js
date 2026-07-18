@@ -13,6 +13,7 @@ import {
 } from '../lib/firebase-data.js';
 import { validateProjectForm, parseMaterials, slugify } from './admin-utils.js';
 import { openStoragePicker } from './admin-storage.js';
+import { convertProjectImageToWebp } from './admin-image.js';
 
 export { validateProjectForm, parseMaterials, slugify };
 
@@ -85,22 +86,29 @@ function wireImageSlots(form, slugProvider) {
       if (!file) return;
       const slot = input.dataset.uploadSlot;
       const slug = slugProvider ? slugProvider() : 'uploads';
-      const ext = file.name.split('.').pop() || 'webp';
-      const path = `projects/${slug}/${slot}.${ext}`;
+      const path = `projects/${slug}/${slot}.webp`;
 
       const btn = input.closest('label');
+      const originalLabel = btn?.childNodes[0]?.nodeValue;
       if (btn) btn.style.opacity = '0.5';
 
       try {
+        if (btn?.childNodes[0]) btn.childNodes[0].nodeValue = 'Preparing image ';
+        const { blob } = await convertProjectImageToWebp(file);
         const r = storageRef(storage, path);
-        await uploadBytes(r, file, { contentType: file.type || 'image/webp' });
+        if (btn?.childNodes[0]) btn.childNodes[0].nodeValue = 'Uploading ';
+        await uploadBytes(r, blob, { contentType: 'image/webp' });
         const url = await getDownloadURL(r);
         setSlotUrl(form, slot, url);
       } catch (err) {
         console.error('[admin] Upload failed:', err);
         alert('Upload failed: ' + (err.message || err.code));
       } finally {
-        if (btn) btn.style.opacity = '';
+        if (btn) {
+          btn.style.opacity = '';
+          if (originalLabel != null && btn.childNodes[0])
+            btn.childNodes[0].nodeValue = originalLabel;
+        }
         input.value = '';
       }
     });

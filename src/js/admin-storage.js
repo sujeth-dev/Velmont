@@ -5,6 +5,7 @@
 
 import { ref, listAll, getDownloadURL, uploadBytes, deleteObject } from 'firebase/storage';
 import { storage } from '../lib/firebase-admin.js';
+import { convertProjectImageToWebp } from './admin-image.js';
 
 const ROOT = 'projects';
 
@@ -255,8 +256,6 @@ function updateBreadcrumb(path) {
 
 async function handleUpload(file) {
   const { grid } = dom();
-  const fileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-  const uploadPath = `${currentPath}/${fileName}`;
 
   // Show uploading state
   const placeholder = document.createElement('div');
@@ -267,8 +266,12 @@ async function handleUpload(file) {
   grid.prepend(placeholder);
 
   try {
+    placeholder.textContent = 'Preparing image...';
+    const { blob, fileName } = await convertProjectImageToWebp(file);
+    const uploadPath = `${currentPath}/${fileName}`;
+    placeholder.textContent = 'Uploading...';
     const storageRef = ref(storage, uploadPath);
-    await uploadBytes(storageRef, file, { contentType: file.type || 'image/webp' });
+    await uploadBytes(storageRef, blob, { contentType: 'image/webp' });
     const url = await getDownloadURL(storageRef);
 
     // Auto-select the newly uploaded image

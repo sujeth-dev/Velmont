@@ -110,6 +110,79 @@
   max-width: 900px;
 }
 
+/* The existing page geometry doubles as a branded loading skeleton. */
+main[data-project-state='loading'] .vm-proj-hero {
+  background: linear-gradient(105deg, #2e2b28 20%, #4a4540 45%, #2e2b28 70%);
+  background-size: 220% 100%;
+  animation: vm-project-shimmer 1.6s ease-in-out infinite;
+}
+
+main[data-project-state='loading'] .vm-proj-hero__bg {
+  opacity: 0;
+}
+
+main[data-project-state='loading'] .vm-proj-hero__eyebrow,
+main[data-project-state='loading'] .vm-proj-hero__h1 {
+  color: transparent;
+  background: rgba(244, 240, 235, 0.3);
+  border-radius: 2px;
+}
+
+main[data-project-state='loading'] .vm-proj-hero__eyebrow {
+  width: min(280px, 55vw);
+}
+
+main[data-project-state='loading'] .vm-proj-hero__h1 {
+  width: min(650px, 80vw);
+  min-height: 1.1em;
+}
+
+main[data-project-state='loading'] .vm-spec-bar__value,
+main[data-project-state='loading'] .vm-proj-body__lead,
+main[data-project-state='loading'] .vm-proj-body__right {
+  color: transparent;
+  background: linear-gradient(105deg, var(--concrete) 20%, #e4ded6 45%, var(--concrete) 70%);
+  background-size: 220% 100%;
+  animation: vm-project-shimmer 1.6s ease-in-out infinite;
+}
+
+main[data-project-state='loading'] .vm-proj-body__lead,
+main[data-project-state='loading'] .vm-proj-body__right {
+  min-height: 180px;
+}
+
+main[data-project-state='loading'] .vm-proj-gallery,
+main[data-project-state='loading'] .vm-proj-nav,
+main[data-project-state='loading'] .vm-other-projects {
+  visibility: hidden;
+}
+
+main[data-project-state='loaded'] .vm-proj-hero__bg,
+main[data-project-state='loaded'] .vm-spec-bar,
+main[data-project-state='loaded'] .vm-proj-body,
+main[data-project-state='loaded'] .vm-proj-gallery,
+main[data-project-state='loaded'] .vm-proj-nav,
+main[data-project-state='loaded'] .vm-other-projects {
+  animation: vm-project-content-in 360ms ease-out both;
+}
+
+@keyframes vm-project-shimmer {
+  to {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes vm-project-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ----------------------------------------------------------------
    Spec bar — concrete bg, 2px terracotta top border
    ---------------------------------------------------------------- */

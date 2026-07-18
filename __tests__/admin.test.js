@@ -38,8 +38,10 @@ describe('storage.rules', () => {
     expect(rules).toMatch(/allow\s+write\s*:\s*if\s+request\.auth\s*!=\s*null/);
   });
 
-  it('allows public read without authentication', () => {
-    expect(rules).toMatch(/allow\s+read\s*:\s*if\s+true/);
+  it('allows public reads only for optimized delivery formats', () => {
+    expect(rules).toMatch(/allPaths\.matches/);
+    expect(rules).toMatch(/request\.auth\s*!=\s*null/);
+    expect(rules).toMatch(/webp\|avif/);
   });
 });
 
