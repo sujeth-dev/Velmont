@@ -87,8 +87,8 @@ async function uploadImage(sourceFile, targetFile, sourcePath, report) {
       await targetFile.save(webp, targetMetadata);
       report.imagesConverted += 1;
     } else {
-      await sourceFile.copy(targetFile);
-      await targetFile.setMetadata(targetMetadata);
+      const [buffer] = await sourceFile.download();
+      await targetFile.save(buffer, targetMetadata);
       report.filesCopied += 1;
     }
   } else if (IMAGE_EXTENSIONS.has(extname(sourcePath).toLowerCase())) {
@@ -118,7 +118,9 @@ async function migrateStorage(oldBucket, newBucket, report) {
         const oldToken = oldMetadata.metadata?.firebaseStorageDownloadTokens?.split(',')[0];
         if (oldToken) urlMap.set(publicDownloadUrl(oldBucket, sourcePath, oldToken), targetUrl);
       } else if (!DRY_RUN) {
-        await sourceFile.copy(targetFile);
+        const [buffer] = await sourceFile.download();
+        const [metadata] = await sourceFile.getMetadata();
+        await targetFile.save(buffer, { contentType: metadata.contentType });
         report.filesCopied += 1;
       } else {
         report.filesCopied += 1;
